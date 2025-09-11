@@ -21,7 +21,8 @@ export default function HowItWorks() {
 
      
       {/* Right Column */}
-      <div className="flex flex-col gap-8 items-center">
+      <div className="relative flex flex-col gap-8 items-center">
+        <div className="absolute -top-2 bg-[#167BFF] h-7 w-[38.5rem] align-middle blur-[63.8px]"></div>
         <div className="flex flex-col gap-0">
         {/* First Div - Top Row */}
         <div className="flex justify-center flex-row w-[670px] h-[88px] gap-4 p-4 rounded-t-[12px]  bg-[#09346B]">
