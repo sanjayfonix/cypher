@@ -1,9 +1,12 @@
+import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntelligence";
+import { HomeBanner } from "@/app/Components/home/HomeBanner";
 
 
 export default function HomePage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20">
-     Hello World
+    <div className="w-full bg-[var(--primary)]">
+     <HomeBanner/>
+     <GlobalThreatIntelligence/>
     </div>
   );
 }

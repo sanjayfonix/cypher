@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
+
+/* styles/globals.css */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #000000;
+  --buttonPrimary:#1057B5;
+  --border:#D5D5D5;
+  --textPrimary:#FFFFFF;
+  --textSecondary:#989898;
+  --dropDownHover:#8A8A8A;
 }
 
 @theme inline {

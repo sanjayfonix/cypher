@@ -39,14 +39,14 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex gap-2 items-center">
               <Image
-                src="/fotterimage2.png"
+                src="/images/fotterimage2.png"
                 alt="Footer Icon"
                 width={50}
                 height={50}
                 className="mb-6 border border-[#042433]"
               />
               <Image
-                src="/footer_logo_image.png"
+                src="/images/footer_logo_image.png"
                 alt="Footer Logo"
                 width={304}
                 height={38}

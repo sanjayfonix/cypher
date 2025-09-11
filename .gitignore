@@ -12,6 +12,8 @@
 !.yarn/versions
 .next/
 out/
+node_modules/
+
 # testing
 /coverage
 
