@@ -20,7 +20,13 @@
 }
 
 body {
-  background: var(--background);
+  background: black;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+  max-width: 1440px;
+  margin: auto;
+  background: black;
 }

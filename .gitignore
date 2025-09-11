@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-/next
+/.next
 /.pnp
 .pnp.*
 .yarn/*
@@ -10,7 +10,8 @@
 !.yarn/plugins
 !.yarn/releases
 !.yarn/versions
-
+.next/
+out/
 # testing
 /coverage
 
