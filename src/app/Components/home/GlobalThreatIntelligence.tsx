@@ -1,5 +1,6 @@
 // components/ThreatDetectionUI.tsx
 'use client';
+import { time } from "console";
 import { useState } from "react";
 
 interface TimelineItemProps {
@@ -8,6 +9,7 @@ interface TimelineItemProps {
   description: string;
   className?: string;
   align:string;
+  children?:React.ReactNode;
 }
 
 interface LabelProps {
@@ -79,19 +81,24 @@ const Label = ({ children, className }:LabelProps) => (
     </div>
   );
 
-  const TimelineItem = ({ icon, title, description, className,align }:TimelineItemProps) => (
-    <div style={{alignSelf:align}} className={`relative flex justify-start items-start gap-4 p-2 ${className}`}>
+  const TimelineItem = ({ icon, title, description, className,align,children }:TimelineItemProps) => (
+    <div style={{alignSelf:align}} className={`flex justify-start items-start gap-4 p-2 ${className}`}>
         {/* Connector line */}
         {/* <div className="absolute top-12 w-0.5 h-full bg-gradient-to-t from-blue-600 via-blue-600/50 to-transparent -z-10"></div> */}
-
-        <div className="relative h-20 w-20 bg-[linear-gradient(180deg,rgba(27,27,27,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0_0_6.6px_3px_rgba(21,154,255,0.1)] rounded-full">
-            <div className="bg-black p-4 rounded-full">
+        <div className=" flex flex-col items-center justify-start gap-4 ">
+        <div className="flex justify-center items-center h-20 w-20 bg-[linear-gradient(180deg,rgba(27,27,27,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0_0_6.6px_3px_rgba(21,154,255,0.1)] rounded-[2.625rem]">
+           
                 {icon}
-            </div>
+            
         </div>
-        <div>
-        <h3 className=" text-xl font-semibold text-white">{title}</h3>
-        <p className=" text-gray-400 max-w-xs">{description}</p>
+        <div className="absolute border-solid border-[1px] border-[#696969] w-1.5 h-1"></div>
+        </div>
+        <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-2">
+        <h3 className=" text-xl text-white font-sans font-bold">{title}</h3>
+        <p className="text-[1rem] font-normal text-[#989898] font-inter">{description}</p>
+        </div>
+         {children!==undefined && children!==null && children}
         </div>
     </div>
 );
@@ -180,19 +187,32 @@ const RadarChart = () => {
       </div>
 
       <div className="bg-black text-white font-sans flex items-center justify-center py-6 px-8">
-      <div className="w-full max-w-7xl mx-auto flex justify-start items-start gap-12">
+      <div className="max-w-7xl mx-auto flex justify-start items-start gap-12">
         
        
           <RadarChart />
        
 
         {/* Right Side: Timeline */}
-        <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-24">
-            <TimelineItem align="flex-start" {...timelineData[0]} className="sm:mt-0" />
-            <TimelineItem align="flex-start" {...timelineData[1]} className="" />
-            <TimelineItem align="flex-end" {...timelineData[2]} className="sm:mt-0" />
-            <TimelineItem align="flex-end" {...timelineData[3]} className="" />
-        </div>
+        
+   <div className="grid grid-cols-[400px_1fr] gap-x-20 gap-y-16">
+  <TimelineItem align="flex-start" {...timelineData[0]} />
+  <TimelineItem align="flex-start" {...timelineData[1]} />
+
+  {/* Slight horizontal shift for bottom items */}
+  <div className="left-22 relative">
+    <TimelineItem align="flex-start" {...timelineData[2]} />
+  </div>
+  <div className="left-22 relative">
+    <TimelineItem align="flex-start" {...timelineData[3]} />
+  </div>
+</div>
+
+  {/* <div className="flex flex-col gap-16">
+    
+    <TimelineItem className="pl-8" align="flex-start" {...timelineData[3]} />
+  </div> */}
+
 
       </div>
     </div>
@@ -227,7 +247,7 @@ const RadarChart = () => {
 //         <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-24">
 //             <TimelineItem {...timelineData[0]} className="sm:mt-0" />
 //             <TimelineItem {...timelineData[1]} className="sm:mt-24" />
-//             <TimelineItem {...timelineData[2]} className="sm:mt-0" />
+//            
 //             <TimelineItem {...timelineData[3]} className="sm:mt-24" />
 //         </div>
 
