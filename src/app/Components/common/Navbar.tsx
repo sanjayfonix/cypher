@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ArrowUpRight } from "lucide-react";
+import Button from "./Button";
 
 export default function Navbar() {
   const pathname = usePathname(); // Get current route
@@ -28,7 +29,7 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="flex justify-center px-6 lg:px-16 py-6 bg-black">
+    <nav className="flex justify-center px-6 lg:px-16 py-4 bg-black">
       <div className="w-full container bg-black flex items-center justify-between">
         {/* Left Logo */}
         <Link href="/" className="flex gap-2">
@@ -125,18 +126,11 @@ export default function Navbar() {
 
         {/* Right Buttons */}
         <div className="flex items-center gap-4">
-          <Link
-            href="/refer"
-            className="px-5 py-2 rounded-2xl font-medium transition-all flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white border border-white/20"
-          >
-            Refer a Case
-          </Link>
-          <Link
-            href="/contact"
-            className="px-5 py-2 rounded-2xl font-medium transition-all flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white shadow-md"
-          >
-            Get in touch
-          </Link>
+          
+          <Button color="bg-transparent " text="Refer A Case"  isBorder={true} />
+          
+          <Button color="bg-[#1057B5]" text="Get in touch" isIcon={true} />
+          
         </div>
       </div>
     </nav>

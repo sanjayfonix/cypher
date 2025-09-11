@@ -37,7 +37,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${ibmPlex.className} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-black text-white`}
+        className={`${ibmPlex.className} ${geistMono.variable} antialiased flex flex-col min-h-screen bg-black text-white containerr`}
       >
         {/* Navbar at top */}
         <div className="sticky top-0 z-50 shadow-md">
