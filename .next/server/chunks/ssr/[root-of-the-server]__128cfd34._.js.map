@@ -1,8 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 3, "column": 0}, "map": {"version":3,"sources":[],"names":[],"mappings":"","debugId":null}},
-    {"offset": {"line": 15, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/ayush/OneDrive/Desktop/Fonix/cyphr/src/app/pages/home/page.tsx"],"sourcesContent":["\r\n\r\nexport default function HomePage() {\r\n  return (\r\n    <div className=\"font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center p-8 pb-20 gap-16 sm:p-20\">\r\n     Hello World\r\n    </div>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;;AAEe,SAAS;IACtB,qBACE,8OAAC;QAAI,WAAU;kBAAsG;;;;;;AAIzH","debugId":null}},
-    {"offset": {"line": 35, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/ayush/OneDrive/Desktop/Fonix/cyphr/src/app/page.tsx"],"sourcesContent":["import HomePage from \"./pages/home/page\";\r\n\r\n\r\nexport default function Home() {\r\n  return (\r\n    <HomePage/>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAAA;;;AAGe,SAAS;IACtB,qBACE,8OAAC,+IAAQ;;;;;AAEb","debugId":null}}]
-}
