@@ -2,7 +2,7 @@ import ContactSection from "@/app/Components/common/Getintouch";
 
 export default function AboutPage() {
   return (
-    <div >
+    <div className="containerr">
       <ContactSection />
     </div>
   );
