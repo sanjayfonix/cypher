@@ -59,9 +59,28 @@ export default function HowItWorks() {
           </div>
 
           {/* Placeholder for next row content */}
-          <div className="w-full h-20 bg-[#111111] rounded-md flex items-center justify-center text-gray-400">
-            Second row content goes here
-          </div>
+          <div className="flex flex-row items-center justify-center gap-4 opacity-100">
+      {/* First Div - Username */}
+      <div className="flex items-center justify-center gap-2.5 opacity-100 rounded-[48px] border-[1.2px] px-4 py-3 bg-[#E8F2FF] border-[#157AFF]">
+        <span className="font-sans font-medium text-[#1E1E1E] text-xl">
+          Username
+        </span>
+      </div>
+
+      {/* Second Div - Phone Number */}
+      <div className="flex items-center justify-center gap-2.5  rounded-[48px] px-4 py-3 bg-[#515151]">
+        <span className="font-sans font-normal text-[20px] leading-[20px] text-black">
+          Phone Number
+        </span>
+      </div>
+
+      {/* Third Div - Email */}
+      <div className="flex items-center justify-center gap-2.5 rounded-[48px] px-4 py-3 bg-[#515151]">
+        <span className="font-sans font-normal text-[20px] leading-[20px] text-black">
+          Email
+        </span>
+      </div>
+    </div>
           </div>
         </div>
         <p className="font-inter font-normal text-white text-sm">Search by username, phone number, or email to confidentially look up information.</p>

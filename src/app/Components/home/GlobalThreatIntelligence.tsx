@@ -1,10 +1,11 @@
 // components/ThreatDetectionUI.tsx
 'use client';
+import { Find, Graph, Health, Shield } from "@/assets/icon";
 import { time } from "console";
 import { useState } from "react";
 
 interface TimelineItemProps {
-  icon: React.ReactNode;
+  icon:React.ReactNode;
   title: string;
   description: string;
   className?: string;
@@ -24,22 +25,22 @@ export default function GlobalThreatIntelligence() {
 
   const timelineData = [
     {
-      icon: '',
+      
       title: 'Malintent',
       description: 'Active protection against evolving digital threats',
     },
     {
-      icon: '',
+      
       title: 'Investigation',
       description: 'Forensic examination of security incidents',
     },
     {
-      icon: '',
+      
       title: 'Risk Assessment',
       description: 'Continuous evaluation of vulnerability exposure',
     },
     {
-      icon: '',
+      
       title: 'Data Analysis',
       description: 'Pattern recognition across massive datasets',
     },
@@ -91,7 +92,6 @@ const Label = ({ children, className }:LabelProps) => (
                 {icon}
             
         </div>
-        <div className="absolute border-solid border-[1px] border-[#696969] w-1.5 h-1"></div>
         </div>
         <div className="flex flex-col gap-16">
           <div className="flex flex-col gap-2">
@@ -196,15 +196,15 @@ const RadarChart = () => {
         {/* Right Side: Timeline */}
         
    <div className="grid grid-cols-[400px_1fr] gap-x-20 gap-y-16">
-  <TimelineItem align="flex-start" {...timelineData[0]} />
-  <TimelineItem align="flex-start" {...timelineData[1]} />
+  <TimelineItem icon={<Shield />} align="flex-start" {...timelineData[0]} />
+  <TimelineItem icon={<Find />} align="flex-start" {...timelineData[1]} />
 
   {/* Slight horizontal shift for bottom items */}
   <div className="left-22 relative">
-    <TimelineItem align="flex-start" {...timelineData[2]} />
+    <TimelineItem icon={<Health />} align="flex-start" {...timelineData[2]} />
   </div>
   <div className="left-22 relative">
-    <TimelineItem align="flex-start" {...timelineData[3]} />
+    <TimelineItem icon={<Graph />} align="flex-start" {...timelineData[3]} />
   </div>
 </div>
 
