@@ -15,9 +15,16 @@ export default function ContactSection() {
         terms: false,
     });
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-        const { name, value, type, checked } = e.target;
-        setForm({ ...form, [name]: type === "checkbox" ? checked : value });
+    const handleChange = (
+        e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    ) => {
+        const target = e.target as HTMLInputElement;
+        const { name, value, type, checked } = target;
+
+        setForm({
+            ...form,
+            [name]: type === "checkbox" ? checked : value,
+        });
     };
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -79,7 +86,7 @@ export default function ContactSection() {
                             value={form.firstName}
                             onChange={handleChange}
                             placeholder="John"
-                            className="w-full bg-gradient-to-b from-[#0E1014] to-[#0B0D12] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                            className="w-full bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                         />
                         <p className="text-xs text-gray-500 mt-1">Minimum 2 characters</p>
                     </div>
@@ -92,7 +99,7 @@ export default function ContactSection() {
                             value={form.lastName}
                             onChange={handleChange}
                             placeholder="Doe"
-                            className="w-full bg-gradient-to-b from-[#0E1014] to-[#0B0D12] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                            className="w-full bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                         />
                         <p className="text-xs text-gray-500 mt-1">Minimum 2 characters</p>
                     </div>
@@ -107,7 +114,7 @@ export default function ContactSection() {
                         value={form.email}
                         onChange={handleChange}
                         placeholder="John123@example.com"
-                        className="w-full bg-gradient-to-b from-[#0E1014] to-[#0B0D12] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                        className="w-full bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                     />
                     <p className="text-xs text-gray-500 mt-1">Must be a valid email address</p>
                 </div>
@@ -121,7 +128,7 @@ export default function ContactSection() {
                         value={form.phone}
                         onChange={handleChange}
                         placeholder="00 0000 0000"
-                        className="w-full bg-gradient-to-b from-[#0E1014] to-[#0B0D12] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
+                        className="w-full bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500"
                     />
                     <p className="text-xs text-gray-500 mt-1">Numbers and “+” allowed</p>
                 </div>
@@ -175,7 +182,7 @@ export default function ContactSection() {
                         value={form.message}
                         onChange={handleChange}
                         placeholder="Tell us more about your intelligence needs..."
-                        className="w-full h-28 bg-gradient-to-b from-[#0E1014] to-[#0B0D12] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 resize-none"
+                        className="w-full h-28 bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500 resize-none"
                     />
                     <p className="text-xs text-gray-500 mt-1">Minimum 20 characters</p>
                 </div>
