@@ -84,7 +84,7 @@ export const WhyConsulting = () => {
               ref={(el) => {
                 if (el) sectionsRef.current[i] = el;
               }}
-              className={`relative flex px-16 justify-between w-full items-center ${
+              className={`relative flex px-16 justify-between items-center ${
                 i === 0 ? "pt-[4.625rem]" : "pt-8"
               }`}
             >

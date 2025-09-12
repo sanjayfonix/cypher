@@ -4,7 +4,29 @@ import Button from "../common/Button";
 
 const ServiceBlurCard = () => {
   return (
-    <div className="py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
+    <div className="flex flx-col py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
+        <div className="relative">
+        <div
+          className="absolute  animate-glow"
+          style={{
+            width: "81px",
+            height: "233px",
+            background: "#167BFF",
+            opacity: 0.6,
+            filter: "blur(108.1px)",
+            right:'-3%',
+            top: "0px", // adjust if you want vertical offset
+            borderRadius: "50%",
+            zIndex: 0,
+          }}
+        >
+          
+          {/* Inner div with background image */}
+          <div
+            className="absolute w-full h-full bg-[url('/grid.png')] bg-center bg-cover"
+          />
+        </div>
+      </div>
       {/* Main Card */}
       <div className="relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
         {/* First Decorative Blur Div */}

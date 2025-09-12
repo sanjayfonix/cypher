@@ -1,7 +1,11 @@
+import { IndustryBanner } from "@/app/Components/industries/IndustryBanner";
+import CustomDiv from "@/app/Components/industries/WhyInsurance";
+
 export default function IndustriesPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-     Industries Page
+    <div className="font-sans bg-black">
+  <IndustryBanner/>
+  <CustomDiv/>
     </div>
   );
 }
