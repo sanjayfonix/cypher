@@ -1,10 +1,11 @@
 "use client";
 import { useState } from "react";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
-import Button from "./Button";
-import { Bell, Email, Headquators } from "@/assets/icon";
 
-export default function ContactSection() {
+import { Bell, Email, Headquators } from "@/assets/icon";
+import Button from "../common/Button";
+
+export default function GetContact() {
     const [form, setForm] = useState({
         firstName: "",
         lastName: "",
@@ -33,20 +34,18 @@ export default function ContactSection() {
     };
 
     return (
-        <div className="relative containerr  border border-gray-600 rounded-4xl text-white  flex flex-col md:flex-row items-start justify-between p-12  my-10  gap-10 overflow-hidden">
+        <div className="mt-10">
+        <div className="relative containerr text-white  flex flex-col md:flex-row items-start justify-between p-12   overflow-hidden">
 
             {/* Background Glow */}
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_70%)] pointer-events-none" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_30%)] pointer-events-none" />
 
             {/* Left Side - Info */}
             <div className="md:w-1/2 relative z-10">
-                <h3 className="text-[24px] font-semibold mb-4 tracking-wide p-2">
-                    Every investigation we conduct is grounded in responsibility, transparency, and societal impact.
-                </h3>
-                <div className=" border-b-2 border-gray-600 mr-8 my-6"></div>
+
                 <h2 className="text-[48px] font-bold mb-4">Get in touch</h2>
                 <p className="text-gray-300 text-[16px] mb-6">
-                    Fill out the form or contact us directly to discuss how Cyphr can provide intelligence solutions tailored to your organization's needs.
+                    Fill out the form or contact us directly to discuss how <br/> Cyphr can provide intelligence solutions tailored to your <br/> organization's needs.
                 </p>
 
                 <div className="flex items-center gap-3 mb-4">
@@ -69,6 +68,21 @@ export default function ContactSection() {
 
                     </div>
                 </div>
+                <div className="flex items-center gap-3 mb-4">
+                    <div className="border-t border-b rounded-t-full rounded-b-full">
+                        <Headquators />
+                    </div>
+                    <div>
+                        <p className="text-gray-100 text-2xl font-bold">Phone</p>
+                        <p className="text-gray-300">0101010100</p>
+
+                    </div>
+                </div>
+                <div className=" border-b-2 border-gray-600 mr-8 my-6"></div>
+
+                <h3 className="text-[24px] mb-4 tracking-wide p-2">
+                    We're here to help with your investigative <br/> intelligence needs, Reach out to us today <br/>for expert support
+                </h3>
             </div>
 
             {/* Right Side - Form */}
@@ -209,5 +223,7 @@ export default function ContactSection() {
             </form>
 
         </div>
+        </div>
+        
     );
 }

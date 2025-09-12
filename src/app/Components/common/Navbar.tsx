@@ -30,7 +30,7 @@ export default function Navbar() {
 
   return (
     <nav className="flex justify-center px-6 lg:px-16 py-4 bg-black">
-      <div className="w-full container bg-black flex items-center justify-between">
+      <div className="w-full containerr bg-black flex items-center justify-between">
         {/* Left Logo */}
         <Link href="/" className="flex gap-2">
           <Image
@@ -116,6 +116,12 @@ export default function Navbar() {
           </div>
 
           {/* Legal */}
+          <Link
+            href="/pages/contactus"
+            className={`px-4 py-1 rounded-full transition-all ${pathname === "/pages/contactus" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}
+          >
+            Contact Us
+          </Link>
           <Link
             href="/pages/legal"
             className={`px-4 py-1 rounded-full transition-all ${pathname === "/pages/legal" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}

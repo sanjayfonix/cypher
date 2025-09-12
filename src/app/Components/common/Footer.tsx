@@ -6,35 +6,33 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer
-      className="text-white pt-16 pb-8 px-4 md:px-8 relative overflow-hidden"
-    // style={{
-    //   background:
-    //     "linear-gradient(to bottom, #004aad 0%, #001a33 100%)",
-    // }}
+      className="text-white pt-16 pb-8 px-4 mt-8 md:px-8 relative overflow-hidden"
     >
       {/* Glow effects */}
-     
+
 
       {/* Content */}
-      <div className="relative container z-10 p-4">
+      <div className="relative  z-10 p-4">
         <div
-        className="absolute pointer-events-none z-0 blur-[100.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]"
-      />
-      
-      <div
-        className="absolute pointer-events-none z-0 blur-[50px] animate-blink"
-        style={{
-          width: 1440,
-          height: 170,
-          top: -95,
-          left: "50%",
-          transform: "translateX(-50%)",
-          opacity: 0.3,
-          borderRadius: "50%",
-          backgroundColor: "#167BFF",
-        }}
-      />
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          className="absolute pointer-events-none z-0 blur-[100.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]"
+        />
+
+        <div
+          className="absolute pointer-events-none z-0 blur-[50px] animate-blink"
+          style={{
+            width: 1440,
+            height: 170,
+            top: -95,
+            left: "50%",
+            transform: "translateX(-50%)",
+            opacity: 0.3,
+            borderRadius: "50%",
+            backgroundColor: "#167BFF",
+          }}
+        />
+      </div>
+      <div className="containerr">
+        <div className="grid  grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Logo + Description */}
           <div className="lg:col-span-2">
             <div className="flex gap-2 items-center">
@@ -116,7 +114,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Section */}
-        <div className="border-t border-gray-800 py-10 px-4 relative ">
+        <div className="border-t  border-gray-800 py-10 px-4 relative ">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-300 text-[16px]  md:mb-0">
               © 2025 Cyphr. All Right Reserved

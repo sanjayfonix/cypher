@@ -1,7 +1,11 @@
+import GetContact from "@/app/Components/contact_component/getintouch";
+import { LegalBanner } from "@/app/Components/contact_component/legal_header";
+
 export default function ContactPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-     Contact Page
+    <div >
+      <LegalBanner/>
+     <GetContact/>
     </div>
   );
 }
