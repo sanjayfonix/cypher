@@ -77,19 +77,7 @@ export default function HomePage() {
   return (
     <div className="w-full bg-[var(--primary)]">
      <HomeBanner/>
-     <GlobalThreatIntelligence/>
-
-      
-        <SearchResultTab
-          key={1}
-          icon={User}
-          title={'Instagram'}
-          queryVal={'Change Password'}
-          date={'2025-08-08'}
-          rowsData={tabsData[2].rowsData}
-        />
-      
-   
+     <GlobalThreatIntelligence/>         
      <HowItWorks/>
      <BlurCard/>
     </div>
