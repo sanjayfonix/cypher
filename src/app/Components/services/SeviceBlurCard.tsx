@@ -2,7 +2,7 @@
 import React from "react";
 import Button from "../common/Button";
 
-const BlurCard = () => {
+const ServiceBlurCard = () => {
   return (
     <div className="py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
       {/* Main Card */}
@@ -18,7 +18,7 @@ const BlurCard = () => {
             opacity: 0.5,
             background: "#1057B5",
             boxShadow: "0px 0px 108.3px 0px #157AFF80",
-            top: "-50%",
+            top: "-120%",
             left: "30%",
             zIndex: 1,
           }}
@@ -44,28 +44,27 @@ const BlurCard = () => {
           {/* First Div */}
           <div className="flex flex-col gap-6 sm:gap-7 lg:gap-[28px]">
             <h1 className="font-[IBM Plex Sans] font-bold text-3xl sm:text-4xl lg:text-[48px] text-white text-center leading-snug">
-              Integrity at the Core of
-              <br /> Everything We Do
+              Take Command of Your Future.
             </h1>
-            <h2 className="font-[IBM Plex Sans] font-medium text-base sm:text-lg lg:text-[18px] text-[#F1F1F1] text-center">
-              Trustworthy Intelligence Built on Transparency and Responsibility
-            </h2>
-            <p className="font-inter font-normal text-sm sm:text-base lg:text-[16px] text-[#F1F1F1] text-center">
-              At Cyphr, we deliver actionable insights through ethical practices.
-              We prioritize responsible data collection, privacy, and security,
-              ensuring that every decision is backed by integrity. Whether it's
-              OSINT, social media intelligence, or geospatial data, we are
-              committed to providing transparent and secure intelligence.
+            
+            <p className="font-inter font-normal text-sm sm:text-base lg:text-[16px] text-[#F1F1F1] self-center text-center max-w-[60%]">
+              With Cyphr’s Consulting & Advisory services, you’ll gain the knowledge, tools, and strategies to act decisively in an unpredictable world.
             </p>
           </div>
 
           {/* Second Div */}
-          <div className="flex justify-center">
+          <div className="flex justify-center gap-4">
             <Button
               isBorder={false}
-              isIcon={true}
-              text="Get in Touch"
+              isIcon={false}
+              text="Book a Consultation"
               color="bg-[#1057B5]"
+            />
+            <Button
+              isBorder={true}
+              isIcon={true}
+              text="Contact our expert"
+              color="bg-transparent"
             />
           </div>
         </div>
@@ -74,4 +73,4 @@ const BlurCard = () => {
   );
 };
 
-export default BlurCard;
+export default ServiceBlurCard;

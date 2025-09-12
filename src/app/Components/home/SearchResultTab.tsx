@@ -22,6 +22,7 @@ export default function SearchResultTab({
   rowsData,
 }: SearchResultTabProps) {
   return (
+    <div className="px-7 py-5">
     <div
       className="flex flex-col gap-2.5 rounded-[12px] border border-[#696969] p-6"
       style={{
@@ -32,7 +33,7 @@ export default function SearchResultTab({
       {/* Inner container */}
       <div className="flex flex-col gap-6 h-[313px]">
         {/* First row */}
-        <div className="flex flex-row gap-6">
+        <div className="flex items-center flex-row gap-6">
           {/* Icon */}
           <div
             className="flex items-center justify-center w-[70px] h-[70px] p-2 rounded-[100px]"
@@ -52,15 +53,15 @@ export default function SearchResultTab({
 
             <div className="flex flex-row gap-0">
               {/* User ID */}
-              <div className="flex items-center justify-center gap-2.5 rounded-l-[16px] px-4 py-[7px] bg-[#09346B80]">
+              <div className="flex items-center justify-center gap-2.5 rounded-l-full px-4 py-[7px] bg-[#09346B80]">
                 <span className="font-sans text-white text-lg font-normal">
                   User ID:
                 </span>
               </div>
 
               {/* Query */}
-              <div className="flex items-center justify-center gap-2.5 rounded-r-[16px] px-6 py-[7px] bg-[#B1B1B129]">
-                <span className="font-inter font-normal text-[16px] text-black">
+              <div className="flex items-center justify-center gap-2.5 rounded-r-full px-6 py-[7px] bg-[#B1B1B129]">
+                <span className="font-inter font-normal text-[16px] text-[#CACACA]">
                   Query: {queryVal}
                 </span>
               </div>
@@ -73,13 +74,13 @@ export default function SearchResultTab({
           {rowsData.map((row, index) => (
             <div
               key={index}
-              className="flex flex-row justify-between items-center px-2 py-2 border-b border-[0.5px] border-[#B1B1B18A]"
+              className="flex flex-row justify-between items-center px-2 py-2 border-b border-b-[0.5px] border-b-[#B1B1B18A]"
             >
               <span className="font-inter font-normal text-[16px] text-white">
                 {row.label}
               </span>
 
-              {index < 2 ? (
+              
                 <div
                   className="flex items-center justify-center gap-2.5 rounded-[16px] px-2 py-1"
                   style={{
@@ -91,23 +92,31 @@ export default function SearchResultTab({
                   <span
                     className="font-inter font-normal text-[16px]"
                     style={{
-                      backgroundColor: row.isValue
-                        ? "#22A121"
-                        : "#D8201D",
+                      color:row.isValid?'#22A121':'#D8201D'
                     }}
                   >
-                    {row.isValue ? "Yes" : "No"}
+                    {row.isValid ? "True" : "False"}
                   </span>
-                </div>
-              ) : (
-                <span className="font-inter font-normal text-[16px] text-white">
-                  {date}
-                </span>
-              )}
+                </div> 
+
             </div>
           ))}
+          <div
+              
+              className="flex flex-row justify-between items-center px-2 py-2 "
+            ><span className="font-inter font-normal text-[16px] text-white">
+                {'Facebook Login Option'}
+              </span>
+              <span className="font-inter font-normal text-[16px] text-white">
+                {date}
+              </span>
+</div>
+          {/* <div className="font-inter font-normal text-[16px] text-white border-b-none">
+                  {date}
+                </div> */}
         </div>
       </div>
+    </div>
     </div>
   );
 }

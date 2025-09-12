@@ -3,7 +3,18 @@ import GridItem from "./GridItem";
 
 export default function Loc8Intelligence() {
   return (
-    <div className="flex flex-col lg:flex-row gap-6 py-5 px-4 sm:px-7">
+    <div className="flex flex-col gap-12  sm:px-7">
+
+        <div className="flex flex-col gap-4">
+      <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
+          Loc8 Cellular Intelligence
+        </h2>
+        <p className="text-sm sm:text-base text-[#F1F1F1] font-inter font-normal ">
+          Our proprietary Loc8 technology transforms mobile device data into powerful investigative intelligence, providing unprecedented insights into movement patterns and behaviors.
+        </p>
+        </div>
+
+        <div className="flex flex-col py-5 px-4 gap-6 sm:flex-row">
       {/* Left Div → Image */}
       <div className="flex-1">
         <img
@@ -12,6 +23,8 @@ export default function Loc8Intelligence() {
           className="w-64 h-64 sm:h-80 md:h-full object-cover rounded-lg"
         />
       </div>
+      
+    
 
       {/* Right Div → 2x2 Grid */}
       <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-6 mt-6 lg:mt-0">
@@ -23,22 +36,23 @@ export default function Loc8Intelligence() {
         />
         <GridItem
           icon={<Graph />}
-          text="AI-Powered Insights"
-          subtext="Leverage advanced machine learning to detect risks faster than ever."
+          text="Legal-Grade Evidence"
+          subtext="Generate defensible, court-admissible location reports for legal proceedings."
           isCol={true}
         />
         <GridItem
           icon={<Graph />}
-          text="Fraud Detection"
-          subtext="Identify and mitigate suspicious activities in real time."
+          text="Historical Movement Analysis"
+          subtext="Reconstruct past movements with detailed timestamp and location data."
           isCol={true}
         />
         <GridItem
           icon={<Graph />}
-          text="Brand Protection"
-          subtext="Safeguard your brand’s reputation from digital threats."
+          text="Pattern Recognition"
+          subtext="Identify behavioral patterns and routines through AI-powered analysis."
           isCol={true}
         />
+      </div>
       </div>
     </div>
   );

@@ -2,7 +2,9 @@ import BlurCard from "@/app/Components/home/BlurCard";
 import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntelligence";
 import { HomeBanner } from "@/app/Components/home/HomeBanner";
 import HowItWorks from "@/app/Components/home/HowItWorks";
+import IntegrityAtCore from "@/app/Components/home/IntegrityAtCore";
 import SearchResultTab from "@/app/Components/home/SearchResultTab";
+import WhereInvestigation from "@/app/Components/home/WhereInvestigation";
 import {User,Facebook,Mail,} from 'lucide-react'
 
 const tabsData = [
@@ -77,8 +79,11 @@ export default function HomePage() {
   return (
     <div className="w-full bg-[var(--primary)]">
      <HomeBanner/>
-     <GlobalThreatIntelligence/>         
+     <GlobalThreatIntelligence/> 
      <HowItWorks/>
+     <IntegrityAtCore/>
+     <WhereInvestigation/>
+     <SearchResultTab icon={User} title="hello" queryVal="change" date="22" rowsData={tabsData[0].rowsData}/>
      <BlurCard/>
     </div>
   );
