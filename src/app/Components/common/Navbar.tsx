@@ -15,17 +15,17 @@ export default function Navbar() {
   };
 
   const services = [
-    { label: "Consulting and Advisory", href: "/services/consulting" },
-    { label: "Brand Defence", href: "/services/brand-defence" },
-    { label: "Social Media Intelligence", href: "/services/social-intel" },
-    { label: "Geospatial Cellular Forensics", href: "/services/geospatial" },
+    { label: "Consulting and Advisory", href: "/pages/services/consulting" },
+    { label: "Brand Defence", href: "/pages/services/brand-defence" },
+    { label: "Social Media Intelligence", href: "/pages/services/social-intel" },
+    { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
   ];
 
   const industries = [
-    { label: "Insurance Career", href: "/industries/insurance" },
-    { label: "Employer", href: "/industries/employer" },
-    { label: "Law Firm", href: "/industries/law" },
-    { label: "Academia", href: "/industries/academia" },
+    { label: "Insurance Career", href: "/pages/industries/insurance" },
+    { label: "Employer", href: "/pages/industries/employer" },
+    { label: "Law Firm", href: "/pages/industries/law" },
+    { label: "Academia", href: "/pages/industries/academia" },
   ];
 
   return (

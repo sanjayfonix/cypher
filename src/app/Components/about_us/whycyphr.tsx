@@ -48,16 +48,16 @@ export default function WhyCyphr() {
                 </p>
             </div>
 
-            <div ref={ref} className="flex flex-col gap-16 max-w-7xl mx-auto relative">
+            <div ref={ref} className="flex flex-col gap-8 max-w-7xl mx-auto relative">
                 {features.map((item, index) => {
                     const isLeft = index % 2 === 0;
 
                     return (
-                        <div className={` relative flex items-center gap-8 ${isLeft ? "flex-row-reverse" : "flex-row"}`}>
+                        <div className={` relative flex items-center gap-4 ${isLeft ? "flex-row-reverse" : "flex-row"}`}>
 
                             <motion.div
                                 key={index}
-                                initial={{ opacity: 0, x: isLeft ? 800 : -800 }}
+                                initial={{ opacity: 0, x: isLeft ? 400 : -400 }}
                                 animate={inView ? { opacity: 1, x: 0 } : {}}
                                 transition={{
                                     duration: 3.8,
@@ -70,13 +70,13 @@ export default function WhyCyphr() {
 
                                 {/* Gradient bar (coming from border) */}
                                 <div
-                                    className={`absolute  top-1/2 transform -translate-y-1/2 h-[140px] w-full   ${isLeft ? "rounded-l-full right-0 bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]" : "rounded-r-full left-0 bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
+                                    className={`absolute  top-1/2 transform -translate-y-1/2 h-[100px] w-full   ${isLeft ? "rounded-l-full right-0 bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]" : "rounded-r-full left-0 bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
                                         }`}
                                 ></div>
 
                                 {/* Content (icon + text) */}
                                 <div
-                                    className={` relative flex items-center gap-8 ${isLeft ? "flex-row-reverse" : "flex-row"
+                                    className={` relative flex items-center gap-2 ${isLeft ? "flex-row-reverse" : "flex-row"
                                         }`}
                                 >
                                     {/* Text */}

@@ -1,4 +1,5 @@
 import { AboutHeader } from "@/app/Components/about_us/about_header";
+import { History } from "@/app/Components/about_us/history";
 import MissionSection from "@/app/Components/about_us/mission";
 import TeamSection from "@/app/Components/about_us/teams";
 import WhyCyphr from "@/app/Components/about_us/whycyphr";
@@ -8,6 +9,7 @@ export default function AboutPage() {
   return (
     <div >
       <AboutHeader/>
+      <History/>
       <WhyCyphr/>
       <TeamSection/>
       <MissionSection/>
