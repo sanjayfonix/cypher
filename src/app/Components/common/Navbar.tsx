@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ArrowUpRight } from "lucide-react";
@@ -9,6 +9,7 @@ import Button from "./Button";
 export default function Navbar() {
   const pathname = usePathname(); // Get current route
   const [openMenu, setOpenMenu] = useState<string | null>(null);
+  const router = useRouter();
 
   const toggleMenu = (menu: string) => {
     setOpenMenu(openMenu === menu ? null : menu);
@@ -132,11 +133,16 @@ export default function Navbar() {
 
         {/* Right Buttons */}
         <div className="flex items-center gap-4">
-          
-          <Button color="bg-transparent " text="Refer A Case"  isBorder={true} />
-          
+
+          <Button
+            color="bg-transparent"
+            text="Refer A Case"
+            onClick={() => router.push("/pages/refer_case")} // 👈 passing function directly
+            isBorder={true}
+          />
+
           <Button color="bg-[#1057B5]" text="Get in touch" isIcon={true} />
-          
+
         </div>
       </div>
     </nav>
