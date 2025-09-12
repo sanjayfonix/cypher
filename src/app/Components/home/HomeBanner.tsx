@@ -1,6 +1,6 @@
 import { inter } from "@/app/layout";
 import Button from "../common/Button";
-import AnimatingPath from "./AnimatingPath";
+
 
 export const HomeBanner = () => {
   return (

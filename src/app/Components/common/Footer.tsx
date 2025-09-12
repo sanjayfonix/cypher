@@ -6,7 +6,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <footer
-      className="text-white pt-16 pb-8 px-4 md:px-8 relative overflow-hidden"
+      className="text-white pt-16 pb-8 px-4 mt-8 md:px-8 relative overflow-hidden"
     >
       {/* Glow effects */}
 

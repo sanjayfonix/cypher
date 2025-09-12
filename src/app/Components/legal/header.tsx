@@ -4,7 +4,7 @@ import Button from "../common/Button";
 
 export const LegalHeader = () => {
     return (
-        <div className="relative w-full  bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-20 px-6 sm:px-12 lg:px-28 h-auto ">
+        <div className="relative w-full border-t border-gray-600 bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-20 px-6 sm:px-12 lg:px-28 h-auto ">
 
             {/* <div className="absolute pointer-events-none z-0 blur-[185.1px] -top-[31px] opacity-60 w-[100%] h-10 bg-[#1057B5]" /> */}
             {/* Ellipses */}
