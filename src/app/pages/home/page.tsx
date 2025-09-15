@@ -84,13 +84,13 @@ export default function HomePage() {
      
      <HowItWorks/>
       <div className="font-sans text-3xl font-bold text-white text-center underline decoration-gray-600 underline-offset-4">Search Results</div>
-     <div className="grid grid-cols-3 gap-2 gap-y-6">
+     <div className="grid p-6 grid-cols-3 gap-2 gap-y-6">
      {[1,2,3,4,5,6].map((item)=>{
          return<SearchResultTab key={item} icon={User} title="hello" queryVal="change" date="22-05-2023" rowsData={tabsData[0].rowsData}/>
      })}
-     </div>
+     </div> 
     
-    <IntegrityAtCore/>
+    {/* <IntegrityAtCore/> */}
      <BlurCard/>
     </div>
   );

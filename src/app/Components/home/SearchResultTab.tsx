@@ -11,7 +11,7 @@ interface SearchResultTabProps {
   title: string;
   queryVal: string;
   date: string;
-  rowsData: RowBadgeProps[]; // Array of three rows
+  rowsData: RowBadgeProps[];
 }
 
 export default function SearchResultTab({
@@ -22,103 +22,99 @@ export default function SearchResultTab({
   rowsData,
 }: SearchResultTabProps) {
   return (
-    <div className="px-4 sm:px-7 py-5">
-  
-    <div
-      className="flex flex-col gap-2.5 rounded-[12px] border border-[#696969] p-6"
-      style={{
-        background:
-          "linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(21, 122, 255, 0.3) 100%)",
-      }}
-    >
-       
-      {/* Inner container */}
-      <div className="flex flex-col gap-6 ">
+    <div className="px-4 sm:px-6 md:px-8 py-5">
+      <div
+        className="flex flex-col gap-3 sm:gap-4 md:gap-6 rounded-xl border border-[#696969] p-4 sm:p-6"
+        style={{
+          background:
+            "linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(21, 122, 255, 0.3) 100%)",
+        }}
+      >
         {/* First row */}
-        <div className="flex items-center flex-row gap-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6">
           {/* Icon */}
           <div
-            className="flex items-center justify-center w-[70px] h-[70px] p-2 rounded-[100px]"
+            className="flex items-center justify-center min-w-[56px] sm:min-w-[64px] md:min-w-[70px] aspect-square p-2 rounded-full"
             style={{
               background:
                 "linear-gradient(180deg, rgba(3, 10, 20, 0.2) 28.22%, rgba(21, 122, 255, 0.2) 185.84%)",
             }}
           >
-            <Icon className="text-white w-6 h-6" />
+            <Icon className="text-white w-full" />
           </div>
 
           {/* Text container */}
-          <div className="flex flex-col gap-2">
-            <span className="font-sans font-medium text-[24px] text-white">
+          <div className="flex flex-col gap-2 w-full">
+            <span className="font-sans font-medium text-lg sm:text-xl md:text-2xl text-white">
               {title}
             </span>
 
-            <div className="flex flex-row gap-0">
-              {/* User ID */}
-              <div className="flex items-center justify-center gap-2.5 rounded-l-full px-4 py-[7px] bg-[#09346B80]">
-                <span className="font-sans text-white text-lg font-normal">
-                  User ID:
-                </span>
-              </div>
+            {/* User ID + Query */}
+           <div className="flex sm:flex-row flex-wrap gap-2 sm:gap-0 w-full">
+  {/* User ID Block */}
+  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-1.5 
+                  rounded-t-full sm:rounded-l-full sm:rounded-tr-none 
+                  bg-[#09346B80]">
+    <span className="font-sans text-white text-sm sm:text-base">
+      User ID:
+    </span>
+  </div>
 
-              {/* Query */}
-              <div className="flex items-center justify-center gap-2.5 rounded-r-full px-6 py-[7px] bg-[#B1B1B129]">
-                <span className="font-inter font-normal text-[16px] text-[#CACACA]">
-                  Query: {queryVal}
-                </span>
-              </div>
-            </div>
+  {/* Query Block */}
+  <div className="flex items-center gap-2.5 px-4 sm:px-6 py-1.5 
+                  rounded-b-full sm:rounded-r-full sm:rounded-bl-none 
+                  bg-[#B1B1B129] min-w-0 flex-1">
+    <span className="font-inter font-normal text-sm sm:text-base text-[#CACACA] truncate">
+      Query: {queryVal}
+    </span>
+  </div>
+</div>
+
           </div>
         </div>
 
-        {/* Second row: 3 rows with badges and date */}
-        <div className="flex flex-col gap-2.5">
+        {/* Second row: data rows */}
+        <div className="flex flex-col gap-2">
           {rowsData.map((row, index) => (
             <div
               key={index}
-              className="flex flex-row justify-between items-center px-2 py-2 border-b border-b-[0.5px] border-b-[#B1B1B18A]"
+              className="flex flex-row justify-between items-center px-1 sm:px-2 py-2 border-b border-b-[0.5px] border-b-[#B1B1B18A]"
             >
-              <span className="font-inter font-normal text-[16px] text-white">
+              <span className="font-inter font-normal text-sm sm:text-base text-white">
                 {row.label}
               </span>
 
-              
-                <div
-                  className="flex items-center justify-center gap-2.5 rounded-[16px] px-2 py-1"
+              <div
+                className="flex items-center justify-center gap-2.5 rounded-xl px-2 sm:px-3 py-1"
+                style={{
+                  backgroundColor: row.isValid
+                    ? "#22A12133"
+                    : "#D8201D33",
+                }}
+              >
+                <span
+                  className="font-inter font-normal text-sm sm:text-base"
                   style={{
-                    backgroundColor: row.isValid
-                      ? "#22A12133"
-                      : "#D8201D33",
+                    color: row.isValid ? "#22A121" : "#D8201D",
                   }}
                 >
-                  <span
-                    className="font-inter font-normal text-[16px]"
-                    style={{
-                      color:row.isValid?'#22A121':'#D8201D'
-                    }}
-                  >
-                    {row.isValid ? "True" : "False"}
-                  </span>
-                </div> 
-
+                  {row.isValid ? "True" : "False"}
+                </span>
+              </div>
             </div>
           ))}
-          <div
-              
-              className="flex flex-row justify-between items-center px-2 py-2 "
-            ><span className="font-inter font-normal text-[16px] text-white">
-                {'Facebook Login Option'}
-              </span>
-              <span className="font-inter font-normal text-[16px] text-white">
-                {date}
-              </span>
-</div>
-          {/* <div className="font-inter font-normal text-[16px] text-white border-b-none">
-                  {date}
-                </div> */}
+
+          {/* Date row */}
+          <div className="flex flex-row justify-between items-center px-1 sm:px-2 py-2">
+            <span className="font-inter font-normal text-sm sm:text-base text-white">
+              Facebook Login Option
+            </span>
+            <span className="font-inter font-normal text-sm sm:text-base text-white">
+              {date}
+            </span>
+          </div>
         </div>
       </div>
-    </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@
 import { Find, Graph, Health, Shield } from "@/assets/icon";
 import { useState } from "react";
 import Loc8Intelligence from "./Loc8Intelligence";
+import Radar from "./RadarAnimation";
 
 interface TimelineItemProps {
   icon: React.ReactNode;
@@ -141,7 +142,7 @@ export default function GlobalThreatIntelligence() {
 
       {tabIndex === 0 && (
         <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-2 sm:px-4 md:px-8">
-          <RadarChart />
+         <Radar/>
           {/* Timeline (Responsive Grid) */}
 <div className="relative grid grid-cols-2 gap-8 md:gap-12 w-full max-w-3xl">
   {/* LEFT COLUMN */}

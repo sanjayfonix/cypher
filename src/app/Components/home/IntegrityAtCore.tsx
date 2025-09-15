@@ -1,4 +1,4 @@
-import { AcademiaIcon, EmployersIcon, InsuranceIcon, LawIcon } from "@/assets/icon";
+import { AcademiaIcon, EmployersIcon, Icon2, InsuranceIcon, LawIcon } from "@/assets/icon";
 
 const Items = [
   { id: 1, name: "Insurance Carriers", icon: <InsuranceIcon /> },
@@ -24,7 +24,7 @@ export default function IntegrityAtCore() {
             {Items.slice(0, 2).map((item) => (
               <div
                 key={item.id}
-                className="flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
+                className="flex  flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
                 style={{ marginTop: item.id === 1 ? 16 : 0 }}
               >
                 <div className="flex items-center justify-center rounded-full p-3 sm:p-4 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66]">
@@ -52,13 +52,14 @@ export default function IntegrityAtCore() {
             {Items.slice(2).map((item) => (
               <div
                 key={`bottom-${item.id}`}
-                className="flex flex-row items-center gap-3 sm:gap-4 rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
+                className={`flex flex-row ml-0 sm:${item.id===3 ? "ml-4" :"ml-0"} items-center gap-3 sm:gap-4 rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4`}
                 style={{
-                  marginLeft: item.id === 3 ? 16 : 0,
+                  marginRight:item.id==4?'5%':0,
+                  marginLeft:item.id === 3 ? 16 : 0,
                   marginTop: item.id === 3 ? 16 : 0,
                 }}
               >
-                <div className="flex items-center justify-center rounded-full p-3 sm:p-4 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66]">
+                <div className="flex items-center justify-center rounded-full p-3 sm:p-4  backdrop-blur-sm shadow-[0_0_10px_rgba(21,122,255,0.6)] ">
                   {item.icon}
                 </div>
                 <span className="font-sans font-bold text-base sm:text-lg md:text-xl text-white">
@@ -69,6 +70,7 @@ export default function IntegrityAtCore() {
           </div>
         </div>
       </div>
+      
     </div>
   );
 }
