@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { ServicesIcon } from "@/assets/icon";// <-- adjust import to your path
+import { ServicesIcon } from "@/assets/icon"; // adjust import
 import Button from "../common/Button";
 
 export const WhyConsulting = () => {
@@ -18,7 +18,6 @@ export const WhyConsulting = () => {
         const rect = el.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
-        // detect which section is in focus (closest to center)
         const sectionCenter = rect.top + rect.height / 2;
         const distanceToCenter = Math.abs(windowHeight / 2 - sectionCenter);
 
@@ -55,23 +54,24 @@ export const WhyConsulting = () => {
     {
       text: "Leverage advanced intelligence techniques and unique data sources to enhance security, prevent fraud, and inform critical decisions",
       img: "/services1.png",
-      maxW: "max-w-[32%]",
+      maxW: "md:max-w-[32%]",
     },
     {
       text: "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
       img: "/services2.png",
-      maxW: "max-w-[35%]",
+      maxW: "md:max-w-[35%]",
     },
     {
       text: "Unlock actionable insights and secure your future",
       img: "/services3.png",
-      maxW: "max-w-[32%]",
+      maxW: "md:max-w-[32%]",
     },
   ];
 
   return (
-    <div className="py-4 px-2 flex flex-col">
-      <h2 className="text-white text-4xl font-bold font-sans text-center mt-20">
+    <div className="py-4 px-2 sm:px-4 md:px-8 flex flex-col">
+      {/* Title */}
+      <h2 className="text-white text-xl sm:text-2xl md:text-4xl font-bold font-sans text-center mt-20">
         Why Consulting & Advisory?
       </h2>
 
@@ -84,52 +84,48 @@ export const WhyConsulting = () => {
               ref={(el) => {
                 if (el) sectionsRef.current[i] = el;
               }}
-              className={`relative flex px-16 justify-between items-center ${
-                i === 0 ? "pt-[4.625rem]" : "pt-8"
-              }`}
+              className={`relative flex px-4 md:px-16 justify-between items-center ${i === 0 ? "pt-[4.625rem]" : "pt-8"} gap-4`}
             >
               {/* Left text (for rows 1 & 3) */}
               {i !== 1 && (
                 <div
-                  className={`flex gap-1 font-normal text-2xl ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%]  text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",
                   }}
                 >
-                  <span>{i + 1}.</span>
+                  <span className="font-bold">{i + 1}.</span>
                   <span>{row.text}</span>
                 </div>
               )}
 
               {/* Vertical line */}
-              <div className="absolute left-1/2  w-[1px] rounded-[20px] bg-[#6D6D6D]" style={{
-    top: i === 0 ? "4.625rem" : 0, // match padding for first & others
-    height: i === 2 ? "60%" : "calc(100%)", // ✅ third row = 50% height only
-  }}>
-                {/* Blue fill for active section only */}
+              <div className="absolute left-1/2  w-[1px] rounded-[20px] bg-[#6D6D6D]"
+                   style={{
+                     top: i === 0 ? "4.625rem" : 0,
+                     height: i === 2 ? "60%" : "100%",
+                   }}
+              >
                 {isActive && (
                   <div
                     className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-100"
                     style={{ height: `${progress * 100}%` }}
-                  ></div>
+                  />
                 )}
 
                 {/* Circle OR ServicesIcon */}
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                  {/* Circle (fades out when active) */}
                   <div
                     className={`w-3 h-3 rounded-full bg-[#6D6D6D] transition-all duration-300 ${
                       isActive ? "opacity-0 scale-50" : "opacity-100 scale-100"
                     }`}
                   ></div>
 
-                  {/* ServicesIcon (fades in when active) */}
                   <div
-                    className={`absolute top-1/2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
                       isActive ? "opacity-100 scale-100" : "opacity-0 scale-50"
-                    }` }
-                    
+                    }`}
                   >
                     <ServicesIcon />
                   </div>
@@ -137,30 +133,41 @@ export const WhyConsulting = () => {
               </div>
 
               {/* Image */}
-              <img src={row.img} className="w-1/3 h-1/3 object-cover" />
+              <img
+                src={row.img}
+                className="w-[40%] w-[43%]  h-auto object-cover"
+                alt={`service-${i + 1}`}
+              />
 
-              {/* Right text (for middle row) */}
+              {/* Right text (middle row) */}
               {i === 1 && (
                 <div
-                  className={`flex gap-1 font-normal text-2xl ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%]    text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",
                   }}
                 >
-                  <span>{i + 1}.</span>
+                  <span className="font-bold">{i + 1}.</span>
                   <span>{row.text}</span>
                 </div>
               )}
             </div>
           );
         })}
-         
       </div>
-     <div className="relative -top-5 flex justify-center"><Button isBorder={false} isIcon={false} color="bg-[#1057B5]" text="Book a Consultation"/></div>
+
+      {/* Button */}
+      <div className="relative -top-5 flex justify-center mt-8">
+        <Button
+          isBorder={false}
+          isIcon={false}
+          color="bg-[#1057B5]"
+          text="Book a Consultation"
+        />
+      </div>
     </div>
   );
 };
-
 
 

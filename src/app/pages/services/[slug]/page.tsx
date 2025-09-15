@@ -3,7 +3,9 @@ import CorePrincipals from "@/app/Components/services/CorePrincipals";
 import CurvedPathAnimation from "@/app/Components/services/CurvedAnimation";
 import ServiceBlurCard from "@/app/Components/services/SeviceBlurCard";
 import { TopBanner } from "@/app/Components/services/TopBanner";
-import { WhyConsulting } from "@/app/Components/services/WhyConsulting";
+import {WhyConsulting}  from "@/app/Components/services/WhyConsulting";
+import { Grid } from "@/assets/icon";
+
 
 export default function ServicesPage() {
   return (
@@ -15,7 +17,9 @@ export default function ServicesPage() {
       {/* Blur Div with Glow */}
       
 
-      <ServiceBlurCard />
+      
+        
+        <ServiceBlurCard />
       <CurvedPathAnimation/>
     </div>
   );

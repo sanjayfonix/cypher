@@ -9,7 +9,7 @@ export const HomeBanner = () => {
 <div className="absolute pointer-events-none z-0 blur-[185.1px] -top-[31px] opacity-60 w-[100%] h-10 bg-[#1057B5]"/>
       {/* Ellipses */}
       <div
-        className="absolute pointer-events-none z-0 blur-[3px] animate-blink"
+        className="absolute pointer-events-none z-1 blur-[3px] animate-blink"
         style={{
           width:'30%',
           height: 26,

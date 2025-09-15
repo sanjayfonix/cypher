@@ -1,87 +1,116 @@
-// components/CustomDiv.jsx
+import { ArrowDownRightIcon } from "lucide-react";
 import React from "react";
+import { Button } from "./IndustryButton";
+import { Card, CardContent, CardTitle, CardDescription } from "./Card";
+import { FindIcon, GuassMeterIcon, ProtectIcon, WeighScaleIcon } from "@/assets/icon";
 
-const CustomDiv = () => {
+export const WhyIndustriesCarrier = () => {
   return (
-    <div className="flex flex-col gap-[23px] opacity-100 p-[80px] rotate-0">
-      {/* Row div inside */}
-      <div className="flex flex-row gap-4">
-        {/* First div: flex column */}
-        <div className="flex flex-col gap-[32px] opacity-100 rotate-0">
-          {/* Nested div inside first div */}
-          <div className="flex flex-col gap-[16px] opacity-100 rotate-0 max-w-[36em]">
-            {/* First text */}
-            <h1 className="font-sans font-bold text-[40px] text-white tracking-[0%]">
-              Why Insurance Carriers Choose Cyphr
-            </h1>
+    <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6 ">
 
-            {/* Second div with two texts */}
-            <div className="flex flex-col gap-[8px] opacity-100 rotate-0">
-              <h2 className="font-sans font-bold text-[24px] text-[#157AFF] tracking-[0%]">
-                Problem
-              </h2>
-              <p className="font-inter font-normal text-[16px] text-[#F1F1F1] tracking-[0%] ">
-                Managing risks and detecting fraud can be complex and time-sensitive. With inconsistent claimant statements and rising fraudulent activity, insurance carriers face challenges in making accurate assessments while protecting their bottom line.
-              </p>
-            </div>
+      {/* Left Column: Text + Button */}
+      <div className="flex flex-col gap-8 relative animate-fade-in opacity-0">
+        <header className="flex flex-col gap-4">
+          <h1 className="text-white font-UI-h3-bold text-3xl md:text-[length:var(--UI-h3-bold-font-size)] lg:tracking-[var(--UI-h3-bold-letter-spacing)] lg:leading-[var(--UI-h3-bold-line-height)] [font-style:var(--UI-h3-bold-font-style)]">
+            Why Insurance Carriers Choose Cyphr
+          </h1>
+
+          <div className="flex flex-col gap-2 mt-2">
+            <h2 className="text-[#157aff] font-UI-h5-bold text-[length:var(--UI-h5-bold-font-size)] tracking-[var(--UI-h5-bold-letter-spacing)] leading-[var(--UI-h5-bold-line-height)] [font-style:var(--UI-h5-bold-font-style)]">
+              Problem
+            </h2>
+            <p className="text-gray-pure1 font-UI-b1-reg text-[length:var(--UI-b1-reg-font-size)] tracking-[var(--UI-b1-reg-letter-spacing)] leading-[var(--UI-b1-reg-line-height)] [font-style:var(--UI-b1-reg-font-style)] max-w-3xl">
+              Managing risks and detecting fraud can be complex and time-sensitive. 
+              With inconsistent claimant statements and rising fraudulent activity, 
+              insurance carriers face challenges in making accurate assessments while 
+              protecting their bottom line.
+            </p>
           </div>
-        </div>
-
-        {/* Second div: flex row with two nested divs */}
-        <div className="flex flex-row ">
-          {/* First nested div */}
-          <div
-            className="flex flex-row gap-[24px] opacity-100 rotate-0"
-            
-          >
-            {/* Inner div 1: rounded box */}
-            <div className="w-[59px] h-[59px] flex items-center justify-center gap-[32px] p-[16px] rounded-[48px] bg-gray-700"></div>
-
-            {/* Inner div 2: flex column with two texts */}
-            <div className="flex flex-col gap-[16px] opacity-100 rotate-0">
-              <h3 className="font-sans font-bold text-[24px] text-[#CACACA] tracking-[0%]">
-                Detect Fraud Early
-              </h3>
-              <p className="font-inter font-normal text-[15px] text-[#E3E3E3] tracking-[0%]">
-                Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
-              </p>
-            </div>
-          </div>
-
-          {/* Divider */}
-          <div
-            className="opacity-100 rotate-0 absolute"
-            style={{
-              top: "190px", // Adjust as needed between the two divs
-              left: "50px",
-              width: "100%", // Adjust width to match your layout
-              height: "0px",
-              border: "1px solid #5B5B5B",
-            }}
-          ></div>
-
-          {/* Second nested div: same as first one */}
-          <div
-            className="flex flex-row gap-[24px] opacity-100 rotate-0 absolute"
-            style={{ top: "220px", left: "50px" }} // Adjust top position as needed
-          >
-            {/* Inner div 1 */}
-            <div className="w-[59px] h-[59px] flex items-center justify-center gap-[32px] p-[16px] rounded-[48px] bg-gray-700"></div>
-
-            {/* Inner div 2: flex column with two texts */}
-            <div className="flex flex-col gap-[16px] opacity-100 rotate-0">
-              <h3 className="font-sans font-bold text-[24px] text-[#CACACA] tracking-[0%]">
-                Detect Fraud Early
-              </h3>
-              <p className="font-inter font-normal text-[15px] text-[#E3E3E3] tracking-[0%]">
-                Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
-              </p>
-            </div>
-          </div>
+        </header>
+<div>
+        <Button
+          variant="outline"
+          className="inline-flex h-12 items-center justify-center gap-2 px-4 py-3 rounded-3xl border border-solid border-[#d5d5d5] bg-transparent hover:bg-gray-800 transition-colors mt-4"
+        >
+          <span className="font-UI-b1-med text-primary-text text-[length:var(--UI-b1-med-font-size)] tracking-[var(--UI-b1-med-letter-spacing)] leading-[var(--UI-b1-med-line-height)] [font-style:var(--UI-b1-med-font-style)]">
+            Contact our expert
+          </span>
+          <img src={'/arrow-down-right.svg'} className="w-5 h-5 object-cover"/>
+        </Button>
         </div>
       </div>
-    </div>
+
+      {/* Right Column: Cards */}
+      <div className="relative max-w-3xl">
+
+        {/* Divider */}
+        
+
+        {/* Left Cards Column */}
+        <div className="grid grid-cols-[1fr_auto_1fr] md:flex gap-4  md:gap-8 ">
+        <div className="md:mt-20 flex flex-col gap-14 ">
+          {/* Card 1 */}
+          <Card className="flex flex-col flex-1 lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
+            <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
+              <div className="h-24 w-24 object-cover"><FindIcon/></div>
+              <div className="flex flex-col gap-4 ">
+                <CardTitle>Detect Fraud Early</CardTitle>
+                <CardDescription>
+                  Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
+                </CardDescription>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex-0.25 block h-px bg-gray-600" />
+        
+          {/* Card 2 */}
+          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+            <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
+              <div className="h-24 w-24 object-cover"><GuassMeterIcon/></div>
+              <div className="flex flex-col gap-4">
+                <CardTitle>Build Better Risk Profiles</CardTitle>
+                <CardDescription>
+                  Create accurate risk profiles and assess client risks to make better underwriting decisions and improve risk management.
+                </CardDescription>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+       <div className="block w-0.25 bg-gray-600" />
+        {/* Right Cards Column */}
+        <div className="flex flex-col gap-14  mt-0 ">
+          {/* Card 3 */}
+          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+            <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
+              <div className="h-24 w-24 object-cover"><ProtectIcon/></div>
+              <div className="flex flex-col gap-4">
+                <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
+                <CardDescription>
+                  Minimize payouts and improve operational efficiency by detecting fraud and streamlining the claims process.
+                </CardDescription>
+              </div>
+            </CardContent>
+          </Card>
+
+          <div className="flex-0.25 h-px bg-gray-600" />
+
+          {/* Card 4 */}
+          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+            <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
+              <div className="h-24 w-24 object-cover"><WeighScaleIcon/></div>
+              <div className="flex flex-col gap-4">
+                <CardTitle>Ensure Legal Compliance</CardTitle>
+                <CardDescription>
+                  Ensure fraud detection and investigations are legally defensible, providing courtroom-ready reports and compliance.
+                </CardDescription>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+        </div>
+      </div>
+    </section>
   );
 };
 
-export default CustomDiv;

@@ -1,109 +1,90 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { MotionPathPlugin } from 'gsap/dist/MotionPathPlugin';
 
-gsap.registerPlugin(MotionPathPlugin);
+import React from 'react';
 
-export default function CurvedPathAnimation() {
-  const pointerRefs = [
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
-    useRef<HTMLDivElement>(null),
+
+export default function SemicircularArcs({viewWidth,viewHeight}:{
+  viewWidth:number;
+  viewHeight:number;
+}) {
+  const pointerPositions = [
+    { cx: 278.5, cy: 180 }, // Arc 1
+    { cx: 278.5, cy: 130 }, // Arc 2
+    { cx: 278.5, cy: 80 },  // Arc 3
+    { cx: 278.5, cy: 30 },  // Arc 4
   ];
 
-  const paths = ['#arc1', '#arc2', '#arc3', '#arc4'];
-
-  useEffect(() => {
-    pointerRefs.forEach((ref, i) => {
-      const pointer = ref.current;
-      if (!pointer) return;
-
-      gsap.to(pointer, {
-        duration: 6 + i, // staggered speed
-        repeat: -1,
-        ease: 'power1.inOut',
-        motionPath: {
-          path: paths[i],
-          align: paths[i],
-          alignOrigin: [0.5, 0.5],
-        },
-      });
-    });
-  }, []);
-
   return (
-    <div className="relative w-full h-[400px]">
-      {/* Moving circular divs */}
-      {pointerRefs.map((ref, i) => (
-        <div
+    <svg
+      width="700"
+      height="300"
+      viewBox={`0 0 ${viewWidth} ${viewHeight}`} // Keep original viewBox to preserve coordinates
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Arcs */}
+      <path
+        d="M397.711 250 C397.711 221.622 385.151 194.406 362.795 174.34 C340.438 154.273 310.117 143 278.5 143 C246.883 143 216.561 154.273 194.205 174.34 C171.848 194.406 159.289 221.622 159.289 250"
+        stroke="url(#paint0_linear_222_2088)"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="12 12"
+      />
+      <path
+        d="M455.091 250 C455.091 208.096 436.538 167.908 403.514 138.277 C370.489 108.646 325.698 92 278.995 92 C232.291 92 187.5 108.646 154.476 138.277 C121.451 167.908 102.898 208.096 102.898 250"
+        stroke="url(#paint1_linear_222_2088)"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="12 12"
+      />
+      <path
+        d="M501.588 250 C501.588 196.957 478.084 146.086 436.247 108.579 C394.41 71.0714 337.667 50 278.5 50 C219.333 50 162.59 71.0714 120.753 108.579 C78.9155 146.086 55.4116 196.957 55.4116 250"
+        stroke="url(#paint2_linear_222_2088)"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="12 12"
+      />
+      <path
+        d="M556 250 C556 183.961 526.763 120.627 474.722 73.9304 C422.681 27.2339 352.098 1 278.5 1 C204.902 0.999995 134.319 27.2338 82.2779 73.9304 C30.2365 120.627 1.00001 183.961 1 250"
+        stroke="url(#paint3_linear_222_2088)"
+        strokeOpacity="0.3"
+        strokeWidth="2"
+        strokeDasharray="12 12"
+      />
+
+      {/* Stationary pointers */}
+      {pointerPositions.map((pos, i) => (
+        <circle
           key={i}
-          ref={ref}
-          className="w-6 h-6 bg-white rounded-full absolute shadow-lg"
+          className="pointer-circle"
+          cx={pos.cx}
+          cy={pos.cy}
+          r={6}
+          fill="#FF5C5C"
         />
       ))}
 
-      {/* SVG arcs */}
-      <svg className="absolute top-0 left-0 w-full h-full" viewBox="0 0 241 160">
-        {/* Outermost Arc */}
-        <path
-          id="arc1"
-          d="M239 140 C239 100 220 60 204 40 C188 20 152 0 121 0 C90 0 54 20 38 40 C22 60 3 100 3 140"
-          stroke="url(#gradient1)"
-          strokeWidth="2"
-          strokeDasharray="12 12"
-          fill="transparent"
-        />
-        {/* Second Arc */}
-        <path
-          id="arc2"
-          d="M239 120 C239 90 220 55 204 35 C188 15 152 0 121 0 C90 0 54 15 38 35 C22 55 3 90 3 120"
-          stroke="url(#gradient2)"
-          strokeWidth="2"
-          strokeDasharray="12 12"
-          fill="transparent"
-        />
-        {/* Third Arc */}
-        <path
-          id="arc3"
-          d="M239 100 C239 75 220 45 204 28 C188 11 152 0 121 0 C90 0 54 11 38 28 C22 45 3 75 3 100"
-          stroke="url(#gradient3)"
-          strokeWidth="2"
-          strokeDasharray="12 12"
-          fill="transparent"
-        />
-        {/* Innermost Arc */}
-        <path
-          id="arc4"
-          d="M239 80 C239 60 220 35 204 20 C188 5 152 0 121 0 C90 0 54 5 38 20 C22 35 3 60 3 80"
-          stroke="url(#gradient4)"
-          strokeWidth="2"
-          strokeDasharray="12 12"
-          fill="transparent"
-        />
-
-        <defs>
-          <linearGradient id="gradient1" x1="121" y1="0" x2="121" y2="140" gradientUnits="userSpaceOnUse">
-            <stop offset="0.1" stopColor="#CCCCCC"/>
-            <stop offset="1" stopColor="#030A14"/>
-          </linearGradient>
-          <linearGradient id="gradient2" x1="121" y1="0" x2="121" y2="120" gradientUnits="userSpaceOnUse">
-            <stop offset="0.1" stopColor="#AAAAAA"/>
-            <stop offset="1" stopColor="#020811"/>
-          </linearGradient>
-          <linearGradient id="gradient3" x1="121" y1="0" x2="121" y2="100" gradientUnits="userSpaceOnUse">
-            <stop offset="0.1" stopColor="#888888"/>
-            <stop offset="1" stopColor="#01060A"/>
-          </linearGradient>
-          <linearGradient id="gradient4" x1="121" y1="0" x2="121" y2="80" gradientUnits="userSpaceOnUse">
-            <stop offset="0.1" stopColor="#666666"/>
-            <stop offset="1" stopColor="#000"/>
-          </linearGradient>
-        </defs>
-      </svg>
-    </div>
+      {/* Gradients */}
+      <defs>
+        <linearGradient id="paint0_linear_222_2088" x1="278.5" y1="143" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+          <stop offset="0.115385" stopColor="#CCCCCC" />
+          <stop offset="1" stopColor="#030A14" />
+        </linearGradient>
+        <linearGradient id="paint1_linear_222_2088" x1="278.995" y1="92" x2="278.995" y2="250" gradientUnits="userSpaceOnUse">
+          <stop offset="0.115385" stopColor="#CCCCCC" />
+          <stop offset="1" stopColor="#030A14" />
+        </linearGradient>
+        <linearGradient id="paint2_linear_222_2088" x1="278.5" y1="50" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+          <stop offset="0.115385" stopColor="#CCCCCC" />
+          <stop offset="1" stopColor="#030A14" />
+        </linearGradient>
+        <linearGradient id="paint3_linear_222_2088" x1="278.5" y1="1" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+          <stop offset="0.115385" stopColor="#CCCCCC" />
+          <stop offset="1" stopColor="#030A14" />
+        </linearGradient>
+      </defs>
+    </svg>
   );
 }
 

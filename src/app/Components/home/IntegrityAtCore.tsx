@@ -1,3 +1,30 @@
+import { AcademiaIcon, EmployersIcon, InsuranceIcon, LawIcon } from "@/assets/icon";
+import { Icon, icons } from "lucide-react";
+
+const Items=[
+  {
+    id:1,
+    name:'Insurance Carriers',
+    icon:<InsuranceIcon/>
+  },
+  {
+    id:2,
+    name:'Employers',
+    icon:<EmployersIcon/>
+  },
+  {
+    id:3,
+    name:'Law Firms',
+    icon:<LawIcon/>
+  },
+  {
+    id:4,
+    name:'Academia',
+    icon:<AcademiaIcon/>
+  }
+]
+
+
 export default function IntegrityAtCore() {
   return (
     <div className="shadow-[0px_4px_4px_0px_#00000040] p-10">
@@ -13,15 +40,17 @@ export default function IntegrityAtCore() {
   blur-[50.1px]" />
           {/* Top Cards */}
           <div className="flex flex-row justify-between items-start">
-            {[1, 2].map((item) => (
+            {Items.slice(0,2).map((item) => (
               <div
-                key={item}
+                key={item.id.toString()}
                 className="flex flex-row gap-4 items-center rounded-[8px] bg-[#09346B80] pt-2 pr-4 pb-2 pl-4"
-                style={{marginTop:item===1?16:0}}
+                style={{marginTop:item.id===1?16:0}}
               >
-                <div className="w-[60px] h-[60px] flex flex-col gap-1 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66] p-4 rounded-[42px]"></div>
+                <div className="w-[60px] h-[60px] flex flex-col gap-1 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66] p-4 rounded-[42px]">
+                  {item.icon}
+                </div>
                 <span className="font-sans font-bold text-[20px] text-white tracking-normal">
-                  Some Text {item}
+                 {item.name}
                 </span>
               </div>
             ))}
@@ -39,15 +68,17 @@ export default function IntegrityAtCore() {
 
           {/* Bottom Cards */}
           <div className="flex flex-row justify-between items-start">
-            {[1, 2].map((item) => (
+            {Items.slice(2).map((item) => (
               <div
-                key={`bottom-${item}`}
+                key={`bottom-${item.id.toString()}`}
                 className="flex flex-row items-center gap-4 rounded-[8px] bg-[#09346B80] pt-2 pr-4 pb-2 pl-4"
-                style={{ marginRight: item === 2 ? 60 : 0, marginLeft: item === 1 ? 16 : 0,marginTop:item===1?16:0 }}
+                style={{ marginRight: item.id === 4 ? 60 : 0, marginLeft: item.id === 3 ? 16 : 0,marginTop:item.id===3?16:0 }}
               >
-                <div className="w-[60px] h-[60px] flex flex-col gap-1 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66] p-4 rounded-[42px]"></div>
+                <div className="w-[60px] h-[60px] flex flex-col gap-1 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66] p-4 rounded-[42px]">
+                {item.icon}  
+                </div>
                 <span className="font-sans font-bold text-[20px] text-white tracking-normal">
-                  Some Text {item}
+                  {item.name}
                 </span>
               </div>
             ))}

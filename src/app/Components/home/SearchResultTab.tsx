@@ -22,7 +22,8 @@ export default function SearchResultTab({
   rowsData,
 }: SearchResultTabProps) {
   return (
-    <div className="px-7 py-5">
+    <div className="px-4 sm:px-7 py-5">
+  
     <div
       className="flex flex-col gap-2.5 rounded-[12px] border border-[#696969] p-6"
       style={{
@@ -30,8 +31,9 @@ export default function SearchResultTab({
           "linear-gradient(180deg, rgba(132, 132, 132, 0) 0%, rgba(21, 122, 255, 0.3) 100%)",
       }}
     >
+       
       {/* Inner container */}
-      <div className="flex flex-col gap-6 h-[313px]">
+      <div className="flex flex-col gap-6 ">
         {/* First row */}
         <div className="flex items-center flex-row gap-6">
           {/* Icon */}

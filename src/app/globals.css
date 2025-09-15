@@ -2,6 +2,8 @@
 @import "tailwindcss";
 
 
+
+
 /* styles/globals.css */
 
 :root {
@@ -11,7 +13,151 @@
   --textPrimary:#FFFFFF;
   --textSecondary:#989898;
   --dropDownHover:#8A8A8A;
+  --foundation-blueblue-50: rgba(232, 242, 255, 1);
+  --gray-pure1: rgba(241, 241, 241, 1);
+  --gray-pure10: rgba(202, 202, 202, 1);
+  --gray-pure2: rgba(227, 227, 227, 1);
+  --gray-pure3: rgba(213, 213, 213, 1);
+  --gray-pure7: rgba(91, 91, 91, 1);
+  --primary-text: rgba(229, 229, 229, 1);
+  --secondary-background: rgba(26, 31, 41, 1);
+  --UI-b1-med-font-family: "Inter", Helvetica;
+  --UI-b1-med-font-size: 16px;
+  --UI-b1-med-font-style: normal;
+  --UI-b1-med-font-weight: 500;
+  --UI-b1-med-letter-spacing: 0px;
+  --UI-b1-med-line-height: 24px;
+  --UI-b1-reg-font-family: "Inter", Helvetica;
+  --UI-b1-reg-font-size: 16px;
+  --UI-b1-reg-font-style: normal;
+  --UI-b1-reg-font-weight: 400;
+  --UI-b1-reg-letter-spacing: 0px;
+  --UI-b1-reg-line-height: 24px;
+  --UI-b2-reg-font-family: "Inter", Helvetica;
+  --UI-b2-reg-font-size: 15px;
+  --UI-b2-reg-font-style: normal;
+  --UI-b2-reg-font-weight: 400;
+  --UI-b2-reg-letter-spacing: 0px;
+  --UI-b2-reg-line-height: 22px;
+  --UI-h3-bold-font-family: "IBM Plex Sans", Helvetica;
+  --UI-h3-bold-font-size: 40px;
+  --UI-h3-bold-font-style: normal;
+  --UI-h3-bold-font-weight: 700;
+  --UI-h3-bold-letter-spacing: 0px;
+  --UI-h3-bold-line-height: 55px;
+  --UI-h5-bold-font-family: "IBM Plex Sans", Helvetica;
+  --UI-h5-bold-font-size: 24px;
+  --UI-h5-bold-font-style: normal;
+  --UI-h5-bold-font-weight: 700;
+  --UI-h5-bold-letter-spacing: 0px;
+  --UI-h5-bold-line-height: 32px;
+  --animate-spin: spin 1s linear infinite;
 }
+
+.animate-fade-in {
+  animation: fade-in 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-fade-up {
+  animation: fade-up 1s var(--animation-delay, 0s) ease forwards;
+}
+
+.animate-marquee {
+  animation: marquee var(--duration) infinite linear;
+}
+
+.animate-marquee-vertical {
+  animation: marquee-vertical var(--duration) linear infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 8s infinite;
+}
+
+.animate-spin {
+  animation: var(--animate-spin);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes image-glow {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+  }
+
+  10% {
+    opacity: 0.7;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+  }
+
+  to {
+    opacity: 0.4;
+  }
+}
+
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fade-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes shimmer {
+  0%,
+  90%,
+  to {
+    background-position: calc(-100% - var(--shimmer-width)) 0;
+  }
+
+  30%,
+  60% {
+    background-position: calc(100% + var(--shimmer-width)) 0;
+  }
+}
+
+@keyframes marquee {
+  0% {
+    transform: translate(0);
+  }
+
+  to {
+    transform: translateX(calc(-100% - var(--gap)));
+  }
+}
+
+@keyframes marquee-vertical {
+  0% {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(calc(-100% - var(--gap)));
+  }
+}
+
+
 
 @theme inline {
   --color-background: var(--background);
@@ -38,6 +184,7 @@ body {
   margin: auto;
   background: black;
 }
+
 @keyframes glowPulse {
   0%, 100% {
     opacity: 0.4;
@@ -54,11 +201,99 @@ body {
 }
 
 @keyframes spin-slow {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0%   { transform: translate(20px, 0); }          /* 0° */
+  4.16%{ transform: translate(19.3px, 5.18px); }   /* 15° */
+  8.33%{ transform: translate(17.3px, 10px); }     /* 30° */
+  12.5%{ transform: translate(13.7px, 13.7px); }   /* 45° */
+  16.66%{ transform: translate(10px, 17.3px); }    /* 60° */
+  20.83%{ transform: translate(5.18px, 19.3px); }  /* 75° */
+  25%  { transform: translate(0, 20px); }          /* 90° */
+  29.16%{ transform: translate(-5.18px, 19.3px); } /* 105° */
+  33.33%{ transform: translate(-10px, 17.3px); }   /* 120° */
+  37.5%{ transform: translate(-13.7px, 13.7px); }  /* 135° */
+  41.66%{ transform: translate(-17.3px, 10px); }   /* 150° */
+  45.83%{ transform: translate(-19.3px, 5.18px); } /* 165° */
+  50%  { transform: translate(-20px, 0); }         /* 180° */
+  54.16%{ transform: translate(-19.3px, -5.18px);} /* 195° */
+  58.33%{ transform: translate(-17.3px, -10px); }  /* 210° */
+  62.5%{ transform: translate(-13.7px, -13.7px); } /* 225° */
+  66.66%{ transform: translate(-10px, -17.3px); }  /* 240° */
+  70.83%{ transform: translate(-5.18px, -19.3px);} /* 255° */
+  75%  { transform: translate(0, -20px); }         /* 270° */
+  79.16%{ transform: translate(5.18px, -19.3px); } /* 285° */
+  83.33%{ transform: translate(10px, -17.3px); }   /* 300° */
+  87.5%{ transform: translate(13.7px, -13.7px); }  /* 315° */
+  91.66%{ transform: translate(17.3px, -10px); }   /* 330° */
+  95.83%{ transform: translate(19.3px, -5.18px); } /* 345° */
+  100% { transform: translate(20px, 0); }          /* 360° */
 }
+
+
 
 .animate-spin-slow {
   animation: spin-slow 6s linear infinite;
   transform-origin: center center; /* ensure rotation around center */
 }
+
+@keyframes blink {
+          0%{opacity: 0.2;}
+          100% { opacity: 0.8; }
+          50% { opacity: 0.5; }
+        }
+
+.animate-blink{
+  animation: blink 5s ease-in-out infinite;
+}        
+
+
+@keyframes ripple {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-ripple {
+  animation: ripple 2s ease-in-out infinite;
+}
+.delay-150 {
+  animation-delay: 0.3s;
+}
+.delay-300 {
+  animation-delay: 0.6s;
+}
+
+@keyframes movePointer {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.pointer-container {
+  position: absolute;       /* required for offset-path to work inside container */
+  will-change: offset-distance, transform; /* improves performance of animation */
+  offset-rotate: auto;      /* makes pointer automatically rotate along path */
+}
+
+.pointer-circle {
+  cursor: pointer;
+  transition: r 0.3s, filter 0.3s;
+}
+
+.pointer-circle:hover {
+  r: 10;
+  fill: #FFFFFF !important;
+  filter: drop-shadow(0 0 10px #FFFFFF );
+}
+
