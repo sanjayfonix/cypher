@@ -13,15 +13,15 @@ export default function ServicesPage() {
       <TopBanner />
       <WhyConsulting />
       <div className="container">
-<CorePrincipals />
+        <CorePrincipals />
       </div>
-      
+
       <ServiceBlurCard />
 
-      
-        
-        <ServiceBlurCard />
-      
+
+
+      <ServiceBlurCard />
+
     </div>
   );
 }
