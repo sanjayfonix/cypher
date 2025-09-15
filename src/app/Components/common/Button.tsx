@@ -21,11 +21,11 @@ export default function Button({
     <button
     style={{
     boxShadow:isBorder===false? "0px 0px 10px 0px #89BFFF inset, 0px 0px 4px 0px #268AFF":'none',
-    border:isBorder?'1px solid #D5D5D5':'none'
+    border:isBorder?'1px solid #D5D5D5':'border-transparent'
   }}
       onClick={onClick}
       className={
-        `flex items-center justify-center rounded-4xl px-[0.55rem] py-2 sm:px-4 sm:py-3 text-sm sm:text-base font-medium transition-all duration-200
+        `flex items-center justify-center rounded-4xl px-3 py-3 text-sm sm:text-base font-medium transition-all duration-200
         ${color}
         text-white
         text-[0.7rem]
@@ -35,7 +35,7 @@ export default function Button({
       }
     >      
       {text}
-      {isIcon && <img src={'/arrow-down-right.svg'} className="w-6 h-6 object-cover"/> }
+      {isIcon?<img src={'/arrow-down-right.svg'} className="w-5 h-5 object-cover"/>:<div className="h-5 w-0"/> }
     </button>
   );
 }

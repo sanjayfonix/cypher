@@ -1,8 +1,14 @@
+'use client'
+import { useState } from "react";
 import Button from "../common/Button"; // Make sure to import your Button component
+import { Bounce } from "gsap";
+import { easeInOut } from "framer-motion";
 
 export default function HowItWorks() {
+  const [mode,setMode]=useState(0);
+  const [type,setType]=useState(0); 
   return (
-    <div className="flex flex-col lg:flex-row items-center p-6 sm:p-12 lg:p-20 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')] bg-fill bg-repeat">
+    <div className="flex flex-col lg:flex-row mt-20 items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')] bg-fill bg-repeat">
       {/* Left Column */}
       <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
         {/* First Text */}
@@ -26,25 +32,45 @@ export default function HowItWorks() {
           {/* First Div - Top Row */}
           <div className="flex flex-col sm:flex-row justify-center w-full gap-2 sm:gap-4 p-4 rounded-t-[12px] bg-[#09346B]">
             {/* First inner div */}
-            <div className="border border-[#167BFF] bg-[#0C448C] rounded-lg px-4 py-2 sm:py-3">
-              <span className="font-sans font-bold text-lg sm:text-xl md:text-2xl text-white">
+            <button onClick={()=>setMode(0)} style={{
+              border:mode===0?'1px solid #167BFF':'none',
+              backgroundColor:mode===0?'#0C448C':'transparent',
+               transition:'linear 0.5s',
+            }} className="rounded-lg px-4 py-2 sm:py-3">
+              <span style={{
+                color:mode===0?'white':'#E3E3E3',
+                fontWeight:mode===0?'bold':'normal',
+              }} className="font-sans  text-lg sm:text-xl md:text-2xl ">
                 All in One
               </span>
-            </div>
+            </button>
 
-            {/* Second inner div */}
-            <div className="rounded-lg px-4 py-2 sm:py-3">
-              <span className="font-sans font-normal text-lg sm:text-xl md:text-2xl text-[#E3E3E3]">
-                OSINT
-              </span>
-            </div>
+              <button onClick={()=>setMode(1)} style={{
+              border:mode===1?'1px solid #167BFF':'none',
+              backgroundColor:mode===1?'#0C448C':'transparent',
 
-            {/* Third inner div */}
-            <div className="rounded-lg px-4 py-2 sm:py-3">
-              <span className="font-sans font-normal text-lg sm:text-xl md:text-2xl text-[#E3E3E3]">
-                Data Breach
-              </span>
-            </div>
+            }} className="rounded-lg px-4 py-2 sm:py-3">
+              <span style={{
+                 transition:'linear 0.5s',
+                color:mode===1?'white':'#E3E3E3',
+                fontWeight:mode===1?'bold':'normal',
+              }} className="font-sans  text-lg sm:text-xl md:text-2xl ">
+                OSINT              </span>
+            </button>
+
+           <button onClick={()=>setMode(2)} style={{
+              transition:'linear 0.5s',
+              border:mode===2?'1px solid #167BFF':'none',
+              backgroundColor:mode===2?'#0C448C':'transparent',
+
+            }} className="rounded-lg px-4 py-2 sm:py-3">
+              <span style={{
+                color:mode===2?'white':'#E3E3E3',
+                fontWeight:mode===2?'bold':'normal',
+              }} className="font-sans  text-lg sm:text-xl md:text-2xl ">
+                Data Breach              </span>
+            </button>
+
           </div>
 
           {/* Second Div - Bottom Content */}
@@ -70,25 +96,52 @@ export default function HowItWorks() {
             {/* Placeholder for next row content */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-100">
               {/* First Div - Username */}
-              <div className="flex items-center justify-center gap-2.5 rounded-[3rem] border-[1.2px] px-4 py-2 sm:py-3 bg-[#E8F2FF] border-[#157AFF]">
-                <span className="font-sans font-medium text-[#1E1E1E] text-base sm:text-lg md:text-xl">
+              <button style={{
+                 transition:'linear 1s',
+                backgroundColor:type===0?'#E8F2FF':'#515151',
+                border:type===0?'1.2px solid #157AFF':'none'
+              }} onClick={()=>setType(0)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 ">
+                <span
+                style={{
+                  color:type===0?'#1E1E1E':'black',
+                  fontWeight:mode===0?'medium':'normal'
+                }}
+                className="font-sans text-base sm:text-lg md:text-xl">
                   Username
                 </span>
-              </div>
+              </button>
 
               {/* Second Div - Phone Number */}
-              <div className="flex  items-center justify-center gap-2.5 rounded-[3rem] px-4 py-2 sm:py-3 bg-[#515151]">
-                <span className="font-sans font-normal text-base sm:text-lg md:text-xl text-black">
+              <button style={{
+                transition:'linear 1s',
+                backgroundColor:type===1?'#E8F2FF':'#515151',
+                border:type===1?'1.2px solid #157AFF':'none'
+              }} onClick={()=>setType(1)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 ">
+                <span
+                style={{
+                  color:type===1?'#1E1E1E':'black',
+                  fontWeight:mode===1?'medium':'normal'
+                }}
+                className="font-sans text-base sm:text-lg md:text-xl">
                   Phone Number
                 </span>
-              </div>
+              </button>
 
               {/* Third Div - Email */}
-              <div className="flex items-center justify-center gap-2.5 rounded-[3rem] px-4 py-2 sm:py-3 bg-[#515151]">
-                <span className="font-sans font-normal text-base sm:text-lg md:text-xl text-black">
+              <button style={{
+                 transition:'linear 1s',
+                backgroundColor:type===2?'#E8F2FF':'#515151',
+                border:type===2?'1.2px solid #157AFF':'none'
+              }} onClick={()=>setType(2)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 ">
+                <span
+                style={{
+                  color:type===2?'#1E1E1E':'black',
+                  fontWeight:mode===2?'medium':'normal'
+                }}
+                className="font-sans text-base sm:text-lg md:text-xl">
                   Email
                 </span>
-              </div>
+              </button>
             </div>
           </div>
         </div>

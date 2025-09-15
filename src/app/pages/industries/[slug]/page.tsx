@@ -1,7 +1,19 @@
+import AnimatedPath from "@/app/Components/industries/AnimatedBanner";
+import IndustriesBlurCard from "@/app/Components/industries/IndustriesBlurCard";
+import { IndustryBanner } from "@/app/Components/industries/IndustryBanner";
+import KeySegments from "@/app/Components/industries/KeySegments";
+import { WhyIndustriesCarrier } from "@/app/Components/industries/WhyInsurance";
+
+
+
 export default function IndustriesPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-     Industries Page
+    <div className="font-sans bg-black">
+ <IndustryBanner/>
+  <WhyIndustriesCarrier/>
+   <KeySegments/>
+  <IndustriesBlurCard/>  
+
     </div>
   );
 }

@@ -1,59 +1,129 @@
 // components/BlurCard.tsx
 import React from "react";
 import Button from "../common/Button";
+import { Grid } from "@/assets/icon";
 
 const ServiceBlurCard = () => {
   return (
-    <div className="py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
-      {/* Main Card */}
-      <div className="relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
-        {/* First Decorative Blur Div */}
+    <div className="relative flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
+      {/* ===== Left Grid + Blur (outside card, never overlapping) ===== */}
+      <div
+        className="absolute"
+        style={{
+          top: "60%",
+          left: "clamp(-7rem, -14vw, -2rem)", // pushes grid far left on mobile
+          transform: "translateY(-50%)",
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        {/* Blur behind left grid */}
         <div
-          className="absolute blur-[157.2px]"
+          className="absolute blur-[50px] sm:blur-[80px] lg:blur-[120px]"
+          style={{
+            width: "clamp(90px, 20vw, 180px)",
+            height: "clamp(90px, 20vw, 180px)",
+            background: "#1057B5",
+            opacity: 0.8,
+            borderRadius: "50%",
+            boxShadow: "0px 0px 80px 0px #157AFF80",
+            transform: "translate(-15%, -10%)",
+          }}
+        />
+        <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
+          <Grid />
+        </div>
+      </div>
+
+      {/* ===== Right Grid + Blur ===== */}
+      <div
+        className="absolute"
+        style={{
+          top: "15%",
+          right: "clamp(-2rem, 3vw, 4rem)", // keeps right grid visible but away from card
+          pointerEvents: "none",
+          zIndex: 0,
+        }}
+      >
+        {/* Blur behind right grid */}
+        <div
+          className="absolute blur-[50px] sm:blur-[80px] lg:blur-[120px] animate-glow"
+          style={{
+            width: "clamp(80px, 18vw, 160px)",
+            height: "clamp(80px, 18vw, 160px)",
+            background: "#1057B5",
+            opacity: 0.8,
+            borderRadius: "50%",
+            boxShadow: "0px 0px 70px 0px #157AFF80",
+            transform: "translate(-5%, 10%)",
+          }}
+        />
+        <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
+          <Grid />
+        </div>
+      </div>
+
+      {/* ===== Main Card ===== */}
+      <div
+        className="
+          relative w-full
+          max-w-[95%] sm:max-w-3xl lg:max-w-4xl
+          mx-auto overflow-hidden
+          flex flex-col gap-6 sm:gap-10 lg:gap-[32px]
+          p-4 sm:p-8 lg:p-[48px]
+          rounded-[16px] border border-[#515151] bg-[#121212]
+          z-20
+        "
+      >
+        {/* First Decorative Blur Div (inside card) */}
+        <div
+          className="absolute blur-[80px] sm:blur-[120px] lg:blur-[160px]"
           style={{
             borderRadius: "50%",
-            width: "213.5988892543589px",
-            height: "543.9217453983816px",
+            width: "30%",
+            height: "93%",
             transform: "rotate(-110.74deg)",
-            opacity: 0.5,
+            opacity: 0.7,
             background: "#1057B5",
-            boxShadow: "0px 0px 108.3px 0px #157AFF80",
-            top: "-120%",
-            left: "30%",
+            boxShadow: "0px 0px 80px 0px #157AFF80",
+            top: "-40%",
+            left: "20%",
             zIndex: 1,
           }}
         ></div>
 
-        {/* Second Decorative Blur Div */}
+        {/* Second Decorative Blur Div (inside card) */}
         <div
-          className="absolute blur-[93.2px]"
+          className="absolute blur-[50px] sm:blur-[80px]"
           style={{
-            width: "186.9999847412111px",
-            height: "276.0000000000002px",
+            width: "20%",
+            height: "60%",
             transform: "rotate(90deg)",
-            opacity: 0.3,
+            opacity: 0.7,
             background: "#1057B5",
-            bottom: "-20%",
-            right: "25%",
+            bottom: "-10%",
+            right: "20%",
             borderRadius: "50%",
             zIndex: 0,
           }}
         ></div>
 
-        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-[44px]">
-          {/* First Div */}
-          <div className="flex flex-col gap-6 sm:gap-7 lg:gap-[28px]">
-            <h1 className="font-[IBM Plex Sans] font-bold text-3xl sm:text-4xl lg:text-[48px] text-white text-center leading-snug">
+        {/* Content */}
+        <div className="flex flex-col gap-6 sm:gap-8 lg:gap-[44px]">
+          {/* Text Section */}
+          <div className="flex flex-col gap-3 sm:gap-6 lg:gap-[28px] text-center">
+            <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[48px] text-white leading-snug">
               Take Command of Your Future.
             </h1>
-            
-            <p className="font-inter font-normal text-sm sm:text-base lg:text-[16px] text-[#F1F1F1] self-center text-center max-w-[60%]">
-              With Cyphr’s Consulting & Advisory services, you’ll gain the knowledge, tools, and strategies to act decisively in an unpredictable world.
+            <p className="font-inter font-normal text-xs sm:text-base lg:text-[16px] text-[#F1F1F1] mx-auto text-center max-w-[95%] sm:max-w-[80%] lg:max-w-[72%]">
+              With Cyphr’s Consulting & Advisory services, you’ll gain the
+              knowledge, tools, and strategies to act decisively in an
+              unpredictable world.
             </p>
           </div>
 
-          {/* Second Div */}
-          <div className="flex justify-center gap-4">
+          {/* Buttons Section */}
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
             <Button
               isBorder={false}
               isIcon={false}

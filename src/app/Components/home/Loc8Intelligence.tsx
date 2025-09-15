@@ -1,5 +1,7 @@
-import { Graph } from "@/assets/icon";
+import { Graph, HammerIcon, HistoryIcon, PatternIcon, TargetIcon } from "@/assets/icon";
 import GridItem from "./GridItem";
+
+
 
 export default function Loc8Intelligence() {
   return (
@@ -9,7 +11,7 @@ export default function Loc8Intelligence() {
       <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
           Loc8 Cellular Intelligence
         </h2>
-        <p className="text-sm sm:text-base text-[#F1F1F1] font-inter font-normal ">
+        <p className="text-sm sm:text-base text-[#F1F1F1] font-inter font-normal max-w-[95%]">
           Our proprietary Loc8 technology transforms mobile device data into powerful investigative intelligence, providing unprecedented insights into movement patterns and behaviors.
         </p>
         </div>
@@ -29,25 +31,25 @@ export default function Loc8Intelligence() {
       {/* Right Div → 2x2 Grid */}
       <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-6 mt-6 lg:mt-0">
         <GridItem
-          icon={<Graph />}
+          icon={<TargetIcon />}
           text="Precise Location Tracking"
           subtext="Track subjects with extraordinary accuracy through cellular app data integration."
           isCol={true}
         />
         <GridItem
-          icon={<Graph />}
+          icon={<HammerIcon />}
           text="Legal-Grade Evidence"
           subtext="Generate defensible, court-admissible location reports for legal proceedings."
           isCol={true}
         />
         <GridItem
-          icon={<Graph />}
+          icon={<HistoryIcon />}
           text="Historical Movement Analysis"
           subtext="Reconstruct past movements with detailed timestamp and location data."
           isCol={true}
         />
         <GridItem
-          icon={<Graph />}
+          icon={<PatternIcon />}
           text="Pattern Recognition"
           subtext="Identify behavioral patterns and routines through AI-powered analysis."
           isCol={true}
