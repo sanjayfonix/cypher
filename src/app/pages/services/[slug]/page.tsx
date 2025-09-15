@@ -18,6 +18,10 @@ export default function ServicesPage() {
       
       <ServiceBlurCard />
 
+      
+        
+        <ServiceBlurCard />
+      
     </div>
   );
 }
