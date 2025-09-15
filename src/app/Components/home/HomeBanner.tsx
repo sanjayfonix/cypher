@@ -1,10 +1,18 @@
+
+
 import { inter } from "@/app/layout";
 import Button from "../common/Button";
 import { TopBanner } from "../services/TopBanner";
 import { Toparrow } from "@/assets/icon";
+import Link from "next/link";
+
+
 
 
 export const HomeBanner = () => {
+
+
+
   return (
     <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-20 px-6 sm:px-12 lg:px-28 h-auto ">
 
@@ -80,7 +88,7 @@ export const HomeBanner = () => {
         {/* Buttons */}
         <div className="flex gap-3 sm:gap-5 mt-[0.9rem] w-full sm:w-auto justify-center">
          <button className="custom-button with-shadow bg-[#1057B5] " >Book a Consultation</button>
-         <button className="custom-button with-border bg-transparent" >Explore Services <Toparrow/></button>
+         <Link href={'/pages/services/consulting'}><button className="custom-button with-border bg-transparent" >Explore Services <Toparrow/></button></Link>
         </div>
       </div>
     </div>
