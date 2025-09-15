@@ -85,21 +85,17 @@ export default function WhereInvestigation() {
 
               {/* Vertical rectangle */}
               
-           <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start">
-  {/* 💎 Diamond Glow (centered + semicircle) */}
-  <div className="absolute -bottom-[3%] left-1/2 -translate-x-1/2 w-[150%] h-[30%] overflow-hidden">
-    {/* Diamond Shape Glow */}
-    <div
-      className="
-        w-full h-full blur-[120px] rounded-t-full
-      "
-      style={{
-        background:
-          "conic-gradient(from 0deg at 50% 50%, rgba(20,112,232,0.4) 0deg, rgba(2,8,18,0) 90deg, rgba(20,112,232,0.4) 180deg, rgba(2,8,18,0) 270deg)",
-        transform: "rotate(45deg)",
-      }}
-    />
-  </div>
+           <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start ">
+  {/* 🌟 Radial Glow (centered on rectangle, behind it, semicircle shape) */}
+  <div
+  className="absolute w-[647px] h-[220px] left-[-33px] top-[284.5px] opacity-100 backdrop-blur-[31.3px] overflow-hidden"
+  style={{
+    background:
+      "conic-gradient(from 0deg at 50% 50%, #1470E8 0deg, #020812 90deg, #1470E8 180deg, #020812 270deg)",
+    transform: "rotate(45deg)",
+  }}
+/>
+
   {/* Actual rectangle */}
   <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
     <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
@@ -147,7 +143,7 @@ export default function WhereInvestigation() {
         
         {/* 🌟 New Glow Behind Inner Circle */}
         <div className="absolute inset-0 flex justify-center items-center -z-10">
-          <div className="w-[130%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.4)_0%,rgba(22,123,255,0)_80%)] blur-2xl" />
+          <div className="w-[130%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.4)_0%,rgba(22,123,255,0)_80%)] blur-[5px] animate-glow" />
         </div>
 
         {/* Extra Glow Circle */}

@@ -1,7 +1,7 @@
 import ContactSection from "@/app/Components/common/Getintouch";
 import BlurCard from "@/app/Components/home/BlurCard";
 import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntelligence";
-import { HomeBanner } from "@/app/Components/home/HomeBanner";
+import  HomeBanner  from "@/app/Components/home/HomeBanner";
 import HowItWorks from "@/app/Components/home/HowItWorks";
 import IntegrityAtCore from "@/app/Components/home/IntegrityAtCore";
 import SearchResultTab from "@/app/Components/home/SearchResultTab";
@@ -85,13 +85,13 @@ export default function HomePage() {
      
      <HowItWorks/>
       <div className="font-sans text-3xl font-bold text-white text-center underline decoration-gray-600 underline-offset-4">Search Results</div>
-     <div className="grid p-6 grid-cols-3 gap-2 gap-y-6">
+     <div className="grid p-6 grid-cols-2 gap-2 gap-y-6">
      {[1,2,3,4,5,6].map((item)=>{
          return<SearchResultTab key={item} icon={User} title="hello" queryVal="change" date="22-05-2023" rowsData={tabsData[0].rowsData}/>
      })}
      </div> 
     
-    <IntegrityAtCore/>
+    {/* <IntegrityAtCore/> */}
      <BlurCard/>
      <ContactSection />
     </div>

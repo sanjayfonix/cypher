@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ChevronDown, ArrowUpRight, Menu, X } from "lucide-react";
 import Button from "./Button";
+import { Toparrow } from "@/assets/icon";
 
 export default function Navbar() {
   const pathname = usePathname(); // Get current route
@@ -170,15 +171,12 @@ export default function Navbar() {
 
           {/* Right Buttons - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-4">
-            <Button
-              color="bg-transparent"
-              text="Refer A Case"
-              onClick={() => router.push("/pages/refer_case")}
-              isBorder={true}
-            />
-            <Button color="bg-[#1057B5]" text="Get in touch"
+            <button
+              className="custom-button with-border bg-transparent "
+            >Refer A Case</button>
+            <button 
               onClick={() => router.push("/pages/contactus")}
-              isIcon={true} />
+               className="custom-button with-shadow bg-[#1057B5]">Get in touch <Toparrow/></button> 
           </div>
 
           {/* Placeholder to balance the layout on mobile */}
