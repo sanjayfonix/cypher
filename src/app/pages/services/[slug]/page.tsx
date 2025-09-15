@@ -1,3 +1,4 @@
+import ContactSection from "@/app/Components/common/Getintouch";
 import BlurCard from "@/app/Components/home/BlurCard";
 import CorePrincipals from "@/app/Components/services/CorePrincipals";
 
@@ -21,6 +22,7 @@ export default function ServicesPage() {
 
 
       <ServiceBlurCard />
+      <ContactSection />
 
     </div>
   );

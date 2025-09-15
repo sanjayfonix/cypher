@@ -1,3 +1,4 @@
+import ContactSection from "@/app/Components/common/Getintouch";
 import AnimatedPath from "@/app/Components/industries/AnimatedBanner";
 import IndustriesBlurCard from "@/app/Components/industries/IndustriesBlurCard";
 import { IndustryBanner } from "@/app/Components/industries/IndustryBanner";
@@ -13,7 +14,7 @@ export default function IndustriesPage() {
       <WhyIndustriesCarrier />
       <KeySegments />
       <IndustriesBlurCard />
-
+      <ContactSection />
     </div>
   );
 }
