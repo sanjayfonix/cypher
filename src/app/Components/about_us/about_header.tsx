@@ -6,7 +6,7 @@ import { ShoppingBag, Mail, Globe } from "lucide-react";
 export const AboutHeader = () => {
     return (
         <div className="bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover ">
-            <div className="relative  container  flex flex-col lg:flex-row items-center justify-between py-20 px-6 sm:px-12 lg:px-28 h-auto">
+            <div className="relative  containerr  flex flex-col lg:flex-row items-center justify-between py-20 px-6 sm:px-12 lg:px-28 h-auto">
                 <div>
 
                 </div>

@@ -184,6 +184,10 @@ body {
   margin: auto;
   background: black;
 }
+.containerr{
+  max-width: 1440px;
+  margin: auto;
+}
 
 @keyframes glowPulse {
   0%, 100% {
