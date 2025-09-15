@@ -75,7 +75,7 @@ export const WhyConsulting = () => {
         Why Consulting & Advisory?
       </h2>
 
-      <div className="flex flex-col gap-0">
+      <div className="flex flex-col gap-0 container">
         {rows.map((row, i) => {
           const isActive = i === activeIndex;
           return (

@@ -77,7 +77,7 @@ const tabsData = [
   ];
 export default function HomePage() {
   return (
-    <div className="w-full bg-[var(--primary)]">
+    <div className="w-full bg-[var(--primary)] container">
      <HomeBanner/>
      <GlobalThreatIntelligence/> 
       <WhereInvestigation/>

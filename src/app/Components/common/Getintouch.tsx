@@ -33,7 +33,7 @@ export default function ContactSection() {
     };
 
     return (
-        <div className="relative containerr  border border-gray-600 rounded-4xl text-white  flex flex-col md:flex-row items-start justify-between p-12  my-10  gap-10 overflow-hidden">
+        <div className="relative container  border border-gray-600 rounded-4xl text-white  flex flex-col md:flex-row items-start justify-between p-12  my-10  gap-10 overflow-hidden">
 
             {/* Background Glow */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_70%)] pointer-events-none" />

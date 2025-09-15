@@ -8,11 +8,11 @@ import { WhyIndustriesCarrier } from "@/app/Components/industries/WhyInsurance";
 
 export default function IndustriesPage() {
   return (
-    <div className="font-sans bg-black">
- <IndustryBanner/>
-  <WhyIndustriesCarrier/>
-   <KeySegments/>
-  <IndustriesBlurCard/>  
+    <div className="font-sans bg-black container">
+      <IndustryBanner />
+      <WhyIndustriesCarrier />
+      <KeySegments />
+      <IndustriesBlurCard />
 
     </div>
   );

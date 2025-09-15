@@ -38,7 +38,7 @@ export const TopBanner = () => {
       />
 
       {/* Content */}
-      <div className="flex flex-col items-center justify-start gap-4 z-10 text-center max-w-[90%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
+      <div className="flex flex-col container items-center justify-start gap-4 z-10 text-center max-w-[90%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
         <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight font-sans">
           Transform Complex Data Into Your Strategic Advantage
         </p>

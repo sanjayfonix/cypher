@@ -15,7 +15,7 @@ const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
 };
 
   return (
-    <div className="flex min-h-screen containerr text-gray-300">
+    <div className="flex min-h-screen container text-gray-300">
       {/* Sidebar */}
       <aside className=" hidden lg:block w-64 h-auto   mt-10">
         <div className="flex flex-col border border-[#3c414a] bg-[#0f1012]">
