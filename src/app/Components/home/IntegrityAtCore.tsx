@@ -1,4 +1,5 @@
 import { AcademiaIcon, EmployersIcon, Icon2, InsuranceIcon, LawIcon } from "@/assets/icon";
+import { TravelingBorder } from "../services/CorePrincipals";
 
 const Items = [
   { id: 1, name: "Insurance Carriers", icon: <InsuranceIcon /> },
@@ -17,16 +18,17 @@ export default function IntegrityAtCore() {
         {/* Content */}
         <div className="relative z-10 w-full flex flex-col gap-10 sm:gap-16 pt-8 sm:pt-[76px] px-4 sm:px-[68px] pb-8 sm:pb-[76px]">
           {/* Glow Circle (no fixed width/height, uses % + aspect ratio) */}
-          <div className="absolute top-1/3 left-[45%] aspect-square max-w-[25vw] sm:max-w-[160px] rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.6)_0%,rgba(22,123,255,0.2)_100%)] blur-[40px] sm:blur-[50px]" />
+          <div className="absolute top-1/3 left-[40%] aspect-square w-[25vw] sm:max-w-[200px] h-[25vw] sm:h-[250px] rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.6)_0%,rgba(22,123,255,0.2)_100%)] blur-[30.1px]  animate-glow" />
 
           {/* Top Cards */}
           <div className="flex flex-wrap justify-between items-start gap-4 sm:gap-0">
             {Items.slice(0, 2).map((item) => (
               <div
                 key={item.id}
-                className="flex  flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
+                className=" flex  flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
                 style={{ marginTop: item.id === 1 ? 16 : 0 }}
               >
+                 
                 <div className="flex items-center justify-center rounded-full p-3 sm:p-4 bg-[linear-gradient(180deg,rgba(47,47,47,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)] shadow-[0px_0px_10px_0px_#157AFF66]">
                   {item.icon}
                 </div>

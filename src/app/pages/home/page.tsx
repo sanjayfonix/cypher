@@ -91,7 +91,7 @@ export default function HomePage() {
      })}
      </div> 
     
-    {/* <IntegrityAtCore/> */}
+    <IntegrityAtCore/>
      <BlurCard/>
      <ContactSection />
     </div>

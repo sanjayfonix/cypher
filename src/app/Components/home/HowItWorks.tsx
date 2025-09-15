@@ -8,7 +8,7 @@ export default function HowItWorks() {
   const [mode,setMode]=useState(0);
   const [type,setType]=useState(0); 
   return (
-    <div className="flex flex-col lg:flex-row mt-20 items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')] bg-fill bg-repeat">
+    <div className="flex flex-col lg:flex-row mt-20 items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]  bg-repeat">
       {/* Left Column */}
       <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
         {/* First Text */}
@@ -75,26 +75,12 @@ export default function HowItWorks() {
 
           {/* Second Div - Bottom Content */}
           <div className="flex flex-col gap-6 sm:gap-8 p-4 sm:p-6 md:p-8 rounded-b-[12px] bg-black shadow-[inset_0_0_30px_0_#157AFF80]">
-            {/* First Row inside Bottom Div */}
-            <div className="flex flex-col sm:flex-row gap-4 items-center w-full">
-              {/* Input */}
-              <input
-                type="text"
-                placeholder="Enter text..."
-                className="w-full sm:flex-1 rounded-[38px] border border-[#515151] bg-[#1E1E1E] px-4 py-2 sm:py-3 text-white placeholder-gray-400 focus:outline-none"
-              />
-
-              {/* Button Component */}
-              <Button
-                isIcon={true}
-                isBorder={false}
-                color="bg-[#1057B5]"
-                text="Search Now"
-              />
-            </div>
-
+            {type===0 && <UsernameForm/>}
+            {type===1 && <CustomForm formType={1}/>}
+            {type===2 && <CustomForm formType={2}/>}
             {/* Placeholder for next row content */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-100">
+              
               {/* First Div - Username */}
               <button style={{
                  transition:'linear 1s',
@@ -154,3 +140,78 @@ export default function HowItWorks() {
   );
 }
 
+
+// components/SearchForm.tsx
+
+
+import { Toparrow } from "@/assets/icon";
+
+export  function UsernameForm() {
+  return (
+    <div className="w-full  p-4">
+      {/* Full Name */}
+      <div className="mb-3">
+        <label className="block text-sm text-white mb-4">Full name</label>
+        <input
+          type="text"
+          placeholder="Enter full name"
+          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 py-3 px-4 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      {/* City, State + Button */}
+      <div className="flex flex-row gap-4 items-end justify-between mt-4">
+        {/* City */}
+        <div className="flex gap-4">
+        <div >
+          <label className={`block text-sm text-white  mb-4 `}>City</label>
+          <input
+            type="text"
+            placeholder="City"
+            className=" rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* State */}
+        <div>
+          <label className="block text-sm text-white mb-4">State</label>
+          <input
+            type="text"
+            placeholder="State"
+            className=" rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+</div>
+        {/* Search Button */}
+        <div>
+        <button className="custom-button with-shadow bg-[#1057B5]">Search Now <Toparrow/></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+interface formInput {
+  formType:number;
+}
+
+export  function CustomForm({formType}:formInput) {
+  return (
+    <div className="w-full  p-4">
+      {/* Full Name */}
+      <div>
+        <label className="block text-sm text-white font-inter mb-4">{formType===1?'Phone Number':'Email'}</label>
+        <div className="flex items-end justify-between gap-4 flex-wrap sm:flex-nowrap">
+        <input
+          type="text"
+          placeholder={formType===1?"Enter Phone Number":"Enter Email address"}
+          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500 py-3 px-4"
+        />
+        <button className="w-1/2 custom-button with-shadow bg-[#1057B5]">Search Now <Toparrow/></button>
+        </div>
+        
+      </div>
+        
+      </div>
+  );
+}

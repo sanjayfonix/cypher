@@ -1,5 +1,6 @@
 import { BigProtectIc, FbIcon, InstaIcon, WhatsappIcon } from "@/assets/icon";
 import { XIcon } from "lucide-react";
+import { TravelingBorder } from "../services/CorePrincipals";
 
 export default function WhereInvestigation() {
   return (
@@ -20,8 +21,8 @@ export default function WhereInvestigation() {
         {/* Left Column */}
         <div className="flex flex-col justify-between flex-1 gap-6">
           {/* Consulting & Advisory */}
-          <div className="relative bg-gradient-to-b from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between">
-            <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/Union.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10"/>
+          <div className="relative bg-gradient-to-b  from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between">
+            <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/grid2.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10"/>
             <div className="flex flex-col gap-3 relative z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">
                 Consulting & Advisory
@@ -29,7 +30,7 @@ export default function WhereInvestigation() {
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">
                 Transform complex data into your strategic advantage
               </p>
-              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter">
+              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-sm">
                 Leverage intelligence techniques to make informed decisions, enhance security, and mitigate risks.
               </p>
             </div>
@@ -42,9 +43,10 @@ export default function WhereInvestigation() {
           </div>
 
           {/* Social Media Intelligence */}
-          <div className="overflow-hidden relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col justify-between h-full">
+          <div className=" relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col justify-between h-full">
             {/* Bottom radial glow */}
-            <div className="absolute -bottom-20 sm:-bottom-30 left-1/3 sm:left-1/2 -translate-x-1/2 z-1 w-[70%] max-w-[420px] aspect-[2/1] opacity-100 bg-[radial-gradient(50%_50%_at_50%_50%,#1470E8_0%,#020812_100%)] blur-[30px]" />
+            <TravelingBorder/>
+            
 
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-sans">
@@ -67,6 +69,7 @@ export default function WhereInvestigation() {
             {/* Floating divs / glows inside Social Media Intelligence */}
             <div className="relative flex items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square">
               {/* Small floating circles */}
+              
               <div className="absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
                 <InstaIcon/>  
               </div>
@@ -81,8 +84,30 @@ export default function WhereInvestigation() {
               </div>
 
               {/* Vertical rectangle */}
-              <div className="relative w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start p-2 rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66]">
-                <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
+              
+           <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start">
+  {/* 💎 Diamond Glow (centered + semicircle) */}
+  <div className="absolute -bottom-[3%] left-1/2 -translate-x-1/2 w-[150%] h-[30%] overflow-hidden">
+    {/* Diamond Shape Glow */}
+    <div
+      className="
+        w-full h-full blur-[120px] rounded-t-full
+      "
+      style={{
+        background:
+          "conic-gradient(from 0deg at 50% 50%, rgba(20,112,232,0.4) 0deg, rgba(2,8,18,0) 90deg, rgba(20,112,232,0.4) 180deg, rgba(2,8,18,0) 270deg)",
+        transform: "rotate(45deg)",
+      }}
+    />
+  </div>
+  {/* Actual rectangle */}
+  <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
+    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
+  </div>
+</div>
+
+              <div>
+              
               </div>
             </div>
           </div>
@@ -95,6 +120,7 @@ export default function WhereInvestigation() {
         <div className="flex flex-col justify-between flex-1 gap-6">
           {/* Brand Defense */}
           <div className="relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col justify-between h-full">
+            <TravelingBorder/>
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
               <p className="text-[#E3E3E3] text-base sm:text-lg font-medium font-sans">
@@ -111,41 +137,51 @@ export default function WhereInvestigation() {
               </span>
             </button>
 
-            {/* Concentric circles */}
-            <div className="flex justify-center items-center relative left-[10%] sm:left-[20%] -top-5 sm:-top-[1.25rem] opacity-50 w-[80%] max-w-[24.75rem] aspect-square rounded-full border border-[#09336B]">
-              <div className="flex justify-center items-center opacity-80 w-[85%] aspect-square rounded-full border border-[#09336B]">
-                <div className="flex justify-center items-center opacity-90 w-[80%] aspect-square rounded-full border border-[#09336B]">
-                  <div className="absolute w-[35%] aspect-square rounded-full opacity-100 bg-[#167BFF99] blur-[1.1px]" />
-                  <div
-                    style={{
-                      display:'flex',
-                      justifyContent:'center',
-                      alignItems:'center',
-                      width: '50%',
-                      aspectRatio: '1 / 1',
-                      transform: 'rotate(-0.47deg)',
-                      padding: '8px',
-                      borderRadius: '50%',
-                      opacity: 1,
-                      background: 'linear-gradient(180deg, #030A14 44.67%, #157AFF 185.84%)',
-                      boxShadow: '0px 0px 150px #157AFF80',
-                    }}
-                  >
-                    <BigProtectIc/>
-                  </div>
-                </div>
-              </div>
-            </div>
+           <div className="relative flex justify-center items-center w-full max-w-[400px] aspect-square mx-auto">
+  {/* Outer Circle */}
+  <div className="flex justify-center items-center relative w-[95%] aspect-square rounded-full border border-[#09336B] opacity-50">
+    {/* Middle Circle */}
+    <div className="flex justify-center items-center w-[85%] aspect-square rounded-full border border-[#09336B] opacity-80">
+      {/* Inner Circle */}
+      <div className="flex justify-center items-center w-[80%] aspect-square rounded-full border border-[#09336B] opacity-90 relative">
+        
+        {/* 🌟 New Glow Behind Inner Circle */}
+        <div className="absolute inset-0 flex justify-center items-center -z-10">
+          <div className="w-[130%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.4)_0%,rgba(22,123,255,0)_80%)] blur-2xl" />
+        </div>
+
+        {/* Extra Glow Circle */}
+        <div className="absolute w-[35%] aspect-square rounded-full bg-[#167BFF99] blur-[1.1px] animate-glow" />
+        
+        {/* Center Content */}
+        <div
+          className="flex justify-center items-center w-1/2 aspect-square rounded-full relative z-10 animate-ripple"
+          style={{
+            transform: 'rotate(-0.47deg)',
+            padding: '8px',
+            background: 'linear-gradient(180deg, #030A14 44.67%, #157AFF 185.84%)',
+
+            boxShadow: '0px 0px 150px #157AFF80',
+          }}
+        >
+          <BigProtectIc />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
           </div>
 
           {/* Geospatial Cellular Forensics */}
           <div className="relative bg-gradient-to-b from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between h-full">
+            <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/grid2.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10"/>
             <div className="flex flex-col gap-3 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Geospatial Cellular Forensics</h2>
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">
                 Unlock the power of location-based intelligence.
               </p>
-              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter">
+              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-sm">
                 Analyze mobile device data to track movement, verify alibis, and uncover hidden connections.
               </p>
             </div>
