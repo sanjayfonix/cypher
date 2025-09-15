@@ -16,11 +16,6 @@ export default function ServicesPage() {
       <div className="container">
         <CorePrincipals />
       </div>
-
-      <ServiceBlurCard />
-
-
-
       <ServiceBlurCard />
       <ContactSection />
 
