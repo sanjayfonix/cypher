@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Toparrow } from "@/assets/icon";
+import { AnimateBannerPaths } from "./AnimatePath";
 
 const HEADLINES = [
   "Investigative Intelligence Transformed",
@@ -166,7 +167,7 @@ export default function HomeBanner() {
           <br />
           defensible answers when you need them most.
         </p>
-
+   
         <div className="flex gap-3 sm:gap-5 mt-[0.9rem] w-full sm:w-auto justify-center">
           <button className="custom-button with-shadow bg-[#1057B5]">
             Book a Consultation
@@ -177,6 +178,7 @@ export default function HomeBanner() {
             </button>
           </Link>
         </div>
+        <AnimateBannerPaths/>
       </div>
     </div>
   );

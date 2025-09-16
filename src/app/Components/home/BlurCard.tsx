@@ -2,6 +2,7 @@
 import React from "react";
 import Button from "../common/Button";
 
+
 const BlurCard = () => {
   return (
     <div className="py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">

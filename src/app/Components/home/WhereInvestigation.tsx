@@ -1,4 +1,4 @@
-import { BigProtectIc, FbIcon, InstaIcon, WhatsappIcon } from "@/assets/icon";
+import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, WhatsappIcon } from "@/assets/icon";
 import { XIcon } from "lucide-react";
 import { TravelingBorder } from "../services/CorePrincipals";
 
@@ -85,16 +85,9 @@ export default function WhereInvestigation() {
 
               {/* Vertical rectangle */}
               
-           <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start ">
+           <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start">
   {/* 🌟 Radial Glow (centered on rectangle, behind it, semicircle shape) */}
-  <div
-  className="absolute w-[647px] h-[220px] left-[-33px] top-[284.5px] opacity-100 backdrop-blur-[31.3px] overflow-hidden"
-  style={{
-    background:
-      "conic-gradient(from 0deg at 50% 50%, #1470E8 0deg, #020812 90deg, #1470E8 180deg, #020812 270deg)",
-    transform: "rotate(45deg)",
-  }}
-/>
+  <div className=" absolute translate-x-1/4 -left-1/2 -bottom-9 overflow-hidden"><DiamondGlow/></div>
 
   {/* Actual rectangle */}
   <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
