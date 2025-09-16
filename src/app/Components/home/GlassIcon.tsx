@@ -15,7 +15,7 @@ export const GlassIcon = ({
   size = 96,
   borderOpacity = 0.75,
   borderThickness = 1,
-  arcLength = 110,
+  arcLength = 130,
   fadeSize = 45,
 }: GlassIconProps) => {
   const solidStart = fadeSize;
@@ -23,7 +23,7 @@ export const GlassIcon = ({
 
   return (
     <div
-      className="relative flex items-center justify-center rounded-full"
+      className="relative aspect-square flex items-center justify-center rounded-full"
       style={{ width: size, height: size }}
     >
      {/* TOP-LEFT ARC */}
@@ -32,14 +32,14 @@ export const GlassIcon = ({
   style={{
     border: `${borderThickness}px solid rgba(255,255,255,${borderOpacity})`,
     WebkitMaskImage: `conic-gradient(
-      from 450deg,   /* top-left corner */
+      from 270deg,   /* top-left corner */
       rgba(0,0,0,0) 0deg,
       rgba(0,0,0,1) ${fadeSize}deg,
       rgba(0,0,0,1) ${arcLength - fadeSize}deg,
       rgba(0,0,0,0) ${arcLength}deg
     )`,
     maskImage: `conic-gradient(
-      from 225deg, 
+      from 250deg, 
       rgba(0,0,0,0) 0deg,
       rgba(0,0,0,1) ${fadeSize}deg,
       rgba(0,0,0,1) ${arcLength - fadeSize}deg,
@@ -61,7 +61,7 @@ export const GlassIcon = ({
       rgba(0,0,0,0) ${arcLength}deg
     )`,
     maskImage: `conic-gradient(
-      from 45deg, 
+      from 65deg, 
       rgba(0,0,0,0) 0deg,
       rgba(0,0,0,1) ${fadeSize}deg,
       rgba(0,0,0,1) ${arcLength - fadeSize}deg,

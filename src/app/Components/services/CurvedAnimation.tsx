@@ -1,25 +1,32 @@
 'use client';
 
-
 import React from 'react';
 
-
-export default function SemicircularArcs({viewWidth,viewHeight}:{
-  viewWidth:number;
-  viewHeight:number;
+export default function SemicircularArcs({
+  viewWidth,
+  viewHeight,
+}: {
+  viewWidth: number;
+  viewHeight: number;
 }) {
   const pointerPositions = [
-    { cx: 278.5, cy: 180 }, // Arc 1
-    { cx: 278.5, cy: 130 }, // Arc 2
-    { cx: 278.5, cy: 80 },  // Arc 3
-    { cx: 278.5, cy: 30 },  // Arc 4
+    // Arc 1 → near END (right side)
+    { cx: 385, cy:20 },
+
+    // Arc 3 → near START (left side)
+    { cx: 335, cy: 160 },
+
+    // Arc 4 → near END (right side)
+    { cx: 150, cy: 90 },
   ];
+
+  const texts=['Fraud Detection','Digital Forensics','OSINT']
 
   return (
     <svg
       width="700"
       height="300"
-      viewBox={`0 0 ${viewWidth} ${viewHeight}`} // Keep original viewBox to preserve coordinates
+      viewBox={`0 0 ${viewWidth} ${viewHeight}`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -53,33 +60,75 @@ export default function SemicircularArcs({viewWidth,viewHeight}:{
         strokeDasharray="12 12"
       />
 
-      {/* Stationary pointers */}
+      {/* Pointers (Arc 2 removed) */}
       {pointerPositions.map((pos, i) => (
         <circle
+        className='pointer-circle'
           key={i}
-          className="pointer-circle"
           cx={pos.cx}
           cy={pos.cy}
           r={6}
-          fill="#FF5C5C"
+          fill="#838383"
         />
       ))}
 
+      {
+        pointerPositions.map((pos, i) => (
+          <foreignObject key={`label-${i}`}
+          x={i===0?pos.cx+20:i==1?pos.cx+20:pos.cx+10}  // shift a bit right so it doesn't overlap the circle
+          y={i===0?pos.cy+10:i===1?pos.cy-10:pos.cy-70}  // align vertically centered with the circle
+          width={170}
+          height={80}>
+          <div className={` absolute top-[pos.cy] left-[pos.cx+30] gap-4 flex p-2 rounded-sm border text-sm text-[#6B6B6B] font-normal`}>
+          {texts[i]}
+          </div>
+          </foreignObject>
+        ))
+      }
+
       {/* Gradients */}
       <defs>
-        <linearGradient id="paint0_linear_222_2088" x1="278.5" y1="143" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint0_linear_222_2088"
+          x1="278.5"
+          y1="143"
+          x2="278.5"
+          y2="250"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0.115385" stopColor="#CCCCCC" />
           <stop offset="1" stopColor="#030A14" />
         </linearGradient>
-        <linearGradient id="paint1_linear_222_2088" x1="278.995" y1="92" x2="278.995" y2="250" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint1_linear_222_2088"
+          x1="278.995"
+          y1="92"
+          x2="278.995"
+          y2="250"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0.115385" stopColor="#CCCCCC" />
           <stop offset="1" stopColor="#030A14" />
         </linearGradient>
-        <linearGradient id="paint2_linear_222_2088" x1="278.5" y1="50" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint2_linear_222_2088"
+          x1="278.5"
+          y1="50"
+          x2="278.5"
+          y2="250"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0.115385" stopColor="#CCCCCC" />
           <stop offset="1" stopColor="#030A14" />
         </linearGradient>
-        <linearGradient id="paint3_linear_222_2088" x1="278.5" y1="1" x2="278.5" y2="250" gradientUnits="userSpaceOnUse">
+        <linearGradient
+          id="paint3_linear_222_2088"
+          x1="278.5"
+          y1="1"
+          x2="278.5"
+          y2="250"
+          gradientUnits="userSpaceOnUse"
+        >
           <stop offset="0.115385" stopColor="#CCCCCC" />
           <stop offset="1" stopColor="#030A14" />
         </linearGradient>
@@ -87,4 +136,5 @@ export default function SemicircularArcs({viewWidth,viewHeight}:{
     </svg>
   );
 }
+
 
