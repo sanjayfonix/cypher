@@ -197,25 +197,27 @@ function SecurityFeatures() {
   return (
     <div className="bg-black flex items-center justify-center py-10">
       <div className="grid grid-cols-2 gap-20 relative">
-        {/* Column containers */}
         {[0, 1].map((col) => (
           <div key={col} className="relative flex flex-col items-center">
-            {/* Vertical line starting from center of first icon */}
-            <div className="absolute top-[90px] left-1/8 transform -translate-x-1/2 h-[calc(100%-50px)] w-1 bg-gradient-to-b from-blue-500 to-transparent"></div>
+            {/* Vertical line starting from center of top icon */}
+            
 
             {features
               .filter((_, idx) => idx % 2 === col)
               .map((feature, idx) => (
                 <div
                   key={idx}
-                  style={{marginLeft:idx===2||idx===3?'20%':0}}
-                  className="flex items-start text-white gap-4 mb-20 relative z-10"
+                  className={`flex items-start text-white gap-4 mb-20 relative z-10
+                    ${idx === 1 ? "translate-x-20" : "translate-x-0"}`}
                 >
-                  {/* Icon Circle */}
-                  <div className="bg-gray-800 p-5 rounded-full flex items-center justify-center">
-                    {feature.icon}
-                  </div>
+                   <div className="absolute top-[90px] left-1/8 transform -translate-x-1/2  h-[calc(100%)] w-1 border border-[#696969] bg-gradient-to-b from-[#A8A8A8] to-transparent"></div>
 
+                  {/* Icon Circle */}
+                  <div className="relative bg-gray-800 p-5 rounded-full flex items-center justify-center">
+                    {feature.icon}
+                    {idx===2||idx===3&&<div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 h-[calc(100%+90px)] w-1 border border-[#696969] bg-gradient-to-b from-[#A8A8A8] to-transparent"></div>}
+                  </div>
+                  
                   {/* Text */}
                   <div className="flex flex-col gap-2">
                     <h3 className="font-bold text-lg">{feature.title}</h3>
@@ -229,6 +231,7 @@ function SecurityFeatures() {
     </div>
   );
 }
+
 
 
 
