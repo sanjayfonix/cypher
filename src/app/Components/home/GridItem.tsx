@@ -20,7 +20,7 @@ export default function GridItem({ icon, text, subtext, isCol = true }: GridItem
                   sm:gap-6 md:gap-8 lg:gap-10`}
     >
       {/* Circular Avatar */}
-      <GlassIcon icon={<Shield/>}/>
+      <GlassIcon icon={icon}/>
       
       
 
