@@ -95,7 +95,7 @@ export default function HomePage() {
     {/* <IntegrityAtCore/> */}
      <BlurCard/>
      <ContactSection />
-     <Grid/>
+     {/* <Grid/> */}
     </div>
   );
 }

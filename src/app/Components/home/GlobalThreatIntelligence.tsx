@@ -1,6 +1,6 @@
 // components/ThreatDetectionUI.tsx
 'use client';
-import { Find, Graph, Health, Shield } from "@/assets/icon";
+import { Find, Graph, Health, Search2, Search3, Search4, Shield } from "@/assets/icon";
 import { useState } from "react";
 import Loc8Intelligence from "./Loc8Intelligence";
 import Radar from "./RadarAnimation";
@@ -181,17 +181,17 @@ function SecurityFeatures() {
     {
       title: "Investigation",
       desc: "Forensic examination of security incidents",
-      icon: <Shield />,
+      icon: <Search2 />,
     },
     {
       title: "Risk Assessment",
       desc: "Continuous evaluation of vulnerability exposure",
-      icon: <Shield />,
+      icon: <Search3 />,
     },
     {
       title: "Data Analysis",
       desc: "Pattern recognition across massive datasets",
-      icon: <Shield />,
+      icon: <Search4 />,
     },
   ];
 

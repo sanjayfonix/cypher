@@ -1,5 +1,6 @@
-import { Graph, HammerIcon, HistoryIcon, PatternIcon, TargetIcon } from "@/assets/icon";
+import { Graph, HammerIcon, HistoryIcon, PatternIcon, Search5, Search6, TargetIcon } from "@/assets/icon";
 import GridItem from "./GridItem";
+import Image from "next/image";
 
 
 
@@ -7,54 +8,56 @@ export default function Loc8Intelligence() {
   return (
     <div className="flex flex-col gap-12  sm:px-7">
 
-        <div className="flex flex-col gap-4">
-      <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
-          Loc8 Cellular Intelligence
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
+          Cellular Intelligence
         </h2>
         <p className="text-sm sm:text-base text-[#F1F1F1] font-inter font-normal max-w-[95%]">
-          Our proprietary Loc8 technology transforms mobile device data into powerful investigative intelligence, providing unprecedented insights into movement patterns and behaviors.
+          Cyphr's Cellular Intelligence provides cutting-edge capabilities to collect and analyze mobile network data, uncovering valuable insights into people’s behavior, location, and activities. This technology equips investigators with the tools to enhance threat detection, gather intelligence in real-time, and make informed decisions based on mobile device interactions.
         </p>
+      </div>
+
+      <div className="flex flex-col py-5 px-4 gap-6 sm:flex-row">
+        {/* Left Div → Image */}
+        <div className="flex-1">
+          <Image
+            src="/images/Cellular.png"
+            alt="Left"
+            width={200}         // 👈 required numeric value
+            height={200}        // 👈 required numeric value
+            className="w-full h-64 sm:h-80 md:h-full object-cover rounded-lg"
+          />
         </div>
 
-        <div className="flex flex-col py-5 px-4 gap-6 sm:flex-row">
-      {/* Left Div → Image */}
-      <div className="flex-1">
-        <img
-          src="/placeholder-image.png"
-          alt="Left"
-          className="w-64 h-64 sm:h-80 md:h-full object-cover rounded-lg"
-        />
-      </div>
-      
-    
 
-      {/* Right Div → 2x2 Grid */}
-      <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-6 mt-6 lg:mt-0">
-        <GridItem
-          icon={<TargetIcon />}
-          text="Precise Location Tracking"
-          subtext="Track subjects with extraordinary accuracy through cellular app data integration."
-          isCol={true}
-        />
-        <GridItem
-          icon={<HammerIcon />}
-          text="Legal-Grade Evidence"
-          subtext="Generate defensible, court-admissible location reports for legal proceedings."
-          isCol={true}
-        />
-        <GridItem
-          icon={<HistoryIcon />}
-          text="Historical Movement Analysis"
-          subtext="Reconstruct past movements with detailed timestamp and location data."
-          isCol={true}
-        />
-        <GridItem
-          icon={<PatternIcon />}
-          text="Pattern Recognition"
-          subtext="Identify behavioral patterns and routines through AI-powered analysis."
-          isCol={true}
-        />
-      </div>
+
+        {/* Right Div → 2x2 Grid */}
+        <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-6 mt-6 lg:mt-0">
+          <GridItem
+            icon={<TargetIcon />}
+            text="Real-Time Location Data"
+            subtext="Track individuals' movements in real-time, gaining insights into location patterns to aid investigations and support timely decisions."
+            isCol={true}
+          />
+          <GridItem
+            icon={<HistoryIcon />}
+            text="Location-Based Analytics"
+            subtext="Analyze geographic hotspots and movement patterns to gain a comprehensive understanding of trends and behaviors over time."
+            isCol={true}
+          />
+          <GridItem
+            icon={<Search5 />}
+            text="Behavioral Trend Recognition"
+            subtext="Identify repetitive behaviors, routines, and patterns for proactive decision-making, improving security by predicting future actions."
+            isCol={true}
+          />
+          <GridItem
+            icon={<Search6 />}
+            text="Cross-Network Integration"
+            subtext="Integrate data from multiple mobile networks to provide a 360-degree view of individuals’ interactions and movements across regions."
+            isCol={true}
+          />
+        </div>
       </div>
     </div>
   );
