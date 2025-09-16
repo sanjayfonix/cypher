@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Laptop, Lock, MessageSquare, Shield, Brain } from "lucide-react";
+import { GlassIcon } from "../home/GlassIcon";
 
 const features = [
     {
@@ -64,13 +65,13 @@ export default function WhyCyphr() {
                                     delay: index * 0.2,
                                     ease: "easeOut",
                                 }}
-                                className={`relative flex items-center  gap-6 p-2  ${isLeft ? "justify-start " : "justify-end"
+                                className={`relative flex items-center max-w-5xl mx-auto w-[85%] ${isLeft?'translate-x-1/4':'-translate-x-1/4'}  gap-6 p-2  ${isLeft ? "justify-start" : "justify-end"
                                     }`}
                             >
 
                                 {/* Gradient bar (coming from border) */}
                                 <div
-                                    className={`absolute  top-1/2 transform -translate-y-1/2 h-[100px] w-full   ${isLeft ? "rounded-l-full right-0 bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]" : "rounded-r-full left-0 bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
+                                    className={`absolute  top-1/2 transform -translate-y-1/2  h-[100px] w-full   ${isLeft ? "rounded-l-full right-0 bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]" : "rounded-r-full left-0 bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
                                         }`}
                                 ></div>
 
@@ -82,12 +83,11 @@ export default function WhyCyphr() {
                                     {/* Text */}
                                     <div className={`${isLeft ? "text-left" : "text-right"}`}>
                                         <h3 className="text-[32px] font-semibold">{item.title}</h3>
-                                        <p className="text-gray-300 text-[16px] mt-1">{item.description}</p>
+                                        <p className="text-gray-300 text-[16px] mt-1 max-w-3xl">{item.description}</p>
                                     </div>
                                     {/* Icon */}
-                                    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-blue-600 shadow-[0_0_20px_rgba(22,123,255,0.7)] z-10">
-                                        {item.icon}
-                                    </div>
+                                    <GlassIcon icon={item.icon} fadeSize={45} size={60} />
+                                   
 
 
                                 </div>

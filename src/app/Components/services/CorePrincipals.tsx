@@ -85,7 +85,7 @@ export default function CorePrincipals() {
       
 
       {/* Second Row */}
-      <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8">
+      <div className={`flex flex-col sm:flex-row ${tabIndex!==-1?'items-start':'items-stretch'} gap-6 sm:gap-8`}>
         {/* Investigative Services Support */}
         <div className="relative border border-[#6D6D6D] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
           <TravelingBorder />
@@ -111,7 +111,7 @@ export default function CorePrincipals() {
       <img
         src={imageUrl}
         alt="fingerprint"
-        className="my-4 h-40 md:h-45 lg:h-60 sm:my-8 mx-auto relative z-10 max-w-[60%]"
+        className="my-4 lg:h-70 mt-7 mx-auto relative z-10 max-w-[60%]"
       />
 
       {/* Magnifier */}
@@ -165,10 +165,10 @@ export default function CorePrincipals() {
             }}
           />
           </div>
-          <div className="relative mx-auto w-[200px] my-4 md:w-[270px] lg:w-[297px]">
-  <div className="flex justify-center items-center aspect-square w-full animate-ripple rounded-full border border-[#0C438C]">
-    <div className="flex justify-center items-center w-[85%] animate-ripple delay-150 h-[85%] rounded-full border border-[#0C438C]">
-      <div className="relative w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
+          <div className="relative mb-4 mx-auto w-[200px] my-4 md:w-[270px] lg:w-[297px]">
+  <div className="flex animate-ripple  justify-center items-center aspect-square w-full  rounded-full border border-[#0C438C]">
+    <div className="flex animate-ripple delay-150 justify-center items-center w-[85%] h-[85%] rounded-full border border-[#0C438C]">
+      <div className="relative  w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
       <img className="absolute w-full h-full" src="/book.png" />
     </div>
   </div>
@@ -193,8 +193,18 @@ export default function CorePrincipals() {
             }} className="relative top-2 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
             {tabIndex === 1 ? <DropUp /> : <DropDown />}
             </button>
+
+           
               
           </div>
+           {tabIndex === 1 && (
+            <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
+              <li className="flex items-center gap-2"><Tick/> Uncover hidden connections and threats</li>
+              <li className="flex items-center gap-2"><Tick/> Validate evidence with digital forensics</li>
+              <li className="flex items-center gap-2"><Tick/> Deliver courtroom-ready reports</li>
+              <li className="flex items-center gap-2"><Tick/> Support or augment your existing investigations</li>
+            </ul>
+          )}
         </div>
       </div>
     </div>

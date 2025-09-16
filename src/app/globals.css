@@ -269,10 +269,10 @@ body {
   animation: ripple 2s ease-in-out infinite;
 }
 .delay-150 {
-  animation-delay: 0.3s;
+  animation-delay: 0.5s;
 }
 .delay-300 {
-  animation-delay: 0.6s;
+  animation-delay: 1s;
 }
 
 @keyframes movePointer {

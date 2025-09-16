@@ -62,15 +62,16 @@ export const AboutHeader = () => {
                 </div>
 
                 {/* RIGHT TIMELINE */}
-                <div className="flex flex-col relative w-full lg:w-1/2 mt-10 lg:mt-0 items-center gap-6">
+                <div className="flex flex-col relative w-full  lg:w-1/2 mt-10 lg:mt-0 items-center gap-6">
                     {/* Vertical Line */}
-                    <div className="absolute left-[145px] transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-blue-500 via-blue-300 to-black hidden md:block"></div>
+                    
 
                     {/* Card 1 */}
-                    <div className="relative pl-12 w-full max-w-sm">
-                        <div className="absolute left-0 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
+                    <div className="relative pl-12 w-full max-w-sm ">
+                        <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
+                        <div className="absolute left-6 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
                         <div className="px-6 py-4 flex justify-between rounded-2xl border border-[#3c414a] backdrop-blur-xs shadow-[inset_0_0_65px_rgba(22,123,255,0.7)]">
-
+                           
                             <div className="flex flex-col   mb-2">
                                 <p className="text-gray-300 text-sm">Today</p>
                                 <p className="text-3xl  text-white">8:25 AM</p>
@@ -85,7 +86,8 @@ export const AboutHeader = () => {
 
                     {/* Card 2 */}
                     <div className="relative pl-12 w-full max-w-sm">
-                        <div className="absolute left-0 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
+                        <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
+                        <div className="absolute left-6  top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
                         <div className="px-6 py-4 flex justify-between rounded-2xl gap-4 border border-[#3c414a] backdrop-blur-xs shadow-[inset_0_0_20px_rgba(22,123,255,0.7)]">
                             <Image
                                 src="/images/dumypro.png"
@@ -106,7 +108,8 @@ export const AboutHeader = () => {
 
                     {/* Card 3 */}
                     <div className="relative pl-12 w-full max-w-sm">
-                        <div className="absolute left-0 top-8 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
+                        <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
+                        <div className="absolute left-6 top-8 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
                         <div className="px-6 py-4 flex justify-between rounded-2xl border border-[#3c414a] backdrop-blur-xs shadow-[inset_0_0_20px_rgba(22,123,255,0.7)]">
 
                             <div className="flex-1 text-left">
@@ -119,7 +122,8 @@ export const AboutHeader = () => {
 
                     {/* Card 4 */}
                     <div className="relative pl-12 w-full max-w-sm">
-                        <div className="absolute left-0 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
+                        <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%)] w-[0.25px] bg-blue-800 "></div>
+                        <div className="absolute left-6 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
                         <div className="px-6 py-4 flex justify-between gap-4 rounded-2xl border border-[#3c414a] backdrop-blur-xs shadow-[inset_0_0_30px_rgba(22,123,255,0.7)]">
                             <Image
                                 src="/images/dumypro.png"
