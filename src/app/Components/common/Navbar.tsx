@@ -109,12 +109,13 @@ export default function Navbar() {
                 />
               </button>
               {openMenu === "services" && (
-                <div className="absolute mt-3 bg-[#1A1A1A] text-white rounded-xl shadow-lg w-64 p-2 z-10">
+                <div className="absolute mt-3  backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
                   {services.map((item, index) => (
                     <Link
                       key={index}
                       href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"}`}
+                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+                        }`}
                       onClick={handleLinkClick}
                     >
                       {item.label}
@@ -138,7 +139,7 @@ export default function Navbar() {
                 />
               </button>
               {openMenu === "industries" && (
-                <div className="absolute mt-3 bg-[#1A1A1A] text-white rounded-xl shadow-lg w-64 p-2 z-10">
+                <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
                   {industries.map((item, index) => (
                     <Link
                       key={index}
@@ -173,10 +174,13 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <button
               className="custom-button with-border bg-transparent "
-            >Refer A Case</button>
-            <button 
+            >Get in touch</button>
+            <button
               onClick={() => router.push("/pages/contactus")}
-               className="custom-button with-shadow bg-[#1057B5]">Get in touch <Toparrow/></button> 
+              className="custom-button with-shadow bg-[#1057B5]">
+              
+              Refer A Case
+               <Toparrow /></button>
           </div>
 
           {/* Placeholder to balance the layout on mobile */}
