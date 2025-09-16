@@ -1,8 +1,11 @@
-import { ArrowDownRightIcon } from "lucide-react";
+'use client'
+import { ArrowDownRightIcon, } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 import { Button } from "./IndustryButton";
 import { Card, CardContent, CardTitle, CardDescription } from "./Card";
-import { FindIcon, GuassMeterIcon, ProtectIcon, WeighScaleIcon } from "@/assets/icon";
+import { FindIcon, GuassMeterIcon, ProtectIcon, Toparrow, WeighScaleIcon } from "@/assets/icon";
+import { GlassIcon } from "../home/GlassIcon";
 
 export const WhyIndustriesCarrier = () => {
   return (
@@ -28,15 +31,7 @@ export const WhyIndustriesCarrier = () => {
           </div>
         </header>
 <div>
-        <Button
-          variant="outline"
-          className="inline-flex h-12 items-center justify-center gap-2 px-4 py-3 rounded-3xl border border-solid border-[#d5d5d5] bg-transparent hover:bg-gray-800 transition-colors mt-4"
-        >
-          <span className="font-UI-b1-med text-primary-text text-[length:var(--UI-b1-med-font-size)] tracking-[var(--UI-b1-med-letter-spacing)] leading-[var(--UI-b1-med-line-height)] [font-style:var(--UI-b1-med-font-style)]">
-            Contact our expert
-          </span>
-          <img src={'/arrow-down-right.svg'} className="w-5 h-5 object-cover"/>
-        </Button>
+        <Link href='/pages/contactus'><button  className="with-border custom-button bg-transparent">Contact our expert <Toparrow/></button></Link>
         </div>
       </div>
 
@@ -52,7 +47,7 @@ export const WhyIndustriesCarrier = () => {
           {/* Card 1 */}
           <Card className="flex flex-col flex-1 lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
             <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
-              <div className="h-24 w-24 object-cover"><FindIcon/></div>
+              <GlassIcon size={60} icon={<FindIcon/>}></GlassIcon>
               <div className="flex flex-col gap-4 ">
                 <CardTitle>Detect Fraud Early</CardTitle>
                 <CardDescription>
@@ -67,7 +62,7 @@ export const WhyIndustriesCarrier = () => {
           {/* Card 2 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
-              <div className="h-24 w-24 object-cover"><GuassMeterIcon/></div>
+             <GlassIcon size={60} icon={<ProtectIcon/>}></GlassIcon>
               <div className="flex flex-col gap-4">
                 <CardTitle>Build Better Risk Profiles</CardTitle>
                 <CardDescription>
@@ -83,7 +78,7 @@ export const WhyIndustriesCarrier = () => {
           {/* Card 3 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
-              <div className="h-24 w-24 object-cover"><ProtectIcon/></div>
+              <GlassIcon size={60} icon={<GuassMeterIcon/>}></GlassIcon>
               <div className="flex flex-col gap-4">
                 <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
                 <CardDescription>
@@ -98,7 +93,7 @@ export const WhyIndustriesCarrier = () => {
           {/* Card 4 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
-              <div className="h-24 w-24 object-cover"><WeighScaleIcon/></div>
+             <GlassIcon size={60} icon={<WeighScaleIcon/>}></GlassIcon>
               <div className="flex flex-col gap-4">
                 <CardTitle>Ensure Legal Compliance</CardTitle>
                 <CardDescription>

@@ -1,7 +1,9 @@
 // components/BlurCard.tsx
+'use client'
 import React from "react";
 import Button from "../common/Button";
-import { Grid } from "@/assets/icon";
+import { Grid, Toparrow } from "@/assets/icon";
+import { TopBanner } from "./TopBanner";
 
 const ServiceBlurCard = () => {
   return (
@@ -125,18 +127,24 @@ const ServiceBlurCard = () => {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
-            <Button
-              isBorder={false}
-              isIcon={false}
-              text="Book a Consultation"
-              color="bg-[#1057B5]"
-            />
-            <Button
-              isBorder={true}
-              isIcon={true}
-              text="Contact our expert"
-              color="bg-transparent"
-            />
+            <button onClick={()=>{
+              const navToSection=document.getElementById('contact-us')
+            if(navToSection){
+              navToSection.scrollIntoView({behavior:'smooth'})
+            }
+            }} className="custom-button bg-[#1057B5] with-shadow"
+            
+              
+           
+              
+            >Book a Consultation</button>
+            <button className="custom-button with-border bg-transparent"
+              
+              
+              
+            >
+            Contact our expert <Toparrow/>
+            </button>
           </div>
         </div>
       </div>

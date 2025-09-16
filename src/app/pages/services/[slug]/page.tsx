@@ -10,7 +10,7 @@ import { Grid } from "@/assets/icon";
 
 export default function ServicesPage() {
   return (
-    <div className="font-sans  bg-black overflow-hidden relative">
+    <div className="font-sans overflow-hidden relative">
       <TopBanner />
       <WhyConsulting />
       <div className="container">

@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="flex justify-center px-6 lg:px-16 py-4 bg-black">
-        <div className="w-full container bg-black flex items-center justify-between">
+        <div className="w-full  bg-black flex items-center justify-between">
           {/* Mobile menu button - Now on left side */}
           <button
             className="md:hidden text-white mr-4"
@@ -79,112 +79,124 @@ export default function Navbar() {
           </Link>
 
           {/* Menu Links - Hidden on mobile */}
-          <div className="hidden md:flex bg-[#3c414a] items-center gap-6 border border-white/20 rounded-full px-6 py-2">
-            {/* Home */}
-            <Link
-              href="/"
-              className={`px-4 py-1 rounded-full transition-all ${pathname === "/" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}
-            >
-              Home
-            </Link>
+          <div className="hidden md:flex flex-nowrap whitespace-nowrap bg-[#3c414a] items-center gap-4 border border-white/20 rounded-full px-4 py-2 ">
+  {/* Home */}
+  <Link
+    href="/"
+    className={`px-3 py-1 text-sm rounded-full transition-all ${
+      pathname === "/" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"
+    }`}
+  >
+    Home
+  </Link>
 
-            {/* About */}
-            <Link
-              href="/pages/aboutus"
-              className={`px-4 py-1 rounded-full transition-all ${pathname === "/pages/aboutus" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}
-            >
-              About Us
-            </Link>
+  {/* About */}
+  <Link
+    href="/pages/aboutus"
+    className={`px-3 py-1 text-sm rounded-full transition-all ${
+      pathname === "/pages/aboutus" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"
+    }`}
+  >
+    About Us
+  </Link>
 
-            {/* Services Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => toggleMenu("services")}
-                className="flex items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
-              >
-                Services
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform ${openMenu === "services" ? "rotate-180" : ""}`}
-                />
-              </button>
-              {openMenu === "services" && (
-                <div className="absolute mt-3  backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
-                  {services.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
-                        }`}
-                      onClick={handleLinkClick}
-                    >
-                      {item.label}
-                      <ArrowUpRight size={16} />
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+  {/* Services Dropdown */}
+  <div className="relative">
+    <button
+      onClick={() => toggleMenu("services")}
+      className="flex text-sm items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
+    >
+      Services
+      <ChevronDown
+        size={16}
+        className={`transition-transform ${openMenu === "services" ? "rotate-180" : ""}`}
+      />
+    </button>
+    {openMenu === "services" && (
+      <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
+        {services.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
+              pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+            }`}
+            onClick={handleLinkClick}
+          >
+            {item.label}
+            <ArrowUpRight size={16} />
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
 
-            {/* Industries Dropdown */}
-            <div className="relative">
-              <button
-                onClick={() => toggleMenu("industries")}
-                className="flex items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
-              >
-                Industries
-                <ChevronDown
-                  size={16}
-                  className={`transition-transform ${openMenu === "industries" ? "rotate-180" : ""}`}
-                />
-              </button>
-              {openMenu === "industries" && (
-                <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
-                  {industries.map((item, index) => (
-                    <Link
-                      key={index}
-                      href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"}`}
-                      onClick={handleLinkClick}
-                    >
-                      {item.label}
-                      <ArrowUpRight size={16} />
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+  {/* Industries Dropdown */}
+  <div className="relative">
+    <button
+      onClick={() => toggleMenu("industries")}
+      className="flex text-sm items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
+    >
+      Industries
+      <ChevronDown
+        size={16}
+        className={`transition-transform ${openMenu === "industries" ? "rotate-180" : ""}`}
+      />
+    </button>
+    {openMenu === "industries" && (
+      <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
+        {industries.map((item, index) => (
+          <Link
+            key={index}
+            href={item.href}
+            className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
+              pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+            }`}
+            onClick={handleLinkClick}
+          >
+            {item.label}
+            <ArrowUpRight size={16} />
+          </Link>
+        ))}
+      </div>
+    )}
+  </div>
 
-            {/* Contact and Legal */}
-            <Link
-              href="/pages/contactus"
-              className={`px-4 py-1 rounded-full transition-all ${pathname === "/pages/contactus" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}
-            >
-              Contact Us
-            </Link>
-            <Link
-              href="/pages/legal"
-              className={`px-4 py-1 rounded-full transition-all ${pathname === "/pages/legal" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"}`}
-            >
-              Legal
-            </Link>
-          </div>
+  {/* Contact and Legal */}
+  <Link
+    href="/pages/contactus"
+    className={`px-3 py-1 rounded-full transition-all ${
+      pathname === "/pages/contactus" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"
+    }`}
+  >
+    Contact Us
+  </Link>
+  <Link
+    href="/pages/legal"
+    className={`px-3 py-1 rounded-full transition-all ${
+      pathname === "/pages/legal" ? "bg-gray-100 text-black" : "text-gray-100 hover:text-gray-300"
+    }`}
+  >
+    Legal
+  </Link>
+</div>
+
 
           {/* Right Buttons - Hidden on mobile */}
-          <div className="hidden md:flex items-center gap-4">
+          <div className="hidden md:flex items-center gap-4 md:gap-2">
             <button
-              className="custom-button with-border bg-transparent "
+              className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent "
             >Get in touch</button>
             <button
               onClick={() => router.push("/pages/contactus")}
-              className="custom-button with-shadow bg-[#1057B5]">
+              className="min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]">
               
               Refer A Case
                <Toparrow /></button>
           </div>
 
           {/* Placeholder to balance the layout on mobile */}
-          <div className="md:hidden invisible">
+          <div className=" md:hidden invisible">
             <Menu size={24} />
           </div>
         </div>

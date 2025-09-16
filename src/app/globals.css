@@ -317,6 +317,8 @@ body {
   gap: 0.5rem;
   font-size: 1rem; /* Matches sm:text-[1rem] */
   font-weight: 500;
+
+  
 }
 
 /* Apply shadow if no border */
@@ -327,6 +329,7 @@ body {
 
 /* Apply border style */
 .custom-button.with-border {
+  
   border: 1px solid #d5d5d5;
   box-shadow: none;
   background-clip: padding-box;

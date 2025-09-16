@@ -132,7 +132,7 @@ export default function CorePrincipals() {
             </p>
             <div
               onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
-              className="flex relative top-2 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
+              className="flex relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
             >
               {tabIndex === 0 ? <DropUp /> : <DropDown />}
             </div>

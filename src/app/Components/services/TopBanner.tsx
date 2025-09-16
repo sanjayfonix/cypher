@@ -15,7 +15,7 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Left */}
       <div
-        className="absolute pointer-events-none z-0 animate-glow"
+        className="absolute pointer-events-none -z-1 animate-glow"
         style={{
           width: "300px",
           height: "200px",
@@ -23,7 +23,7 @@ export const TopBanner = () => {
           left: "-150px",
           background: "#167BFF",
           opacity: 0.5,
-          filter: "blur(150px)",
+          filter: "blur(50px)",
           borderRadius: "50%",
           transform: "rotate(-180deg)",
         }}
@@ -31,7 +31,7 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Right */}
       <div
-        className="absolute pointer-events-none z-0 animate-glow"
+        className="absolute pointer-events-none z-2 animate-glow"
         style={{
           width: "300px",
           height: "200px",
@@ -39,14 +39,14 @@ export const TopBanner = () => {
           right: "-150px",
           background: "#167BFF",
           opacity: 0.5,
-          filter: "blur(150px)",
+          filter: "blur(50px)",
           borderRadius: "50%",
           transform: "rotate(-180deg)",
         }}
       />
 
       {/* Content */}
-      <div className="flex flex-col container items-center justify-start gap-4 z-10 text-center max-w-[90%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
+      <div className="flex bg-transparent flex-col items-center justify-start gap-4 z-10 text-center max-w-[90%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
         <p className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl max-w-5xl font-bold text-white leading-tight font-sans">
           Transform Complex Data Into Your Strategic Advantage
         </p>
