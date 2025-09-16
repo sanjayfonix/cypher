@@ -143,32 +143,9 @@ export default function GlobalThreatIntelligence() {
       {tabIndex === 0 && (
         <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-2 sm:px-4 md:px-8">
          <Radar/>
-          {/* Timeline (Responsive Grid) */}
-<div className="relative grid grid-cols-2 gap-8 md:gap-12 w-full max-w-3xl">
-  {/* LEFT COLUMN */}
-  <div className="relative flex flex-col items-center sm:items-start gap-8">
-    {/* Vertical connector line (LEFT) */}
-    <div className="hidden sm:block absolute left-1/8 -translate-x-1/2 top-1/3 bottom-0 border border-[#696969] w-0" />
-    <div className="hidden sm:block absolute left-[36%] -translate-x-1/2 top-3/4 bottom-0 border border-[#696969] w-0" />
-    <TimelineItem icon={<Shield />} align="flex-start" {...timelineData[0]} />
-    <div className="mx-20">
-      <TimelineItem icon={<Health />} align="flex-start" {...timelineData[2]} />
-    </div>
-  </div>
+         <SecurityFeatures/>
+         </div>
 
-  {/* RIGHT COLUMN */}
-  <div className="relative flex flex-col items-center sm:items-start gap-8">
-    {/* Vertical connector line (RIGHT) */}
-    <div className="hidden sm:block absolute left-1/8 -translate-x-1/2 top-1/3 bottom-0 border border-[#696969] w-0" />
-    <div className="hidden sm:block absolute left-[30%] -translate-x-1/2 top-3/4 bottom-0 border border-[#696969] w-0" />
-    <TimelineItem className="relative" icon={<Find />} align="flex-start" {...timelineData[1]} />
-    <div className="mx-8 sm:mx-12">
-      <TimelineItem className="relative" icon={<Graph />} align="flex-start" {...timelineData[3]} />
-    </div>
-  </div>
-</div>
-
-        </div>
       )}
 
       {tabIndex === 1 && <Loc8Intelligence />}
@@ -191,22 +168,67 @@ export default function GlobalThreatIntelligence() {
 
 
 
-//     <div className="bg-black text-white font-sans min-h-screen w-full flex items-center justify-center p-4 sm:p-8">
-//       <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-center gap-16 lg:gap-8">
-        
-//         {/* Left Side: Radar Chart */}
-//         <div className="flex justify-center items-center">
-//           <RadarChart />
-//         </div>
 
-//         {/* Right Side: Timeline */}
-//         <div className="relative grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-24">
-//             <TimelineItem {...timelineData[0]} className="sm:mt-0" />
-//             <TimelineItem {...timelineData[1]} className="sm:mt-24" />
-//            
-//             <TimelineItem {...timelineData[3]} className="sm:mt-24" />
-//         </div>
 
-//       </div>
-//     </div>
-//   );
+function SecurityFeatures() {
+  const features = [
+    {
+      title: "Malintent",
+      desc: "Active protection against evolving digital threats",
+      icon: <Shield />,
+    },
+    {
+      title: "Investigation",
+      desc: "Forensic examination of security incidents",
+      icon: <Shield />,
+    },
+    {
+      title: "Risk Assessment",
+      desc: "Continuous evaluation of vulnerability exposure",
+      icon: <Shield />,
+    },
+    {
+      title: "Data Analysis",
+      desc: "Pattern recognition across massive datasets",
+      icon: <Shield />,
+    },
+  ];
+
+  return (
+    <div className="bg-black flex items-center justify-center py-10">
+      <div className="grid grid-cols-2 gap-20 relative">
+        {/* Column containers */}
+        {[0, 1].map((col) => (
+          <div key={col} className="relative flex flex-col items-center">
+            {/* Vertical line starting from center of first icon */}
+            <div className="absolute top-[90px] left-1/8 transform -translate-x-1/2 h-[calc(100%-50px)] w-1 bg-gradient-to-b from-blue-500 to-transparent"></div>
+
+            {features
+              .filter((_, idx) => idx % 2 === col)
+              .map((feature, idx) => (
+                <div
+                  key={idx}
+                  style={{marginLeft:idx===2||idx===3?'20%':0}}
+                  className="flex items-start text-white gap-4 mb-20 relative z-10"
+                >
+                  {/* Icon Circle */}
+                  <div className="bg-gray-800 p-5 rounded-full flex items-center justify-center">
+                    {feature.icon}
+                  </div>
+
+                  {/* Text */}
+                  <div className="flex flex-col gap-2">
+                    <h3 className="font-bold text-lg">{feature.title}</h3>
+                    <p className="text-gray-400">{feature.desc}</p>
+                  </div>
+                </div>
+              ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+
+
