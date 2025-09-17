@@ -16,9 +16,7 @@ type Point = {
   color?: string;
 };
 
-// Points
 const points: Point[] = [
-  // Investigation
   (() => {
     const angle = 22;
     const r = RADIUS - 24;
@@ -28,9 +26,8 @@ const points: Point[] = [
       x: CX + r * Math.cos((angle * Math.PI) / 180),
       y: CY + r * Math.sin((angle * Math.PI) / 180),
       color: "#cfe9ff",
-    } as Point;
+    };
   })(),
-  // Data Analysis
   (() => {
     const angle = 145;
     const r = RADIUS - 120;
@@ -40,9 +37,8 @@ const points: Point[] = [
       x: CX + r * Math.cos((angle * Math.PI) / 180),
       y: CY + r * Math.sin((angle * Math.PI) / 180),
       color: "#7fb7ff",
-    } as Point;
+    };
   })(),
-  // Risk Assessment
   (() => {
     const angle = 220;
     const r = RADIUS - 90;
@@ -52,9 +48,8 @@ const points: Point[] = [
       x: CX + r * Math.cos((angle * Math.PI) / 180),
       y: CY + r * Math.sin((angle * Math.PI) / 180),
       color: "#7fb7ff",
-    } as Point;
+    };
   })(),
-  // Malintent
   (() => {
     const angle = 10;
     const r = 40;
@@ -64,7 +59,7 @@ const points: Point[] = [
       x: CX + r * Math.cos((angle * Math.PI) / 180) + 18,
       y: CY + r * Math.sin((angle * Math.PI) / 180) - 4,
       color: "#ff3d6e",
-    } as Point;
+    };
   })(),
 ];
 
@@ -75,9 +70,9 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
   const [activeHit, setActiveHit] = useState<string | null>(null);
   const hitTimeout = useRef<number | null>(null);
 
-  // Sweep loop
+  // Sweep loop (slower speed)
   useEffect(() => {
-    const speedDegPerSec = 48;
+    const speedDegPerSec = 20; // ⬅ much slower now
     function tick(now: number) {
       const dt = (now - lastRef.current) / 1000;
       lastRef.current = now;
@@ -86,10 +81,8 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
     }
     rafRef.current = requestAnimationFrame(tick);
     return () => {
-      if (rafRef.current !== null) {
-      cancelAnimationFrame(rafRef.current);
-    }
-    }
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
 
   // Hit detection
@@ -117,7 +110,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
     }
   }, [angle]);
 
-  // Label helper
+  // Label helper (unchanged for other nodes)
   function Label({ x, y, text }: { x: number; y: number; text: string }) {
     return (
       <g transform={`translate(${x},${y})`}>
@@ -165,7 +158,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           </linearGradient>
         </defs>
 
-        {/* Background */}
+        {/* Background grid + circles */}
         <g>
           <circle cx={CX} cy={CY} r={RADIUS + 18} fill="url(#bgGrad)" />
           {[60, 120, 180, 240].map((r, i) => (
@@ -196,32 +189,63 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           />
         </g>
 
-        {/* Malintent */}
-       <g>
-  <circle cx={points[3].x} cy={points[3].y} r={22} fill="rgba(255,61,110,0.12)" />
-  <circle cx={points[3].x} cy={points[3].y} r={14} fill="rgba(255,61,110,0.25)" />
-  <circle cx={points[3].x} cy={points[3].y} r={6} fill={points[3].color} />
+        {/* Malintent (bigger + rectangle inside circle) */}
+        {/* Malintent (with soft pin/stamp effect) */}
+<g>
+  {/* Outer border rings */}
   <circle
     cx={points[3].x}
     cy={points[3].y}
-    r={28}
+    r={36}
     fill="none"
-    stroke="rgba(255,61,110,0.18)"
+    stroke="rgba(255,61,110,0.35)"
+    strokeWidth={2}
   />
-  <rect fill="">
+  <circle
+    cx={points[3].x}
+    cy={points[3].y}
+    r={26}
+    fill="none"
+    stroke="rgba(255,61,110,0.5)"
+    strokeWidth={2}
+  />
+
+  {/* Soft stamp glow (slightly larger + transparent) */}
+  <circle
+    cx={points[3].x}
+    cy={points[3].y}
+    r={18}
+    fill="rgba(255,61,110,0.25)"
+  />
+
+  {/* Inner solid pin */}
+  <circle cx={points[3].x} cy={points[3].y} r={10} fill={points[3].color} />
+
+  {/* Translucent label rectangle */}
+  <rect
+    x={points[3].x - 42}
+    y={points[3].y - 12}
+    width={84}
+    height={24}
+    rx={4}
+    ry={4}
+    fill="rgba(255,61,110,0.6)"   // translucent red
+    stroke="rgba(255,61,110,0.8)" // stronger border
+    strokeWidth={1}
+  />
   <text
     x={points[3].x}
-    y={points[3].y + 4}
+    y={points[3].y + 6}
     textAnchor="middle"
-    fontSize={12}
-    fill="#ffd7e0"
+    fontSize={16}
+    fill="#fff"
+    fontWeight="600"
   >
-    {points[3].label}
+    Malintent
   </text>
-  </rect>
 </g>
 
-        {/* Labels */}
+        {/* Labels for other nodes */}
         <Label x={points[0].x - 18} y={points[0].y - 36} text={points[0].label} />
         <Label x={points[1].x - 54} y={points[1].y - 8} text={points[1].label} />
         <Label x={points[2].x - 68} y={points[2].y + 8} text={points[2].label} />
@@ -229,7 +253,6 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         {/* Points */}
         {points.slice(0, 3).map((p) => (
           <g key={p.id}>
-            {/* Static border for Investigation, Data, Risk */}
             {(p.id === "data" || p.id === "risk" || p.id === "investigation") && (
               <circle
                 cx={p.x}
@@ -246,15 +269,15 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           </g>
         ))}
 
-        {/* Sweep Beam */}
+        {/* Sweep Beam (full radius, slower) */}
         <g transform={`rotate(${angle}, ${CX}, ${CY})`}>
           <line
             x1={CX}
             y1={CY}
-            x2={CX + RADIUS}
+            x2={CX + RADIUS+12}
             y2={CY}
             stroke="#9fe7ff"
-            strokeWidth={2}
+            strokeWidth={2.5}
             strokeLinecap="round"
           />
         </g>
@@ -265,7 +288,6 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
             <AnimatePresence>
               {activeHit === p.id && (
                 <>
-                  {/* Default ripple */}
                   <motion.circle
                     cx={p.x}
                     cy={p.y}
@@ -278,8 +300,6 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                   />
-
-                  {/* Expanding border for Data, Risk, Investigation */}
                   {(p.id === "data" || p.id === "risk" || p.id === "investigation") && (
                     <motion.circle
                       cx={p.x}

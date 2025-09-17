@@ -1,10 +1,17 @@
-// components/ThreatDetectionUI.tsx
+
 'use client';
-import { Find, Graph, Health, Search2, Search3, Search4, Shield } from "@/assets/icon";
-import { useState } from "react";
+import { FallDownIcon, Find, Graph, Health, Search2, Search3, Search4, Shield } from "@/assets/icon";
+import { useState,useRef,useEffect} from 'react'
 import Loc8Intelligence from "./Loc8Intelligence";
 import Radar from "./RadarAnimation";
 import { GlassIcon } from "./GlassIcon";
+import { TravelingBorder } from "../services/CorePrincipals";
+import { motion } from "framer-motion";
+import { li } from "framer-motion/client";
+
+
+
+
 
 interface TimelineItemProps {
   icon: React.ReactNode;
@@ -131,11 +138,11 @@ export default function GlobalThreatIntelligence() {
 
       {/* Description */}
       {tabIndex === 0 && (
-        <div className="flex flex-col gap-2 max-w-2xl sm:max-w-3xl text-center mb-8 sm:mb-12">
+        <div className="flex flex-col gap-2 max-w-2xl sm:max-w-3xl items-center text-center mb-8 sm:mb-12">
           <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
             Threat Detection System
           </h2>
-          <p className="text-sm sm:text-base text-[#F1F1F1] font-inter font-normal">
+          <p className="text-sm sm:text-base max-w-[80%] text-center text-[#F1F1F1] font-inter font-normal">
             Our advanced radar system continuously scans the global landscape for malintent threats and vulnerabilities, providing real-time detection of emerging risks.
           </p>
         </div>
@@ -172,6 +179,27 @@ export default function GlobalThreatIntelligence() {
 
 
 function SecurityFeatures() {
+
+
+const lineRef = useRef<HTMLDivElement>(null);
+const [lineHeight,setLineHeight]=useState(80);
+
+useEffect(() => {
+    if (!lineRef.current) return;
+
+    const observer = new ResizeObserver((entries) => {
+      for (let entry of entries) {
+        if (entry.contentRect.height) {
+          setLineHeight(entry.contentRect.height);
+        }
+      }
+    });
+
+    observer.observe(lineRef.current);
+
+    return () => observer.disconnect();
+  }, []);
+
   const features = [
     {
       title: "Malintent",
@@ -198,10 +226,10 @@ function SecurityFeatures() {
   return (
     <div className="bg-black flex items-start justify-center py-10">
       <div className="grid grid-cols-2 gap-20 relative">
-        {[0, 1].map((col) => (
+        {[0, 1].map((col,idx) => (
           <div key={col} className="relative flex flex-col items-center">
             {/* Vertical line starting from center of top icon */}
-            
+         
 
             {features
               .filter((_, idx) => idx % 2 === col)
@@ -211,7 +239,24 @@ function SecurityFeatures() {
                   className={`flex items-start text-white gap-4 mb-20 relative z-10
                     ${idx === 1 ? "translate-x-20" : "translate-x-0"}`}
                 >
-                   <div className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${idx===1||idx===3?'h-[calc(100%)]':' h-[calc(250%)]'} w-1 border border-[#696969] bg-gradient-to-b from-[#A8A8A8] to-transparent`}></div>
+                   <div ref={lineRef} className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${idx===1||idx===3?'h-[calc(100%)]':' h-[calc(250%)]'} w-0 border border-[#696969]`}>
+                   
+    {/* Animated pointer */}    <motion.div
+        className="absolute left-1/2 -translate-x-1/2"
+        initial={{ y: -5}}
+        animate={{ y: idx===1||idx===3?lineHeight-50:lineHeight*2.5-50}} 
+        transition={{
+          duration: 4,
+          repeat: Infinity,
+          repeatType: "loop",
+          ease: "linear",
+        }}
+      >
+        <FallDownIcon />
+      </motion.div>
+  
+  
+                   </div>
 
                   {/* Icon Circle */}
                   <div className="relative  px-5 rounded-full flex items-center justify-center">
@@ -232,6 +277,7 @@ function SecurityFeatures() {
     </div>
   );
 }
+
 
 
 

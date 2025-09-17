@@ -77,6 +77,7 @@ export const GlassIcon = ({
           bg-[linear-gradient(180deg,rgba(27,27,27,0.17)_28.22%,rgba(1,72,165,0.2)_185.84%)]
           shadow-[0_0_6.6px_3px_#159AFF1A]
         "
+       
       >
         {icon}
       </div>
