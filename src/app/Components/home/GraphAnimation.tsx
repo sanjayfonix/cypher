@@ -102,7 +102,7 @@ export default function TrackingAnimation() {
   ];
 
   return (
-    <div className="relative w-full h-[800px] bg-[#0a0f1a] grid place-items-center overflow-hidden">
+    <div className="relative w-full h-[700px] bg-[#0a0f1a] grid place-items-center overflow-hidden">
         <div className="relative w-full h-[800px] bg-[#0a0f1a] grid place-items-center overflow-hidden">
   {/* === TOP LEFT TRACKING BOX === */}
   <div className="absolute top-6 left-6 px-3 py-2 border border-[#3B6AB1] bg-[#0a0f1a]/60 rounded">

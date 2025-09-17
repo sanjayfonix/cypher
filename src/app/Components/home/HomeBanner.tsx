@@ -88,7 +88,7 @@ export default function HomeBanner() {
       {/* Glow background layers */}
       <div className="absolute pointer-events-none z-0 blur-[185.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]" />
       <div
-        className="absolute pointer-events-none z-1 blur-[3px] animate-blink"
+        className="absolute pointer-events-none z-1 blur-[3px] animate-blink delay-75"
         style={{
           width: "30%",
           height: 26,
@@ -101,7 +101,7 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[26.2px] animate-blink"
+        className="absolute pointer-events-none z-0 blur-[26.2px] animate-glow2 "
         style={{
           width: "50%",
           height: 78,
@@ -114,7 +114,7 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[50px] animate-blink"
+        className="absolute pointer-events-none z-0 blur-[50px] animate-glow2  "
         style={{
           width: "50%",
           height: 192,
@@ -127,7 +127,7 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[271.2px] animate-blink"
+        className="absolute pointer-events-none z-0 blur-[271.2px] animate-glow2  "
         style={{
           width: "50%",
           height: 659,

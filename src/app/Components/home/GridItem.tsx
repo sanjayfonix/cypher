@@ -26,10 +26,10 @@ export default function GridItem({ icon, text, subtext, isCol = true }: GridItem
 
       {/* Text + Subtext */}
       <div className="flex flex-col gap-1 sm:gap-2">
-        <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-bold font-sans text-white">
+        <h3 className="max-w-[90%] text-lg sm:text-xl md:text-2xl font-bold font-sans text-white">
           {text}
         </h3>
-        <p className="text-sm sm:text-base md:text-lg text-[#F1F1F1]">
+        <p className="max-w-[90%] text-sm sm:text-base md:text-base font-normal text-[#F1F1F1]">
           {subtext}
         </p>
       </div>
