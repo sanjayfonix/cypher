@@ -22,7 +22,7 @@ export const IndustryBanner = () => {
         </p>
 
         {/* Buttons */}
-        <div className="relative flex flex-col gap-0 mt-6">
+        <div className="relative flex flex-col gap-0 mt-6 ">
           {/* Blurred background */}
           <div className="absolute top-0 left-0 w-full sm:w-[80%]  bg-[#030A14B2] blur-3xl rounded-2xl -z-10" />
           <div className="relative bg-black w-fit z-2 sm:flex-row flex-col flex gap-4 mt-6">  
@@ -38,7 +38,7 @@ export const IndustryBanner = () => {
             
         
           </div>
-          {/* ANIMATED PATHS */}
+        
           </div>
         </div>
       </div>
