@@ -3,6 +3,7 @@ import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, WhatsappIcon } from "@/as
 import { XIcon } from "lucide-react";
 import { TravelingBorder } from "../services/CorePrincipals";
 import { useState } from "react";
+import { GlassIcon } from "./GlassIcon";
 
 export default function WhereInvestigation() {
 const[isHovering,setHovering]=useState(false);
@@ -50,7 +51,7 @@ const[isHovering,setHovering]=useState(false);
           </div>
 
           {/* Social Media Intelligence */}
-          <div className=" relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col justify-between h-full">
+          <div className=" relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col">
             {/* Bottom radial glow */}
             <TravelingBorder />
 
@@ -66,50 +67,61 @@ const[isHovering,setHovering]=useState(false);
                 We extract critical insights from social media, offering real-time fraud detection and litigation support.
               </p>
             </div>
-            <button className="font-medium text-sm sm:text-base w-fit border border-[#D5D5D5] gap-2 bg-transparent text-[#E5E5E5] rounded-full pl-4 pr-2 py-2 sm:py-3 flex items-center m-5 sm:m-6">
+            <button className="font-medium text-sm sm:text-base w-fit border border-[#D5D5D5] gap-2 bg-transparent text-[#E5E5E5] rounded-full pl-4 pr-2 py-2 sm:py-3 flex items-center ml-5">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
               </span>
             </button>
-
-            {/* Floating divs / glows inside Social Media Intelligence */}
-            <div className="relative flex items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square">
+          {/* Floating divs / glows inside Social Media Intelligence */}
+            <div className={`relative flex items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
-              <div className={`${isHovering?'block transition':'hidden'} absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]`}>
-                <InstaIcon />
+              <div className="absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
+                <GlassIcon size={60} icon={<InstaIcon />}/>
               </div>
               <div className="absolute top-0 left-[25%] w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
-                <XIcon />
+                <GlassIcon size={60} icon={<XIcon />}/>
               </div>
               <div className="absolute top-0 left-[59%] w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
-                <WhatsappIcon />
+                 <GlassIcon size={60} icon={<WhatsappIcon />}/>
               </div>
               <div className="absolute top-[20%] left-[82%] w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
-                <FbIcon />
+                <GlassIcon size={60} icon={<FbIcon />}/>
               </div>
 
               {/* Vertical rectangle */}
+             <div className="overflow-hidden relative flex items-end justify-center mx-auto w-[100%] aspect-square">
+  {/* ...floating circles */}
+<div className="absolute w-120 -left-1/8 blur-[30px] inset-0 flex justify-center items-center  top-[97%]">
+    <DiamondGlow />
+  </div>
+  {/* Vertical rectangle */}
+ <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[153px] h-[70%] flex flex-col justify-start">
+  {/* 🌟 Radial Glow — put BEHIND the rectangle */}
+  
 
-              <div className="relative mx-auto w-[40%] sm:w-[153px] h-[75%] flex flex-col justify-start">
-                {/* 🌟 Radial Glow (centered on rectangle, behind it, semicircle shape) */}
-                <div 
-                className=" 
-                absolute 
-                translate-x-1/4 
-                -left-1/4 -bottom-9 overflow-hidden"><DiamondGlow /></div>
+  {/* Actual rectangle - keep it above */}
+  <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
+    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
+  </div>
+</div>
 
-                {/* Actual rectangle */}
-                <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
-                  <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
-                </div>
-              </div>
+</div>
 
               <div>
 
               </div>
+
             </div>
+
+
+              <div>
+             
+
+              </div>
+
+           
           </div>
         </div>
 
@@ -119,7 +131,7 @@ const[isHovering,setHovering]=useState(false);
         {/* Right Column */}
         <div className="flex flex-col justify-between flex-1 gap-6">
           {/* Brand Defense */}
-          <div className="relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col justify-between h-full">
+          <div className="relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             <TravelingBorder />
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
@@ -130,7 +142,7 @@ const[isHovering,setHovering]=useState(false);
                 Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>
-            <button className="font-medium text-sm sm:text-base w-fit border border-[#D5D5D5] gap-2 bg-transparent text-[#E5E5E5] rounded-full pl-4 pr-2 py-2 sm:py-3 flex items-center m-5 sm:m-6">
+            <button className="font-medium text-sm sm:text-base w-fit border border-[#D5D5D5] gap-2 bg-transparent text-[#E5E5E5] rounded-full pl-4 pr-2 py-2 sm:py-3 flex items-center ml-5">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />

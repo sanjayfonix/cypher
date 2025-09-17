@@ -26,7 +26,7 @@ export default function HowItWorks() {
 
       {/* Right Column */}
       <div className="relative h-full flex flex-col gap-6 lg:gap-8 items-center w-full max-w-3xl">
-        <div className="absolute -top-2 bg-[#167BFF] h-7 w-full max-w-[38.5rem] align-middle blur-[63.8px]"></div>
+        <div className="absolute -top-2 bg-[#167BFF] h-7 w-full max-w-[38.5rem] align-middle blur-[43.8px]"></div>
 
         <div className="flex flex-col gap-0 w-full">
           {/* First Div - Top Row */}
