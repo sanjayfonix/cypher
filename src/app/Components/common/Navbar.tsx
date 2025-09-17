@@ -59,7 +59,7 @@ export default function Navbar() {
   return (
     <>
       <nav className="flex justify-center px-6 lg:px-16 py-4 bg-black">
-        <div className="w-full  bg-black flex items-center justify-between">
+        <div className="w-full container  bg-black flex items-center justify-between">
           {/* Mobile menu button - Now on left side */}
           <button
             className="md:hidden text-white mr-4"
