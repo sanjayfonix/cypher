@@ -1,3 +1,4 @@
+import { Fotterico1, Fotterico2, Fotterico3 } from "@/assets/icon";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -91,6 +92,7 @@ export default function Footer() {
                 <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">About</Link></li>
                 <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Why Cyphr</Link></li>
                 <li><Link href="/pages/contactus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Contact</Link></li>
+                <li><Link href="/pages/careers" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Career</Link></li>
               </ul>
             </div>
             <div className="text-center sm:text-left">
@@ -109,14 +111,14 @@ export default function Footer() {
 
         {/* Bottom Section */}
         <div className="border-t border-gray-800 py-8 sm:py-10 px-4 relative">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+          <div className="flex flex-col w-full md:flex-row justify-between items-center space-y-6 md:space-y-0">
             <p className="text-gray-300 text-[16px] order-2 md:order-1">
               © 2025 Cyphr. All Right Reserved
             </p>
             
-            <div className="flex flex-col sm:flex-row items-center gap-6 order-1 md:order-2">
+            <div className="flex flex-col w-1/2 sm:flex-row items-center  justify-between gap-6 order-1 md:order-2">
               {/* Legal Links - Stack on mobile, row on larger screens */}
-              <div className="flex flex-wrap justify-center gap-4 sm:gap-6 md:gap-10">
+              <div className="flex flex-wrap justify-center gap-4 sm:gap-4 md:gap-6">
                 <Link href="/privacy-policy" className="text-gray-300 hover:text-white text-[16px] transition-colors">Privacy Policy</Link>
                 <Link href="/terms" className="text-gray-300 hover:text-white text-[16px] transition-colors">Terms of Service</Link>
                 <Link href="/data-processing" className="text-gray-300 hover:text-white text-[16px] transition-colors">Data Processing</Link>
@@ -124,15 +126,15 @@ export default function Footer() {
               </div>
 
               {/* Social Icons */}
-              <div className="flex gap-5 justify-center">
+              <div className="flex gap-[18px] justify-center">
                 <Link href="https://x.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
-                  <Twitter size={18} />
+                  <Fotterico1/>
                 </Link>
                 <Link href="https://linkedin.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
-                  <Linkedin size={18} />
+                  <Fotterico2/>
                 </Link>
                 <Link href="https://github.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
-                  <Github size={18} />
+                  <Fotterico3/>
                 </Link>
               </div>
             </div>

@@ -1,6 +1,6 @@
 
 'use client'
-import Button from "../common/Button";
+
 import { Toparrow } from "@/assets/icon";
 
 

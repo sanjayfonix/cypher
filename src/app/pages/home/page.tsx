@@ -1,5 +1,6 @@
 import ContactSection from "@/app/Components/common/Getintouch";
 import BlurCard from "@/app/Components/home/BlurCard";
+import CESessions from "@/app/Components/home/CeCle";
 import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntelligence";
 
 import  HomeBanner  from "@/app/Components/home/HomeBanner";
@@ -96,6 +97,7 @@ export default function HomePage() {
      <IntegrityAtCore/>
      <BlurCard/>
      <ContactSection />
+     <CESessions/>
      {/* <Grid/> */}
     </div>
   );

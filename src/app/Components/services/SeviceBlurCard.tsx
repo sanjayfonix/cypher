@@ -1,9 +1,9 @@
 // components/BlurCard.tsx
 'use client'
 import React from "react";
-import Button from "../common/Button";
+
 import { Grid, Toparrow } from "@/assets/icon";
-import { TopBanner } from "./TopBanner";
+
 
 const ServiceBlurCard = () => {
   return (
@@ -20,18 +20,18 @@ const ServiceBlurCard = () => {
         }}
       >
         {/* Blur behind left grid */}
-       <div
-  className="absolute blur-[8.1px]  translate-y-[80%] sm:translate-y-[50%]  md:translate-x-3 lg:translate-x-5 lg:translate-y-[40%]  animate-glow"
-  style={{
-    width: "clamp(90px, 20vw, 180px)",
-    height: "clamp(90px, 20vw, 180px)",
-    background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-    rotate: "180deg",
-    borderRadius: "50%",
-    boxShadow: "0px 0px 80px 0px #157AFF80",
-   
-  }}
-/>
+        <div
+          className="absolute blur-[8.1px]  translate-y-[80%] sm:translate-y-[50%]  md:translate-x-3 lg:translate-x-5 lg:translate-y-[40%]  animate-glow"
+          style={{
+            width: "clamp(90px, 20vw, 180px)",
+            height: "clamp(90px, 20vw, 180px)",
+            background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
+            rotate: "180deg",
+            borderRadius: "50%",
+            boxShadow: "0px 0px 80px 0px #157AFF80",
+
+          }}
+        />
 
         <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
           <Grid />
@@ -50,17 +50,17 @@ const ServiceBlurCard = () => {
       >
         {/* Blur behind right grid */}
         <div
-  className="absolute blur-[8.1px] md:translate-x-[10%] lg:translate-x-[40%] md:-translate-y-[80%] translate-x-[25%] -translate-y-[80%] lg:-translate-y-[60%]  animate-glow"
-  style={{
-    width: "clamp(90px, 20vw, 180px)",
-    height: "clamp(90px, 20vw, 180px)",
-    background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-    rotate: "180deg",
-    borderRadius: "50%",
-    boxShadow: "0px 0px 80px 0px #157AFF80",
-   
-  }}
-/>
+          className="absolute blur-[8.1px] md:translate-x-[10%] lg:translate-x-[40%] md:-translate-y-[80%] translate-x-[25%] -translate-y-[80%] lg:-translate-y-[60%]  animate-glow"
+          style={{
+            width: "clamp(90px, 20vw, 180px)",
+            height: "clamp(90px, 20vw, 180px)",
+            background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
+            rotate: "180deg",
+            borderRadius: "50%",
+            boxShadow: "0px 0px 80px 0px #157AFF80",
+
+          }}
+        />
         <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
           <Grid />
         </div>
@@ -127,23 +127,23 @@ const ServiceBlurCard = () => {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
-            <button onClick={()=>{
-              const navToSection=document.getElementById('contact-us')
-            if(navToSection){
-              navToSection.scrollIntoView({behavior:'smooth'})
-            }
+            <button onClick={() => {
+              const navToSection = document.getElementById('contact-us')
+              if (navToSection) {
+                navToSection.scrollIntoView({ behavior: 'smooth' })
+              }
             }} className="custom-button bg-[#1057B5] with-shadow"
-            
-              
-           
-              
+
+
+
+
             >Book a Consultation</button>
             <button className="custom-button with-border bg-transparent"
-              
-              
-              
+
+
+
             >
-            Contact our expert <Toparrow/>
+              Contact our expert <Toparrow />
             </button>
           </div>
         </div>
