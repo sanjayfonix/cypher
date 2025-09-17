@@ -92,7 +92,7 @@ export default function GlobalThreatIntelligence() {
       </h1>
 
       {/* Tabs */}
-      <div className="flex rounded-full overflow-hidden w-full max-w-5xl mb-8 sm:mb-12 border border-gray-800">
+      <div className="flex rounded-full overflow-hidden w-full mb-8 sm:mb-12 border border-gray-800">
         <button
           onClick={() => setTabIndex(0)}
           style={{

@@ -1,10 +1,17 @@
+'use client'
 import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, WhatsappIcon } from "@/assets/icon";
 import { XIcon } from "lucide-react";
 import { TravelingBorder } from "../services/CorePrincipals";
+import { useState } from "react";
 
 export default function WhereInvestigation() {
+const[isHovering,setHovering]=useState(false);
+
   return (
-    <div className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-12 flex flex-col items-center overflow-hidden">
+    <div onMouseEnter={()=>{
+      setHovering(true)
+      console.log('hovering')
+      }} onMouseLeave={()=>setHovering(false)} className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-12 flex flex-col items-center overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
@@ -70,7 +77,7 @@ export default function WhereInvestigation() {
             <div className="relative flex items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square">
               {/* Small floating circles */}
 
-              <div className="absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">
+              <div className={`${isHovering?'block transition':'hidden'} absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]`}>
                 <InstaIcon />
               </div>
               <div className="absolute top-0 left-[25%] w-12 sm:w-[60px] aspect-square flex justify-center items-center rounded-full bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]">

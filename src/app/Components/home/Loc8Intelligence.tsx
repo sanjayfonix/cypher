@@ -1,12 +1,13 @@
 import { Graph, HammerIcon, HistoryIcon, PatternIcon, Search5, Search6, TargetIcon } from "@/assets/icon";
 import GridItem from "./GridItem";
 import Image from "next/image";
+import TrackingAnimation from "./GraphAnimation";
 
 
 
 export default function Loc8Intelligence() {
   return (
-    <div className="flex flex-col gap-12  sm:px-7">
+    <div className="flex flex-col gap-12  ">
 
       <div className="flex flex-col gap-4">
         <h2 className="text-xl sm:text-2xl md:text-[2rem] font-bold font-sans text-white">
@@ -17,16 +18,10 @@ export default function Loc8Intelligence() {
         </p>
       </div>
 
-      <div className="flex flex-col py-5 px-4 gap-6 sm:flex-row">
+      <div className="flex flex-col py-5 gap-6 sm:flex-row">
         {/* Left Div → Image */}
         <div className="flex-1">
-          <Image
-            src="/images/Cellular.png"
-            alt="Left"
-            width={200}         // 👈 required numeric value
-            height={200}        // 👈 required numeric value
-            className="w-full h-64 sm:h-80 md:h-full object-cover rounded-lg"
-          />
+         <TrackingAnimation/>
         </div>
 
 
