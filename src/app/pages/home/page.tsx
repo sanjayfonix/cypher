@@ -4,6 +4,7 @@ import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntellig
 
 import  HomeBanner  from "@/app/Components/home/HomeBanner";
 import HowItWorks from "@/app/Components/home/HowItWorks";
+import IntegrityAtCore from "@/app/Components/home/IntegrityAtCore";
 
 import SearchResultTab from "@/app/Components/home/SearchResultTab";
 import WhereInvestigation from "@/app/Components/home/WhereInvestigation";
@@ -92,7 +93,7 @@ export default function HomePage() {
      })}
      </div> 
     
-    {/* <IntegrityAtCore/> */}
+     <IntegrityAtCore/>
      <BlurCard/>
      <ContactSection />
      {/* <Grid/> */}
