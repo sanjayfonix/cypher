@@ -102,7 +102,7 @@ export default function CorePrincipals() {
           filter: "blur(90px)",
           borderRadius: "50%",
           top: "30%",
-          transform: "translate(-50%, -50%)",
+         
           zIndex: 0,
         }}
       />
@@ -213,88 +213,113 @@ export default function CorePrincipals() {
 
 
 
-export  function TravelingBorder({
+
+
+
+export function TravelingBorder({
   borderRadius = 32,
-  pointerWidth = 66,
-  pointerHeight = 10,
-  speed = 100, // pixels/sec
-}: TravelingBorderProps) {
+  speed = 150, // px per second
+  scale = 0.5, // shrink the pointer so it fits corners
+  inset = 2,
+}: {
+  borderRadius?: number;
+  speed?: number;
+  scale?: number;
+  inset?: number;
+}) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
-  const pointerRef = useRef<HTMLDivElement | null>(null);
+  const pointerRef = useRef<SVGPathElement | null>(null);
   const [pathData, setPathData] = useState("");
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    if (!containerRef.current) return;
 
     const updatePath = () => {
-      const rect = container.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
+      const rect = containerRef.current!.getBoundingClientRect();
+      const w = rect.width - inset * 2;
+      const h = rect.height - inset * 2;
       const r = borderRadius;
 
       const newPath = `
-M ${r} 0
-L ${w - r} 0
-C ${w - r/2} 0 ${w} ${r/2} ${w} ${r}
-L ${w} ${h - r}
-C ${w} ${h - r/2} ${w - r/2} ${h} ${w - r} ${h}
-L ${r} ${h}
-C ${r/2} ${h} 0 ${h - r/2} 0 ${h - r}
-L 0 ${r}
-C 0 ${r/2} ${r/2} 0 ${r} 0
-Z
-`;
+M ${inset + r} ${inset}
+L ${inset + w - r} ${inset}
+C ${inset + w - r/2} ${inset} ${inset + w} ${inset + r/2} ${inset + w} ${inset + r}
+L ${inset + w} ${inset + h - r}
+C ${inset + w} ${inset + h - r/2} ${inset + w - r/2} ${inset + h} ${inset + w - r} ${inset + h}
+L ${inset + r} ${inset + h}
+C ${inset + r/2} ${inset + h} ${inset} ${inset + h - r/2} ${inset} ${inset + h - r}
+L ${inset} ${inset + r}
+C ${inset} ${inset + r/2} ${inset + r/2} ${inset} ${inset + r} ${inset}
+Z`;
+
       setPathData(newPath);
     };
 
     updatePath();
-
-    const resizeObserver = new ResizeObserver(updatePath);
-    resizeObserver.observe(container);
-    return () => resizeObserver.disconnect();
-  }, [borderRadius]);
+    const ro = new ResizeObserver(updatePath);
+    ro.observe(containerRef.current!);
+    return () => ro.disconnect();
+  }, [borderRadius, inset]);
 
   useEffect(() => {
     if (!pathRef.current || !pointerRef.current) return;
-
     const pathEl = pathRef.current;
     const pointerEl = pointerRef.current;
     let start: number | null = null;
-    const pathLength = pathEl.getTotalLength();
+    const length = pathEl.getTotalLength();
 
-    const animate = (timestamp: number) => {
-      if (!start) start = timestamp;
-      const elapsed = timestamp - start;
-      const distance = (elapsed / 1000) * speed;
-      const point = pathEl.getPointAtLength(distance % pathLength);
-const nextPoint = pathEl.getPointAtLength((distance + 1) % pathLength);
-const angle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * (180 / Math.PI);
-pointerEl.style.left = `${point.x}px`;
-pointerEl.style.top = `${point.y}px`;
-pointerEl.style.transform = `translate(-50%, -50%) rotate(${angle}deg)`; 
+    const animate = (t: number) => {
+      if (start === null) start = t;
+      const elapsed = (t - start) / 1000;
+      const dist = (elapsed * speed) % length;
+
+      const point = pathEl.getPointAtLength(dist);
+      const next = pathEl.getPointAtLength((dist + 1) % length);
+      const angle =
+        (Math.atan2(next.y - point.y, next.x - point.x) * 180) / Math.PI;
+
+      pointerEl.setAttribute(
+        "transform",
+        `translate(${point.x},${point.y}) rotate(${angle}) scale(${scale}) translate(-31.5,-5)`
+      );
 
       requestAnimationFrame(animate);
     };
 
-    const animationId = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animationId);
-  }, [pathData, speed]);
+    const id = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(id);
+  }, [pathData, speed, scale]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       {pathData && (
-        <svg className="absolute w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <svg className="absolute w-full h-full overflow-visible">
+          {/* invisible path for measurement */}
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />
+
+          {/* Original pointer path, centered and scaled */}
+          <path
+            ref={pointerRef}
+            d="M3 5.00037L60.5474 3.00037C60.5474 3.00037 63 4.21932 63 5.00037C63 5.78141 60.5474 7.00036 60.5474 7.00036L3 5.00037Z"
+            fill="url(#capsuleGrad)"
+          />
+
+          <defs>
+            <linearGradient
+              id="capsuleGrad"
+              x1="63"
+              y1="5"
+              x2="0"
+              y2="5"
+              gradientUnits="userSpaceOnUse"
+            >
+              <stop stopColor="#016FFF" />
+              <stop offset="1" stopColor="#093C80" />
+            </linearGradient>
+          </defs>
         </svg>
       )}
-      <div ref={pointerRef} className="absolute pointer-events-none w-[66px] h-[10px]">
-        <BorderTravel />
-      </div>
     </div>
   );
 }
-
-
-

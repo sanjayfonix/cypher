@@ -414,7 +414,7 @@ export const ProtectGlowIcon = () => {
 export const BorderTravel = () => (
 
   <svg width="66" height="10" viewBox="0 0 66 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g filter="url(#filter0_dd_222_2331)">
+    <g filter="url(#filter0_dd_222_2331)" transform='translate(-25,0)'>
       <path d="M3 5.00037L60.5474 3.00037C60.5474 3.00037 63 4.21932 63 5.00037C63 5.78141 60.5474 7.00036 60.5474 7.00036L3 5.00037Z" fill="url(#paint0_linear_222_2331)" />
     </g>
     <defs>
