@@ -63,7 +63,7 @@ export default function ProgramPage({ params }: any) {
         {/* LEFT CONTENT */}
         <div className="flex-1">
           {/* Header Card */}
-          <div className="bg-gradient-to-r from-[#1E2631] to-[#3A4454] rounded-2xl p-6 shadow-lg">
+          <div className="bg-[linear-gradient(191.01deg,rgba(3,10,20,0)_40.1%,rgba(22,123,255,0.4)_87.34%)] border border-[#6D6D6D99] rounded-2xl p-6 shadow-lg">
             <h1 className="text-3xl font-bold">{program.title}</h1>
             <p className="mt-1 text-sm text-[#9BA3B4]">{program.credit}</p>
             <p className="mt-4 text-base text-[#D2D8E4]">{program.description}</p>
@@ -157,20 +157,23 @@ export default function ProgramPage({ params }: any) {
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="w-full lg:w-80 bg-[#1B1E24] rounded-2xl p-6 shadow-md flex flex-col justify-between">
+        <div className="w-full h-fit lg:w-100 bg-[#030A14] border border-[#6D6D6D] rounded-2xl p-8 shadow-md flex flex-col gap-2">
+          <div className="w-full h-[347px] bg-[#D9D9D9] rounded-lg">
+
+          </div>
           <div>
-            <p className="text-2xl font-bold">$79</p>
-            <ul className="text-sm text-[#B0BAC5] mt-2 space-y-1">
+            <div className="flex justify-between"><p className="text-2xl font-medium font-inter text-[#A0A4AE]">Course Price</p><p className="text-white font-bold text-2xl font-inter">$79</p></div>
+            <ul className="text-base font-normal font-inter text-[#A0A4AE] mt-2 space-y-1">
               <li>• Instant Certificate Upon Completion</li>
               <li>• Mobile, Desktop and Laptop Access</li>
               <li>• Money-Back Guarantee</li>
             </ul>
           </div>
-          <div className="mt-6 flex flex-col gap-3">
-            <button className="bg-blue-600 hover:bg-blue-700 text-white rounded-xl py-3 font-semibold">
+          <div className="flex flex-col gap-2">
+            <button className="custom-button with-shadow bg-[#1057B5]">
               Get this course
             </button>
-            <button className="bg-transparent border border-[#3C414A] hover:bg-[#2C313A] rounded-xl py-3 font-semibold">
+            <button className="custom-button with-border bg-transparent">
               Try it with free trial
             </button>
           </div>
