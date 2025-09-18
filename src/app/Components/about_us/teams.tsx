@@ -139,7 +139,7 @@ export default function TeamSection() {
                 alt={member.title}
                 width={230}
                 height={258}
-                className="rounded-2xl object-cover border border-gray-200"
+                className="  "
               />
             </motion.div>
           ))}
