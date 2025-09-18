@@ -9,7 +9,7 @@ export const WhyIndustriesCarrier = () => {
 
 
   return (
-    <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6 mt-120">
+    <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6">
 
       {/* Left Column: Text + Button */}
       <div className="flex flex-col gap-8 relative animate-fade-in opacity-0">

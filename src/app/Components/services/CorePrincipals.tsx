@@ -64,7 +64,7 @@ export default function CorePrincipals() {
             <h2 className="font-sans text-white font-bold mt-6 lg:mt-0 text-[22px] sm:text-[28px] lg:text-[40px] leading-[1.3]">
               Custom Seminars
             </h2>
-            <div className="text-[#E3E3E3] text-[0.9rem] sm:text-[1rem] font-inter font-normal max-w-[85%]">
+            <div className="text-[#E3E3E3] text-[0.9rem] sm:text-[1rem] font-inter font-normal max-w-[98%] lg:max-w-[85%]">
               Tailored seminars to equip your team with the skills to detect and mitigate intelligence threats. We offer practical tools and roadmaps to help you stay ahead.
             </div>
           </div>
@@ -77,8 +77,8 @@ export default function CorePrincipals() {
         </div>
 
         {/* Right Column: Dashed Semi-Circles */}
-        <div className="flex flex-1  justify-center items-center relative max-w-1/2">
-          <SemicircularArcs viewWidth={500} viewHeight={400}/>
+        <div className="flex flex-1  justify-center items-center relative max-w-full mt-8 lg:mt-0">
+          <SemicircularArcs viewWidth={570} viewHeight={300}/>
         </div>
         
       </div>
@@ -213,19 +213,18 @@ export default function CorePrincipals() {
 
 
 
-
-
-
 export function TravelingBorder({
   borderRadius = 32,
   speed = 150, // px per second
-  scale = 0.5, // shrink the pointer so it fits corners
-  inset = 2,
+  scale = 0.5,
+  inset = 0,
+  delta = 8,
 }: {
   borderRadius?: number;
   speed?: number;
   scale?: number;
   inset?: number;
+  delta?: number;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
@@ -244,13 +243,13 @@ export function TravelingBorder({
       const newPath = `
 M ${inset + r} ${inset}
 L ${inset + w - r} ${inset}
-C ${inset + w - r/2} ${inset} ${inset + w} ${inset + r/2} ${inset + w} ${inset + r}
+C ${inset + w - r / 2} ${inset} ${inset + w} ${inset + r / 2} ${inset + w} ${inset + r}
 L ${inset + w} ${inset + h - r}
-C ${inset + w} ${inset + h - r/2} ${inset + w - r/2} ${inset + h} ${inset + w - r} ${inset + h}
+C ${inset + w} ${inset + h - r / 2} ${inset + w - r / 2} ${inset + h} ${inset + w - r} ${inset + h}
 L ${inset + r} ${inset + h}
-C ${inset + r/2} ${inset + h} ${inset} ${inset + h - r/2} ${inset} ${inset + h - r}
+C ${inset + r / 2} ${inset + h} ${inset} ${inset + h - r / 2} ${inset} ${inset + h - r}
 L ${inset} ${inset + r}
-C ${inset} ${inset + r/2} ${inset + r/2} ${inset} ${inset + r} ${inset}
+C ${inset} ${inset + r / 2} ${inset + r / 2} ${inset} ${inset + r} ${inset}
 Z`;
 
       setPathData(newPath);
@@ -275,13 +274,14 @@ Z`;
       const dist = (elapsed * speed) % length;
 
       const point = pathEl.getPointAtLength(dist);
-      const next = pathEl.getPointAtLength((dist + 1) % length);
+      const next = pathEl.getPointAtLength((dist + delta) % length);
       const angle =
         (Math.atan2(next.y - point.y, next.x - point.x) * 180) / Math.PI;
 
+      // Align to center vertically (y=6 is midpoint of pointer shape)
       pointerEl.setAttribute(
         "transform",
-        `translate(${point.x},${point.y}) rotate(${angle}) scale(${scale}) translate(-31.5,-5)`
+        `translate(${point.x},${point.y}) rotate(${angle}) scale(${scale}) translate(-41,-6)`
       );
 
       requestAnimationFrame(animate);
@@ -289,7 +289,7 @@ Z`;
 
     const id = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(id);
-  }, [pathData, speed, scale]);
+  }, [pathData, speed, scale, delta]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
@@ -298,20 +298,20 @@ Z`;
           {/* invisible path for measurement */}
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />
 
-          {/* Original pointer path, centered and scaled */}
+          {/* Pointer with wider front face, centered vertically */}
           <path
             ref={pointerRef}
-            d="M3 5.00037L60.5474 3.00037C60.5474 3.00037 63 4.21932 63 5.00037C63 5.78141 60.5474 7.00036 60.5474 7.00036L3 5.00037Z"
+            d="M3 6L82 3C85 3 89 6 85 9L82 9L3 6Z"
             fill="url(#capsuleGrad)"
           />
 
           <defs>
             <linearGradient
               id="capsuleGrad"
-              x1="63"
-              y1="5"
+              x1="87"
+              y1="6"
               x2="0"
-              y2="5"
+              y2="6"
               gradientUnits="userSpaceOnUse"
             >
               <stop stopColor="#016FFF" />
