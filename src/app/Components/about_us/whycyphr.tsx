@@ -49,7 +49,7 @@ export default function WhyCyphr() {
                 </p>
             </div>
 
-            <div ref={ref} className="flex flex-col gap-8 max-w-7xl mx-auto relative">
+            <div ref={ref} className="flex flex-col gap-8 relative">
                 {features.map((item, index) => {
                     const isLeft = index % 2 === 0;
 

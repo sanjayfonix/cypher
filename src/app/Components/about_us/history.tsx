@@ -95,19 +95,19 @@ export const History = () => {
                 }}
             />
             {/* Left section with heading + image */}
-            <div className="flex-1 flex flex-col  items-start">
-                <h2 className="text-white text-4xl font-bold leading-snug">
-                    Transforming Complex Data into <br /> Powerful Insights That Drive <br /> Action,
-                    Empower Decisions, and <br /> Safeguard Your Future.
-                </h2>
-                <div className="mt-8">
-                    <img
-                        src="/images/aboutimg.png"
-                        alt="OSINT Evolution"
-                        className="drop-shadow-[0_0_20px_#1057B5]"
-                    />
-                </div>
-            </div>
+            <div className="flex flex-col items-start md:items-end pr-6 md:pr-12">
+  <h2 className="text-white text-4xl font-bold leading-snug text-left md:text-right">
+    Transforming Complex Data into <br /> Powerful Insights That Drive <br /> Action,
+    Empower Decisions, and <br /> Safeguard Your Future.
+  </h2>
+  <div className="mt-8">
+    <img
+      src="/images/aboutimg.png"
+      alt="OSINT Evolution"
+      className="drop-shadow-[0_0_20px_#1057B5] max-w-[90%]"
+    />
+  </div>
+</div>
 
             {/* Right side timeline */}
             <div className="flex-1 relative">
@@ -122,17 +122,17 @@ export const History = () => {
                             className="relative flex flex-col pl-10 mb-16"
                         >
                             {/* Vertical line */}
-                            <div className="absolute left-0 top-0 w-[2px] h-full bg-[#6D6D6D]">
+                            {i!==2&&<div className="absolute left-0 top-0 w-[2px] h-[calc(100%+64px)] bg-[#6D6D6D]">
                                 {isActive && (
                                     <div
                                         className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-300"
                                         style={{ height: `${progress * 100}%` }}
                                     ></div>
                                 )}
-                            </div>
+                            </div>}
 
                             {/* Circle marker */}
-                            <div className="absolute -left-2 top-2 w-4 h-4 rounded-full bg-[#6D6D6D]">
+                            <div className="absolute -left-2  w-4 h-4 rounded-full bg-[#6D6D6D]">
                                 {isActive && (
                                     <div className="w-4 h-4 rounded-full bg-[#1057B5] flex items-center justify-center">
                                         <ServicesIcon />

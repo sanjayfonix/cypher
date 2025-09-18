@@ -1,7 +1,9 @@
-import { inter } from "@/app/layout";
+'use client'
 import Button from "../common/Button";
 import Image from "next/image";
 import { ShoppingBag, Mail, Globe } from "lucide-react";
+import Link from "next/link";
+import { Toparrow } from "@/assets/icon";
 
 export const AboutHeader = () => {
     return (
@@ -46,7 +48,7 @@ export const AboutHeader = () => {
                     </h1>
 
                     <p
-                        className={`text-sm sm:text-base md:text-lg text-[#F1F1F1] ${inter.className}`}
+                        className={`text-sm sm:text-base md:text-lg text-[#F1F1F1]`}
                     >
                         "With comprehensive expertise, we tackle critical challenges head-on.
                         Our solutions empower businesses to make informed, confident
@@ -55,11 +57,12 @@ export const AboutHeader = () => {
                     </p>
 
 
-                    <Button
-                        color="bg-[#1057B5] hover:bg-[#1470E8] transition"
-                        text="Book a Consultation"
-                        isIcon={true}
-                    />
+                    <button onClick={()=>{
+            const navToSection=document.getElementById('contact-us')
+            if(navToSection){
+              navToSection.scrollIntoView({behavior:'smooth'})
+            }
+          }} className="custom-button with-shadow bg-[#1057B5]"> Book a Consultation <Toparrow/></button>
                 </div>
 
                 {/* RIGHT TIMELINE */}
