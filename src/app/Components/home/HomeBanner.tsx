@@ -169,7 +169,14 @@ export default function HomeBanner() {
         </p>
    
         <div className="flex gap-3 sm:gap-5 mt-[0.9rem] w-full sm:w-auto justify-center">
-          <button className="custom-button with-shadow bg-[#1057B5]">
+          <button
+          onClick={()=>{
+            const navToSection=document.getElementById('contact-us')
+            if(navToSection){
+              navToSection.scrollIntoView({behavior:'smooth'})
+            }
+          }}
+          className="custom-button with-shadow bg-[#1057B5]">
             Book a Consultation
           </button>
           <Link href={"/pages/services/consulting"}>

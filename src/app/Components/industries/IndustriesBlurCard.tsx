@@ -2,6 +2,7 @@
 import React from "react";
 import Button from "../common/Button";
 import { Grid, Toparrow } from "@/assets/icon";
+import Link from "next/link";
 
 const IndustriesBlurCard = () => {
   return (
@@ -57,8 +58,8 @@ const IndustriesBlurCard = () => {
           {/* Text Section */}
           <div className="flex flex-col gap-3 sm:gap-6 lg:gap-[28px] text-center">
             <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[48px] text-white leading-snug">
-              Strengthen Your Defenses.<br/>
-Protect Your Bottom Line.
+              Strengthen Your Defenses.<br />
+              Protect Your Bottom Line.
             </h1>
             <p className="font-inter font-normal font-inter text-xs sm:text-base  text-[#F1F1F1] mx-auto text-center max-w-xs sm:max-w-[60%]">
               Cyphr gives insurance carriers the tools to stay ahead of fraud, reduce costs, and secure long-term profitability.
@@ -67,11 +68,14 @@ Protect Your Bottom Line.
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
-            <button className="custom-button with-shadow bg-[#1057B5]">Book a Consultation</button>
-             <button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow/></button>
-              
-              
-            
+            <Link href={"/pages/search"}>
+              <button className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
+
+            </Link>
+            <button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button>
+
+
+
           </div>
         </div>
       </div>

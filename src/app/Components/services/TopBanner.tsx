@@ -2,6 +2,7 @@
 'use client'
 
 import { Toparrow } from "@/assets/icon";
+import Link from "next/link";
 
 
 interface ButtonProps{
@@ -57,13 +58,23 @@ export const TopBanner = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-8 sm:gap-5 mt-4 justify-start sm:justify-center">
-          <button onClick={()=>{
+
+
+          <Link href={"/pages/search"}>
+          <button  className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
+            
+          </Link>
+
+
+
+          <button 
+          onClick={()=>{
             const navToSection=document.getElementById('contact-us')
             if(navToSection){
               navToSection.scrollIntoView({behavior:'smooth'})
             }
-          }} className="custom-button with-shadow bg-[#1057B5]"   >Book a Consultation</button>
-          <button className="custom-button with-border bg-transparent"  >Explore Our Services <Toparrow/></button>
+          }}
+          className="custom-button with-border bg-transparent"  >Explore Our Services <Toparrow/></button>
         </div>
       </div>
     </div>
