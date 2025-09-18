@@ -5,24 +5,24 @@ import { motion } from "framer-motion";
 const teamData = [
   {
     id: 1,
-    title: "Michael Petrie – Founder & Chief Investigator",
+    title: "Michael Petrie - Founder/CEO",
     description:
       "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses on addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
-    image: "/images/img1.jpg",
+    image: "/images/img1.png",
   },
   {
     id: 2,
-    title: "A Neuroscience & Biotech Enthusiast:",
+    title: "Brett Huselton - Vice President of Strategy and Growth",
     description:
       "With two decades of experience in building growth-oriented services, Michael merged his expertise in neuroscience and psychology with his forensic and data analysis skills. Recognizing the power of data liquidity and strategic forensic assessment, he is shaping the future of investigative science, just as advancements have revolutionized healthcare science.",
-    image: "/images/img2.jpg",
+    image: "/images/img2.png",
   },
   {
     id: 3,
-    title: "Michael Petrie – Founder & Chief Investigator",
+    title: "Max Terzi - CTO",
     description:
       "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses on addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
-    image: "/images/img3.jpg",
+    image: "/images/img3.png",
   },
 ];
 
