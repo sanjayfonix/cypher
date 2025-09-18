@@ -91,7 +91,7 @@ export default function CurrentOpportunities() {
               </p>
               <button
                 onClick={() =>
-                  router.push(`pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
+                  router.push(`/pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
                 }
                 className="hidden lg:block min-w-[130px] mt-4 custom-button with-border bg-transparent"
               >
