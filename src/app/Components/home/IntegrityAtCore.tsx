@@ -2,6 +2,7 @@ import { AcademiaIcon, EmployersIcon, Icon2, InsuranceIcon, LawIcon } from "@/as
 import { TravelingBorder } from "../services/CorePrincipals";
 import Link from "next/link";
 import { GlassIcon } from "./GlassIcon";
+import { GlassCard } from "./GlassCard";
 
 const Items = [
   { id: 1, name: "Insurance Carriers", icon: <InsuranceIcon /> },
@@ -29,9 +30,9 @@ export default function IntegrityAtCore() {
           
           <div className=" flex w-[80%] flex-wrap justify-between items-start gap-4">
             {Items.slice(0, 2).map((item) => (
-              <Link href={item.id===1?'/pages/industries/insurance':'/pages/industries/employer'}><div
+              <GlassCard className="w-fit"><Link href={item.id===1?'/pages/industries/insurance':'/pages/industries/employer'}><div
                 key={item.id}
-                className=" flex  flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4"
+                className=" flex  flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4"
                 style={{ marginTop: item.id === 1 ? 16 : 0 }}
               >
                  
@@ -41,7 +42,7 @@ export default function IntegrityAtCore() {
                 <span className="font-sans font-bold text-base sm:text-lg md:text-xl text-white">
                   {item.name}
                 </span>
-              </div></Link>
+              </div></Link></GlassCard>
             ))}
           </div>
        
@@ -58,9 +59,9 @@ export default function IntegrityAtCore() {
           {/* Bottom Cards */}
           <div className="flex w-[80%]  flex-wrap justify-between items-start gap-4 ">
             {Items.slice(2).map((item) => (
-              <Link href={item.id===3?'/pages/industries/law':'/pages/industries/academia'}><div
+              <Link href={item.id===3?'/pages/industries/law':'/pages/industries/academia'}><GlassCard className="w-fit"><div
                 key={`bottom-${item.id}`}
-                className={`flex flex-row ml-0 sm:${item.id===3 ? "ml-4" :"ml-0"} items-center gap-3 sm:gap-4 rounded-[8px] bg-[#09346B80] py-2 px-3 sm:px-4`}
+                className={`flex flex-row ml-0 sm:${item.id===3 ? "ml-4" :"ml-0"} items-center gap-3 sm:gap-4 rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4`}
                 style={{
                   marginRight:item.id==4?'5%':0,
                   marginLeft:item.id === 3 ? 16 : 0,
@@ -73,7 +74,7 @@ export default function IntegrityAtCore() {
                 <span className="font-sans font-bold text-base sm:text-lg md:text-xl text-white">
                   {item.name}
                 </span>
-              </div>
+              </div></GlassCard>
               </Link>
             ))}
           </div>

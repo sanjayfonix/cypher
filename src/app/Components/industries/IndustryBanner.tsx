@@ -36,7 +36,7 @@ export const IndustryBanner = () => {
                      
         
           </div>
-        <AnimatedPath/>
+        {/* <AnimatedPath/> */}
           </div>
         </div>
       </div>

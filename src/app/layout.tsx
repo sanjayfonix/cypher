@@ -5,6 +5,7 @@ import Navbar from "./Components/common/Navbar";
 import Footer from "./Components/common/Footer";
 
 import { IBM_Plex_Sans } from "next/font/google";
+import BookingForm from "./Components/common/BookingForm";
 
 const ibmPlex = IBM_Plex_Sans({
   variable: "--font-ibm-plex",
@@ -46,7 +47,9 @@ export default function RootLayout({
 
 
         {/* Main content takes all remaining height */}
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">{children}
+          
+        </main>
 
         {/* Footer sticks to bottom */}
         <Footer />

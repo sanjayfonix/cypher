@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { GlassIcon } from "../home/GlassIcon";
 
 export default function MissionSection() {
   return (
@@ -44,10 +45,12 @@ export default function MissionSection() {
 
           {/* Radar Icons */}
           <div className="absolute -top-6 left-1/2 -translate-x-1/2">
-            <div className="p-2 sm:p-3 rounded-full bg-black border border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.8)]">
-              <Image src="/images/mission1.png" alt="Mission1" width={32} height={32} />
+          
+            <div className="p-2 sm:p-3 rounded-full bg-black shadow-[0_0_15px_rgba(59,130,246,0.8)]">
+              <Image src="/images/mission1.png" alt="Mission1" width={32} height={32}/>
             </div>
           </div>
+          
           <div className="absolute top-1/2 -right-6 -translate-y-1/2">
             <div className="p-2 sm:p-3 rounded-full bg-black border border-blue-400 shadow-[0_0_15px_rgba(59,130,246,0.8)]">
               <Image src="/images/mission2.png" alt="Mission2" width={32} height={32} />

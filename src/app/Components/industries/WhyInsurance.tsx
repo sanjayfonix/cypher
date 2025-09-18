@@ -3,7 +3,9 @@ import { ArrowDownRightIcon } from "lucide-react";
 import React from "react";
 import { Button } from "./IndustryButton";
 import { Card, CardContent, CardTitle, CardDescription } from "./Card";
-import { FindIcon, GuassMeterIcon, ProtectIcon, WeighScaleIcon } from "@/assets/icon";
+import { FindIcon, GuassMeterIcon, ProtectIcon, Toparrow, WeighScaleIcon } from "@/assets/icon";
+import { GlassIcon } from "../home/GlassIcon";
+import Link from "next/link";
 
 export const WhyIndustriesCarrier = () => {
 
@@ -31,15 +33,11 @@ export const WhyIndustriesCarrier = () => {
           </div>
         </header>
 <div>
-        <Button
-          variant="outline"
-          className="inline-flex h-12 items-center justify-center gap-2 px-4 py-3 rounded-3xl border border-solid border-[#d5d5d5] bg-transparent hover:bg-gray-800 transition-colors mt-4"
-        >
-          <span className="font-UI-b1-med text-primary-text text-[length:var(--UI-b1-med-font-size)] tracking-[var(--UI-b1-med-letter-spacing)] leading-[var(--UI-b1-med-line-height)] [font-style:var(--UI-b1-med-font-style)]">
-            Contact our expert
-          </span>
-          <img src={'/arrow-down-right.svg'} className="w-5 h-5 object-cover"/>
-        </Button>
+        <Link href={'/pages/contactus'}><button 
+         
+          className="custom-button with-border bg-transparent"
+        >Contact our expert <Toparrow/>
+        </button></Link>
         </div>
       </div>
 
@@ -55,7 +53,7 @@ export const WhyIndustriesCarrier = () => {
           {/* Card 1 */}
           <Card className="flex flex-col flex-1 lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
             <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
-              <div className="h-24 w-24 object-cover"><FindIcon/></div>
+              <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4 ">
                 <CardTitle>Detect Fraud Early</CardTitle>
                 <CardDescription>
@@ -65,12 +63,12 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
 
-          <div className="flex-0.25 block h-px bg-gray-600" />
+          <div className="w-full h-0 border-[#5B5B5B] border block  " />
         
           {/* Card 2 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
-              <div className="h-24 w-24 object-cover"><GuassMeterIcon/></div>
+              <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4">
                 <CardTitle>Build Better Risk Profiles</CardTitle>
                 <CardDescription>
@@ -80,13 +78,13 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
         </div>
-       <div className="block w-0.25 bg-gray-600" />
+       <div className=" block w-0 border border-[#5B5B5B] " />
         {/* Right Cards Column */}
         <div className="flex flex-col gap-14  mt-0 ">
           {/* Card 3 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
-              <div className="h-24 w-24 object-cover"><ProtectIcon/></div>
+              <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4">
                 <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
                 <CardDescription>
@@ -96,12 +94,12 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
 
-          <div className="flex-0.25 h-px bg-gray-600" />
+ <div className="w-full h-0 border-[#5B5B5B] border block  " />
 
           {/* Card 4 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
-              <div className="h-24 w-24 object-cover"><WeighScaleIcon/></div>
+              <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4">
                 <CardTitle>Ensure Legal Compliance</CardTitle>
                 <CardDescription>

@@ -159,12 +159,7 @@ export const WhyConsulting = () => {
 
       {/* Button */}
       <div className="relative -top-5 flex justify-center mt-8">
-        <Button
-          isBorder={false}
-          isIcon={false}
-          color="bg-[#1057B5]"
-          text="Book a Consultation"
-        />
+        <button className="custom-button with-shadow bg-[#1057B5]">Book a Consultation</button>
       </div>
     </div>
   );

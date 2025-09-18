@@ -72,7 +72,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <Button text="Support Your TPA Team" isBorder isIcon color="bg-transparent" />
+              <button className='custom-button with-border bg-transparent'>Support Your TPA Team</button>
             </div>
           </motion.div>
         </div>
@@ -113,7 +113,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <Button text="Request Risk Profiling" isBorder isIcon color="bg-transparent" />
+              <button className="custom-button bg-transparent with-border" >Request Risk Profiling</button>
             </div>
           </motion.div>
 

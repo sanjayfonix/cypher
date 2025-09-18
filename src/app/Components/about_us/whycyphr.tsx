@@ -88,7 +88,7 @@ export default function WhyCyphr() {
                                     }`}
                                 >
                                     <div className={`${isLeft ? "text-left" : "text-right"}`}>
-                                        <h3 className="text-[32px] font-semibold">{item.title}</h3>
+                                        <h3 className="text-[24px] font-semibold">{item.title}</h3>
                                         <p className="text-gray-300 text-[16px] mt-1 max-w-3xl">
                                             {item.description}
                                         </p>

@@ -54,12 +54,12 @@ const CESessions = () => {
         </div>
       </div>
 
-      {/* Popup Modal */}
-      {isOpen && (
-        <div className="fixed container inset-0 flex items-center justify-center bg-opacity-70 z-50">
-          <div className="relative w-full  mx-auto bg-[#1A1A1A] rounded-3xl shadow-2xl p-8 md:p-12 overflow-y-auto max-h-[90vh]">
+   
+      {/* {isOpen && (
+        <div className="fixed container inset-0 w-[70%] flex items-center justify-center z-50 h-[70%]">
+          <div className="relative w-full  mx-auto bg-transparent rounded-3xl shadow-2xl p-4 md:p-8  overflow-y-auto scrollbar-hide max-h-[70vh]">
             
-            {/* Close Button */}
+            
             <button
               onClick={() => setIsOpen(false)}
               className="absolute top-4 right-4 text-gray-400 hover:text-white text-2xl font-bold"
@@ -67,11 +67,10 @@ const CESessions = () => {
               ×
             </button>
 
-            {/* Booking Form */}
             <BookingForm />
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };

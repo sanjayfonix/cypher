@@ -43,7 +43,7 @@ const[isHovering,setHovering]=useState(false);
                 Leverage intelligence techniques to make informed decisions, enhance security, and mitigate risks.
               </p>
             </div>
-            <Link href={'/pages/services/consulting'}><button className="mt-4 custom-button with-border bg-transparent max-w-1/2">
+            <Link href={'/pages/services/consulting'}><button className="mt-4 custom-button with-border bg-transparent">
               See How It works{" "}
               <span>
                <Toparrow/>
@@ -69,7 +69,7 @@ const[isHovering,setHovering]=useState(false);
                 We extract critical insights from social media, offering real-time fraud detection and litigation support.
               </p>
             </div>
-            <Link href={'/pages/services/social-intel'}><button className="custom-button with-border bg-transparent max-w-1/3 ml-5">
+            <Link href={'/pages/services/social-intel'}><button className="custom-button with-border bg-transparent ml-5">
               See How It works{" "}
               <span>
                <Toparrow/>
@@ -156,7 +156,7 @@ const[isHovering,setHovering]=useState(false);
                 Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>
-            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border max-w-1/3 bg-transparent ml-5">
+            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent ml-5">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
@@ -211,7 +211,7 @@ const[isHovering,setHovering]=useState(false);
                 Analyze mobile device data to track movement, verify alibis, and uncover hidden connections.
               </p>
             </div>
-             <Link href={'/pages/services/geospatial'}><button className="custom-button with-border max-w-1/2 bg-transparent mt-4">
+             <Link href={'/pages/services/geospatial'}><button className="custom-button with-border bg-transparent mt-4">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
