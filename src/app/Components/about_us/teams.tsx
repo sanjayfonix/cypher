@@ -19,9 +19,9 @@ const teamData = [
   },
   {
     id: 3,
-    title: "Max Terzi - CTO",
+    title: "Max Terzi - CTO ",
     description:
-      "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses on addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
+      "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses  addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
     image: "/images/img3.png",
   },
 ];
