@@ -2,6 +2,7 @@
 import { PointerGlow, ProtectGlowIcon, Toparrow } from "@/assets/icon";
 import Button from "../common/Button";
 import AnimatedPath from "./AnimatedBanner";
+import Link from "next/link";
 
 export const IndustryBanner = () => {
   return (
@@ -26,12 +27,10 @@ export const IndustryBanner = () => {
           {/* Blurred background */}
           <div className="absolute top-0 left-0 w-full sm:w-[80%]  bg-[#030A14B2] blur-3xl rounded-2xl -z-10" />
           <div className="relative bg-black w-fit z-2 sm:flex-row flex-col flex gap-4 mt-6">  
-          <button onClick={()=>{
-            const navToSection=document.getElementById('contact-us')
-            if(navToSection){
-              navToSection.scrollIntoView({behavior:'smooth'})
-            }
-          }} className="custom-button with-shadow bg-[#1057B5]">Book a Consultation</button> 
+          <Link href={"/pages/search"}>
+          <button  className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
+            
+          </Link>
           <button className="with-border custom-button bg-transparent">Explore Our Services <Toparrow/></button>
                      
         

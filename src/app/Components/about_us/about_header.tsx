@@ -54,6 +54,7 @@ export const AboutHeader = () => {
                         and data-driven insights."
                     </p>
 
+
                     <Button
                         color="bg-[#1057B5] hover:bg-[#1470E8] transition"
                         text="Book a Consultation"
@@ -62,11 +63,7 @@ export const AboutHeader = () => {
                 </div>
 
                 {/* RIGHT TIMELINE */}
-                <div className="flex flex-col relative w-full  lg:w-1/2 mt-10 lg:mt-0 items-center gap-6">
-                    {/* Vertical Line */}
-                    
-
-                    {/* Card 1 */}
+                {/* <div className="flex flex-col relative w-full  lg:w-1/2 mt-10 lg:mt-0 items-center gap-6">
                     <div className="relative pl-12 w-full max-w-sm ">
                         <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
                         <div className="absolute left-6 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
@@ -84,7 +81,6 @@ export const AboutHeader = () => {
                         </div>
                     </div>
 
-                    {/* Card 2 */}
                     <div className="relative pl-12 w-full max-w-sm">
                         <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
                         <div className="absolute left-6  top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
@@ -106,7 +102,7 @@ export const AboutHeader = () => {
                         </div>
                     </div>
 
-                    {/* Card 3 */}
+
                     <div className="relative pl-12 w-full max-w-sm">
                         <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%+24px)] w-[0.25px] bg-blue-800 "></div>
                         <div className="absolute left-6 top-8 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
@@ -120,7 +116,7 @@ export const AboutHeader = () => {
                         </div>
                     </div>
 
-                    {/* Card 4 */}
+                   
                     <div className="relative pl-12 w-full max-w-sm">
                         <div className="absolute left-8 transform -translate-x-1/2 h-[calc(100%)] w-[0.25px] bg-blue-800 "></div>
                         <div className="absolute left-6 top-10 w-4 h-4 rounded-full bg-blue-500 shadow-[0_0_15px_#167BFF]" />
@@ -139,6 +135,16 @@ export const AboutHeader = () => {
                             <Globe className="text-gray-300" size={18} />
                         </div>
                     </div>
+                </div> */}
+                <div className="flex justify-center items-center">
+                    <Image
+                        src="/images/aboutheader.png"
+                        alt="About Header"
+                        width={630}
+                        height={630}
+                        className="rounded-lg object-cover"
+                        priority
+                    />
                 </div>
             </div>
         </div>
