@@ -103,6 +103,7 @@ export default function GlobalThreatIntelligence() {
         <button
           onClick={() => setTabIndex(0)}
           style={{
+            cursor:'pointer',
             transition: "1s ease-out",
             boxShadow:
               tabIndex === 0
@@ -120,6 +121,7 @@ export default function GlobalThreatIntelligence() {
         <button
           onClick={() => setTabIndex(1)}
           style={{
+             cursor:'pointer',
             transition: "1s ease-out",
             boxShadow:
               tabIndex === 1
@@ -160,23 +162,6 @@ export default function GlobalThreatIntelligence() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-  
-  
-    
-
-
-
-
-
-
 
 function SecurityFeatures() {
 

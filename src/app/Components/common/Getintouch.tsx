@@ -2,7 +2,8 @@
 import { useState } from "react";
 import { Mail, MapPin, ArrowRight } from "lucide-react";
 import Button from "./Button";
-import { Bell, Email, Headquators } from "@/assets/icon";
+import { Bell, Email, Headquators, Toparrow } from "@/assets/icon";
+import { GlassIcon } from "../home/GlassIcon";
  
 export default function ContactSection() {
     const [form, setForm] = useState({
@@ -50,9 +51,9 @@ export default function ContactSection() {
                 </p>
  
                 <div className="flex items-center gap-3 mb-4">
-                    <div className="border-t border-b rounded-t-full rounded-b-full">
-                        <Email />
-                    </div>
+                  
+                        <GlassIcon icon={<Email />} size={46}/>
+                   
                     <div>
                         <p className="text-gray-100 text-2xl font-bold">Email Id</p>
                         <p className="text-gray-300">Loremipsum16@gmail.com</p>
@@ -60,9 +61,9 @@ export default function ContactSection() {
                     </div>
                 </div>
                 <div className="flex items-center gap-3 mb-4">
-                    <div className="border-t border-b rounded-t-full rounded-b-full">
-                        <Headquators />
-                    </div>
+                   
+                         <GlassIcon icon={<Headquators />} size={46}/>
+                    
                     <div>
                         <p className="text-gray-100 text-2xl font-bold">Headquaters</p>
                         <p className="text-gray-300">New York , NY</p>
@@ -205,7 +206,7 @@ export default function ContactSection() {
                 </div>
  
                 {/* Submit Button with Glow */}
-                <Button color="bg-[#1057B5]" text="Submit" isIcon={true} />
+                <button className="custom-button with-shadow bg-[#1057B5] ">Submit <Toparrow/></button>
             </form>
  
         </div>

@@ -219,12 +219,14 @@ export function TravelingBorder({
   scale = 0.5,
   inset = 0,
   delta = 8,
+  anticlockwise = false, // NEW PROP
 }: {
   borderRadius?: number;
   speed?: number;
   scale?: number;
   inset?: number;
   delta?: number;
+  anticlockwise?: boolean; // NEW PROP TYPE
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
@@ -271,10 +273,20 @@ Z`;
     const animate = (t: number) => {
       if (start === null) start = t;
       const elapsed = (t - start) / 1000;
-      const dist = (elapsed * speed) % length;
+
+      // 👉 Clockwise vs Anticlockwise control
+      const dist = anticlockwise
+        ? (length - (elapsed * speed) % length) % length
+        : (elapsed * speed) % length;
 
       const point = pathEl.getPointAtLength(dist);
-      const next = pathEl.getPointAtLength((dist + delta) % length);
+
+      // ensure the pointer faces the actual movement direction
+      const nextDist = anticlockwise
+        ? (dist - delta + length) % length
+        : (dist + delta) % length;
+      const next = pathEl.getPointAtLength(nextDist);
+
       const angle =
         (Math.atan2(next.y - point.y, next.x - point.x) * 180) / Math.PI;
 
@@ -289,7 +301,7 @@ Z`;
 
     const id = requestAnimationFrame(animate);
     return () => cancelAnimationFrame(id);
-  }, [pathData, speed, scale, delta]);
+  }, [pathData, speed, scale, delta, anticlockwise]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
@@ -323,3 +335,4 @@ Z`;
     </div>
   );
 }
+

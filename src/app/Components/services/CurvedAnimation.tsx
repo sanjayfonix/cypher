@@ -60,21 +60,28 @@ export default function SemicircularArcs({
         {/* Pointers */}
         {pointerPositions.map((pos, i) => (
           <circle
-          className='pointer-circle'
+          style={{
+
+       
+           
+      
+  
+          }}
           onMouseEnter={()=>setHoveredIndex(i)}
           onMouseLeave={()=>setHoveredIndex(null)}
             key={i}
             cx={pos.cx}
             cy={pos.cy}
-            r={6}
-            fill="#838383"
+            r={hoveredIndex===i?10:6}
+            fill={hoveredIndex===i?"white":"#838383"}
           />
         ))}
 
 
 
-
-
+<foreignObject width={200} height={200} x='90' y='30'><div onMouseEnter={()=>setHoveredIndex(2)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===2?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
+<foreignObject width={100} height={100} x='325' y='-20'><div onMouseEnter={()=>setHoveredIndex(0)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===0?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
+<foreignObject width={100} height={100} x='275' y='110'><div onMouseEnter={()=>setHoveredIndex(1)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===1?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
 
         {/* Labels */}
         {pointerPositions.map((pos, i) => (
@@ -84,10 +91,13 @@ export default function SemicircularArcs({
   y={i === 0 ? pos.cy + 10 : i === 1 ? pos.cy - 10 : pos.cy - 70}
   width={170}
   height={40}
+  className='relative'
 >
+  
   <div
-    
-    className="gap-4 flex p-2 w-fit rounded-sm border text-sm  font-normal"
+    onMouseEnter={()=>setHoveredIndex(i)}
+    onMouseLeave={()=>setHoveredIndex(null)}
+    className="gap-4 flex p-2 w-fit rounded-sm border border-[#6B6B6B] text-sm  font-normal"
     style={{ position: "relative",color:hoveredIndex===i?'blue':'#6B6B6B' }}
   >
     {texts[i]}
@@ -96,6 +106,19 @@ export default function SemicircularArcs({
 ))}
         {/* Gradients */}
         <defs>
+           <filter id="hoverGlow" x="-50%" y="-50%" width="200%" height="200%">
+       
+    <feGaussianBlur in="SourceGraphic" stdDeviation="25" result="blur" />
+    
+    <feFlood floodColor="#157AFF" floodOpacity="1" result="color" />
+    <feComposite in="color" in2="blur" operator="in" result="coloredBlur" />
+   
+    <feMerge>
+      <feMergeNode in="coloredBlur" />
+      <feMergeNode in="SourceGraphic" />
+    </feMerge>
+  </filter>
+
           <linearGradient id="paint0_linear_222_2088" x1="278.5" y1="143" x2="278.5" y2="250">
             <stop offset="0.115385" stopColor="#CCCCCC" />
             <stop offset="1" stopColor="#030A14" />
