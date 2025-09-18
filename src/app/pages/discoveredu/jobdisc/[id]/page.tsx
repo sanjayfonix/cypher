@@ -2,7 +2,9 @@
 
 import { notFound } from "next/navigation";
 import React, { useState } from "react";
-import { CheckCircle, XCircle, ChevronDown, ChevronUp } from "lucide-react";
+import { CheckCircle, XCircle, ChevronDown, ChevronUp,   } from "lucide-react";
+import { GlassIcon } from "@/app/Components/home/GlassIcon";
+import { ProtectIcon, Shield,StarIcon } from "@/assets/icon";
 
 const programs = [
   {
@@ -64,17 +66,22 @@ export default function ProgramPage({ params }: any) {
         <div className="flex-1">
           {/* Header Card */}
           <div className="bg-[linear-gradient(191.01deg,rgba(3,10,20,0)_40.1%,rgba(22,123,255,0.4)_87.34%)] border border-[#6D6D6D99] rounded-2xl p-6 shadow-lg">
-            <h1 className="text-3xl font-bold">{program.title}</h1>
-            <p className="mt-1 text-sm text-[#9BA3B4]">{program.credit}</p>
-            <p className="mt-4 text-base text-[#D2D8E4]">{program.description}</p>
-            <p className="text-sm text-[#9BA3B4] mt-2">
-              ⭐ {program.rating} • Created: {program.created}
-            </p>
+            <div className="flex gap-4">
+              <GlassIcon icon={<ProtectIcon/>} size={60}/>
+              <div className="flex flex-col gap-2 items-start">
+              <h1 className="text-2xl font-sans font-bold text-white">{program.title}</h1>
+              <div className="p-2 rounded-full bg-[#00C781] flex"><div className="text-xs font-medium font-sans text-black">Credit Type:</div><div className="font-sans text-black text-xs font-normal"> sCredit Type: CE / CLE Accredited</div></div>
+              </div>
+              </div>
+            <p className="text-base mt-6 text-[#A0A4AE]">{program.description}</p>
+           <div className="flex gap-2 mt-2 items-center">
+              <StarIcon/> <span className="text-base font-inter font-normal text-[#A0A4AE]">{program.rating}</span><span className="ml-2 text-base font-inter font-normal text-[#A0A4AE]">{`|`}</span><span className="ml-2 text-base font-inter font-normal text-[#A0A4AE]">Created: {program.created}</span>
+            </div>
             <div className="flex flex-wrap gap-2 mt-4">
               {program.tags.map((tag, index) => (
                 <span
                   key={index}
-                  className="bg-[#202530] text-sm px-3 py-1 rounded-full text-[#B0BAC5]"
+                  className="bg-[#1A293E] border border-[#989898] text-xs p-2 rounded-full text-[#A0A4AE] font-sans font-normal"
                 >
                   {tag}
                 </span>
@@ -83,10 +90,14 @@ export default function ProgramPage({ params }: any) {
           </div>
 
           {/* Overview */}
-          <div className="mt-10">
-            <h2 className="text-xl font-semibold border-b border-[#2C313A] pb-2">
+          <div className="mt-8">
+            <div className="h-0 w-full border-[0.2px] border-blue-500"></div>
+            <div className="flex justify-between mt-4 items-center">
+            <h2 className=" lg:text-5xl md:text-4xl text-3xl font-bold font-sans pb-2">
               Overview
             </h2>
+            <div className="w-[33px] h-[3.6666667461395264px] bg-white"></div>
+            </div>
             <p className="mt-4 text-[#B0BAC5] leading-relaxed">
               A memorable presentation can make you the go-to advisor in your field.
               But too many legal presentations are dry, inaccessible, and forgettable,
