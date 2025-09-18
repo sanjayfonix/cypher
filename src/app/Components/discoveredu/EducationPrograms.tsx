@@ -64,6 +64,7 @@ export default function EducationPrograms() {
           {features.map((feature, index) => (
             <div key={index} className="flex items-start space-x-4">
               <div className="flex-shrink-0">{feature.icon}</div>
+              
               <div>
                 <h3 className="text-lg font-semibold">{feature.title}</h3>
                 <p className="text-gray-400 text-sm md:text-base">{feature.description}</p>

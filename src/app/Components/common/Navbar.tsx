@@ -116,7 +116,7 @@ export default function Navbar() {
                     <Link
                       key={index}
                       href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-[#8A8A8A]"
                         }`}
                       onClick={handleLinkClick}
                     >
@@ -146,7 +146,7 @@ export default function Navbar() {
                     <Link
                       key={index}
                       href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-[#8A8A8A]"
                         }`}
                       onClick={handleLinkClick}
                     >

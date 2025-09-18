@@ -10,9 +10,9 @@ export default function BookingForm() {
           Book Your CE/CLE Public Speaking Session
         </h1>
 
-        <form className="space-y-[8px]">
+        <form className="flex flex-col gap-[16px]">
           {/* First Name & Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
             <div>
               <label
                 htmlFor="firstName"
@@ -109,7 +109,7 @@ export default function BookingForm() {
           </div>
 
           {/* Organization & Role */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
             <div>
               <label
                 htmlFor="organizationName"
@@ -143,7 +143,7 @@ export default function BookingForm() {
           </div>
 
           {/* Session Type & Date */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
             <div>
               <label
                 htmlFor="sessionType"

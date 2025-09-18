@@ -1,40 +1,56 @@
 "use client";
 
+import { Toparrow } from "@/assets/icon";
 import { Laptop, Fingerprint, Users } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function CurrentOpportunities() {
+  const router = useRouter();
+
   const opportunities = [
     {
+      id: 1,
+      slug: "data-intelligence-analyst",
       icon: <Laptop className="w-12 h-12 text-[#167BFF]" />,
       title: "Data Intelligence Analyst",
       description:
         "Data Intelligence involves analyzing large datasets using machine learning, AI, and data mining to extract actionable insights, identify trends, and inform decisions.",
     },
     {
+      id: 2,
+      slug: "forensic-data-engineer",
       icon: <Fingerprint className="w-12 h-12 text-[#167BFF]" />,
       title: "Forensic Data Engineer",
       description:
         "A Forensic Data Engineer retrieves, analyzes, and preserves digital evidence from systems and networks to support legal investigations and cybercrime cases.",
     },
     {
+      id: 3,
+      slug: "client-engagement-manager",
       icon: <Users className="w-12 h-12 text-[#167BFF]" />,
       title: "Client Engagement Manager",
       description:
         "A Client Engagement Manager oversees client relationships, ensuring satisfaction, addressing needs, and driving business growth through tailored solutions and communication.",
     },
     {
+      id: 4,
+      slug: "osint-investigator",
       icon: <Users className="w-12 h-12 text-[#167BFF]" />,
       title: "OSINT Investigator",
       description:
         "An OSINT Investigator collects and analyzes publicly available information from online sources to support investigations, uncover threats, and gather intelligence.",
     },
     {
+      id: 5,
+      slug: "security-intelligence-analyst",
       icon: <Users className="w-12 h-12 text-[#167BFF]" />,
       title: "Security Intelligence Analyst",
       description:
         "Corporate security teams use OSINT to detect threats to people, assets, and reputation. Your work helps safeguard the business, mitigate risks, and ensure operational continuity.",
     },
     {
+      id: 6,
+      slug: "private-investigator",
       icon: <Users className="w-12 h-12 text-[#167BFF]" />,
       title: "Private Investigator",
       description:
@@ -43,12 +59,12 @@ export default function CurrentOpportunities() {
   ];
 
   return (
-    <section className="container text-white py-16 px-6 md:px-12 lg:px-28">
+    <section className="container text-white py-16">
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
         {/* Left Section */}
         <div className="lg:col-span-2 flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            <h2 className="text-3xl md:text-[48px] font-bold mb-4">
               Current Opportunities
             </h2>
             <p className="text-gray-300 leading-relaxed mb-6">
@@ -58,25 +74,30 @@ export default function CurrentOpportunities() {
               starting your career, we offer dynamic and challenging positions
               that allow you to grow, innovate, and make an impact.
             </p>
-            <button className="bg-gradient-to-r from-[#030A14] to-[#167BFF] border border-[#6D6D6D99] text-white px-6 py-3 rounded-full w-fit hover:scale-105 transition-transform">
-            Apply Now
-          </button>
           </div>
-          
         </div>
 
         {/* Right Section (Cards) */}
         <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {opportunities.map((item, idx) => (
+          {opportunities.map((item) => (
             <div
-              key={idx}
+              key={item.id}
               className="rounded-[32px] border border-[#6D6D6D99] p-8 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
             >
               <div className="mb-6">{item.icon}</div>
-              <h3 className="text-lg font-semibold mb-3">{item.title}</h3>
-              <p className="text-gray-300 text-sm leading-relaxed">
+              <h3 className="text-[24px] font-semibold mb-3">{item.title}</h3>
+              <p className="text-gray-300 text-[16px] leading-relaxed">
                 {item.description}
               </p>
+              <button
+                onClick={() =>
+                  router.push(`pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
+                }
+                className="hidden lg:block min-w-[130px] mt-4 custom-button with-border bg-transparent"
+              >
+                Read full job description
+                <Toparrow />
+              </button>
             </div>
           ))}
         </div>
