@@ -33,12 +33,10 @@ export const IndustryBanner = () => {
             }
           }} className="custom-button with-shadow bg-[#1057B5]">Book a Consultation</button> 
           <button className="with-border custom-button bg-transparent">Explore Our Services <Toparrow/></button>
-            
-           
-            
+                     
         
           </div>
-        
+        <AnimatedPath/>
           </div>
         </div>
       </div>

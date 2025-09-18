@@ -1,6 +1,9 @@
 // components/BlurCard.tsx
 import React from "react";
 import Button from "../common/Button";
+import Link from "next/link";
+import { TopBanner } from "../discoveredu/Header";
+import { Toparrow } from "@/assets/icon";
 
 
 const BlurCard = () => {
@@ -41,7 +44,7 @@ const BlurCard = () => {
           }}
         ></div>
 
-        <div className="flex flex-col gap-8 sm:gap-10 lg:gap-[44px]">
+        <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[44px]">
           {/* First Div */}
           <div className="flex flex-col gap-6 sm:gap-7 lg:gap-[28px]">
             <h1 className="font-[IBM Plex Sans] font-bold text-3xl sm:text-4xl lg:text-[48px] text-white text-center leading-snug">
@@ -51,7 +54,7 @@ const BlurCard = () => {
             <h2 className="font-[IBM Plex Sans] font-medium text-base sm:text-lg lg:text-[18px] text-[#F1F1F1] text-center">
               Trustworthy Intelligence Built on Transparency and Responsibility
             </h2>
-            <p className="font-inter font-normal text-sm sm:text-base lg:text-[16px] text-[#F1F1F1] text-center">
+            <p className="font-inter max-w-3xl font-normal text-sm sm:text-base lg:text-[16px] text-[#F1F1F1] text-center">
               At Cyphr, we deliver actionable insights through ethical practices.
               We prioritize responsible data collection, privacy, and security,
               ensuring that every decision is backed by integrity. Whether it's
@@ -62,12 +65,11 @@ const BlurCard = () => {
 
           {/* Second Div */}
           <div className="flex justify-center">
-            <Button
-              isBorder={false}
-              isIcon={true}
-              text="Get in Touch"
-              color="bg-[#1057B5]"
-            />
+            <Link href={'/pages/contactus'}><button className="custom-button with-shadow bg-[#1057B5]"
+            
+             
+              
+            > Get in Touch <Toparrow/></button></Link>
           </div>
         </div>
       </div>
