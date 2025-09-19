@@ -7,7 +7,7 @@ import { Grid, Toparrow } from "@/assets/icon";
 
 const EmpowerTeam = () => {
   return (
-    <div className="relative container mb-4 flex flex-col items-center justify-center  overflow-visible">
+    <div className="relative container mb-4 flex flex-col items-center justify-center  overflow-visible px-4">
       
       
 
