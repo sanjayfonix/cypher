@@ -96,7 +96,10 @@ export default function HomePage() {
     
      <IntegrityAtCore/>
      <BlurCard/>
+     <div className="p-4 lg:p-0">
      <ContactSection />
+
+     </div>
      <CESessions/>
      {/* <Grid/> */}
     </div>

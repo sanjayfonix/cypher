@@ -138,13 +138,7 @@ const ServiceBlurCard = () => {
 
 
             >Book a Consultation</button>
-            <button className="custom-button with-border bg-transparent"
-
-
-
-            >
-              Contact our expert <Toparrow />
-            </button>
+            
           </div>
         </div>
       </div>

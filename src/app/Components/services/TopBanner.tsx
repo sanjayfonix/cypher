@@ -74,7 +74,7 @@ export const TopBanner = () => {
               navToSection.scrollIntoView({behavior:'smooth'})
             }
           }}
-          className="custom-button with-border bg-transparent"  >Explore Our Services <Toparrow/></button>
+          className="custom-button with-border bg-transparent"  >Book a Consultation <Toparrow/></button>
         </div>
       </div>
     </div>
