@@ -8,45 +8,54 @@ export default function LegalPage() {
   const dataRef = useRef<HTMLDivElement>(null);
   const securityRef = useRef<HTMLDivElement>(null);
 
-const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
-  if (ref.current) {
-    ref.current.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-};
+  const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
+    if (ref.current) {
+      // Calculate position with offset for fixed header if needed
+      const elementPosition = ref.current.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - 80; // Adjust 80px offset if you have a header
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth"
+      });
+    }
+  };
 
   return (
     <div className="flex min-h-screen container text-gray-300">
-      {/* Sidebar */}
-      <aside className=" hidden lg:block w-64 h-auto   mt-10">
+      {/* Fixed Sidebar */}
+      <aside className="hidden lg:block w-64 h-auto mt-10 sticky top-24 self-start">
         <div className="flex flex-col border border-[#3c414a] bg-[#0f1012]">
           <button
             className="text-left p-2 flex justify-between border-b border-[#3c414a] cursor-pointer hover:text-white hover:bg-blue-500 transition"
             onClick={() => scrollToSection(privacyRef)}
           >
             Privacy Policy
-            <Toparrow/>
+            <Toparrow />
           </button>
-          
-          <button
-            className="text-left p-2 flex justify-between border-b border-[#3c414a] cursor-pointer hover:text-white hover:bg-blue-500 transition"
-            onClick={() => scrollToSection(termsRef)}
-          >
-            Terms of Service
-            <Toparrow/>
-          </button>
+
           <button
             className="text-left p-2 flex justify-between border-b border-[#3c414a] cursor-pointer hover:text-white hover:bg-blue-500 transition"
             onClick={() => scrollToSection(dataRef)}
           >
             Data Processing
-            <Toparrow/>
+            <Toparrow />
           </button>
+
           <button
-            className="text-left p-2 flex justify-between  cursor-pointer hover:text-white hover:bg-blue-500 transition"
+            className="text-left p-2 flex justify-between border-b border-[#3c414a] cursor-pointer hover:text-white hover:bg-blue-500 transition"
+            onClick={() => scrollToSection(termsRef)}
+          >
+            Terms of Service
+            <Toparrow />
+          </button>
+
+          <button
+            className="text-left p-2 flex justify-between cursor-pointer hover:text-white hover:bg-blue-500 transition"
             onClick={() => scrollToSection(securityRef)}
           >
             Security
-            <Toparrow/>
+            <Toparrow />
           </button>
         </div>
       </aside>
@@ -59,7 +68,7 @@ const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
           <p className="mb-6 text-[16px]">
             At Cyphr, we are committed to protecting your personal data. This Privacy Policy explains how we
             collect, use, and protect your personal information when you interact with our website and services.
-            By using Cyphr’s platform, you agree to the terms outlined in this policy. We ensure that your
+            By using Cyphr's platform, you agree to the terms outlined in this policy. We ensure that your
             information is handled ethically and in full compliance with applicable privacy laws.
           </p>
 
@@ -95,7 +104,7 @@ const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
                 </li>
                 <li>
                   <strong>Analytics:</strong> We use analytics tools to gather insights into how users
-                  interact with Cyphr’s platform.
+                  interact with Cyphr's platform.
                 </li>
               </ul>
             </li>
@@ -146,7 +155,7 @@ const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
 
           <h2 className="text-xl font-semibold mb-2">Use of Services</h2>
           <ul className="list-disc ml-6 space-y-2">
-            <li>You may use Cyphr’s tools and services only for lawful purposes.</li>
+            <li>You may use Cyphr's tools and services only for lawful purposes.</li>
             <li>We reserve the right to suspend or terminate your access if you violate our terms.</li>
           </ul>
 
