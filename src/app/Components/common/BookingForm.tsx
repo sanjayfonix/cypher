@@ -5,19 +5,19 @@ import React from "react";
 
 export default function BookingForm() {
   return (
-    <div className="container p-[48px]">
-      <div className="w-full border-[1px] border-[#5B5B5B]  rounded-[32px] p-[48px]">
-        <h1 className="text-white text-3xl md:text-[32px] font-bold mb-8 text-center sm:text-left">
+    <div className="container px-4 sm:px-6 lg:px-[48px] py-8 sm:py-12">
+      <div className="w-full border border-[#5B5B5B] rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 lg:p-[48px]">
+        <h1 className="text-white text-2xl sm:text-3xl md:text-[32px] font-bold mb-6 sm:mb-8 text-center sm:text-left leading-snug">
           Book Your CE/CLE Public Speaking Session
         </h1>
 
-        <form className="flex flex-col gap-[16px]">
+        <form className="flex flex-col gap-4 sm:gap-[16px]">
           {/* First Name & Last Name */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
                 htmlFor="firstName"
-                className="block text-white text-[16px] font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 First Name
               </label>
@@ -26,16 +26,15 @@ export default function BookingForm() {
                 id="firstName"
                 name="firstName"
                 placeholder="John"
-                className=" w-full p-[11px]  bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px] "
-
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
                 required
               />
-              <p className="mt-2 text-[12px] text-[#A0A4AE] font-normal font-inter">Minimum 2 characters</p>
+              <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters</p>
             </div>
             <div>
               <label
                 htmlFor="lastName"
-                className="block text-white text-[16px] font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 Last Name
               </label>
@@ -44,11 +43,11 @@ export default function BookingForm() {
                 id="lastName"
                 name="lastName"
                 placeholder="Doe"
-                className="w-full p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
                 minLength={2}
                 required
               />
-              <p className="mt-2 text-[12px] text-[#A0A4AE] font-normal font-inter">Minimum 2 characters</p>
+              <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters</p>
             </div>
           </div>
 
@@ -56,7 +55,7 @@ export default function BookingForm() {
           <div>
             <label
               htmlFor="email"
-              className="block text-white  text-[16px] font-medium mb-2"
+              className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
             >
               Email
             </label>
@@ -65,56 +64,47 @@ export default function BookingForm() {
               id="email"
               name="email"
               placeholder="John123@example.com"
-              className="w-full p-[11px] shadow-none rounded-lg font-normal font-inter bg-[#2A2A2A] text-white  border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+              className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
               required
             />
-            <p className="mt-2 text-[12px] text-[#A0A4AE] font-normal font-inter">
-              Must be a valid email address
-            </p>
+            <p className="mt-1 text-[12px] text-[#A0A4AE]">Must be a valid email address</p>
           </div>
 
           {/* Phone Number */}
           <div>
             <label
               htmlFor="phoneNumber"
-              className="block text-white text-[16px] font-medium mb-2"
+              className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
             >
               Phone Number
             </label>
-            <div className="flex bg-[#2A2A2A] rounded-xl border-[0.5px] border-[#3C414A] focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all duration-200"
-            >
+            <div className="flex bg-[#2A2A2A] rounded-xl border border-[#3C414A] focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all duration-200">
               <select
                 id="countryCode"
                 name="countryCode"
-                className="p-[11px] bg-transparent text-white rounded-l-xl outline-none cursor-pointer text-[14px]"
+                className="p-[10px] sm:p-[11px] bg-transparent text-white rounded-l-xl outline-none cursor-pointer text-[14px]"
               >
-                <option value="+91" className="bg-[#2A2A2A]">
-                  +91
-                </option>
-                <option value="+1" className="bg-[#2A2A2A]">
-                  +1
-                </option>
-                <option value="+44" className="bg-[#2A2A2A]">
-                  +44
-                </option>
+                <option value="+91" className="bg-[#2A2A2A]">+91</option>
+                <option value="+1" className="bg-[#2A2A2A]">+1</option>
+                <option value="+44" className="bg-[#2A2A2A]">+44</option>
               </select>
               <input
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
                 placeholder="00 0000 0000"
-                className="shadow-none rounded-lg font-normal font-inter flex-1 p-[11px] bg-transparent text-white rounded-r-xl outline-none text-[14px]"
+                className="flex-1 p-[10px] sm:p-[11px] bg-transparent text-white outline-none text-[14px] rounded-r-xl"
                 required
               />
             </div>
           </div>
 
           {/* Organization & Role */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
                 htmlFor="organizationName"
-                className="block text-white text-[16px] font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 Organization Name
               </label>
@@ -123,13 +113,13 @@ export default function BookingForm() {
                 id="organizationName"
                 name="organizationName"
                 placeholder="Your company, law firm, or institution"
-                className="shadow-none rounded-lg font-normal font-inter w-full p-[11px] bg-[#2A2A2A] text-white border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               />
             </div>
             <div>
               <label
                 htmlFor="professionalRole"
-                className="block text-white text-[16px] font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 Professional Role
               </label>
@@ -138,83 +128,54 @@ export default function BookingForm() {
                 id="professionalRole"
                 name="professionalRole"
                 placeholder="E.g., Claims Manager, Attorney, Investigator"
-                className="shadow-none rounded-lg font-normal font-inter w-full p-[11px] bg-[#2A2A2A] text-white border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               />
             </div>
           </div>
 
           {/* Session Type & Date */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label
                 htmlFor="sessionType"
-                className="block text-white text-[16px] font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 Session Type
               </label>
-              <div className="relative">
-                <select
-                  id="sessionType"
-                  name="sessionType"
-                  className="shadow-none rounded-lg font-normal font-inter w-full p-[11px] bg-[#2A2A2A] text-white border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 appearance-none outline-none transition-all duration-200 cursor-pointer text-[14px] pr-10"
-                >
-                  <option className="bg-[#2A2A2A]">CE Credit</option>
-                  <option className="bg-[#2A2A2A]">CLE Credit</option>
-                  <option className="bg-[#2A2A2A]">
-                    General Speaking Engagement
-                  </option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
-                  <svg className="fill-current h-6 w-6" viewBox="0 0 20 20">
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 6.096 6.924 4.682 8l4.611 4.95z" />
-                  </svg>
-                </div>
-              </div>
+              <select
+                id="sessionType"
+                name="sessionType"
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
+              >
+                <option className="bg-[#2A2A2A]">CE Credit</option>
+                <option className="bg-[#2A2A2A]">CLE Credit</option>
+                <option className="bg-[#2A2A2A]">General Speaking Engagement</option>
+              </select>
             </div>
             <div>
               <label
                 htmlFor="preferredDateTime"
-                className="block text-white text-base font-medium mb-2"
+                className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
                 Preferred Date & Time
               </label>
-              <div className="relative">
-                <input
-                  type="text"
-                  id="preferredDateTime"
-                  name="preferredDateTime"
-                  placeholder="Choose a date and time for the session"
-                  className="shadow-none rounded-lg font-normal font-inter w-full p-[11px] bg-[#2A2A2A] text-white border border-transparent focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 cursor-pointer text-[16px] pr-10"
-                  onFocus={(e) => (e.target.type = "datetime-local")}
-                  onBlur={(e) =>
-                    e.target.value === "" && (e.target.type = "text")
-                  }
-                />
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-white">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
-              </div>
+              <input
+                type="text"
+                id="preferredDateTime"
+                name="preferredDateTime"
+                placeholder="Choose a date and time"
+                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
+                onFocus={(e) => (e.target.type = "datetime-local")}
+                onBlur={(e) => e.target.value === "" && (e.target.type = "text")}
+              />
             </div>
           </div>
 
           {/* Message */}
-          <div className="flex flex-col gap-2">
+          <div>
             <label
               htmlFor="message"
-              className="block text-white text-[16px] font-medium mb-2"
+              className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
             >
               Message
             </label>
@@ -222,40 +183,34 @@ export default function BookingForm() {
               id="message"
               name="message"
               rows={5}
-              placeholder="Tell us more about your audience and what you'd like us to cover..."
-              className="resize-none shadow-none rounded-lg font-normal font-inter w-full p-[11px] bg-[#2A2A2A] text-white border-[0.5px] border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+              placeholder="Tell us more about your audience..."
+              className="resize-none w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               minLength={20}
               required
             ></textarea>
-            <p className="mt-2 text-[12px] text-[#A0A4AE] font-normal font-inter">Minimum 20 characters</p>
+            <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 20 characters</p>
           </div>
 
           {/* Agreement */}
-          <div className="flex items-start">
+          <div className="flex items-start gap-2">
             <input
-             
               type="checkbox"
               id="agreement"
               name="agreement"
-              className="h-[16px] w-[16px] rounded bg-[#2A2A2A] border-gray-600 text-blue-600 focus:ring-blue-500 mr-3 mt-1"
+              className="h-[16px] w-[16px] rounded bg-[#2A2A2A] border-gray-600 text-blue-600 focus:ring-blue-500"
               required
             />
-            <label
-              htmlFor="agreement"
-              className="text-[#E3E3E3] font-normal font-inter text-[14px] cursor-pointer"
-            >
-              I agree to the terms and conditions and authorize Cyphr to contact
-              me regarding this booking.
+            <label htmlFor="agreement" className="text-[#E3E3E3] text-[14px]">
+              I agree to the terms and conditions and authorize Cyphr to contact me regarding this booking.
             </label>
           </div>
 
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full  custom-button with-shadow bg-[#1057B5] mt-4"
+            className="w-full custom-button with-shadow bg-[#1057B5] mt-4"
           >
-            Submit Booking Request
-            <Toparrow/>
+            Submit Booking Request <Toparrow />
           </button>
         </form>
       </div>
