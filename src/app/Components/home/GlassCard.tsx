@@ -12,7 +12,7 @@ export const GlassCard = ({ children, className = "" }: GlassCardProps) => {
       <div
         className="absolute inset-0 rounded-[12px] pointer-events-none"
         style={{
-          border: `1px solid rgba(255,255,255,0.6)`,
+          border: `1px solid rgba(255,255,255,0.5)`,
           WebkitMaskImage: `linear-gradient(
             to bottom right,
             rgba(0,0,0,1) 0%,
