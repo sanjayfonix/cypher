@@ -170,25 +170,18 @@ export default function WhereInvestigation() {
                 {/* Middle Circle */}
                 <div className="flex justify-center items-center w-[85%] aspect-square rounded-full border border-[#09336B] opacity-80">
                   {/* Inner Circle */}
-                  <div className="flex justify-center items-center w-[80%] aspect-square rounded-full border border-[#09336B] opacity-90 relative">
+                  <div className="flex animate-zoom-fade justify-center items-center w-[80%] aspect-square rounded-full border border-[#09336B] opacity-90 relative">
 
                     {/* 🌟 New Glow Behind Inner Circle */}
                     <div className="absolute inset-0 flex justify-center items-center -z-10">
-                      <div className="w-[130%] aspect-square rounded-full bg-gradient-to-b  animate-glow" />
+                      <div className="w-[130%] bg-[#157AFF80] blur-[30px] aspect-square rounded-full bg-gradient-to-b  animate-glow" />
                     </div>
 
                     
 
-                    {/* Center Content */}
+                
                     <div
-  className="absolute w-[250px] h-[250px] rounded-full"
-  style={{
-    background: "#157AFF80",  // translucent blue
-    filter: "blur(30px)",    // spread glow
-  }}
-></div>
-                    <div
-                      className="flex animate-zoom-fade justify-center items-center w-[205px] bg-gradient-to-b from-[#030A14] to-[#157AFF] aspect-square rounded-full relative z-10"
+                      className="flex justify-center items-center w-[205px] bg-gradient-to-b from-[#030A14] to-[#157AFF] aspect-square rounded-full relative z-10"
                       style={{
                         transform: 'rotate(-0.47deg)',
                         padding: '8px',

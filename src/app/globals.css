@@ -408,5 +408,5 @@ body {
 }
 
 .animate-zoom-fade{
-  animation: zoomFade 4s linear 1s infinite;  
+  animation: zoomFade 4s linear infinite;  
 }
