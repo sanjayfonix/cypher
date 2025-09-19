@@ -5,9 +5,93 @@ import { Bounce } from "gsap";
 import { easeInOut } from "framer-motion";
 
 export default function HowItWorks() {
+ const [searchresults,setSearchResults]=useState(false);
+
+const tabsData = [
+  {
+    icon: Instagram,
+    title: "Instagram",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: true },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+  {
+    icon: Facebook,
+    title: "Facebook",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: true },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+  {
+    icon: X,
+    title: "X",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: true },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+  {
+    icon: Phone,
+    title: "Phone Number",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: false },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+  {
+    icon: Banknote,
+    title: "Bank Details",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: true },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+  {
+    icon: Mail,
+    title: "Email ID",
+    queryVal: "abcd1234@gmail.com",
+    date: "2022-25-16132:56",
+    hasMultipleAccounts: false,
+    rowsData: [
+      { label: "Has Multiple Accounts:", isValid: true, isValue: true },
+      { label: "Has Multiple Accounts:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: false, isValue: false },
+      { label: "Facebook Login Option:", isValid: true, isValue: false },
+    ],
+  },
+];
+
   const [mode, setMode] = useState(0);
   const [type, setType] = useState(0);
   return (
+    <div>
     <div className="flex flex-col lg:flex-row mt-20 items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]  bg-repeat">
       {/* Left Column */}
       <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
@@ -131,7 +215,7 @@ export default function HowItWorks() {
             {type === 2 && <CustomForm formType={2} />}
             {/* Search Button */}
             <div className="p-4">
-              <button className="custom-button w-full with-shadow bg-[#1057B5]">Search Now <Toparrow />
+              <button onClick={()=>setSearchResults(!searchresults)} className="custom-button w-full with-shadow bg-[#1057B5]">Search Now <Toparrow />
               </button>
             </div>
 
@@ -141,8 +225,15 @@ export default function HowItWorks() {
         <p className="font-inter font-normal text-white text-xs sm:text-sm text-center">
           Search by username, phone number, or email to confidentially look up information.
         </p>
-      </div>
+      </div>       
     </div>
+    {searchresults&&<div className="font-sans text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF]">Search Results</div>}
+     {searchresults&&<div className="grid p-6 grid-cols-2 gap-2 gap-y-6">
+     {tabsData.map((item,i)=>{
+         return<SearchResultTab key={i} icon={<GlassIcon size={70} icon={<item.icon/>}/>} title={item.title} queryVal={item.queryVal} date={item.date} rowsData={item.rowsData}/>
+     })}
+     </div>} 
+     </div>
   );
 }
 
@@ -151,6 +242,9 @@ export default function HowItWorks() {
 
 
 import { Toparrow } from "@/assets/icon";
+import SearchResultTab from "./SearchResultTab";
+import { Banknote, Facebook, Instagram, Mail, Phone, User, X } from "lucide-react";
+import { GlassIcon } from "./GlassIcon";
 
 export function UsernameForm() {
   return (

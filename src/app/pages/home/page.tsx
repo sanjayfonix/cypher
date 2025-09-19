@@ -11,74 +11,6 @@ import SearchResultTab from "@/app/Components/home/SearchResultTab";
 import WhereInvestigation from "@/app/Components/home/WhereInvestigation";
 import {User,Facebook,Mail,} from 'lucide-react'
 
-const tabsData = [
-    {
-      icon: User,
-      title: "John Doe",
-      queryVal: "Find Account",
-      date: "2025-09-11",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: true, isValue: true },
-        { label: "Facebook Login Option:", isValid: false, isValue: false },
-        { label: "Facebook Login Option:", isValid: true, isValue: false },
-      ],
-    },
-    {
-      icon: Facebook,
-      title: "Jane Smith",
-      queryVal: "Reset Password",
-      date: "2025-09-10",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: false, isValue: false },
-        { label: "Facebook Login Option:", isValid: true, isValue: true },
-        { label: "Facebook Login Option:", isValid: true, isValue: false },
-      ],
-    },
-    {
-      icon: Mail,
-      title: "Alex Johnson",
-      queryVal: "Update Email",
-      date: "2025-09-09",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: true, isValue: true },
-        { label: "Facebook Login Option:", isValid: true, isValue: false },
-        { label: "Facebook Login Option:", isValid: false, isValue: false },
-      ],
-    },
-    {
-      icon: User,
-      title: "Emily Davis",
-      queryVal: "Verify Account",
-      date: "2025-09-08",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: true, isValue: false },
-        { label: "Facebook Login Option:", isValid: false, isValue: true },
-        { label: "Facebook Login Option:", isValid: true, isValue: true },
-      ],
-    },
-    {
-      icon: Facebook,
-      title: "Michael Brown",
-      queryVal: "Deactivate Account",
-      date: "2025-09-07",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: false, isValue: false },
-        { label: "Facebook Login Option:", isValid: true, isValue: true },
-        { label: "Facebook Login Option:", isValid: true, isValue: false },
-      ],
-    },
-    {
-      icon: Mail,
-      title: "Sarah Wilson",
-      queryVal: "Change Password",
-      date: "2025-09-06",
-      rowsData: [
-        { label: "Has Multiple Accounts:", isValid: true, isValue: true },
-        { label: "Facebook Login Option:", isValid: true, isValue: false },
-        { label: "Facebook Login Option:", isValid: false, isValue: true },
-      ],
-    },
-  ];
 export default function HomePage() {
   return (
     <div className="w-full bg-[var(--primary)] container">
@@ -87,13 +19,6 @@ export default function HomePage() {
       <WhereInvestigation/>
      
      <HowItWorks/>
-      <div className="font-sans text-3xl font-bold text-white text-center underline decoration-gray-600 underline-offset-4">Search Results</div>
-     <div className="grid p-6 grid-cols-2 gap-2 gap-y-6">
-     {[1,2,3,4,5,6].map((item)=>{
-         return<SearchResultTab key={item} icon={User} title="hello" queryVal="change" date="22-05-2023" rowsData={tabsData[0].rowsData}/>
-     })}
-     </div> 
-    
      <IntegrityAtCore/>
      <BlurCard/>
      <div className="p-4 lg:p-0">

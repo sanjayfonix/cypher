@@ -7,7 +7,7 @@ interface RowBadgeProps {
 }
 
 interface SearchResultTabProps {
-  icon: LucideIcon;
+  icon: React.ReactNode;
   title: string;
   queryVal: string;
   date: string;
@@ -15,7 +15,7 @@ interface SearchResultTabProps {
 }
 
 export default function SearchResultTab({
-  icon: Icon,
+  icon,
   title,
   queryVal,
   date,
@@ -40,7 +40,7 @@ export default function SearchResultTab({
                 "linear-gradient(180deg, rgba(3, 10, 20, 0.2) 28.22%, rgba(21, 122, 255, 0.2) 185.84%)",
             }}
           >
-            <Icon className="text-white w-full h-full" />
+            {icon}
           </div>
 
           {/* Text container */}
@@ -73,14 +73,14 @@ export default function SearchResultTab({
           {rowsData.map((row, index) => (
             <div
               key={index}
-              className="flex flex-row justify-between items-center px-1 sm:px-2 py-2 border-b border-b-[0.5px] border-b-[#B1B1B18A] min-w-0"
+              className="flex flex-row justify-between items-center px-1 sm:px-2 py-2 border-b-[0.5px] border-b-[#B1B1B18A] min-w-0"
             >
               <span className="font-inter font-normal text-sm sm:text-base text-white break-words">
                 {row.label}
               </span>
 
               <div
-                className="flex items-center justify-center gap-2.5 rounded-xl px-2 sm:px-3 py-1 flex-shrink-0"
+                className="flex items-center justify-center gap-2.5 rounded-full px-2 sm:px-3 py-1 flex-shrink-0"
                 style={{
                   backgroundColor: row.isValid
                     ? "#22A12133"

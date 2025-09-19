@@ -211,7 +211,7 @@ export default function TrackingAnimation() {
               scale: [1, 0.78, 1],
               opacity: [0.45, 0.2, 0.45],
             }}
-            transition={bounceTransition}
+           
             style={{ transformOrigin: "center" }}
           />
 
@@ -221,18 +221,10 @@ export default function TrackingAnimation() {
             fill="#C20000"
             style={{ filter: "url(#glow)" }}
             animate={{ y: [0, -10, 0], scale: [1, 1.03, 1] }}
-            transition={bounceTransition}
+            
           />
 
-          {/* Highlight dot */}
-          <motion.circle
-            cx={-2}
-            cy={-2}
-            r={2.6}
-            fill="#FF8A8A"
-            animate={{ y: [0, -9, 0], opacity: [0.9, 0.6, 0.9], scale: [1, 1.02, 1] }}
-            transition={bounceTransition}
-          />
+         
 
           {/* Ripple rings */}
           {rippleConfigs.map((cfg, idx) => (

@@ -5,6 +5,7 @@ import { TravelingBorder } from "../services/CorePrincipals";
 import { useState } from "react";
 import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
+import { GlassCard } from "./GlassCard";
 
 export default function WhereInvestigation() {
   const [isHovering, setHovering] = useState(false);
@@ -116,11 +117,12 @@ export default function WhereInvestigation() {
 
 
                   {/* Actual rectangle - keep it above */}
-                  <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
-                    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
+                  
+                 <div className="relative z-10 w-[153px] h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
+                    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
                   </div>
                 </div>
-
+              
               </div>
 
               <div>
