@@ -27,7 +27,7 @@ export default function HomeBanner() {
   const [roleIndex, setRoleIndex] = useState(0);
   const [showRoles, setShowRoles] = useState(false);
 
-  const TYPING_SPEED =60;
+  const TYPING_SPEED = 60;
   const DELETING_SPEED = 40;
   const PAUSE_AFTER_COMPLETE = 4000;
   const ROLE_DURATION = 2000;
@@ -152,9 +152,8 @@ export default function HomeBanner() {
             {ROLES.map((role, i) => (
               <span
                 key={role}
-                className={`absolute inset-0 flex items-start justify-center text-3xl sm:text-5xl lg:text-6xl  font-bold text-blue-300 transition-opacity duration-700 ease-in-out ${
-                  i === roleIndex ? "opacity-100" : "opacity-0"
-                }`}
+                className={`absolute inset-0 flex items-start justify-center text-3xl sm:text-5xl lg:text-6xl  font-bold text-blue-300 transition-opacity duration-700 ease-in-out ${i === roleIndex ? "opacity-100" : "opacity-0"
+                  }`}
               >
                 {role}
               </span>
@@ -163,20 +162,18 @@ export default function HomeBanner() {
         )}
 
         <p className="text-xs sm:text-base md:text-[1rem] text-[#F1F1F1]">
-          Cyphr combines OSINT, forensic expertise, and modern data intelligence to give you
-          <br />
-          defensible answers when you need them most.
+          cyphr combines real world investigative experience that combines forensic expertise OSINT displines and <br/> modern data intelligence to give you defensible answers when you need them the most.
         </p>
-   
+
         <div className="flex gap-3 sm:gap-5 mt-[0.9rem] w-full sm:w-auto justify-center">
           <button
-          onClick={()=>{
-            const navToSection=document.getElementById('contact-us')
-            if(navToSection){
-              navToSection.scrollIntoView({behavior:'smooth'})
-            }
-          }}
-          className="custom-button with-shadow bg-[#1057B5]">
+            onClick={() => {
+              const navToSection = document.getElementById('contact-us')
+              if (navToSection) {
+                navToSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+            className="custom-button with-shadow bg-[#1057B5]">
             Book a Consultation
           </button>
           <Link href={"/pages/services/consulting"}>
@@ -185,7 +182,7 @@ export default function HomeBanner() {
             </button>
           </Link>
         </div>
-        <AnimateBannerPaths/>
+        <AnimateBannerPaths />
       </div>
     </div>
   );

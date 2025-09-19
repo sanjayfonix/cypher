@@ -7,13 +7,13 @@ import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
 
 export default function WhereInvestigation() {
-const[isHovering,setHovering]=useState(false);
+  const [isHovering, setHovering] = useState(false);
 
   return (
-    <div onMouseEnter={()=>{
+    <div onMouseEnter={() => {
       setHovering(true)
       console.log('hovering')
-      }} onMouseLeave={()=>setHovering(false)} className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-12 flex flex-col items-center overflow-hidden">
+    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-12 flex flex-col items-center overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
@@ -46,7 +46,7 @@ const[isHovering,setHovering]=useState(false);
             <Link href={'/pages/services/consulting'}><button className="mt-4 custom-button with-border bg-transparent">
               See How It works{" "}
               <span>
-               <Toparrow/>
+                <Toparrow />
               </span>
             </button>
             </Link>
@@ -55,7 +55,7 @@ const[isHovering,setHovering]=useState(false);
           {/* Social Media Intelligence */}
           <div className="group relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
-            <TravelingBorder borderRadius={24} anticlockwise={true} delta={10}/>
+            <TravelingBorder borderRadius={24} anticlockwise={true} delta={10} />
 
 
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
@@ -72,10 +72,10 @@ const[isHovering,setHovering]=useState(false);
             <Link href={'/pages/services/social-intel'}><button className="custom-button with-border bg-transparent ml-5">
               See How It works{" "}
               <span>
-               <Toparrow/>
+                <Toparrow />
               </span>
             </button></Link>
-          {/* Floating divs / glows inside Social Media Intelligence */}
+            {/* Floating divs / glows inside Social Media Intelligence */}
             <div className={` relative flex h-full items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
@@ -83,45 +83,45 @@ const[isHovering,setHovering]=useState(false);
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-x-[140px] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
-                <GlassIcon size={60} icon={<InstaIcon />}/>
+                <GlassIcon size={60} icon={<InstaIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-y-[140px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-0 left-[25%]">
-                <GlassIcon size={60} icon={<XIcon />}/>
+                <GlassIcon size={60} icon={<XIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-y-[140px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-0 left-[59%] ">
-                 <GlassIcon size={60} icon={<WhatsappIcon />}/>
+                <GlassIcon size={60} icon={<WhatsappIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform -translate-x-[140px] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 top-[20%] left-[82%]">
-                <GlassIcon size={60} icon={<FbIcon />}/>
+                <GlassIcon size={60} icon={<FbIcon />} />
               </div>
 
               {/* Vertical rectangle */}
-             <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
-  {/* ...floating circles */}
-<div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/8 blur-[30px] inset-0 flex justify-center items-center  top-[97%]">
-    <DiamondGlow />
-  </div>
-  {/* Vertical rectangle */}
- <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[153px] h-[70%] flex flex-col justify-start">
-  {/* 🌟 Radial Glow — put BEHIND the rectangle */}
-  
+              <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
+                {/* ...floating circles */}
+                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/8 blur-[30px] inset-0 flex justify-center items-center  top-[97%]">
+                  <DiamondGlow />
+                </div>
+                {/* Vertical rectangle */}
+                <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[153px] h-[70%] flex flex-col justify-start">
+                  {/* 🌟 Radial Glow — put BEHIND the rectangle */}
 
-  {/* Actual rectangle - keep it above */}
-  <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
-    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
-  </div>
-</div>
 
-</div>
+                  {/* Actual rectangle - keep it above */}
+                  <div className="relative z-10 w-full h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
+                    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] self-center"></div>
+                  </div>
+                </div>
+
+              </div>
 
               <div>
 
@@ -130,12 +130,12 @@ const[isHovering,setHovering]=useState(false);
             </div>
 
 
-              <div>
-             
+            <div>
 
-              </div>
 
-           
+            </div>
+
+
           </div>
         </div>
 
@@ -146,17 +146,17 @@ const[isHovering,setHovering]=useState(false);
         <div className="flex flex-col justify-between flex-1 gap-6">
           {/* Brand Defense */}
           <div className="relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
-            <TravelingBorder borderRadius={24} anticlockwise={true}/>
+            <TravelingBorder borderRadius={24} anticlockwise={true} />
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Geospatial Cellular Forensics</h2>
               <p className="text-[#E3E3E3] text-base sm:text-lg font-medium font-sans">
-                Protect your brand from digital threats
+                Unlock the power of location-based intelligence.
               </p>
               <p className="text-[#E3E3E3] text-xs sm:text-sm md:text-base font-normal font-inter">
-                Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
+                Analyze mobile device data to track movement, verify alibis, and uncover hidden connections.
               </p>
             </div>
-            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent ml-5">
+            <Link href={'/pages/services/geospatial'}><button className="custom-button with-border bg-transparent ml-5">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
@@ -190,7 +190,7 @@ const[isHovering,setHovering]=useState(false);
                         boxShadow: '0px 0px 150px #157AFF80',
                       }}
                     >
-                      <BigProtectIc/>
+                      <BigProtectIc />
                     </div>
                   </div>
                 </div>
@@ -203,15 +203,15 @@ const[isHovering,setHovering]=useState(false);
           <div className="relative bg-gradient-to-b from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between h-full">
             <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/grid2.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10" />
             <div className="flex flex-col gap-3 z-20">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Geospatial Cellular Forensics</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">
-                Unlock the power of location-based intelligence.
+                Protect your brand from digital threats.
               </p>
               <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-sm">
-                Analyze mobile device data to track movement, verify alibis, and uncover hidden connections.
+                Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>
-             <Link href={'/pages/services/geospatial'}><button className="custom-button with-border bg-transparent mt-4">
+            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent mt-4">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />

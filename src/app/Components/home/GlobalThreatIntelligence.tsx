@@ -1,7 +1,7 @@
 
 'use client';
 import { FallDownIcon, Find, Graph, Health, Search2, Search3, Search4, Shield } from "@/assets/icon";
-import { useState,useRef,useEffect} from 'react'
+import { useState, useRef, useEffect } from 'react'
 import Loc8Intelligence from "./Loc8Intelligence";
 import Radar from "./RadarAnimation";
 import { GlassIcon } from "./GlassIcon";
@@ -103,7 +103,7 @@ export default function GlobalThreatIntelligence() {
         <button
           onClick={() => setTabIndex(0)}
           style={{
-            cursor:'pointer',
+            cursor: 'pointer',
             transition: "1s ease-out",
             boxShadow:
               tabIndex === 0
@@ -121,7 +121,7 @@ export default function GlobalThreatIntelligence() {
         <button
           onClick={() => setTabIndex(1)}
           style={{
-             cursor:'pointer',
+            cursor: 'pointer',
             transition: "1s ease-out",
             boxShadow:
               tabIndex === 1
@@ -133,7 +133,7 @@ export default function GlobalThreatIntelligence() {
         >
           <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
           <span className="text-xs sm:text-lg md:text-xl font-medium font-sans">
-            Loc8 Tracking
+            Cellular Intelligence
           </span>
         </button>
       </div>
@@ -152,9 +152,9 @@ export default function GlobalThreatIntelligence() {
 
       {tabIndex === 0 && (
         <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-2 sm:px-4 md:px-8">
-         <Radar/>
-         <SecurityFeatures/>
-         </div>
+          <Radar />
+          <SecurityFeatures />
+        </div>
 
       )}
 
@@ -166,10 +166,10 @@ export default function GlobalThreatIntelligence() {
 function SecurityFeatures() {
 
 
-const lineRef = useRef<HTMLDivElement>(null);
-const [lineHeight,setLineHeight]=useState(80);
+  const lineRef = useRef<HTMLDivElement>(null);
+  const [lineHeight, setLineHeight] = useState(80);
 
-useEffect(() => {
+  useEffect(() => {
     if (!lineRef.current) return;
 
     const observer = new ResizeObserver((entries) => {
@@ -211,10 +211,10 @@ useEffect(() => {
   return (
     <div className="bg-black flex items-start justify-center py-10">
       <div className="grid grid-cols-2 gap-20 relative">
-        {[0, 1].map((col,idx) => (
+        {[0, 1].map((col, idx) => (
           <div key={col} className="relative flex flex-col items-center">
             {/* Vertical line starting from center of top icon */}
-         
+
 
             {features
               .filter((_, idx) => idx % 2 === col)
@@ -224,31 +224,31 @@ useEffect(() => {
                   className={`flex items-start text-white gap-4 mb-20 relative z-10
                     ${idx === 1 ? "translate-x-20" : "translate-x-0"}`}
                 >
-                   <div ref={lineRef} className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${idx===1||idx===3?'h-[calc(100%)]':' h-[calc(250%)]'} w-0 border border-[#696969]`}>
-                   
-    {/* Animated pointer */}    <motion.div
-        className="absolute left-1/2 -translate-x-1/2"
-        initial={{ y: -5}}
-        animate={{ y: idx===1||idx===3?lineHeight-50:lineHeight*2.5-50}} 
-        transition={{
-          duration: 4,
-          repeat: Infinity,
-          repeatType: "loop",
-          ease: "linear",
-        }}
-      >
-        <FallDownIcon />
-      </motion.div>
-  
-  
-                   </div>
+                  <div ref={lineRef} className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${idx === 1 || idx === 3 ? 'h-[calc(100%)]' : ' h-[calc(250%)]'} w-0 border border-[#696969]`}>
+
+                    {/* Animated pointer */}    <motion.div
+                      className="absolute left-1/2 -translate-x-1/2"
+                      initial={{ y: -5 }}
+                      animate={{ y: idx === 1 || idx === 3 ? lineHeight - 50 : lineHeight * 2.5 - 50 }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "linear",
+                      }}
+                    >
+                      <FallDownIcon />
+                    </motion.div>
+
+
+                  </div>
 
                   {/* Icon Circle */}
                   <div className="relative  px-5 rounded-full flex items-center justify-center">
-                    <GlassIcon icon={feature.icon}/>
-                    
+                    <GlassIcon icon={feature.icon} />
+
                   </div>
-                  
+
                   {/* Text */}
                   <div className="flex flex-col gap-2">
                     <h3 className="font-bold text-lg">{feature.title}</h3>
