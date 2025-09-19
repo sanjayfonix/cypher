@@ -57,9 +57,9 @@ const PotentialTeam = () => {
         ></div>
 
         {/* Content */}
-        <div className="flex flex-col gap-6 sm:gap-8 lg:gap-[44px]">
+        <div className="flex flex-col gap-6 sm:gap-8">
           {/* Text Section */}
-          <div className="flex flex-col gap-3 sm:gap-6 lg:gap-[28px] text-center">
+          <div className="flex flex-col gap-3 sm:gap-4 text-center">
             <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[40px] text-white leading-snug">
               Unleash Your Potential. <br/> Uncover the Truth.
             </h1>
@@ -69,7 +69,7 @@ const PotentialTeam = () => {
           </div>
 
           {/* Buttons Section */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-4 mb-2">
             <button 
             // onClick={() => {
             //   const navToSection = document.getElementById('contact-us')
