@@ -2,7 +2,7 @@
 
 import { notFound } from "next/navigation";
 import React, { useState } from "react";
-import { CheckCircle, XCircle, ChevronDown, ChevronUp,   } from "lucide-react";
+import { CheckCircle, XCircle, ChevronDown, ChevronUp, PlusIcon,   } from "lucide-react";
 import { GlassIcon } from "@/app/Components/home/GlassIcon";
 import { ProtectIcon, Shield,StarIcon } from "@/assets/icon";
 
@@ -56,6 +56,7 @@ export default function ProgramPage({ params }: any) {
   const programId = Number(params.id);
   const program = programs.find((p) => p.id === programId);
   const [openCredits, setOpenCredits] = useState(true);
+  const [overview, setOverview] = useState(true);
 
   if (!program) return notFound();
 
@@ -96,35 +97,32 @@ export default function ProgramPage({ params }: any) {
             <h2 className=" lg:text-5xl md:text-4xl text-3xl font-bold font-sans pb-2">
               Overview
             </h2>
-            <div className="w-[33px] h-[3.6666667461395264px] bg-white"></div>
+            {overview===true?<div onClick={()=>setOverview(false)} className="w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon size={33} color="white" onClick={()=>setOverview(true)}/>}
             </div>
-            <p className="mt-4 text-[#B0BAC5] leading-relaxed">
+            {overview && <p className="mt-4 text-[#FFFFFF] leading-relaxed font-inter font-normal text-base">
               A memorable presentation can make you the go-to advisor in your field.
               But too many legal presentations are dry, inaccessible, and forgettable,
               leaving audiences overwhelmed and uninspired...
-            </p>
-            <ul className="list-decimal list-inside mt-4 text-[#D2D8E4] space-y-2">
+            </p>}
+            {overview &&<p className="mt-4 text-white font-inter font-normal text-base">Learning Objectives:</p>}
+            {overview && <ul className="list-decimal font-inter font-normal text-base list-inside mt-4 text-[#FFFFFF] space-y-2">
               <li>Identify and overcome the most common mistakes...</li>
               <li>Develop a clear, compelling core message...</li>
               <li>Craft vivid stories, metaphors and examples...</li>
               <li>Create visually compelling slides that enhance...</li>
               <li>Master the key presentation techniques...</li>
-            </ul>
+            </ul>}
           </div>
 
-          {/* Credits Accordion */}
-          <div className="mt-10">
-            <button
+          <div className="h-0 w-full border-[0.2px] border-blue-500 mt-8"></div>
+          <div className="mt-[30px]">
+            <div
               onClick={() => setOpenCredits(!openCredits)}
-              className="w-full flex justify-between items-center bg-[#1B1E24] px-5 py-4 rounded-xl hover:bg-[#22262F] transition"
+              className="w-full flex justify-between items-center bg-transparent transition"
             >
-              <span className="text-lg font-semibold">Credits</span>
-              {openCredits ? (
-                <ChevronUp className="w-5 h-5 text-[#9BA3B4]" />
-              ) : (
-                <ChevronDown className="w-5 h-5 text-[#9BA3B4]" />
-              )}
-            </button>
+              <span className="text-5xl font-sans font-bold">Credits</span>
+               {openCredits===true?<div onClick={()=>setOpenCredits(false)} className="w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon size={33} color="white" onClick={()=>setOpenCredits(true)}/>}
+            </div>
 
             <div
               className={`transition-all duration-300 overflow-hidden ${
@@ -132,36 +130,35 @@ export default function ProgramPage({ params }: any) {
               }`}
             >
               <div className="mt-4 overflow-x-auto">
-                <table className="min-w-full bg-[#1B1E24] rounded-xl overflow-hidden">
-                  <thead className="bg-[#22262F] text-[#B0BAC5]">
+                <table className="min-w-full border-[#373737] border shadow-[0px_1px_2px_0px_#1018280F] bg-[#1E1E1E] rounded-lg overflow-hidden">
+                  
+                  <thead className=" text-[#B0BAC5]">
+                    <div className="p-4 bg-[#1E1E1E] text-lg font-medium text-white">Close all credits available</div>
                     <tr>
-                      <th className="text-left p-4">Credit States</th>
-                      <th className="text-left p-4">Status</th>
-                      <th className="text-left p-4">Credits</th>
-                      <th className="text-left p-4">Earn credit until</th>
+                      <th className="text-left py-2 px-4 bg-[#09346B] text-base font-medium font-inter text-white">Credit States</th>
+                      <th className="text-left py-2 px-4 bg-[#09346B] text-base font-medium font-inter text-white">Status</th>
+                      <th className="text-left py-2 px-4 bg-[#09346B] text-base font-medium font-inter text-white">Credits</th>
+                      <th className="text-left py-2 px-4 bg-[#09346B] text-base font-medium font-inter text-white">Earn credit until</th>
                     </tr>
                   </thead>
                   <tbody>
                     {credits.map((row, index) => (
                       <tr
                         key={index}
-                        className="border-t border-[#2C313A] hover:bg-[#262B34] transition"
+                        className="border-t border-[#373737] hover:bg-[#262B34] transition"
                       >
-                        <td className="p-4">{row.state}</td>
+                        <td className="p-4 text-sm font-inter font-normal">{row.state}</td>
                         <td className="p-4 flex items-center gap-2">
-                          {row.status === "Approved" ? (
-                            <CheckCircle className="text-green-400 w-4 h-4" />
-                          ) : (
-                            <XCircle className="text-red-400 w-4 h-4" />
-                          )}
-                          <span>{row.status}</span>
+                          
+                          <span className="text-sm font-inter font-normal" style={{color:row.status==='Approved'?'#00C781':'#FF3B30'}}>{row.status}</span>
                         </td>
-                        <td className="p-4">{row.credits}</td>
-                        <td className="p-4">{row.until}</td>
+                        <td className="p-4 text-white text-sm font-inter font-normal">{row.credits}</td>
+                        <td className="p-4 text-white text-sm font-inter font-normal">{row.until}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+                <div className="h-0 mt-8 w-full border-[0.2px] border-blue-500"></div>
               </div>
             </div>
           </div>
