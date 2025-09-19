@@ -31,7 +31,7 @@ export const IndustryBanner = () => {
           <button  className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
             
           </Link>
-          <button className="with-border custom-button bg-transparent">Explore Our Services <Toparrow/></button>
+          <button className="with-border custom-button bg-transparent">Talk to an Expert <Toparrow/></button>
                      
         
           </div>

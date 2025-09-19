@@ -21,7 +21,7 @@ const teamData = [
     id: 3,
     title: "Max Terzi - CTO ",
     description:
-      "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses  addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
+      "Driven by a track record of success, Michael is building the next-generation Investigative Services platform, which adapts across industries and use cases, from custom to scalable solutions. By combining modern AI with forensic advancements, he bridges the gap between intelligence methodologies and real-world strategies.",
     image: "/images/img3.png",
   },
 ];
