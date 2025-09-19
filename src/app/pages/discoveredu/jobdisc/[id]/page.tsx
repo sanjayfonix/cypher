@@ -97,7 +97,7 @@ export default function ProgramPage({ params }: any) {
             <h2 className=" lg:text-5xl md:text-4xl text-3xl font-bold font-sans pb-2">
               Overview
             </h2>
-            {overview===true?<div onClick={()=>setOverview(false)} className="w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon size={33} color="white" onClick={()=>setOverview(true)}/>}
+            {overview===true?<div onClick={()=>setOverview(false)} className="cursor-pointer w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon className="cursor-pointer" size={33} color="white" onClick={()=>setOverview(true)}/>}
             </div>
             {overview && <p className="mt-4 text-[#FFFFFF] leading-relaxed font-inter font-normal text-base">
               A memorable presentation can make you the go-to advisor in your field.
@@ -121,7 +121,7 @@ export default function ProgramPage({ params }: any) {
               className="w-full flex justify-between items-center bg-transparent transition"
             >
               <span className="text-5xl font-sans font-bold">Credits</span>
-               {openCredits===true?<div onClick={()=>setOpenCredits(false)} className="w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon size={33} color="white" onClick={()=>setOpenCredits(true)}/>}
+               {openCredits===true?<div onClick={()=>setOpenCredits(false)} className="cursor-pointer w-[33px] h-[3.6666667461395264px] bg-white"></div>:<PlusIcon className="cursor-pointer" size={33} color="white" onClick={()=>setOpenCredits(true)}/>}
             </div>
 
             <div
