@@ -55,7 +55,7 @@ const sections = [
     {
         title: "Job Description",
         content: (
-            <div className="text-base font-normal font-inter tracking-normal text-[#A0A4AE]">
+            <div className="text-sm sm:text-base font-normal font-inter tracking-normal text-[#A0A4AE]">
                 <p>
                     <span className="text-white">Project Role :</span> Application Lead
                 </p>
@@ -72,63 +72,30 @@ const sections = [
                     <span className="text-white">Educational Qualification :</span> 15 years full time education
                 </p>
 
-                <p className="mt-4 text-base font-normal font-inter tracki-normal text-white">Summary: <span className="text-[#A0A4AE]">
-                    As an Application Lead, you will lead the effort to design, build, and
-                    configure applications, acting as the primary point of contact. Your
-                    typical day will involve collaborating with various teams to ensure
-                    that application requirements are met, overseeing the development
-                    process, and providing guidance to team members.
-                </span></p>
-                
-
-                {/* <p className="text-lg font-semibold">Roles & Responsibilities:</p>
-                <p className="text-base">
-                    - Expected to be an SME. <br />
-                    - Collaborate and manage the team to perform. <br />
-                    - Responsible for team decisions. <br />
-                    - Engage with multiple teams and contribute on key decisions. <br />
-                    - Provide solutions to problems for their immediate team and across
-                    multiple teams. <br />
-                    - Facilitate knowledge sharing sessions to enhance team capabilities.{" "}
-                    <br />
-                    - Monitor project progress and ensure timely delivery of milestones.
-                </p> */}
-
-                {/* <p className="text-lg font-semibold">
-                    Professional & Technical Skills:
+                <p className="mt-4 text-sm sm:text-base font-normal font-inter text-white">
+                    Summary: <span className="text-[#A0A4AE]">
+                        As an Application Lead, you will lead the effort to design, build, and
+                        configure applications, acting as the primary point of contact. Your
+                        typical day will involve collaborating with various teams to ensure
+                        that application requirements are met, overseeing the development
+                        process, and providing guidance to team members.
+                    </span>
                 </p>
-                <p className="text-base">
-                    - Must To Have Skills: Proficiency in SAP FI S/4HANA Accounting.{" "}
-                    <br />
-                    - Strong understanding of financial accounting principles and
-                    practices. <br />
-                    - Experience with integration of SAP modules and third-party
-                    applications. <br />
-                    - Ability to analyze business requirements and translate them into
-                    technical specifications. <br />
-                    - Familiarity with SAP reporting tools and financial analysis.
-                </p>
-
-                <p className="text-lg font-semibold">Additional Information:</p>
-                <p className="text-base">
-                    The candidate should have minimum 5 years of experience in SAP FI
-                    S/4HANA Accounting.
-                </p> */}
             </div>
         ),
     },
     {
         title: "Qualification",
-        content: <p className="text-white">Minimum 5 years of investigative or forensic experience.</p>,
+        content: <p className="text-sm sm:text-base text-white">Minimum 5 years of investigative or forensic experience.</p>,
     },
     {
         title: "Locations",
-        content: <p className="text-white">Available Online & Onsite (Navi Mumbai, Delhi, Bangalore)</p>,
+        content: <p className="text-sm sm:text-base text-white">Available Online & Onsite (Navi Mumbai, Delhi, Bangalore)</p>,
     },
     {
         title: "Additional Information",
         content: (
-            <p className="text-white">
+            <p className="text-sm sm:text-base text-white">
                 Equal Employment Opportunity Statement All employment decisions shall be
                 made without regard to age, race, creed, color, religion, sex, national
                 origin, ancestry, disability status, veteran status, sexual orientation,
@@ -140,14 +107,14 @@ const sections = [
     {
         title: "About Accenture",
         content: (
-            <div>
-                <p className="text-white">
+            <div className="text-sm sm:text-base text-white">
+                <p>
                     We work with one shared purpose: to deliver on the promise of
                     technology and human ingenuity. Every day, more than 775,000 of us
                     help our stakeholders continuously reinvent. Together, we drive
                     positive change and deliver value.
                 </p>
-                <p>
+                <p className="mt-2">
                     At Accenture, we see well-being holistically, supporting our people’s
                     physical, mental, and financial health. We also provide opportunities
                     to keep skills relevant through certifications, learning, and diverse
@@ -159,7 +126,7 @@ const sections = [
     {
         title: "Important Notice",
         content: (
-            <p className="text-white">
+            <p className="text-sm sm:text-base text-white">
                 We have been alerted to fraudulent messages asking job seekers to set up
                 payment to cover various costs. No one is ever required to pay for
                 employment at Accenture. If contacted, do not respond and report
@@ -177,62 +144,75 @@ export default function OpportunityPage({ params }: any) {
 
     // Accordion state
     const [openIndex, setOpenIndex] = useState<number[]>([]);
-    const toggleSection = (index: number) =>{
-        if(openIndex.includes(index)){
-            const ind = openIndex.filter((opens)=>opens!==index);
+    const toggleSection = (index: number) => {
+        if (openIndex.includes(index)) {
+            const ind = openIndex.filter((opens) => opens !== index);
             setOpenIndex(ind);
         }
-        else{
-            setOpenIndex([...openIndex,index]);
+        else {
+            setOpenIndex([...openIndex, index]);
         }
     }
 
     return (
-        <div className="container mx-auto py-16 text-white">
-            <h1 className="text-4xl md:text-7xl font-sans tracking-normal text-white font-bold mb-4">{opportunity.title}</h1>
-            <p className="text-base text-[#f1f1f1] mb-2">{opportunity.description}</p>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-16 text-white">
+            {/* Title */}
+            <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-sans tracking-normal text-white font-bold mb-4">
+                {opportunity.title}
+            </h1>
 
-            <p className="text-sm text-gray-400">
+            {/* Description */}
+            <p className="text-sm sm:text-base text-[#f1f1f1] mb-2">{opportunity.description}</p>
+            <p className="text-xs sm:text-sm text-gray-400">
                 Job ID: {opportunity.id} | Slug: {opportunity.slug}
             </p>
-            <div className="flex flex-wrap gap-2 mt-4 mb-16">
-                <div className="md:flex items-center gap-4 md:gap-2">
+
+            {/* Buttons */}
+            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4 mt-6 mb-12">
+                <div className="flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
                     <button
-                        className="min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]">
-
+                        className="w-full sm:w-auto min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]"
+                    >
                         Apply for this job
-
                     </button>
                     <button
-                        className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent "
+                        className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent"
                     >
                         Share
                         <Toparrow />
                     </button>
-
                 </div>
             </div>
+
             {/* Accordion */}
-            <div className="flex flex-col gap-[30px] mt-8">
+            <div className="flex flex-col gap-[24px] sm:gap-[30px] mt-6 sm:mt-8">
                 {sections.map((section, index) => (
                     <div
                         key={index}
                         className="border-t border-[#167BFF] overflow-hidden"
                     >
                         {/* Header */}
-                        <div className="flex items-center justify-between mt-7">                       
-                        <div className="font-bold font-sans text-white text-3xl md:text-5xl  text-left">{section.title}</div>
-                        {openIndex.includes(index)? <div
-                            onClick={() => toggleSection(index)}
-                            className="pointer-cursor w-[33px] h-[3.67px] bg-white"
-                        >
-                            
-                            
-                        </div>:<PlusIcon onClick={() => toggleSection(index)} size={33} color="white" className="pointer-cursor"/>}
+                        <div className="flex items-center justify-between mt-5 sm:mt-7">
+                            <div className="font-bold font-sans text-xl sm:text-2xl md:text-4xl lg:text-5xl text-white text-left">
+                                {section.title}
+                            </div>
+                            {openIndex.includes(index) ? (
+                                <div
+                                    onClick={() => toggleSection(index)}
+                                    className="cursor-pointer w-[28px] sm:w-[33px] h-[3px] bg-white"
+                                />
+                            ) : (
+                                <PlusIcon
+                                    onClick={() => toggleSection(index)}
+                                    size={28}
+                                    className="sm:size-[33px] text-white cursor-pointer"
+                                />
+                            )}
                         </div>
+
                         {/* Content */}
                         {openIndex.includes(index) && (
-                            <div className="py-4 text-gray-300 bg-black/40">
+                            <div className="py-3 sm:py-4 text-gray-300 bg-black/40 rounded-md mt-2">
                                 {section.content}
                             </div>
                         )}

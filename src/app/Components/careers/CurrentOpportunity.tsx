@@ -3,10 +3,12 @@
 import { Toparrow } from "@/assets/icon";
 import { Laptop, Fingerprint, Users } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useRef, useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react"; // 👈 new imports
 
 export default function CurrentOpportunities() {
   const router = useRouter();
+  const [isSticky, setIsSticky] = useState(false);
 
   const opportunities = [
     { id: 1, slug: "data-intelligence-analyst", icon: <Laptop className="w-12 h-12 text-[#167BFF]" />, title: "Data Intelligence Analyst", description: "Data Intelligence involves analyzing large datasets using machine learning, AI, and data mining to extract actionable insights, identify trends, and inform decisions." },
@@ -17,48 +19,21 @@ export default function CurrentOpportunities() {
     { id: 6, slug: "private-investigator", icon: <Users className="w-12 h-12 text-[#167BFF]" />, title: "Private Investigator", description: "Private investigators increasingly rely on OSINT to locate individuals, uncover hidden assets, and verify facts. Using public records and social media, you enhance investigations and help clients solve complex cases." },
   ];
 
-  // group into pairs
-  const pairs = Array.from({ length: Math.ceil(opportunities.length / 2) }, (_, i) =>
-    opportunities.slice(i * 2, i * 2 + 2)
-  );
-
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const cardRef = useRef<HTMLDivElement | null>(null);
-
-  const [scrollY, setScrollY] = useState(0);
-  const [stepHeight, setStepHeight] = useState(0);
-
-  useEffect(() => {
-    if (cardRef.current) {
-      const cardHeight = cardRef.current.offsetHeight;
-      // ✅ height = 2 cards stacked + margin
-      setStepHeight(cardHeight  + 48);
-    }
-  }, []);
-
   useEffect(() => {
     const handleScroll = () => {
-      if (!containerRef.current || stepHeight === 0) return;
-      const rect = containerRef.current.getBoundingClientRect();
-      const offsetTop = -rect.top;
-      setScrollY(offsetTop);
+      // Check if we've scrolled past a certain point (e.g., 100px)
+      setIsSticky(window.scrollY > 100);
     };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [stepHeight]);
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
-    <section
-      ref={containerRef}
-      className="relative"
-      style={{ height: 2000 }}
-    >
-      <div
-        className="container text-white py-16 sticky top-0 flex"
-        style={{ height: 623 }}
-      >
-        {/* Left Section (Pinned) */}
-        <div className="lg:col-span-2 w-2/5 pr-6 flex flex-col justify-center">
+    <section className="relative">
+      <div className="container text-white py-16 px-4 flex flex-col lg:flex-row gap-12">
+        {/* Left Part (sticky on scroll) */}
+        <div className={`lg:w-2/5 pr-6 flex flex-col justify-center ${isSticky ? 'lg:sticky lg:top-24 lg:self-start' : ''}`}>
           <h2 className="text-3xl md:text-[48px] font-bold font-sans mb-8">
             Current Opportunities
           </h2>
@@ -71,48 +46,35 @@ export default function CurrentOpportunities() {
           </p>
         </div>
 
-        {/* Right Section (scrolling pairs) */}
-        <div className="lg:col-span-3 w-3/5 relative overflow-hidden">
-          <div
-            className="transition-transform duration-300 w-full"
-            style={{
-              transform: `translateY(-${Math.floor(scrollY / stepHeight) * stepHeight}px)`,
-              height: `${2000}px`,
-            }}
-          >
-            {pairs.map((pair, idx) => (
-              <div
-                key={idx}
-                className="grid grid-cols-1 md:grid-cols-2 gap-8"
-                
+        {/* Right Part (animated cards) */}
+        <div className="lg:w-3/5 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {opportunities.map((item, idx) => (
+            <motion.div
+              key={item.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: idx * 0.2 }}
+              className="rounded-[32px] border border-[#6D6D6D99] p-11 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
+            >
+              <div className="mb-8">{item.icon}</div>
+              <h3 className="text-[24px] font-medium font-sans text-white mb-[14px] max-w-[80%]">
+                {item.title}
+              </h3>
+              <p className="text-[#A0A4AE] text-base font-normal font-inter tracking-normal max-w-[95%] mb-8">
+                {item.description}
+              </p>
+              <button
+                onClick={() =>
+                  router.push(`/pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
+                }
+                className="hidden lg:block min-w-[130px] mt-4 custom-button with-border bg-transparent"
               >
-                {pair.map((item, i) => (
-                  <div
-                    key={item.id}
-                    ref={idx === 0 && i === 0 ? cardRef : null}
-                    className="rounded-[32px] mb-4 border border-[#6D6D6D99] p-11 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
-                  >
-                    <div className="mb-8">{item.icon}</div>
-                    <h3 className="text-[24px] font-medium font-sans text-white mb-[14px] max-w-[80%]">
-                      {item.title}
-                    </h3>
-                    <p className="text-[#A0A4AE] text-base font-normal font-inter tracking-normal max-w-[95%] mb-8">
-                      {item.description}
-                    </p>
-                    <button
-                      onClick={() =>
-                        router.push(`/pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
-                      }
-                      className="hidden lg:block min-w-[130px] mt-4 custom-button with-border bg-transparent"
-                    >
-                      Read full job description
-                      <Toparrow />
-                    </button>
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
+                Read full job description
+                <Toparrow />
+              </button>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
