@@ -1,6 +1,5 @@
 'use client'
-import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon } from "@/assets/icon";
-import { XIcon } from "lucide-react";
+import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
 import { TravelingBorder } from "../services/CorePrincipals";
 import { useState } from "react";
 import { GlassIcon } from "./GlassIcon";
@@ -118,7 +117,7 @@ export default function WhereInvestigation() {
 
                   {/* Actual rectangle - keep it above */}
                   
-                 <div className="relative z-10 w-[153px] h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_80px_0_#157AFF66] flex flex-col justify-start">
+                 <div style={{boxShadow:'0px 0px 110px 0px #157AFF66'}} className="relative z-10 w-[153px] h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] flex flex-col justify-start">
                     <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
                   </div>
                 </div>
@@ -175,23 +174,28 @@ export default function WhereInvestigation() {
 
                     {/* 🌟 New Glow Behind Inner Circle */}
                     <div className="absolute inset-0 flex justify-center items-center -z-10">
-                      <div className="w-[130%] aspect-square rounded-full bg-[radial-gradient(circle,rgba(22,123,255,0.4)_0%,rgba(22,123,255,0)_80%)] blur-[5px] animate-glow" />
+                      <div className="w-[130%] aspect-square rounded-full bg-gradient-to-b  animate-glow" />
                     </div>
 
-                    {/* Extra Glow Circle */}
-                    <div className="absolute w-[35%] aspect-square rounded-full bg-[#167BFF99] blur-[1.1px] animate-glow" />
+                    
 
                     {/* Center Content */}
                     <div
-                      className="flex justify-center items-center w-1/2 aspect-square rounded-full relative z-10 animate-ripple"
+  className="absolute w-[250px] h-[250px] rounded-full"
+  style={{
+    background: "#157AFF80",  // translucent blue
+    filter: "blur(30px)",    // spread glow
+  }}
+></div>
+                    <div
+                      className="flex animate-zoom-fade justify-center items-center w-[205px] bg-gradient-to-b from-[#030A14] to-[#157AFF] aspect-square rounded-full relative z-10"
                       style={{
                         transform: 'rotate(-0.47deg)',
                         padding: '8px',
-                        background: 'linear-gradient(180deg, #030A14 44.67%, #157AFF 185.84%)',
-
-                        boxShadow: '0px 0px 150px #157AFF80',
+                        
                       }}
                     >
+                      
                       <BigProtectIc />
                     </div>
                   </div>
