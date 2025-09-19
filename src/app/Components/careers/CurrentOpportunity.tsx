@@ -60,14 +60,14 @@ export default function CurrentOpportunities() {
 
   return (
     <section className="container text-white py-16">
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Left Section */}
         <div className="lg:col-span-2 flex flex-col justify-between">
           <div>
-            <h2 className="text-3xl md:text-[48px] font-bold mb-4">
+            <h2 className="text-3xl md:text-[48px] font-bold font-sans mb-8">
               Current Opportunities
             </h2>
-            <p className="text-gray-300 leading-relaxed mb-6">
+            <p className="text-[#F1F1F1] tracking-normal mb-6 font-inter font-normal text-base max-w-[90%]">
               Explore a range of exciting career opportunities with us. We are
               constantly looking for talented individuals to join our team in
               various roles. Whether you're an experienced professional or just
@@ -82,11 +82,11 @@ export default function CurrentOpportunities() {
           {opportunities.map((item) => (
             <div
               key={item.id}
-              className="rounded-[32px] border border-[#6D6D6D99] p-8 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
+              className="rounded-[32px] border border-[#6D6D6D99] p-11 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
             >
-              <div className="mb-6">{item.icon}</div>
-              <h3 className="text-[24px] font-semibold mb-3">{item.title}</h3>
-              <p className="text-gray-300 text-[16px] leading-relaxed">
+              <div className="mb-8">{item.icon}</div>
+              <h3 className="text-[24px] font-medium font-sans text-white mb-[14px] max-w-[80%]">{item.title}</h3>
+              <p className="text-[#A0A4AE] text-base font-normal font-inter tracking-normal max-w-[95%] mb-8">
                 {item.description}
               </p>
               <button

@@ -64,13 +64,13 @@ export const CareerBanner = () => {
             {/* Content */}
             <div className="flex flex-col items-center justify-start gap-4 z-10 text-center max-w-[900px]">
                 {/* Headline */}
-                <p className="text-5xl sm:text-6xl lg:text-6xl font-bold text-white leading-tight font-sans">
+                <p className="text-5xl sm:text-6xl font-bold text-white leading-tight font-sans">
                     Connect with Cyphr for Expert<br />
                     Intelligence Solutions
                 </p>
 
                 {/* Subtitle */}
-                <p className={`text-xs sm:text-base sm:text-sm md:text-[1rem] text-[#F1F1F1] ${inter.className}`}>
+                <p className={`text-xs sm:text-base text-[#F1F1F1] font-normal ${inter.className}`}>
                     We're here to provide expert support with actionable intelligence and advanced <br/> investigative solutions tailored to your needs.
                 </p>
 

@@ -6,9 +6,9 @@ export default function LifeAtCyphr() {
   return (
     <section className=" container text-white py-16 ">
       {/* Section Heading */}
-      <div className="text-center max-w-3xl mx-auto mb-16">
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Life at Cyphr</h2>
-        <p className="text-gray-300 text-base md:text-lg">
+      <div className="text-center max-w-3xl mx-auto mb-20">
+        <h2 className="text-4xl md:text-5xl font-bold font-sans tracking-normal mb-[10px]">Life at Cyphr</h2>
+        <p className="text-[#F1F1F1] text-base md:text-lg">
           At Cyphr, we promote innovation, inclusivity, and personal growth in a
           collaborative environment. Our team embraces cutting-edge challenges,
           continuous learning, and diverse contributions, helping shape the
