@@ -228,7 +228,7 @@ const tabsData = [
       </div>       
     </div>
     {searchresults&&<div className="font-sans text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF]">Search Results</div>}
-     {searchresults&&<div className="grid p-6 grid-cols-2 gap-2 gap-y-6">
+     {searchresults&&<div className="grid p-6 grid-cols-1 sm:grid-cols-2 gap-2 gap-y-6">
      {tabsData.map((item,i)=>{
          return<SearchResultTab key={i} icon={<GlassIcon size={70} icon={<item.icon/>}/>} title={item.title} queryVal={item.queryVal} date={item.date} rowsData={item.rowsData}/>
      })}
@@ -260,31 +260,32 @@ export function UsernameForm() {
       </div>
 
       {/* City, State + Button */}
-      <div className="flex flex-row gap-4 items-end justify-between mt-4">
-        {/* City */}
-        <div className="flex gap-4">
-          <div >
-            <label className={`block text-sm text-white  mb-4 `}>City</label>
-            <input
-              type="text"
-              placeholder="City"
-              className=" rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+      {/* City, State */}
+<div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
+  {/* City */}
+  <div className="flex-1 w-full">
+    <label className="block text-sm text-white mb-2 sm:mb-4">City</label>
+    <input
+      type="text"
+      placeholder="City"
+      className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
 
-          {/* State */}
-          <div>
-            <label className="block text-sm text-white mb-4">State</label>
-            <input
-              type="text"
-              placeholder="State"
-              className=" rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-        </div>
+  {/* State */}
+  <div className="flex-1 w-full">
+    <label className="block text-sm text-white mb-2 sm:mb-4">State</label>
+    <input
+      type="text"
+      placeholder="State"
+      className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+    />
+  </div>
+</div>
+
 
       </div>
-    </div>
+    
   );
 }
 

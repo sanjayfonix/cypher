@@ -88,7 +88,7 @@ export default function WhereInvestigation() {
             <div className={` relative flex h-full items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
-              <div className="absolute top-[23%] left-[5%] w-12 sm:w-[60px] aspect-square
+              <div className="absolute top-[23%] left-[5%] w-5 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-x-[80px] translate-y-[60px] opacity-0 
@@ -96,19 +96,19 @@ export default function WhereInvestigation() {
   group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
   <GlassIcon size={60} hoverComp={<InstaIcon/>} isHoverProperty={true} icon={<InstaIcon />} />
 </div>
-              <div className="absolute w-12 sm:w-[60px] aspect-square
+              <div className="absolute w-5 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[25%]">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-5  left-[25%]">
                 <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true} size={60} icon={<XIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[59%] ">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-5 left-[59%] ">
                 <GlassIcon size={60} hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
-             <div className="absolute top-[23%] left-[82%] w-12 sm:w-[60px] aspect-square
+             <div className="absolute top-[23%] left-[85%] w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform -translate-x-[80px] translate-y-[60px] opacity-0 
@@ -119,40 +119,43 @@ export default function WhereInvestigation() {
               {/* Vertical rectangle */}
               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
                 {/* ...floating circles */}
-                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/7 blur-[30px] inset-0 flex justify-center items-center  top-[75%]">
-                  <DiamondGlow />
-                </div>
-                {/* Vertical rectangle */}
-                <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[253px] h-[70%] flex flex-col justify-start">
-                  {/* 🌟 Radial Glow — put BEHIND the rectangle */}
+               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-full aspect-square">
+  {/* Diamond Glow */}
+  <div
+    className="group-hover:opacity-100 transition-all duration-1000 opacity-0 
+               absolute inset-0 flex justify-center items-center 
+               top-[72%] sm:top-[75%] 
+               w-[calc(100%+50px)]
+               -left-4  
+               blur-[20px] sm:blur-[30px]"
+  >
+    <DiamondGlow />
+  </div>
 
-
-                  {/* Actual rectangle - keep it above */}
-                  
-              <div className="
-              left-1/5 top-4
-  relative z-10 w-[153px] h-[95%]
-  rounded-tl-lg rounded-tr-lg 
-
-  flex flex-col justify-start
-  backdrop-blur-[20px]
-
-  border-2 border-t-3 border-b-0 border-white/20
-
-  shadow-[0_0_40px_0_#157AFF66]
-
-  bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)]
-
-  before:absolute before:inset-0 before:rounded-tl-lg before:rounded-tr-lg
-  before:content-[''] before:pointer-events-none before:z-[-1]
-">
-  {/* Notch / Speaker */}
-  <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
+  {/* Vertical rectangle container */}
+  <div className="overflow-hidden relative mx-auto w-[60%] sm:w-[220px] md:w-[180px] lg:w-[250px]  h-[65%] sm:h-[85%] md:h-[75%] flex flex-col justify-start">
+    <div
+      className="relative z-10 
+                 w-[70%] 
+                 h-[95%]
+                 left-1/5 top-3 sm:top-4
+                 rounded-tl-lg rounded-tr-lg
+                 flex flex-col justify-start
+                 backdrop-blur-[20px]
+                 border-2 border-t-3 border-b-0 border-white/20
+                 shadow-[0_0_10px_0_#157AFF66]
+                 sm:shadow-[0_0_20px_0_#157AFF66]
+                 lg:shadow-[0_0_40px_0_#157AFF66]
+                 bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)]
+                 before:absolute before:inset-0 
+                 before:rounded-tl-lg before:rounded-tr-lg
+                 before:content-[''] before:pointer-events-none before:z-[-1]"
+    >
+      {/* Notch / Speaker */}
+      <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
+    </div>
+  </div>
 </div>
-
-
-                 
-                </div>
               
               </div>
 

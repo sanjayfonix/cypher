@@ -17,16 +17,16 @@ import {User,Facebook,Mail,} from 'lucide-react'
 export default function HomePage() {
   return (
     <div className="w-full bg-[var(--primary)] container">
-     <HomeBanner/> 
-     <GlobalThreatIntelligence/> 
-      <WhereInvestigation/>
+     {/* <HomeBanner/> */}
+      {/* <GlobalThreatIntelligence/>  */}
+      {/* <WhereInvestigation/> */}
     <HowItWorks/>
-     <IntegrityAtCore/>
-     <BlurCard/>
+      {/* <IntegrityAtCore/> */}
+    {/* <BlurCard/>
      <div className="p-4 lg:p-0">
      <ContactSection />
      </div>
-     <CESessions/>
+     <CESessions/> */}
      
     </div> 
   );

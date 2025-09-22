@@ -25,13 +25,13 @@ export default function IntegrityAtCore() {
           {/* Glow Circle */}
           <div
             className="absolute -z-1 animate-glow2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-            w-[60vw] sm:w-[300px] aspect-square rounded-full 
+            w-[60vw] sm:w-[200px] md:[300px] lg:w-[350px] aspect-square rounded-full 
             bg-[radial-gradient(circle,rgba(22,123,255,0.6)_0%,rgba(22,123,255,0.2)_100%)] 
             blur-[40px] "
           />
 
           {/* Top Cards */}
-          <div className="flex flex-wrap justify-center md:justify-between items-start gap-4 w-full max-w-4xl">
+          <div className="flex flex-wrap justify-start mx-auto sm:justify-between items-start gap-4 max-w-[70%] sm:w-full sm:max-w-4xl">
             {Items.slice(0, 2).map((item) => (
              
                 <Link
@@ -42,8 +42,8 @@ export default function IntegrityAtCore() {
                   }
                 >
                   <div
-                    className="hover:-rotate-6  flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
-                    style={{ marginTop: item.id === 1 ? 16 : 0 }}
+                    className={`${item.id===1?'md:mt-4':'mt-0'} hover:-rotate-6  flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit`}
+                    
                   >
                     <div className="flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
                       <GlassIcon icon={item.icon} size={50} arcLength={150} />
@@ -58,7 +58,7 @@ export default function IntegrityAtCore() {
           </div>
 
           {/* Center Text */}
-          <div className="flex flex-col gap-3 sm:gap-4 opacity-100 items-center text-center max-w-3xl">
+          <div className="flex flex-col gap-3 sm:gap-4 opacity-100 items-center text-center max-w-[70%] sm:max-w-3xl">
             <h2 className="font-sans font-bold text-2xl sm:text-4xl md:text-5xl text-white leading-tight">
               Intelligence That Works For You.
             </h2>
@@ -70,7 +70,7 @@ export default function IntegrityAtCore() {
           </div>
 
           {/* Bottom Cards */}
-          <div className="flex flex-wrap justify-center md:justify-between items-start gap-4 w-full max-w-4xl">
+          <div className="flex flex-wrap justify-start md:justify-between items-start gap-4 mx-4 max-w-[70%] w-full sm:max-w-4xl">
             {Items.slice(2).map((item) => (
              
                 <Link
@@ -80,14 +80,18 @@ export default function IntegrityAtCore() {
                       : "/pages/industries/academia"
                   }
                 >
-                  <div
-                    className="hover:rotate-5 flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
-                    style={{
-                      marginTop: item.id === 3 ? 16 : 0,
-                      marginRight:item.id===4?40:0,
-                      marginLeft:item.id===3?16:0
-                    }}
-                  >
+                 <div
+  className={`
+    hover:rotate-5 flex flex-row gap-3 sm:gap-4 items-center 
+    rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 
+    w-full sm:w-fit
+
+    ${item.id === 3 ? "md:mt-4 md:ml-4" : ""} 
+    ${item.id === 4 ? "md:mr-4" : ""}
+  `}
+>
+
+
                     <div className=" flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
                       <GlassIcon icon={item.icon} size={50} arcLength={150} />
                     </div>
