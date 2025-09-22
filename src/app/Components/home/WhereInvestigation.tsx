@@ -224,7 +224,7 @@ export default function WhereInvestigation() {
   {/* Inner circle wrapper (static, isolates rotation) */}
   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
     <div
-      className="flex justify-center items-center w-[130px] md:w-[205px] aspect-square
+      className="flex justify-center items-center w-[150px] sm:w-[180px] md:w-[195px] lg:w-[205px] aspect-square
                  rounded-full bg-gradient-to-b from-[#030A14] to-[#157AFF80]"
       style={{
         transform: "rotate(-0.47deg)",
