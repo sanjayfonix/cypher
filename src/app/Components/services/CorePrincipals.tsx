@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useRef, useState } from "react";
-import { BorderTravel, DropDown, DropUp, MagIcon, PointerGlow, Tick } from '@/assets/icon';
+import { BorderTravel, DropDown, DropUp, FingerPrint, FingerPrintSearch, MagIcon, PointerGlow, Tick } from '@/assets/icon';
 import Image from 'next/image';
 import SemicircularArcs from "./CurvedAnimation";
 
@@ -55,8 +55,8 @@ export default function CorePrincipals() {
       </h1>
 
       {/* Custom Seminars */}
-      <div className="relative border border-[#6D6D6D] rounded-[32px] p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 sm:gap-8 ">
-        <TravelingBorder speed={100}/>
+      <div className="relative border border-[#515151] rounded-[32px] p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 sm:gap-8 ">
+        <TravelingBorder  speed={100}/>
 
         {/* Left Column */}
         <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 flex-1">
@@ -64,7 +64,7 @@ export default function CorePrincipals() {
             <h2 className="font-sans text-white font-bold mt-6 lg:mt-0 text-[22px] sm:text-[28px] lg:text-[40px] leading-[1.3]">
               Custom Seminars
             </h2>
-            <div className="text-[#E3E3E3] text-[0.9rem] sm:text-[1rem] font-inter font-normal max-w-[98%] lg:max-w-[85%]">
+            <div className="text-[#E3E3E3] text-[0.9rem] sm:text-[1rem] font-inter font-normal max-w-[95%]">
               Tailored seminars to equip your team with the skills to detect and mitigate intelligence threats. We offer practical tools and roadmaps to help you stay ahead.
             </div>
           </div>
@@ -87,35 +87,31 @@ export default function CorePrincipals() {
       {/* Second Row */}
       <div className={`flex flex-col sm:flex-row ${tabIndex!==-1?'items-start':'items-stretch'} gap-6 sm:gap-8`}>
         {/* Investigative Services Support */}
-        <div className="relative border border-[#6D6D6D] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+        <div onMouseEnter={()=>setTabIndex(0)} onMouseLeave={()=>setTabIndex(-1)} className="relative border border-[#515151] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
           <TravelingBorder />
 
           <div className="relative flex justify-center">
       {/* Background glow */}
       <div
-        className="absolute animate-glow"
+        className="absolute animate-glow2 h-[100px]  w-[110%]  md:w-full"
         style={{
-          width: "80%",
-          height: "50%",
+          width:'100%',
           background: "#157AFF",
-          opacity: 1.5,
-          filter: "blur(90px)",
-          borderRadius: "50%",
-          top: "30%",
-         
+          borderRadius:'50%',
+          opacity:1.5,
+          top: "33%",
+          filter: "blur(40px)",
           zIndex: 0,
         }}
       />
 
       {/* Main Image */}
-      <img
-        src={imageUrl}
-        alt="fingerprint"
-        className="my-4 lg:h-70 mt-7 mx-auto relative z-10 max-w-[60%]"
-      />
+      <div className="h-[291px] w-full flex items-center justify-center my-4">
+      <FingerPrint/>
+      </div>
 
       {/* Magnifier */}
-      <div className="absolute md:top-1/4 top-1/8 left-[40%] z-20  h-[150px]">
+      <div className="absolute top-1/3  left-[40%] z-20  h-[150px]">
         
      
         <MagIcon />
@@ -127,16 +123,21 @@ export default function CorePrincipals() {
           </h2>
 
           <div className="flex flex-row justify-between items-end">
-            <p className="max-w-[80%] text-sm sm:text-base font-normal text-[#F1F1F1] font-inter">
+            <p className="text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[80%]">
               Our team extends your investigative capabilities with investigator-led support. We provide comprehensive intelligence services to:
             </p>
-            <div
-              onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
+            <button
+              style={{
+                cursor:'pointer'
+              }}
+              // onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
               className="flex relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
             >
               {tabIndex === 0 ? <DropUp /> : <DropDown />}
-            </div>
+            </button>
           </div>
+
+          
 
           {tabIndex === 0 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
@@ -149,54 +150,63 @@ export default function CorePrincipals() {
         </div>
 
         {/* Continuing Education */}
-        <div ref={containerRef} className="relative  overflow-visible border border-[#6D6D6D] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+        <div onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)} ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
          <TravelingBorder />
-         
+        
+           <div className="relative sm:my-16 lg:my-4 w-1/2 flex mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
+               
+         <div
+        className="blur-[40px] lg:blur-[60px] absolute animate-glow2 h-[60px] sm:h-[70px] md:h-[90px] w-[150%] -left-1/4 sm:-left-1/24 md:-left-0 sm:w-[110%] md:w-full"
+        style={{
+          background: "#157AFF",
+          borderRadius:'50%',
+          opacity:1.5,
+          top: "33%",
+          zIndex: 0,
+        }}
+      />
          <div className="absolute rounded-[32px] overflow-hidden inset-0  ">
-          <div
-            className="absolute animate-glow w-[100%] h-40 rounded-full -top-[25%] blur-[100px]"
-            style={{
-              
-              background: "#157AFF",
-              opacity: 1.2,
-      
-             
-              zIndex: 0,
-            }}
-          />
+        
           </div>
-          <div className="relative mb-4 mx-auto w-[200px] my-4 md:w-[270px] lg:w-[297px]">
-  <div className="flex animate-ripple  justify-center items-center aspect-square w-full  rounded-full border border-[#0C438C]">
+  <div className=" w-[200px] mx-auto md:w-[270px] lg:w-[297px] relative z-10 flex animate-ripple  justify-center items-center aspect-square w-full  rounded-full border border-[#0C438C]">
+   
     <div className="flex animate-ripple delay-150 justify-center items-center w-[85%] h-[85%] rounded-full border border-[#0C438C]">
       <div className="relative  w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
-      <img className="absolute w-full h-full" src="/book.png" />
+    
     </div>
+    
   </div>
+  <img
+      src="/book.png"
+      className="absolute inset-0 m-auto w-[100%] h-[100%] object-contain animate-none"
+    />
 </div>
+ 
 
-
-          <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[40px] leading-[1.3]">
+          <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3]">
             Continuing Education
           </h2>
 
           <div className="flex flex-row justify-between items-end">
-            <p className="max-w-[75%] text-sm sm:text-base font-normal text-[#F1F1F1] font-inter">
+            <p className="max-w-[75%] text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
               We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.
-            </p>
-            <button onClick={()=>{
-              if(tabIndex===1){
-                setTabIndex(-1)
-              }
-              else{
-                setTabIndex(1)
-              }
-            }} className="relative top-2 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
-            {tabIndex === 1 ? <DropUp /> : <DropDown />}
-            </button>
+            </p>   
+            <button 
 
-           
-              
+            // onClick={()=>{
+            //   if(tabIndex===1){
+            //     setTabIndex(-1)
+            //   }
+            //   else{
+            //     setTabIndex(1)
+            //   }
+            // }} 
+            className="relative top-5 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+
+            {tabIndex === 1 ? <DropUp /> : <DropDown />}
+            </button>           
           </div>
+          
            {tabIndex === 1 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
               <li className="flex items-center gap-2"><Tick/> Uncover hidden connections and threats</li>
@@ -213,26 +223,30 @@ export default function CorePrincipals() {
 
 
 
+
 export function TravelingBorder({
   borderRadius = 32,
-  speed = 150, // px per second
-  scale = 0.5,
+  speed = 150,
+  wedgeLength = 85,
+  minThickness = 0,
+  maxThickness = 4,
   inset = 0,
-  delta = 8,
-  anticlockwise = false, // NEW PROP
+  anticlockwise = false,
 }: {
   borderRadius?: number;
   speed?: number;
-  scale?: number;
+  wedgeLength?: number;
+  minThickness?: number;
+  maxThickness?: number;
   inset?: number;
-  delta?: number;
-  anticlockwise?: boolean; // NEW PROP TYPE
+  anticlockwise?: boolean;
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
   const pointerRef = useRef<SVGPathElement | null>(null);
   const [pathData, setPathData] = useState("");
 
+  // 🔹 Rounded-rectangle path
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -244,16 +258,15 @@ export function TravelingBorder({
 
       const newPath = `
 M ${inset + r} ${inset}
-L ${inset + w - r} ${inset}
-C ${inset + w - r / 2} ${inset} ${inset + w} ${inset + r / 2} ${inset + w} ${inset + r}
-L ${inset + w} ${inset + h - r}
-C ${inset + w} ${inset + h - r / 2} ${inset + w - r / 2} ${inset + h} ${inset + w - r} ${inset + h}
-L ${inset + r} ${inset + h}
-C ${inset + r / 2} ${inset + h} ${inset} ${inset + h - r / 2} ${inset} ${inset + h - r}
-L ${inset} ${inset + r}
-C ${inset} ${inset + r / 2} ${inset + r / 2} ${inset} ${inset + r} ${inset}
+H ${inset + w - r}
+Q ${inset + w} ${inset} ${inset + w} ${inset + r}
+V ${inset + h - r}
+Q ${inset + w} ${inset + h} ${inset + w - r} ${inset + h}
+H ${inset + r}
+Q ${inset} ${inset + h} ${inset} ${inset + h - r}
+V ${inset + r}
+Q ${inset} ${inset} ${inset + r} ${inset}
 Z`;
-
       setPathData(newPath);
     };
 
@@ -263,76 +276,156 @@ Z`;
     return () => ro.disconnect();
   }, [borderRadius, inset]);
 
+  // 🔹 Animate pointer
   useEffect(() => {
     if (!pathRef.current || !pointerRef.current) return;
-    const pathEl = pathRef.current;
-    const pointerEl = pointerRef.current;
+
+    const path = pathRef.current;
+    const pointer = pointerRef.current;
     let start: number | null = null;
-    const length = pathEl.getTotalLength();
+    let rafId: number;
+
+    const length = path.getTotalLength();
 
     const animate = (t: number) => {
       if (start === null) start = t;
       const elapsed = (t - start) / 1000;
 
-      // 👉 Clockwise vs Anticlockwise control
       const dist = anticlockwise
-        ? (length - (elapsed * speed) % length) % length
+        ? (length - ((elapsed * speed) % length)) % length
         : (elapsed * speed) % length;
 
-      const point = pathEl.getPointAtLength(dist);
+      const steps = 10;
+      const stepSize = wedgeLength / steps;
 
-      // ensure the pointer faces the actual movement direction
-      const nextDist = anticlockwise
-        ? (dist - delta + length) % length
-        : (dist + delta) % length;
-      const next = pathEl.getPointAtLength(nextDist);
+      const top: { x: number; y: number }[] = [];
+      const bottom: { x: number; y: number }[] = [];
 
-      const angle =
-        (Math.atan2(next.y - point.y, next.x - point.x) * 180) / Math.PI;
+      for (let i = 0; i <= steps; i++) {
+        const d = anticlockwise
+          ? (dist - i * stepSize + length) % length
+          : (dist + i * stepSize) % length;
 
-      // Align to center vertically (y=6 is midpoint of pointer shape)
-      pointerEl.setAttribute(
-        "transform",
-        `translate(${point.x},${point.y}) rotate(${angle}) scale(${scale}) translate(-41,-6)`
+        const p1 = path.getPointAtLength(d);
+        const p2 = path.getPointAtLength(
+          (d + (anticlockwise ? -1 : 1) * 0.5 + length) % length
+        );
+
+        const dx = p2.x - p1.x;
+        const dy = p2.y - p1.y;
+        const len = Math.sqrt(dx * dx + dy * dy) || 1;
+        const nx = -dy / len;
+        const ny = dx / len;
+
+        const ratio = i / steps;
+        const thickness = minThickness + ratio * (maxThickness - minThickness);
+
+        top.push({ x: p1.x + nx * thickness, y: p1.y + ny * thickness });
+        bottom.push({ x: p1.x - nx * thickness, y: p1.y - ny * thickness });
+      }
+
+      // Front tip
+      const last = path.getPointAtLength(
+        (dist + (anticlockwise ? -wedgeLength : wedgeLength) + length) % length
       );
+      const after = path.getPointAtLength(
+        (dist + (anticlockwise ? -wedgeLength - 8 : wedgeLength + 8) + length) %
+          length
+      );
+      const dxF = after.x - last.x;
+      const dyF = after.y - last.y;
+      const lenF = Math.sqrt(dxF * dxF + dyF * dyF) || 1;
+      const tipFront = {
+        x: last.x + (dxF / lenF) * 14,
+        y: last.y + (dyF / lenF) * 14,
+      };
 
-      requestAnimationFrame(animate);
+      // Back tip
+      const first = path.getPointAtLength(dist);
+      const before = path.getPointAtLength(
+        (dist + (anticlockwise ? 8 : -8) + length) % length
+      );
+      const dxB = first.x - before.x;
+      const dyB = first.y - before.y;
+      const lenB = Math.sqrt(dxB * dxB + dyB * dyB) || 1;
+      const tipBack = {
+        x: first.x + (dxB / lenB) * 12,
+        y: first.y + (dyB / lenB) * 12,
+      };
+      // Build path normally (without forcing top/bottom into tipBack)
+let dStr = `M ${bottom[1].x},${bottom[1].y}`;
+
+// bottom edge (excluding last, since it goes to tipFront)
+for (let i = 2; i < bottom.length - 1; i++) {
+  dStr += ` L ${bottom[i].x},${bottom[i].y}`;
+}
+
+// connect bottom side → tipFront
+dStr += ` L ${tipFront.x},${tipFront.y}`;
+
+// connect tipFront → last top point
+dStr += ` L ${top[top.length - 2].x},${top[top.length - 2].y}`;
+
+// top edge (rest of points back toward start)
+for (let i = top.length - 3; i > 1; i--) {
+  dStr += ` L ${top[i].x},${top[i].y}`;
+}
+
+// ✅ Now close the back with a small triangle
+// connect top[1] → tipBack → bottom[1]
+dStr += ` L ${top[1].x},${top[1].y}`;
+dStr += ` L ${tipBack.x},${tipBack.y}`;
+dStr += ` L ${bottom[1].x},${bottom[1].y}`;
+
+dStr += " Z";
+
+
+
+
+
+
+
+
+
+pointer.setAttribute("d", dStr);
+
+
+
+
+      rafId = requestAnimationFrame(animate);
     };
 
-    const id = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(id);
-  }, [pathData, speed, scale, delta, anticlockwise]);
+    rafId = requestAnimationFrame(animate);
+    return () => cancelAnimationFrame(rafId);
+  }, [pathData, speed, wedgeLength, minThickness, maxThickness, anticlockwise]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 pointer-events-none">
       {pathData && (
         <svg className="absolute w-full h-full overflow-visible">
-          {/* invisible path for measurement */}
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />
-
-          {/* Pointer with wider front face, centered vertically */}
           <path
             ref={pointerRef}
-            d="M3 6L82 3C85 3 89 6 85 9L82 9L3 6Z"
-            fill="url(#capsuleGrad)"
+            fill="url(#diamondGrad)"
+            filter="url(#travelShadow)"
           />
-
           <defs>
-            <linearGradient
-              id="capsuleGrad"
-              x1="87"
-              y1="6"
-              x2="0"
-              y2="6"
-              gradientUnits="userSpaceOnUse"
-            >
+            <linearGradient id="diamondGrad" x1="100%" y1="0" x2="0" y2="0">
               <stop stopColor="#016FFF" />
               <stop offset="1" stopColor="#093C80" />
             </linearGradient>
+            <filter id="travelShadow" x="0" y="0" width="200%" height="200%">
+              <feDropShadow
+                dx="0"
+                dy="0"
+                stdDeviation="3"
+                floodColor="#157AFF"
+                floodOpacity="0.6"
+              />
+            </filter>
           </defs>
         </svg>
       )}
     </div>
   );
 }
-

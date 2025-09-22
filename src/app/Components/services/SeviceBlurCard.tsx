@@ -3,6 +3,8 @@
 import React from "react";
 
 import { Grid, Toparrow } from "@/assets/icon";
+import { PointerGrid } from "../home/GridAnimation";
+
 
 
 const ServiceBlurCard = () => {
@@ -21,14 +23,14 @@ const ServiceBlurCard = () => {
       >
         {/* Blur behind left grid */}
         <div
-          className="absolute blur-[8.1px]  translate-y-[80%] sm:translate-y-[50%]  md:translate-x-3 lg:translate-x-5 lg:translate-y-[40%]  animate-glow"
+          className="absolute blur-[8.1px]  translate-y-[80%] sm:translate-y-[50%]  md:translate-x-3 lg:translate-x-5 lg:translate-y-[40%]  animate-glow2"
           style={{
             width: "clamp(90px, 20vw, 180px)",
             height: "clamp(90px, 20vw, 180px)",
             background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
             rotate: "180deg",
             borderRadius: "50%",
-            boxShadow: "0px 0px 80px 0px #157AFF80",
+           
 
           }}
         />
@@ -38,33 +40,27 @@ const ServiceBlurCard = () => {
         </div>
       </div>
 
-      {/* ===== Right Grid + Blur ===== */}
-      <div
-        className="absolute"
-        style={{
-          top: "15%",
-          right: "clamp(-2rem, 3vw, 4rem)", // keeps right grid visible but away from card
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      >
-        {/* Blur behind right grid */}
-        <div
-          className="absolute blur-[8.1px] md:translate-x-[10%] lg:translate-x-[40%] md:-translate-y-[80%] translate-x-[25%] -translate-y-[80%] lg:-translate-y-[60%]  animate-glow"
-          style={{
-            width: "clamp(90px, 20vw, 180px)",
-            height: "clamp(90px, 20vw, 180px)",
-            background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-            rotate: "180deg",
-            borderRadius: "50%",
-            boxShadow: "0px 0px 80px 0px #157AFF80",
+  {/* Blur behind right grid */}
+  <div
+    className="-right-[42%] py-4  top-40 relative w-[300px] h-40  blur-[8.1px] md:translate-x-[10%] lg:translate-x-[40%] md:-translate-y-[80%] translate-x-[25%] -translate-y-[80%] lg:-translate-y-[60%] animate-glow2"
+    style={{
+      background:
+        "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
+      rotate: "180deg",
+      borderRadius: "50%",
+      zIndex: 10, // 👈 stays at bottom
+    }}
+  >
 
-          }}
-        />
-        <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
-          <Grid />
-        </div>
-      </div>
+   
+  
+  
+
+
+</div>
+
+<div className="absolute -right-20 -top-2 z-10"><PointerGrid /></div>
+
 
       {/* ===== Main Card ===== */}
       <div
@@ -89,9 +85,9 @@ const ServiceBlurCard = () => {
             opacity: 0.7,
             background: "#1057B5",
             boxShadow: "0px 0px 80px 0px #157AFF80",
-            top: "-40%",
+            top: "-20%",
             left: "20%",
-            zIndex: 1,
+            zIndex: -1,
           }}
         ></div>
 
@@ -107,7 +103,7 @@ const ServiceBlurCard = () => {
             bottom: "-10%",
             right: "20%",
             borderRadius: "50%",
-            zIndex: 0,
+            zIndex: -1,
           }}
         ></div>
 

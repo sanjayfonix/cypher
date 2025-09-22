@@ -1,6 +1,6 @@
 "use client";
 
-import { Tick } from "@/assets/icon";
+import { Tick, Toparrow } from "@/assets/icon";
 import Image from "next/image";
 import React from "react";
 import Button from "../common/Button";
@@ -72,7 +72,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className='custom-button with-border bg-transparent'>Support Your TPA Team</button>
+              <button className='custom-button with-border bg-transparent'>Support Your TPA Team <Toparrow/></button>
             </div>
           </motion.div>
         </div>
@@ -113,7 +113,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className="custom-button bg-transparent with-border" >Request Risk Profiling</button>
+              <button className="custom-button bg-transparent with-border" >Request Risk Profiling <Toparrow/></button>
             </div>
           </motion.div>
 

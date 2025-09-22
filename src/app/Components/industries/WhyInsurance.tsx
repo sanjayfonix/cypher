@@ -48,8 +48,9 @@ export const WhyIndustriesCarrier = () => {
         
 
         {/* Left Cards Column */}
-        <div className="grid grid-cols-[1fr_auto_1fr] md:flex gap-4  md:gap-8 ">
-        <div className="md:mt-20 flex flex-col gap-14 ">
+        <div
+        className="grid grid-cols-[1fr_auto_1fr] md:flex gap-4  md:gap-8 ">
+        <div className="md:mt-20 flex flex-col gap-14 mt-2 sm:mt-0">
           {/* Card 1 */}
           <Card className="flex flex-col flex-1 lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
             <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
@@ -63,10 +64,10 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
 
-          <div className="w-full h-0 border-[#5B5B5B] border block  " />
+          <div className="hidden w-full h-0 border-[#5B5B5B] border md:block  " />
         
           {/* Card 2 */}
-          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+          <Card className="flex flex-1 items-start mb-4 gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
               <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4">
@@ -78,9 +79,9 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
         </div>
-       <div className=" block w-0 border border-[#5B5B5B] " />
+       <div className="block w-0 border border-[#5B5B5B] " />
         {/* Right Cards Column */}
-        <div className="flex flex-col gap-14  mt-0 ">
+        <div className="flex flex-col gap-14  mt-2 ">
           {/* Card 3 */}
           <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
@@ -94,10 +95,10 @@ export const WhyIndustriesCarrier = () => {
             </CardContent>
           </Card>
 
- <div className="w-full h-0 border-[#5B5B5B] border block  " />
+ <div className="w-full hidden h-0 border-[#5B5B5B] border md:block  " />
 
           {/* Card 4 */}
-          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+          <Card className="flex mb-4 flex-1 items-start gap-6 bg-transparent border-none shadow-none">
             <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
               <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon/>} size={60}/></div>
               <div className="flex flex-col gap-4">

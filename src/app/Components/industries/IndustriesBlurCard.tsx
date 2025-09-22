@@ -33,7 +33,7 @@ const IndustriesBlurCard = () => {
             boxShadow: "0px 0px 80px 0px #157AFF80",
             top: "-40%",
             left: "20%",
-            zIndex: 1,
+            zIndex: -1,
           }}
         ></div>
 
@@ -49,7 +49,7 @@ const IndustriesBlurCard = () => {
             bottom: "-26%",
             right: "22%",
             borderRadius: "50%",
-            zIndex: 0,
+            zIndex: -1,
           }}
         ></div>
 

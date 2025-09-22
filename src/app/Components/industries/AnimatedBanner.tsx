@@ -13,7 +13,7 @@ const ICONS = [
   { cx: 920 + 50,  cy: 325 + 50, r: 50 },  // (x=920,y=325,w=100,h=100)
 ];
 
-const AnimatedPath: React.FC = () => {
+const AnimatedPathIndustries: React.FC = () => {
   const path1Ref = useRef<SVGPathElement | null>(null);
   const path2Ref = useRef<SVGPathElement | null>(null);
   const path3Ref = useRef<SVGPathElement | null>(null);
@@ -174,7 +174,7 @@ const AnimatedPath: React.FC = () => {
   );
 };
 
-export default AnimatedPath;
+export default AnimatedPathIndustries;
 
 
 

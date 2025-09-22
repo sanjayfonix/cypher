@@ -16,10 +16,10 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Left */}
       <div
-        className="absolute pointer-events-none -z-1 animate-glow"
+        className="absolute pointer-events-none -z-1 animate-glow2"
         style={{
-          width: "300px",
-          height: "200px",
+          width: "320px",
+          height: "250px",
           top: "-100px",
           left: "-150px",
           background: "#167BFF",
@@ -32,10 +32,10 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Right */}
       <div
-        className="absolute pointer-events-none z-2 animate-glow"
+        className="absolute pointer-events-none z-2 animate-glow2"
         style={{
-          width: "300px",
-          height: "200px",
+          width: "320px",
+          height: "250px",
           top: "-100px",
           right: "-150px",
           background: "#167BFF",

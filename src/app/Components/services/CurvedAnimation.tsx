@@ -4,7 +4,7 @@ import React,{useState} from 'react';
 
 export default function SemicircularArcs({
   viewWidth = 556,   // default original design width
-  viewHeight = 300,  // default original design height
+  viewHeight = 700,  // default original design height
 }: {
   viewWidth?: number;
   viewHeight?: number;
@@ -20,10 +20,10 @@ export default function SemicircularArcs({
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="w-full max-w-[800px] mx-auto">
+    <div className="w-full max-w-[800px] mx-auto relative md:-top-24">
       <svg
         className="w-full h-auto"
-        viewBox={`0 0 ${viewWidth} ${viewHeight}`}
+        viewBox={`0 -100 ${viewWidth} 400`}
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -57,16 +57,13 @@ export default function SemicircularArcs({
           strokeDasharray="12 12"
         />
 
+{hoveredIndex===0&&<circle cx='390' cy='20' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
+{hoveredIndex===1&&<circle cx='345' cy='160' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
+{hoveredIndex===2&&<circle cx='150' cy='85' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
         {/* Pointers */}
         {pointerPositions.map((pos, i) => (
           <circle
-          style={{
-
-       
-           
-      
-  
-          }}
+          className='pointer-circle'
           onMouseEnter={()=>setHoveredIndex(i)}
           onMouseLeave={()=>setHoveredIndex(null)}
             key={i}
@@ -74,14 +71,13 @@ export default function SemicircularArcs({
             cy={pos.cy}
             r={hoveredIndex===i?10:6}
             fill={hoveredIndex===i?"white":"#838383"}
+            
           />
         ))}
 
 
 
-<foreignObject width={200} height={200} x='90' y='30'><div onMouseEnter={()=>setHoveredIndex(2)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===2?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
-<foreignObject width={100} height={100} x='325' y='-20'><div onMouseEnter={()=>setHoveredIndex(0)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===0?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
-<foreignObject width={100} height={100} x='275' y='110'><div onMouseEnter={()=>setHoveredIndex(1)} onMouseLeave={()=>setHoveredIndex(null)} className={`${hoveredIndex===1?'bg-blue-500':''} w-30 h-30 rounded-full opacity-20 blur-[20px]`}></div></foreignObject>
+
 
         {/* Labels */}
         {pointerPositions.map((pos, i) => (
@@ -98,7 +94,7 @@ export default function SemicircularArcs({
     onMouseEnter={()=>setHoveredIndex(i)}
     onMouseLeave={()=>setHoveredIndex(null)}
     className="gap-4 flex p-2 w-fit rounded-sm border border-[#6B6B6B] text-sm  font-normal"
-    style={{ position: "relative",color:hoveredIndex===i?'blue':'#6B6B6B' }}
+    style={{ position: "relative",color:hoveredIndex===i?'#157AFF':'#6B6B6B',cursor:'pointer' }}
   >
     {texts[i]}
   </div>

@@ -312,8 +312,7 @@ body {
 
 .pointer-circle:hover {
   r: 10;
-  fill: #FFFFFF !important;
-  filter: drop-shadow(0 0 10px #FFFFFF );
+  filter: drop-shadow(0 0px 3px #FFFFFF73 );
 }
 
 
