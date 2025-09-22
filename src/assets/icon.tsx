@@ -535,22 +535,22 @@ export const Icon2 = () => (
 
 
 export const DiamondGlow = () => (
-  <svg width="711" height="284" viewBox="0 0 711 284" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <g filter="url(#filter0_f_4_53)">
-      <g clip-path="url(#paint0_diamond_4_53_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0 0.11 -0.3235 0 355.5 142)"><rect x="0" y="0" width="1009.09" height="1003.09" fill="url(#paint0_diamond_4_53)" opacity="1" shape-rendering="crispEdges" /><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(1 -1)" fill="url(#paint0_diamond_4_53)" opacity="1" shape-rendering="crispEdges" /><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(-1 1)" fill="url(#paint0_diamond_4_53)" opacity="1" shape-rendering="crispEdges" /><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(-1)" fill="url(#paint0_diamond_4_53)" opacity="1" shape-rendering="crispEdges" /></g></g><ellipse cx="355.5" cy="142" rx="323.5" ry="110" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_DIAMOND&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.078431375324726105,&#34;g&#34;:0.43921568989753723,&#34;b&#34;:0.90980392694473267,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.0078431377187371254,&#34;g&#34;:0.031372550874948502,&#34;b&#34;:0.070588238537311554,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.078431375324726105,&#34;g&#34;:0.43921568989753723,&#34;b&#34;:0.90980392694473267,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.0078431377187371254,&#34;g&#34;:0.031372550874948502,&#34;b&#34;:0.070588238537311554,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:3.9617326753156254e-14,&#34;m01&#34;:-647.0,&#34;m02&#34;:679.0,&#34;m10&#34;:220.0,&#34;m11&#34;:1.3471115431376406e-14,&#34;m12&#34;:32.0},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}" />
-    </g>
-    <defs>
-      <filter id="filter0_f_4_53" x="0.700001" y="0.700001" width="709.6" height="282.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-        <feFlood flood-opacity="0" result="BackgroundImageFix" />
-        <feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape" />
-        <feGaussianBlur stdDeviation="15.65" result="effect1_foregroundBlur_4_53" />
-      </filter>
-      <clipPath id="paint0_diamond_4_53_clip_path"><ellipse cx="355.5" cy="142" rx="323.5" ry="110" /></clipPath><linearGradient id="paint0_diamond_4_53" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#1470E8" />
-        <stop offset="1" stop-color="#020812" />
-      </linearGradient>
-    </defs>
-  </svg>
+  <svg width="630" height="142" viewBox="0 0 630 142" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_f_895_1097)">
+<g clip-path="url(#paint0_diamond_895_1097_clip_path)" data-figma-skip-parse="true"><g transform="matrix(0 0.11 -0.3235 0 322.5 142)"><rect x="0" y="0" width="1009.09" height="1003.09" fill="url(#paint0_diamond_895_1097)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(1 -1)" fill="url(#paint0_diamond_895_1097)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(-1 1)" fill="url(#paint0_diamond_895_1097)" opacity="1" shape-rendering="crispEdges"/><rect x="0" y="0" width="1009.09" height="1003.09" transform="scale(-1)" fill="url(#paint0_diamond_895_1097)" opacity="1" shape-rendering="crispEdges"/></g></g><ellipse cx="322.5" cy="142" rx="323.5" ry="110" data-figma-gradient-fill="{&#34;type&#34;:&#34;GRADIENT_DIAMOND&#34;,&#34;stops&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.078431375324726105,&#34;g&#34;:0.43921568989753723,&#34;b&#34;:0.90980392694473267,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.0078431377187371254,&#34;g&#34;:0.031372550874948502,&#34;b&#34;:0.070588238537311554,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;stopsVar&#34;:[{&#34;color&#34;:{&#34;r&#34;:0.078431375324726105,&#34;g&#34;:0.43921568989753723,&#34;b&#34;:0.90980392694473267,&#34;a&#34;:1.0},&#34;position&#34;:0.0},{&#34;color&#34;:{&#34;r&#34;:0.0078431377187371254,&#34;g&#34;:0.031372550874948502,&#34;b&#34;:0.070588238537311554,&#34;a&#34;:1.0},&#34;position&#34;:1.0}],&#34;transform&#34;:{&#34;m00&#34;:3.9617326753156254e-14,&#34;m01&#34;:-647.0,&#34;m02&#34;:646.0,&#34;m10&#34;:220.0,&#34;m11&#34;:1.3471115431376406e-14,&#34;m12&#34;:32.0},&#34;opacity&#34;:1.0,&#34;blendMode&#34;:&#34;NORMAL&#34;,&#34;visible&#34;:true}"/>
+</g>
+<defs>
+<filter id="filter0_f_895_1097" x="-32.3" y="0.700001" width="709.6" height="282.6" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="15.65" result="effect1_foregroundBlur_895_1097"/>
+</filter>
+<clipPath id="paint0_diamond_895_1097_clip_path"><ellipse cx="322.5" cy="142" rx="323.5" ry="110"/></clipPath><linearGradient id="paint0_diamond_895_1097" x1="0" y1="0" x2="500" y2="500" gradientUnits="userSpaceOnUse">
+<stop stop-color="#1470E8"/>
+<stop offset="1" stop-color="#020812"/>
+</linearGradient>
+</defs>
+</svg>
 )
 
 export const Search2 = () => (

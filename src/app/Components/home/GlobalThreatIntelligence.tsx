@@ -236,13 +236,23 @@ function SecurityFeatures() {
                       initial={{ y: -5 }}
                       animate={{ y: realInd === 1 || realInd === 3 ? lineHeight - 50 : lineHeight * 2.5 - 50 }}
                       transition={{
-                        duration: 1,
+                        duration: 4,
                         repeat: Infinity,
                         repeatType: "loop",
                         ease: "linear",
                       }}
                     >
-                      <FallDownIcon />
+                   <div className="relative w-[24px] h-[60px]">
+      {/* Main droplet */}
+      <div
+        className="
+          absolute inset-0
+          bg-gradient-to-b from-[#006EFF] to-[#093C80]
+          [clip-path:polygon(50%_0%,25%_80%,40%_100%,60%_100%,75%_80%)]
+          shadow-[0_2px_4px_rgba(0,110,255,0.5),0_4px_6px_rgba(9,60,128,0.5)]
+        "
+      />
+    </div>
                     </motion.div>
 
 
@@ -268,6 +278,8 @@ function SecurityFeatures() {
     </div>
   );
 }
+
+
 
 
 

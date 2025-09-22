@@ -43,7 +43,7 @@ export default function WhereInvestigation() {
                 Leverage intelligence techniques to make informed decisions, enhance security, and mitigate risks.
               </p>
             </div>
-            <Link href={'/pages/services/consulting'}><button className="mt-4 custom-button with-border bg-transparent">
+            <Link href={'/pages/services/consulting'}><button className="mt-12 custom-button with-border bg-transparent">
               See How It works{" "}
               <span>
                 <Toparrow />
@@ -55,7 +55,7 @@ export default function WhereInvestigation() {
           {/* Social Media Intelligence */}
           <div className="group relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
-            <TravelingBorder borderRadius={24} anticlockwise={true} delta={10} />
+            <TravelingBorder borderRadius={24} anticlockwise={true}/>
 
 
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
@@ -79,47 +79,70 @@ export default function WhereInvestigation() {
             <div className={` relative flex h-full items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
-              <div className="absolute top-[20%] left-0 w-12 sm:w-[60px] aspect-square
+              <div className="absolute top-[23%] left-[5%] w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-x-[140px] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100">
-                <GlassIcon size={60} icon={<InstaIcon />} />
-              </div>
-              <div className="absolute  w-12 sm:w-[60px] aspect-square
+  transform translate-x-[80px] translate-y-[60px] opacity-0 
+  transition-all duration-500 
+  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+  <GlassIcon size={60} icon={<InstaIcon />} />
+</div>
+              <div className="absolute w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[140px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-0 left-[25%]">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[25%]">
                 <GlassIcon size={60} icon={<XIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[140px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-0 left-[59%] ">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[59%] ">
                 <GlassIcon size={60} icon={<WhatsappIcon />} />
               </div>
-              <div className="absolute  w-12 sm:w-[60px] aspect-square
+             <div className="absolute top-[23%] left-[82%] w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform -translate-x-[140px] opacity-0 transition-all duration-500 group-hover:translate-x-0 group-hover:opacity-100 top-[20%] left-[82%]">
-                <GlassIcon size={60} icon={<FbIcon />} />
-              </div>
+  transform -translate-x-[80px] translate-y-[60px] opacity-0 
+  transition-all duration-500 
+  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+  <GlassIcon size={60} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
                 {/* ...floating circles */}
-                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/8 blur-[30px] inset-0 flex justify-center items-center  top-[97%]">
+                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/7 blur-[30px] inset-0 flex justify-center items-center  top-[80%]">
                   <DiamondGlow />
                 </div>
                 {/* Vertical rectangle */}
-                <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[153px] h-[70%] flex flex-col justify-start">
+                <div className="overflow-hidden relative mx-auto w-[40%] sm:w-[253px] h-[70%] flex flex-col justify-start">
                   {/* 🌟 Radial Glow — put BEHIND the rectangle */}
 
 
                   {/* Actual rectangle - keep it above */}
                   
-                 <div style={{boxShadow:'0px 0px 110px 0px #157AFF66'}} className="relative z-10 w-[153px] h-full rounded-[5px] bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] flex flex-col justify-start">
-                    <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
-                  </div>
+              <div className="
+              left-1/5 top-4
+  relative z-10 w-[153px] h-[95%]
+  rounded-tl-lg rounded-tr-lg 
+
+  flex flex-col justify-start
+  backdrop-blur-[20px]
+
+  border-2 border-t-3 border-b-0 border-white/20
+
+  shadow-[0_0_40px_0_#157AFF66]
+
+  bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)]
+
+  before:absolute before:inset-0 before:rounded-tl-lg before:rounded-tr-lg
+  before:content-[''] before:pointer-events-none before:z-[-1]
+">
+  {/* Notch / Speaker */}
+  <div className="w-3 sm:w-4 h-1 rounded-sm mt-2 bg-[#D9D9D9] opacity-40 self-center"></div>
+</div>
+
+
+                 
                 </div>
               
               </div>
@@ -210,7 +233,7 @@ export default function WhereInvestigation() {
                 Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>
-            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent mt-4">
+            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent mt-12">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
