@@ -32,7 +32,7 @@ export default function HomeBanner() {
   const PAUSE_AFTER_COMPLETE = 4000;
   const ROLE_DURATION = 2000;
 
-  // Typewriter effect for all headlines
+  // Typewriter effect
   useEffect(() => {
     const currentHeadline = HEADLINES[headlineIndex];
     let timerId: number | undefined;
@@ -44,7 +44,6 @@ export default function HomeBanner() {
       );
     } else if (!isDeleting && text.length === currentHeadline.length) {
       if (currentHeadline === "Built by investigators for") {
-        // After typing this headline, show roles once
         setShowRoles(true);
         setRoleIndex(0);
       } else {
@@ -65,7 +64,7 @@ export default function HomeBanner() {
     };
   }, [headlineIndex, text, isDeleting]);
 
-  // Show roles one by one only once
+  // Roles effect
   useEffect(() => {
     if (!showRoles) return;
 
@@ -73,7 +72,6 @@ export default function HomeBanner() {
       const timer = setTimeout(() => setRoleIndex(roleIndex + 1), ROLE_DURATION);
       return () => clearTimeout(timer);
     } else {
-      // After last role, move to next headline
       const timer = setTimeout(() => {
         setShowRoles(false);
         setText("");
@@ -84,15 +82,15 @@ export default function HomeBanner() {
   }, [roleIndex, showRoles]);
 
   return (
-    <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-20 px-6 sm:px-12 lg:px-28">
+    <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-12 sm:py-16 md:py-20 px-4 sm:px-8 md:px-12 lg:px-28">
       {/* Glow background layers */}
-      <div className="absolute pointer-events-none z-0 blur-[185.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]" />
+      <div className="absolute pointer-events-none z-0 blur-[120px] sm:blur-[160px] md:blur-[185.1px] -top-[20px] sm:-top-[28px] md:-top-[31px] opacity-60 w-full h-10 bg-[#1057B5]" />
       <div
-        className="absolute pointer-events-none z-1 blur-[3px] animate-blink delay-75"
+        className="absolute pointer-events-none z-1 blur-[2px] sm:blur-[3px] animate-blink delay-75"
         style={{
-          width: "30%",
-          height: 26,
-          top: -16,
+          width: "50%", // wider for small screens
+          height: 20,
+          top: -12,
           left: "50%",
           transform: "translateX(-50%)",
           opacity: 0.9,
@@ -101,11 +99,11 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[26.2px] animate-glow2 "
+        className="absolute pointer-events-none z-0 blur-[20px] sm:blur-[26.2px] animate-glow2"
         style={{
-          width: "50%",
-          height: 78,
-          top: -43,
+          width: "70%",
+          height: 60,
+          top: -36,
           left: "50%",
           transform: "translateX(-50%)",
           opacity: 0.6,
@@ -114,11 +112,11 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[50px] animate-glow2  "
+        className="absolute pointer-events-none z-0 blur-[40px] sm:blur-[50px] animate-glow2"
         style={{
-          width: "50%",
-          height: 192,
-          top: -95,
+          width: "70%",
+          height: 150,
+          top: -80,
           left: "50%",
           transform: "translateX(-50%)",
           opacity: 0.3,
@@ -127,11 +125,11 @@ export default function HomeBanner() {
         }}
       />
       <div
-        className="absolute pointer-events-none z-0 blur-[271.2px] animate-glow2  "
+        className="absolute pointer-events-none z-0 blur-[200px] sm:blur-[271.2px] animate-glow2"
         style={{
-          width: "50%",
-          height: 659,
-          top: -351,
+          width: "80%",
+          height: 500,
+          top: -280,
           left: "50%",
           transform: "translateX(-50%)",
           opacity: 0.4,
@@ -141,19 +139,22 @@ export default function HomeBanner() {
       />
 
       {/* Content */}
-      <div className="flex flex-col items-center justify-start gap-6 z-10 text-center max-w-[900px]">
-        <p className="text-3xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
+      <div className="flex flex-col items-center justify-start gap-4 sm:gap-6 md:gap-8 z-10 text-center w-full max-w-[95%] sm:max-w-[700px] md:max-w-[900px]">
+        {/* Headline */}
+        <p className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-snug sm:leading-tight">
           {text}
           <span className="inline-block ml-1 animate-pulse text-blue-300">_</span>
         </p>
 
+        {/* Roles */}
         {showRoles && text === "Built by investigators for" && (
-          <div className="relative h-[2.5rem] sm:h-[3rem] md:h-[3.5rem] w-full overflow-visible">
+          <div className="relative h-[2rem] sm:h-[2.5rem] md:h-[3rem] lg:h-[3.5rem] w-full overflow-visible">
             {ROLES.map((role, i) => (
               <span
                 key={role}
-                className={`absolute inset-0 flex items-start justify-center text-3xl sm:text-5xl lg:text-6xl  font-bold text-blue-300 transition-opacity duration-700 ease-in-out ${i === roleIndex ? "opacity-100" : "opacity-0"
-                  }`}
+                className={`absolute inset-0 flex items-start justify-center text-lg sm:text-2xl md:text-4xl lg:text-6xl font-bold text-blue-300 transition-opacity duration-700 ease-in-out ${
+                  i === roleIndex ? "opacity-100" : "opacity-0"
+                }`}
               >
                 {role}
               </span>
@@ -161,32 +162,33 @@ export default function HomeBanner() {
           </div>
         )}
 
-        <p className="text-xs sm:text-base md:text-[1rem] text-[#F1F1F1]">
-          cyphr combines real world investigative experience that combines forensic expertise OSINT displines and <br/> modern data intelligence to give you defensible answers when you need them the most.
+        {/* Subtext */}
+        <p className="text-[0.75rem] sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] leading-relaxed sm:leading-snug">
+          cyphr combines real world investigative experience that combines forensic expertise OSINT disciplines and <br className="hidden lg:block"/> modern data intelligence to give you defensible answers when you need them the most.
         </p>
 
-        <div className="flex gap-3 sm:gap-5 mt-[0.9rem] w-full sm:w-auto justify-center">
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mt-3 sm:mt-4 w-full sm:w-auto justify-center">
           <button
             onClick={() => {
-              const navToSection = document.getElementById('contact-us')
+              const navToSection = document.getElementById("contact-us");
               if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' })
+                navToSection.scrollIntoView({ behavior: "smooth" });
               }
             }}
-            className="custom-button with-shadow bg-[#1057B5]">
+            className="custom-button with-shadow bg-[#1057B5]"
+          >
             Book a Consultation
           </button>
-          <Link href={"/pages/services/consulting"}>
-            <button className="custom-button with-border bg-transparent">
+          <Link href={"/pages/services/consulting"} className="w-full sm:w-auto">
+            <button className="custom-button with-border bg-transparent w-full sm:w-auto">
               Explore Services <Toparrow />
             </button>
           </Link>
         </div>
+
         <AnimateBannerPaths />
       </div>
     </div>
   );
 }
-
-
-

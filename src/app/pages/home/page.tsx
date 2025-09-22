@@ -2,6 +2,7 @@ import ContactSection from "@/app/Components/common/Getintouch";
 import BlurCard from "@/app/Components/home/BlurCard";
 import CESessions from "@/app/Components/home/CeCle";
 import GlobalThreatIntelligence from "@/app/Components/home/GlobalThreatIntelligence";
+import { PointerGrid } from "@/app/Components/home/GridAnimation";
 
 
 
@@ -16,18 +17,17 @@ import {User,Facebook,Mail,} from 'lucide-react'
 export default function HomePage() {
   return (
     <div className="w-full bg-[var(--primary)] container">
-     <HomeBanner/>
-     <GlobalThreatIntelligence/> 
+     {/* <HomeBanner/> */}
+      {/* <GlobalThreatIntelligence/>  */}
       <WhereInvestigation/>
-     
-     <HowItWorks/>
+     {/*<HowItWorks/>
      <IntegrityAtCore/>
      <BlurCard/>
      <div className="p-4 lg:p-0">
      <ContactSection />
-
      </div>
-     <CESessions/>
-    </div>
+     <CESessions/>*/}
+     
+    </div> 
   );
 }

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const SIZE = 600;
 const CX = SIZE / 2;
 const CY = SIZE / 2;
-const RADIUS = 260;
+const RADIUS = 310;
 
 type Point = {
   id: string;
@@ -23,8 +23,8 @@ const points: Point[] = [
     return {
       id: "investigation",
       label: "Investigation",
-      x: CX + r * Math.cos((angle * Math.PI) / 180),
-      y: CY + r * Math.sin((angle * Math.PI) / 180),
+      x: (CX + r * Math.cos((angle * Math.PI) / 180))-0,
+      y: (CY + r * Math.sin((angle * Math.PI) / 180)),
       color: "#cfe9ff",
     };
   })(),
@@ -125,8 +125,8 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           opacity={0.55}
         />
         <text
-          x={12}
-          y={2}
+          x={text==='Investigation'?-20:12}
+          y={text==='Risk Assessment'?-30:text==='Data Analysis'?-15:12}
           fontSize={14}
           fill="#d9f0ff"
           style={{ fontFamily: "Inter, system-ui, sans-serif" }}
@@ -138,9 +138,9 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
   }
 
   return (
-    <div className="flex items-center justify-center p-6">
+    <div className="flex items-center justify-start">
       <svg
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
+        viewBox={`0 0 ${SIZE+40} ${SIZE}`}
         width={size}
         height={size}
         className="rounded-full drop-shadow-lg"
@@ -161,7 +161,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         {/* Background grid + circles */}
         <g>
           <circle cx={CX} cy={CY} r={RADIUS + 18} fill="url(#bgGrad)" />
-          {[60, 120, 180, 240].map((r, i) => (
+          {[40, 120, 200, 280].map((r, i) => (
             <circle
               key={i}
               cx={CX}

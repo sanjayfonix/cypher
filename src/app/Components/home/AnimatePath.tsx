@@ -230,7 +230,7 @@ const AnimatedPathWithPointer: React.FC<{
 export const AnimateBannerPaths: React.FC = () => {
   return (
     
-    <svg width="1300" height="400" viewBox="0 0 1300 400" fill="none">
+    <svg className="lg:w-[1000] md:w-[700] sm:w-[500] w-full h-full" viewBox="0 0 1300 400" fill="none">
       <svg x={'369'} y={'-105'} width="509" height="619" viewBox="0 0 509 509" fill="none" xmlns="http://www.w3.org/2000/svg">
 <g opacity="0.6" filter="url(#filter0_f_1128_929)">
 <circle cx="254.5" cy="254.5" r="150.5" fill="#167BFF" fill-opacity="0.4"/>

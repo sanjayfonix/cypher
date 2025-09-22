@@ -93,14 +93,14 @@ export default function CorePrincipals() {
           <div className="relative flex justify-center">
       {/* Background glow */}
       <div
-        className="absolute animate-glow2 h-[100px]  w-[110%]  md:w-full"
+        className="blur-[40px] md:blur-[60px] absolute animate-glow2 h-[100px]  w-[110%]  md:w-full"
         style={{
           width:'100%',
           background: "#157AFF",
           borderRadius:'50%',
           opacity:1.5,
           top: "33%",
-          filter: "blur(40px)",
+          
           zIndex: 0,
         }}
       />
@@ -130,7 +130,7 @@ export default function CorePrincipals() {
               style={{
                 cursor:'pointer'
               }}
-              // onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
+              onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
               className="flex relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
             >
               {tabIndex === 0 ? <DropUp /> : <DropDown />}
@@ -153,22 +153,22 @@ export default function CorePrincipals() {
         <div onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)} ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
          <TravelingBorder />
         
-           <div className="relative sm:my-16 lg:my-4 w-1/2 flex mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
+           <div className="relative sm:my-16 lg:my-4 w-1/2  mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
                
          <div
-        className="blur-[40px] lg:blur-[60px] absolute animate-glow2 h-[60px] sm:h-[70px] md:h-[90px] w-[150%] -left-1/4 sm:-left-1/24 md:-left-0 sm:w-[110%] md:w-full"
+        className="blur-[40px] md:blur-[60px]  absolute animate-glow2 h-[70px] md:h-[90px]  w-[150%] -left-1/4 sm:-left-1/24 md:-left-0 sm:w-[110%] md:w-full"
         style={{
           background: "#157AFF",
           borderRadius:'50%',
           opacity:1.5,
-          top: "33%",
+          top: "35%",
           zIndex: 0,
         }}
       />
          <div className="absolute rounded-[32px] overflow-hidden inset-0  ">
         
           </div>
-  <div className=" w-[200px] mx-auto md:w-[270px] lg:w-[297px] relative z-10 flex animate-ripple  justify-center items-center aspect-square w-full  rounded-full border border-[#0C438C]">
+  <div className=" w-[200px] mx-auto md:w-[270px] lg:w-[297px] relative z-10 flex animate-ripple  justify-center items-center aspect-square rounded-full border border-[#0C438C]">
    
     <div className="flex animate-ripple delay-150 justify-center items-center w-[85%] h-[85%] rounded-full border border-[#0C438C]">
       <div className="relative  w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
@@ -188,19 +188,19 @@ export default function CorePrincipals() {
           </h2>
 
           <div className="flex flex-row justify-between items-end">
-            <p className="max-w-[75%] text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
+            <p className=" text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
               We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.
             </p>   
             <button 
 
-            // onClick={()=>{
-            //   if(tabIndex===1){
-            //     setTabIndex(-1)
-            //   }
-            //   else{
-            //     setTabIndex(1)
-            //   }
-            // }} 
+            onClick={()=>{
+              if(tabIndex===1){
+                setTabIndex(-1)
+              }
+              else{
+                setTabIndex(1)
+              }
+            }} 
             className="relative top-5 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
             {tabIndex === 1 ? <DropUp /> : <DropDown />}
@@ -227,11 +227,12 @@ export default function CorePrincipals() {
 export function TravelingBorder({
   borderRadius = 32,
   speed = 150,
-  wedgeLength = 85,
-  minThickness = 0,
-  maxThickness = 4,
+  wedgeLength = 80,
+  minThickness = 0.2,
+  maxThickness = 3,
   inset = 0,
   anticlockwise = false,
+  styles,
 }: {
   borderRadius?: number;
   speed?: number;
@@ -240,13 +241,14 @@ export function TravelingBorder({
   maxThickness?: number;
   inset?: number;
   anticlockwise?: boolean;
+  styles?:{};
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
   const pointerRef = useRef<SVGPathElement | null>(null);
   const [pathData, setPathData] = useState("");
 
-  // 🔹 Rounded-rectangle path
+  // 🔹 Generate rounded-rectangle path
   useEffect(() => {
     if (!containerRef.current) return;
 
@@ -276,7 +278,7 @@ Z`;
     return () => ro.disconnect();
   }, [borderRadius, inset]);
 
-  // 🔹 Animate pointer
+  // 🔹 Animate pointer wedge along the path
   useEffect(() => {
     if (!pathRef.current || !pointerRef.current) return;
 
@@ -324,7 +326,7 @@ Z`;
         bottom.push({ x: p1.x - nx * thickness, y: p1.y - ny * thickness });
       }
 
-      // Front tip
+      // 🔹 Short tapered front tip
       const last = path.getPointAtLength(
         (dist + (anticlockwise ? -wedgeLength : wedgeLength) + length) % length
       );
@@ -336,61 +338,22 @@ Z`;
       const dyF = after.y - last.y;
       const lenF = Math.sqrt(dxF * dxF + dyF * dyF) || 1;
       const tipFront = {
-        x: last.x + (dxF / lenF) * 14,
-        y: last.y + (dyF / lenF) * 14,
+        x: last.x + (dxF / lenF), // short tip like reference SVG
+        y: last.y + (dyF / lenF),
       };
 
-      // Back tip
-      const first = path.getPointAtLength(dist);
-      const before = path.getPointAtLength(
-        (dist + (anticlockwise ? 8 : -8) + length) % length
-      );
-      const dxB = first.x - before.x;
-      const dyB = first.y - before.y;
-      const lenB = Math.sqrt(dxB * dxB + dyB * dyB) || 1;
-      const tipBack = {
-        x: first.x + (dxB / lenB) * 12,
-        y: first.y + (dyB / lenB) * 12,
-      };
-      // Build path normally (without forcing top/bottom into tipBack)
-let dStr = `M ${bottom[1].x},${bottom[1].y}`;
+      // 🔹 Build wedge path (hugging corners)
+      let dStr = `M ${bottom[0].x},${bottom[0].y}`;
+      for (let i = 1; i < bottom.length - 1; i++) {
+        dStr += ` L ${bottom[i].x},${bottom[i].y}`;
+      }
+      dStr += ` L ${tipFront.x},${tipFront.y}`;
+      for (let i = top.length - 2; i >= 0; i--) {
+        dStr += ` L ${top[i].x},${top[i].y}`;
+      }
+      dStr += " Z";
 
-// bottom edge (excluding last, since it goes to tipFront)
-for (let i = 2; i < bottom.length - 1; i++) {
-  dStr += ` L ${bottom[i].x},${bottom[i].y}`;
-}
-
-// connect bottom side → tipFront
-dStr += ` L ${tipFront.x},${tipFront.y}`;
-
-// connect tipFront → last top point
-dStr += ` L ${top[top.length - 2].x},${top[top.length - 2].y}`;
-
-// top edge (rest of points back toward start)
-for (let i = top.length - 3; i > 1; i--) {
-  dStr += ` L ${top[i].x},${top[i].y}`;
-}
-
-// ✅ Now close the back with a small triangle
-// connect top[1] → tipBack → bottom[1]
-dStr += ` L ${top[1].x},${top[1].y}`;
-dStr += ` L ${tipBack.x},${tipBack.y}`;
-dStr += ` L ${bottom[1].x},${bottom[1].y}`;
-
-dStr += " Z";
-
-
-
-
-
-
-
-
-
-pointer.setAttribute("d", dStr);
-
-
-
+      pointer.setAttribute("d", dStr);
 
       rafId = requestAnimationFrame(animate);
     };
@@ -400,25 +363,25 @@ pointer.setAttribute("d", dStr);
   }, [pathData, speed, wedgeLength, minThickness, maxThickness, anticlockwise]);
 
   return (
-    <div ref={containerRef} className="absolute inset-0 pointer-events-none">
+    <div ref={containerRef} className="absolute z-20 inset-0 pointer-events-none">
       {pathData && (
         <svg className="absolute w-full h-full overflow-visible">
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />
           <path
             ref={pointerRef}
-            fill="url(#diamondGrad)"
+            fill="url(#wedgeGrad)"
             filter="url(#travelShadow)"
           />
           <defs>
-            <linearGradient id="diamondGrad" x1="100%" y1="0" x2="0" y2="0">
-              <stop stopColor="#016FFF" />
-              <stop offset="1" stopColor="#093C80" />
+            <linearGradient id="wedgeGrad" x1="100%" y1="0" x2="0" y2="0">
+              <stop stopColor="#167BFF" />
+              <stop offset="1" stopColor="#4F9BFF" />
             </linearGradient>
             <filter id="travelShadow" x="0" y="0" width="200%" height="200%">
               <feDropShadow
                 dx="0"
                 dy="0"
-                stdDeviation="3"
+                stdDeviation="1.5"
                 floodColor="#157AFF"
                 floodOpacity="0.6"
               />
@@ -429,3 +392,5 @@ pointer.setAttribute("d", dStr);
     </div>
   );
 }
+
+

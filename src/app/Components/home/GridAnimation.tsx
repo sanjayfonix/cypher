@@ -4,8 +4,11 @@ import React from "react";
 type Direction = "left" | "right" | "up" | "down";
 
 interface PointerGridProps {
+  width?: number | string; // overall SVG width
+  height?: number | string; // overall SVG height
   pointerWidth?: number;
   pointerHeight?: number;
+  speed?: number; // seconds for one loop
   horizontal?: {
     y: number;
     fromX: number;
@@ -21,8 +24,11 @@ interface PointerGridProps {
 }
 
 export const PointerGrid: React.FC<PointerGridProps> = ({
+  width = "100%", // default responsive
+  height = "100%",
   pointerWidth = 25,
   pointerHeight = 6,
+  speed = 4,
   horizontal = {
     y: 184.982,
     fromX: 196.18,
@@ -36,9 +42,10 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
 }) => {
   return (
     <svg
-      width="400"
-      height="300"
+      width={width}
+      height={height}
       viewBox="0 0 200 260"
+      preserveAspectRatio="xMidYMid meet"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -141,15 +148,15 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
           <g
             transform={
               horizontal.direction === "left"
-                ? "scale(1,-1) translate(-25,36)"
-                : undefined
+                ? "scale(-1,1) translate(27,-37) rotate(-180)"
+                : "scale(1,-1) translate(25,43) rotate(-180)"
             }
           >
             <svg width={pointerWidth} height={pointerHeight} viewBox="0 0 25 6">
               <use href="#pointer" />
             </svg>
             <animateMotion
-              dur="4s"
+              dur={`${speed}s`}
               repeatCount="indefinite"
               keyPoints={horizontal.direction === "left" ? "0.5;1" : "0.5;0"}
               keyTimes="0;1"
@@ -165,7 +172,7 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
       {vertical.map((v, idx) => (
         <g
           key={idx}
-          transform={v.direction === "up" ? "rotate(90) translate(-10,-3)" : "rotate(-90) translate(3,-3)"}
+          transform={v.direction === "up" ? "rotate(90) translate(-25,-3)" : "rotate(-90) translate(0,-3)"}
         >
           <path
             id={`v-line-${idx}`}
@@ -177,7 +184,7 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
             <use href="#pointer" />
           </svg>
           <animateMotion
-            dur="4s"
+            dur={`${speed}s`}
             repeatCount="indefinite"
             keyPoints="0;1"
             keyTimes="0;1"
@@ -190,3 +197,4 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
     </svg>
   );
 };
+

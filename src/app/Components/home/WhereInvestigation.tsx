@@ -1,10 +1,11 @@
 'use client'
-import { BigProtectIc, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
+import { BigProtectIc, BlueFbIcon, BlueWhatsappIcon, BlueXIcon, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
 import { TravelingBorder } from "../services/CorePrincipals";
 import { useState } from "react";
 import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
 import { GlassCard } from "./GlassCard";
+import { PointerGrid } from "./GridAnimation";
 
 export default function WhereInvestigation() {
   const [isHovering, setHovering] = useState(false);
@@ -31,7 +32,15 @@ export default function WhereInvestigation() {
         <div className="flex flex-col flex-1 gap-6">
           {/* Consulting & Advisory */}
           <div className="relative bg-gradient-to-b  from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between">
-            <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/grid2.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10" />
+            
+           
+            <div className="absolute z-30 right-0 top-1/8  translate-x-1/4">
+              <div className="relative flex items-center justify-center">
+                <PointerGrid  width={250} height={250} />
+              </div>
+            
+            
+            </div>
             <div className="flex flex-col gap-3 relative z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">
                 Consulting & Advisory
@@ -39,7 +48,7 @@ export default function WhereInvestigation() {
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">
                 Transform complex data into your strategic advantage
               </p>
-              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-sm">
+              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-[28rem]">
                 Leverage intelligence techniques to make informed decisions, enhance security, and mitigate risks.
               </p>
             </div>
@@ -53,9 +62,9 @@ export default function WhereInvestigation() {
           </div>
 
           {/* Social Media Intelligence */}
-          <div className="group relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
+          <div className="group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
-            <TravelingBorder borderRadius={24} anticlockwise={true}/>
+          
 
 
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
@@ -85,19 +94,19 @@ export default function WhereInvestigation() {
   transform translate-x-[80px] translate-y-[60px] opacity-0 
   transition-all duration-500 
   group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-  <GlassIcon size={60} icon={<InstaIcon />} />
+  <GlassIcon size={60} hoverComp={<InstaIcon/>} isHoverProperty={true} icon={<InstaIcon />} />
 </div>
               <div className="absolute w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[25%]">
-                <GlassIcon size={60} icon={<XIcon />} />
+                <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true} size={60} icon={<XIcon />} />
               </div>
               <div className="absolute  w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-2 left-[59%] ">
-                <GlassIcon size={60} icon={<WhatsappIcon />} />
+                <GlassIcon size={60} hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
              <div className="absolute top-[23%] left-[82%] w-12 sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
@@ -105,12 +114,12 @@ export default function WhereInvestigation() {
   transform -translate-x-[80px] translate-y-[60px] opacity-0 
   transition-all duration-500 
   group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-  <GlassIcon size={60} icon={<FbIcon />} /></div>
+  <GlassIcon size={60} hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
                 {/* ...floating circles */}
-                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/7 blur-[30px] inset-0 flex justify-center items-center  top-[80%]">
+                <div className="group-hover:opacity-100 transition-all duration-1000 opacity-0 absolute w-120 -left-1/7 blur-[30px] inset-0 flex justify-center items-center  top-[75%]">
                   <DiamondGlow />
                 </div>
                 {/* Vertical rectangle */}
@@ -148,7 +157,7 @@ export default function WhereInvestigation() {
               </div>
 
               <div>
-
+  
               </div>
 
             </div>
@@ -159,6 +168,7 @@ export default function WhereInvestigation() {
 
             </div>
 
+<TravelingBorder borderRadius={24} anticlockwise={true}/>
 
           </div>
         </div>
@@ -168,7 +178,7 @@ export default function WhereInvestigation() {
 
         {/* Right Column */}
         <div className="flex flex-col justify-between flex-1 gap-6">
-          {/* Brand Defense */}
+         
           <div className="relative bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             <TravelingBorder borderRadius={24} anticlockwise={true} />
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
@@ -187,49 +197,67 @@ export default function WhereInvestigation() {
               </span>
             </button>
             </Link>
-            <div className="relative flex justify-center items-center w-full max-w-[400px] aspect-square mx-auto">
-              {/* Outer Circle */}
-              <div className="flex justify-center items-center relative w-[95%] aspect-square rounded-full border border-[#09336B] opacity-50">
-                {/* Middle Circle */}
-                <div className="flex justify-center items-center w-[85%] aspect-square rounded-full border border-[#09336B] opacity-80">
-                  {/* Inner Circle */}
-                  <div className="flex animate-zoom-fade justify-center items-center w-[80%] aspect-square rounded-full border border-[#09336B] opacity-90 relative">
+            
+              <div className="relative flex justify-center items-center w-full max-w-[400px] aspect-square mx-auto">
+  {/* Animated rings */}
+  <div className="absolute inset-0 pointer-events-none z-0">
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                    w-[89%] md:w-[95%] aspect-square rounded-full border border-[#09336B80]
+                    animate-zoom-fade" />
 
-                    {/* 🌟 New Glow Behind Inner Circle */}
-                    <div className="absolute inset-0 flex justify-center items-center -z-10">
-                      <div className="w-[130%] bg-[#157AFF80] blur-[30px] aspect-square rounded-full bg-gradient-to-b  animate-glow" />
-                    </div>
+    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                    w-[75%] md:w-[80%] aspect-square rounded-full border border-[#09336BCC]
+                    animate-zoom-fade"
+        />
+         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
+                    w-[60%] md:w-[65%] aspect-square rounded-full border border-[#09336BE6]
+                    animate-zoom-fade"
+          />
+         
+  </div>
 
-                    
+  {/* Glow */}
+  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
+    <div className=" w-60 md:w-70 opacity-50 aspect-square rounded-full blur-[30px] bg-[#157AFF80] animate-glow" />
+  </div>
 
-                
-                    <div
-                      className="flex justify-center items-center w-[205px] bg-gradient-to-b from-[#030A14] to-[#157AFF] aspect-square rounded-full relative z-10"
-                      style={{
-                        transform: 'rotate(-0.47deg)',
-                        padding: '8px',
-                        
-                      }}
-                    >
-                      
-                      <BigProtectIc />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+  {/* Inner circle wrapper (static, isolates rotation) */}
+  <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+    <div
+      className="flex justify-center items-center w-[130px] md:w-[205px] aspect-square
+                 rounded-full bg-gradient-to-b from-[#030A14] to-[#157AFF80]"
+      style={{
+        transform: "rotate(-0.47deg)",
+        padding: "8px",
+      }}
+    >
+      
+      <BigProtectIc />
+     
+    </div>
+  </div>
+</div>
+              
+            
+            
 
           </div>
 
           {/* Geospatial Cellular Forensics */}
           <div className="relative bg-gradient-to-b from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between h-full">
-            <div className="absolute bottom-0 right-0 bg-cover bg-no-repeat bg-[url('/grid2.png')] w-[12rem] sm:w-[16.16rem] aspect-[1.06/1] z-10" />
+            <div className="absolute z-30 right-0 top-1/8  translate-x-1/4">
+              <div className="relative flex items-center justify-center">
+                <PointerGrid width={300} height={250}/>
+              </div>
+            
+            
+            </div>
             <div className="flex flex-col gap-3 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">
                 Protect your brand from digital threats.
               </p>
-              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-sm">
+              <p className="text-[#E3E3E3] text-sm sm:text-base font-normal font-inter max-w-[28rem]">
                 Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>

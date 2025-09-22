@@ -75,7 +75,27 @@ export const WhyConsulting = () => {
         Why Consulting & Advisory?
       </h2>
 
-      <div className="flex flex-col gap-0 container">
+      <div className="flex flex-col gap-0 container relative">
+        {/* Global vertical line */}
+        <div
+          className="absolute left-1/2 top-[4.625rem] w-[1px] bg-[#6D6D6D] rounded-[20px]"
+          style={{
+            // full height but cut to 2.5 blocks (half of 3rd block)
+            height: `calc((100% - 4.625rem) - 8%)`,
+          }}
+        >
+          <div
+            className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-200"
+            style={{
+              height: `${
+                activeIndex !== null
+                  ? ((activeIndex + progress) / rows.length) * 100
+                  : 0
+              }%`,
+            }}
+          />
+        </div>
+
         {rows.map((row, i) => {
           const isActive = i === activeIndex;
           return (
@@ -84,12 +104,14 @@ export const WhyConsulting = () => {
               ref={(el) => {
                 if (el) sectionsRef.current[i] = el;
               }}
-              className={`relative flex px-4 md:px-16 justify-between items-center ${i === 0 ? "pt-[4.625rem]" : "pt-8"} gap-4`}
+              className={`relative flex px-4 md:px-16 justify-between items-center ${
+                i === 0 ? "pt-[4.625rem]" : "pt-8"
+              } gap-4`}
             >
               {/* Left text (for rows 1 & 3) */}
               {i !== 1 && (
                 <div
-                  className={`flex gap-1 max-w-[43%]  text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",
@@ -100,49 +122,36 @@ export const WhyConsulting = () => {
                 </div>
               )}
 
-              {/* Vertical line */}
-              <div className="absolute left-1/2  w-[1px] rounded-[20px] bg-[#6D6D6D]"
-                   style={{
-                     top: i === 0 ? "4.625rem" : 0,
-                     height: i === 2 ? "60%" : "100%",
-                   }}
-              >
-                {isActive && (
-                  <div
-                    className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-100"
-                    style={{ height: `${progress * 100}%` }}
-                  />
-                )}
+              {/* Circle OR ServicesIcon */}
+              <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                <div
+                  className={`w-3 h-3 rounded-full bg-[#6D6D6D] transition-all duration-300 ${
+                    isActive ? "opacity-0 scale-50" : "opacity-100 scale-100"
+                  }`}
+                ></div>
 
-                {/* Circle OR ServicesIcon */}
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-                  <div
-                    className={`w-3 h-3 rounded-full bg-[#6D6D6D] transition-all duration-300 ${
-                      isActive ? "opacity-0 scale-50" : "opacity-100 scale-100"
-                    }`}
-                  ></div>
-
-                  <div
-                    className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
-                      isActive ? "opacity-100 scale-100" : "opacity-0 scale-50"
-                    }`}
-                  >
-                    <ServicesIcon />
-                  </div>
+                <div
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
+                    isActive && !(i === 0 && progress === 0)
+                      ? "opacity-100 scale-100"
+                      : "opacity-0 scale-50"
+                  }`}
+                >
+                  <ServicesIcon />
                 </div>
               </div>
 
               {/* Image */}
               <img
                 src={row.img}
-                className="w-[40%] w-[43%]  h-auto object-cover"
+                className="w-[40%] w-[43%] h-auto object-cover"
                 alt={`service-${i + 1}`}
               />
 
               {/* Right text (middle row) */}
               {i === 1 && (
                 <div
-                  className={`flex gap-1 max-w-[43%]    text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",
@@ -159,7 +168,9 @@ export const WhyConsulting = () => {
 
       {/* Button */}
       <div className="relative -top-5 flex justify-center mt-8">
-        <button className="custom-button with-shadow bg-[#1057B5]">Book a Consultation</button>
+        <button className="custom-button with-shadow bg-[#1057B5]">
+          Book a Consultation
+        </button>
       </div>
     </div>
   );

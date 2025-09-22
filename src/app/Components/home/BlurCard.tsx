@@ -4,11 +4,60 @@ import Button from "../common/Button";
 import Link from "next/link";
 import { TopBanner } from "../discoveredu/Header";
 import { Toparrow } from "@/assets/icon";
+import { PointerGrid } from "./GridAnimation";
 
 
 const BlurCard = () => {
   return (
-    <div className="py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
+    <div className="relative py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
+
+
+    <div
+          className="absolute z-30 translate-x-1/4"
+          style={{
+            top: "40%", // aligns with top of card
+            right: "0", 
+            // stick to screen edge
+          }}
+        >
+          <div className="relative flex items-center justify-center">
+            {/* Glow behind */}
+            <div
+              className="absolute blur-[10px] animate-glow2"
+              style={{
+                width: "180px",
+                height: "200px",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
+                zIndex: -1, // sits behind grid
+              }}
+            />
+            <PointerGrid width={150} height={150} />
+          </div>
+        </div>
+        
+        {/* Existing PointerGrid in center with glow */}
+        <div className="absolute z-30 left-0 top-[40%] -translate-x-1/3">
+          <div className="relative flex items-center justify-center">
+            {/* Glow behind */}
+            <div
+              className="absolute blur-[10px] animate-glow2"
+              style={{
+                width: "220px",
+                height: "220px",
+                borderRadius: "50%",
+                background:
+                  "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+                zIndex: -1,
+              }}
+            />
+            <PointerGrid horizontal={{direction:'right',y:30 ,
+            fromX: 60,
+            toX: 100}} width={150} height={150} />
+          </div>
+        </div>
+
       {/* Main Card */}
       <div className="relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
         {/* First Decorative Blur Div */}
@@ -24,7 +73,7 @@ const BlurCard = () => {
             boxShadow: "0px 0px 108.3px 0px #157AFF80",
             top: "-50%",
             left: "30%",
-            zIndex: 1,
+            zIndex: -1,
           }}
         ></div>
 
@@ -40,9 +89,13 @@ const BlurCard = () => {
             bottom: "-20%",
             right: "25%",
             borderRadius: "50%",
-            zIndex: 0,
+            zIndex: -1,
           }}
         ></div>
+
+    
+        
+        
 
         <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[44px]">
           {/* First Div */}

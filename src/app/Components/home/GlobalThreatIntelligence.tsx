@@ -151,7 +151,7 @@ export default function GlobalThreatIntelligence() {
       )}
 
       {tabIndex === 0 && (
-        <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12 px-2 sm:px-4 md:px-8">
+        <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
           <Radar />
           <SecurityFeatures />
         </div>
@@ -268,7 +268,7 @@ function SecurityFeatures() {
                   {/* Text */}
                   <div className="flex flex-col gap-2">
                     <h3 className="font-bold text-lg">{feature.title}</h3>
-                    <p className="text-gray-400">{feature.desc}</p>
+                    <p className="text-gray-400 max-w-[70%]">{feature.desc}</p>
                   </div>
                 </div>
               ))}

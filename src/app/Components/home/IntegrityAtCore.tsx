@@ -1,3 +1,4 @@
+
 import { AcademiaIcon, EmployersIcon, InsuranceIcon, LawIcon } from "@/assets/icon";
 import Link from "next/link";
 import { GlassIcon } from "./GlassIcon";
@@ -11,6 +12,7 @@ const Items = [
 ];
 
 export default function IntegrityAtCore() {
+
   return (
     <div className="shadow-[0px_4px_4px_0px_#00000040] p-4 sm:p-6 md:p-10">
       <div className="relative w-full rounded-[32px] border border-[#6D6D6D] overflow-hidden">
@@ -22,16 +24,16 @@ export default function IntegrityAtCore() {
           
           {/* Glow Circle */}
           <div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
-            w-[60vw] sm:w-[250px] aspect-square rounded-full 
+            className="absolute -z-1 animate-glow2 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 
+            w-[60vw] sm:w-[300px] aspect-square rounded-full 
             bg-[radial-gradient(circle,rgba(22,123,255,0.6)_0%,rgba(22,123,255,0.2)_100%)] 
-            blur-[40px] animate-glow"
+            blur-[40px] "
           />
 
           {/* Top Cards */}
           <div className="flex flex-wrap justify-center md:justify-between items-start gap-4 w-full max-w-4xl">
             {Items.slice(0, 2).map((item) => (
-              <GlassCard key={item.id} className="w-full sm:w-auto">
+             
                 <Link
                   href={
                     item.id === 1
@@ -40,7 +42,7 @@ export default function IntegrityAtCore() {
                   }
                 >
                   <div
-                    className="flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
+                    className="hover:-rotate-6  flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
                     style={{ marginTop: item.id === 1 ? 16 : 0 }}
                   >
                     <div className="flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
@@ -51,7 +53,7 @@ export default function IntegrityAtCore() {
                     </span>
                   </div>
                 </Link>
-              </GlassCard>
+             
             ))}
           </div>
 
@@ -70,7 +72,7 @@ export default function IntegrityAtCore() {
           {/* Bottom Cards */}
           <div className="flex flex-wrap justify-center md:justify-between items-start gap-4 w-full max-w-4xl">
             {Items.slice(2).map((item) => (
-              <GlassCard key={item.id} className="w-full sm:w-auto">
+             
                 <Link
                   href={
                     item.id === 3
@@ -79,12 +81,14 @@ export default function IntegrityAtCore() {
                   }
                 >
                   <div
-                    className="flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
+                    className="hover:rotate-5 flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit"
                     style={{
                       marginTop: item.id === 3 ? 16 : 0,
+                      marginRight:item.id===4?40:0,
+                      marginLeft:item.id===3?16:0
                     }}
                   >
-                    <div className="flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
+                    <div className=" flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
                       <GlassIcon icon={item.icon} size={50} arcLength={150} />
                     </div>
                     <span className="font-sans font-bold text-base sm:text-lg md:text-xl text-white">
@@ -92,7 +96,7 @@ export default function IntegrityAtCore() {
                     </span>
                   </div>
                 </Link>
-              </GlassCard>
+             
             ))}
           </div>
         </div>

@@ -2,6 +2,7 @@
 import { useState } from "react";
 import { Email, Headquators, Toparrow } from "@/assets/icon";
 import { GlassIcon } from "../home/GlassIcon";
+import { PointerGrid } from "../home/GridAnimation";
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -45,6 +46,13 @@ export default function ContactSection() {
         overflow-hidden
       "
     >
+       <div className="absolute z-30 left-0 bottom-0  -translate-x-1/3">
+                    <div className="relative flex items-center justify-center">
+                      <PointerGrid width={400} height={300} horizontal={{direction:'right',y:30 ,
+            fromX: 60,
+            toX: 100}}/>
+                    </div>
+                    </div>
       {/* Background Glow */}
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_70%)] pointer-events-none" />
 
