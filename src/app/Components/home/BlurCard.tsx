@@ -9,73 +9,73 @@ import { PointerGrid } from "./GridAnimation";
 
 const BlurCard = () => {
   return (
-    <div className="overflow-hidden relative py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
+    <div className="overflow-hidden  container relative py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
 
-<div
-  className="absolute z-30 hidden sm:flex items-center justify-center"
-  style={{
-    top: "40%",
-    right: "0",
-    transform: "translateX(50%)", // half outside screen, half visible
-  }}
->
-  <div className="relative flex items-center justify-center">
-    {/* Glow behind */}
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "200px",
-        height: "200px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1,
-      }}
-    />
-   <div className="relative -left-8">
-    <PointerGrid
-      
-      width={150}
-      height={150}
-    />
-    </div>
-  </div>
-</div>
+      <div
+        className="absolute z-30 hidden sm:flex items-center justify-center"
+        style={{
+          top: "40%",
+          right: "0",
+          transform: "translateX(50%)", // half outside screen, half visible
+        }}
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2"
+            style={{
+              width: "200px",
+              height: "200px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <div className="relative -left-8">
+            <PointerGrid
+
+              width={150}
+              height={150}
+            />
+          </div>
+        </div>
+      </div>
 
 
 
-{/* Left Grid Glow */}
-<div
-  className="absolute z-30 hidden sm:flex items-center justify-center"
-  style={{
-    top: "40%",
-    left: "0",
-    transform: "translateX(-50%)", // half outside screen, half visible
-  }}
->
-  <div className="relative flex items-center justify-center">
-    {/* Glow behind */}
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "220px",
-        height: "220px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1,
-      }}
-    />
-    <PointerGrid
-      horizontal={{ direction: "right", y: 30, fromX: 60, toX: 100 }}
-      width={150}
-      height={150}
-    />
-  </div>
-</div>
+      {/* Left Grid Glow */}
+      <div
+        className="absolute z-30 hidden sm:flex items-center justify-center"
+        style={{
+          top: "40%",
+          left: "0",
+          transform: "translateX(-50%)", // half outside screen, half visible
+        }}
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2"
+            style={{
+              width: "220px",
+              height: "220px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <PointerGrid
+            horizontal={{ direction: "right", y: 30, fromX: 60, toX: 100 }}
+            width={150}
+            height={150}
+          />
+        </div>
+      </div>
 
-{/* On mobile, show both grids above card */}
-{/* <div className="absolute flex sm:hidden justify-between w-full px-6 -top-12">
+      {/* On mobile, show both grids above card */}
+      {/* <div className="absolute flex sm:hidden justify-between w-full px-6 -top-12">
  
   <div className="relative flex items-center justify-center">
     <div
@@ -143,9 +143,9 @@ const BlurCard = () => {
           }}
         ></div>
 
-    
-        
-        
+
+
+
 
         <div className="flex flex-col items-center gap-8 sm:gap-10 lg:gap-[44px]">
           {/* First Div */}
@@ -169,10 +169,10 @@ const BlurCard = () => {
           {/* Second Div */}
           <div className="flex justify-center">
             <Link href={'/pages/contactus'}><button className="custom-button with-shadow bg-[#1057B5]"
-            
-             
-              
-            > Get in Touch <Toparrow/></button></Link>
+
+
+
+            > Get in Touch <Toparrow /></button></Link>
           </div>
         </div>
       </div>

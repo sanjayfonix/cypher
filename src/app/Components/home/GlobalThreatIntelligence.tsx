@@ -93,7 +93,7 @@ export default function GlobalThreatIntelligence() {
   );
 
   return (
-    <div className="bg-black text-white flex flex-col items-center px-4 sm:px-6 md:px-12 py-8 md:py-12">
+    <div className="bg-black container text-white flex flex-col items-center px-4 sm:px-6 md:px-12 py-8 md:py-12">
       <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-8 sm:mb-12 text-center">
         Global Threat Intelligence
       </h1>
