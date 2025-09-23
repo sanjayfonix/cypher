@@ -95,7 +95,7 @@ export default function TeamSection() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
         {/* Left Side - Content */}
-        <div className="space-y-10 sm:space-y-12">
+        <div className="space-y-8 sm:space-y-8">
           {teamData.map((member, index) => (
             <motion.div
               key={member.id}
@@ -109,7 +109,7 @@ export default function TeamSection() {
                 </span>
 
                 {/* Glowing Blue Number - Overlapping */}
-                <span className="absolute top-0 left-10 text-7xl sm:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.7)]">
+                <span className="absolute top-0 left-10 text-7xl sm:text-[110px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.7)]">
                   {member.id}
                 </span>
               </div>
@@ -129,18 +129,25 @@ export default function TeamSection() {
             <motion.div
               key={member.id}
               whileHover={{ scale: 1.05 }}
-              className={`relative rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(59,130,246,0.9)] max-w-[250px] sm:max-w-[300px] 
-              ${idx === 0 ? "lg:translate-x-12" : ""} 
-              ${idx === 1 ? "lg:-translate-x-20 lg:-translate-y-10" : ""} 
-              ${idx === 2 ? "lg:-translate-y-20" : ""}`}
+              className={`relative max-w-[250px] sm:max-w-[300px] 
+                ${idx === 0 ? "lg:translate-x-24" : ""} 
+                ${idx === 1 ? "lg:-translate-x-20 lg:-translate-y-10" : ""} 
+                ${idx === 2 ? "lg:-translate-y-20 lg:translate-x-24" : ""}`}
             >
-              <Image
-                src={member.image}
-                alt={member.title}
-                width={230}
-                height={258}
-                className="  "
-              />
+               
+    
+ 
+    {/* Image */}
+    <div className={`${idx===1?'-top-40 left-8':idx===2?'-top-80 -left-4':''} relative rounded-2xl h-105 overflow-hidden z-10`}>
+     
+      <img
+        src={member.image}
+        alt={member.title}
+       className="h-full w-150 object-fill"
+        
+      />
+      </div>
+     
             </motion.div>
           ))}
         </div>

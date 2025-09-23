@@ -420,3 +420,10 @@ body {
   transform: translateX(0);
 }
 }
+
+.scroll-snap-y {
+  scroll-snap-type: y mandatory;
+}
+.scroll-snap-start {
+  scroll-snap-align: start;
+}
