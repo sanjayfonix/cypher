@@ -68,26 +68,26 @@ export default function WhyCyphr() {
                                     delay: index * 0.2,
                                     ease: "easeOut",
                                 }}
-                                className={`relative flex items-center max-w-5xl mx-auto w-full gap-6 p-2 ${
-                                    isLeft ? "justify-start" : "justify-end"
-                                }`}
+                                className="relative flex items-center max-w-5xl mx-auto w-full gap-6 p-2"
                             >
                                 {/* Gradient bar */}
                                 <div
-                                    className={`absolute top-1/2 transform -translate-y-1/2 h-[100px] w-full max-w-full ${
+                                    className={`absolute top-1/2 transform -translate-y-1/2 h-[100px] ${
                                         isLeft
-                                            ? "rounded-l-full right-0 bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]"
-                                            : "rounded-r-full left-0 bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
+                                            ? "w-2/3 right-0 rounded-l-full bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]"
+                                            : "w-2/3 left-0 rounded-r-full bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
                                     }`}
                                 ></div>
 
                                 {/* Content */}
                                 <div
-                                    className={`relative flex items-center gap-2 ${
-                                        isLeft ? "flex-row-reverse" : "flex-row"
+                                    className={`relative flex items-center gap-2 w-2/3 ${
+                                        isLeft
+                                            ? "ml-auto flex-row-reverse text-left"
+                                            : "mr-auto flex-row text-right"
                                     }`}
                                 >
-                                    <div className={`${isLeft ? "text-left" : "text-right"}`}>
+                                    <div>
                                         <h3 className="text-[24px] font-semibold">{item.title}</h3>
                                         <p className="text-gray-300 text-[16px] mt-1 max-w-3xl">
                                             {item.description}
@@ -103,5 +103,4 @@ export default function WhyCyphr() {
             </div>
         </section>
     );
-
 }

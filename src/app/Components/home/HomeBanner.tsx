@@ -13,11 +13,15 @@ const HEADLINES = [
 ];
 
 const ROLES = [
+  "Investigators",
   "Journalists and Media",
   "Law Enforcement",
   "Government Agencies",
   "Law Firms",
   "Insurance Industry",
+  "Social Media Monitoring",
+"Facial Recognition",
+"Object Recognition"
 ];
 
 export default function HomeBanner() {

@@ -153,7 +153,7 @@ export default function GlobalThreatIntelligence() {
       {tabIndex === 0 && (
     
         <div className="bg-black text-white font-sans flex flex-col change-flex items-center justify-center gap-8 lg:gap-12">
- <Radar />
+      <Radar/>
       <SecurityFeatures /> 
         </div>
 
@@ -215,10 +215,10 @@ function SecurityFeatures() {
   ];
 
   return (
-    <div className="bg-black flex items-start py-10 overflow-hidden">
-      <div className="grid grid-cols-2 gap-20 relative">
+    <div className="bg-black flex flex-wrap items-start py-10 overflow-hidden">
+      <div className="grid sm:grid-cols-1 lg:grid-cols-2 sm:gap-0 lg:gap-20 relative">
         {[0, 1].map((col, idx) => (
-          <div key={col} className="relative flex flex-col items-center">
+          <div key={col} className="relative flex flex-col sm:flex-row  lg:flex-col sm:items-start md:items-center">
             {/* Vertical line starting from center of top icon */}
 
 
@@ -227,10 +227,10 @@ function SecurityFeatures() {
               .map((feature, realInd) => (
                 <div
                   key={realInd}
-                  className={`flex items-start text-white gap-4 mb-20 relative z-10
-                    ${realInd === 1 ? "translate-x-20" : "translate-x-0"}`}
+                  className={`flex items-start  text-white gap-4 mb-20 relative z-10 
+                    ${realInd === 1 ? "translate-for-lg" : ""}`}
                 >
-                  <div ref={lineRef} className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${realInd === 1 || realInd === 3 ? 'h-[calc(100%)]' : ' h-[calc(250%)]'} w-0 border border-[#696969]`}>
+                  <div ref={lineRef} className={`hidden lg:block absolute top-[125px] left-1/7 transform -translate-x-1/2 ${realInd === 1 || realInd === 3 ? 'h-[calc(100%)]' : ' h-[calc(250%)]'} w-0 border border-[#696969]`}>
 
                      <motion.div
                       className="absolute left-1/2 -translate-x-1/2"
@@ -262,14 +262,14 @@ function SecurityFeatures() {
                   
                   <div className="relative  px-5 rounded-full flex items-center justify-center ">
                     <div>
-                    <GlassIcon hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
+                    <GlassIcon size={100} hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
                     </div>
                   </div>
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
                     <h3 className="font-bold text-lg max-w-[50%]">{feature.title}</h3>
-                    <p className="text-gray-400 max-w-[50%] lg:max-w-[70%]">{feature.desc}</p>
+                    <p className="text-gray-400 max-w-[50%] md:max-w-[70%]">{feature.desc}</p>
                   </div>
                 </div>
               ))}

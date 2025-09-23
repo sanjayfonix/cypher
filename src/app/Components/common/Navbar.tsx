@@ -38,7 +38,7 @@ export default function Navbar() {
 
   const services = [
     { label: "Consulting and Advisory", href: "/pages/services/consulting" },
-    { label: "Brand Defence", href: "/pages/services/brand-defence" },
+    { label: "Brand Defense", href: "/pages/services/brand-defence" },
     { label: "Social Media Intelligence", href: "/pages/services/social-intel" },
     { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
   ];

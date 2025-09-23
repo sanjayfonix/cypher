@@ -1,14 +1,19 @@
 'use client'
+
 import { BigProtectIc, BlueFbIcon, BlueWhatsappIcon, BlueXIcon, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
 import { TravelingBorder } from "../services/CorePrincipals";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
 import { GlassCard } from "./GlassCard";
 import { PointerGrid } from "./GridAnimation";
 
+
+
 export default function WhereInvestigation() {
   const [isHovering, setHovering] = useState(false);
+
+  
 
   return (
     <div onMouseEnter={() => {
@@ -34,13 +39,11 @@ export default function WhereInvestigation() {
           <div className="relative bg-gradient-to-b  from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between">
             
            
-            <div className="absolute z-30 right-0 top-1/8  translate-x-1/4">
-              <div className="relative flex items-center justify-center">
-                <PointerGrid  width={250} height={250} />
-              </div>
-            
-            
-            </div>
+          <div className="absolute bottom-0 -right-6 z-30 w-[35%] max-w-[180px] aspect-square">
+  <PointerGrid width="100%" height="100%" />
+</div>
+
+
             <div className="flex flex-col gap-3 relative z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">
                 Consulting & Advisory
@@ -88,33 +91,33 @@ export default function WhereInvestigation() {
             <div className={` relative flex h-full items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
-              <div className="absolute top-[23%] left-[5%] w-5 sm:w-[60px] aspect-square
+              <div className="absolute top-[23%] left-[5%] w-fit aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform translate-x-[80px] translate-y-[60px] opacity-0 
   transition-all duration-500 
   group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-  <GlassIcon size={60} hoverComp={<InstaIcon/>} isHoverProperty={true} icon={<InstaIcon />} />
+  <GlassIcon  hoverComp={<InstaIcon/>} isHoverProperty={true} icon={<InstaIcon />} />
 </div>
-              <div className="absolute w-5 sm:w-[60px] aspect-square
+              <div className="absolute w-fit  aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-5  left-[25%]">
-                <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true} size={60} icon={<XIcon />} />
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 top-4  left-[25%]">
+                <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true}  icon={<XIcon />} />
               </div>
-              <div className="absolute  w-12 sm:w-[60px] aspect-square
+              <div className="absolute  w-fit sm:w-[60px] aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 top-5 left-[59%] ">
-                <GlassIcon size={60} hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 top-4 left-[59%] ">
+                <GlassIcon  hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
-             <div className="absolute top-[23%] left-[85%] w-12 sm:w-[60px] aspect-square
+             <div className="absolute top-[23%] left-[85%] w-fit aspect-square
   flex justify-center items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform -translate-x-[80px] translate-y-[60px] opacity-0 
   transition-all duration-500 
   group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-  <GlassIcon size={60} hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
+  <GlassIcon  hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
@@ -205,15 +208,15 @@ export default function WhereInvestigation() {
   {/* Animated rings */}
   <div className="absolute inset-0 pointer-events-none z-0">
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-                    w-[89%] md:w-[95%] aspect-square rounded-full border border-[#09336B80]
+                    w-[89%] aspect-square rounded-full border border-[#09336B80]
                     animate-zoom-fade" />
 
     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-                    w-[75%] md:w-[80%] aspect-square rounded-full border border-[#09336BCC]
+                    w-[75%]  aspect-square rounded-full border border-[#09336BCC]
                     animate-zoom-fade"
         />
          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-                    w-[60%] md:w-[65%] aspect-square rounded-full border border-[#09336BE6]
+                    w-[60%]  aspect-square rounded-full border border-[#09336BE6]
                     animate-zoom-fade"
           />
          
@@ -221,7 +224,7 @@ export default function WhereInvestigation() {
 
   {/* Glow */}
   <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-    <div className=" w-60 md:w-70 opacity-50 aspect-square rounded-full blur-[30px] bg-[#157AFF80] animate-glow" />
+    <div className=" w-60  opacity-50 aspect-square rounded-full blur-[30px] bg-[#157AFF80] animate-glow" />
   </div>
 
   {/* Inner circle wrapper (static, isolates rotation) */}
@@ -248,13 +251,10 @@ export default function WhereInvestigation() {
 
           {/* Geospatial Cellular Forensics */}
           <div className="relative bg-gradient-to-b from-[#030A1400] to-[#167BFFB2] border border-[#6D6D6D99] p-5 sm:p-6 rounded-3xl shadow-lg flex flex-col justify-between h-full">
-            <div className="absolute z-30 right-0 top-1/8  translate-x-1/4">
-              <div className="relative flex items-center justify-center">
-                <PointerGrid width={300} height={250}/>
-              </div>
-            
-            
-            </div>
+              <div className="absolute bottom-0 -right-6 z-30 w-[35%] max-w-[180px] aspect-square">
+  <PointerGrid width="100%" height="100%" />
+</div>
+
             <div className="flex flex-col gap-3 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold font-sans">Brand Defense</h2>
               <p className="text-[#F1F1F1] text-base sm:text-lg font-medium font-sans">

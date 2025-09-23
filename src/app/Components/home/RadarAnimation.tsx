@@ -143,7 +143,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         viewBox={`0 0 ${SIZE+40} ${SIZE}`}
         width={size}
         height={size}
-        className="rounded-full drop-shadow-lg"
+        className="w-full h-auto max-w-full rounded-full drop-shadow-lg"
       >
         <defs>
           <radialGradient id="bgGrad" cx="50%" cy="45%">

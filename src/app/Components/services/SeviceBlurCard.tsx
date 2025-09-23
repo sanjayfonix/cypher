@@ -10,54 +10,6 @@ import { PointerGrid } from "../home/GridAnimation";
 const ServiceBlurCard = () => {
   return (
     <div className="relative mb-4 flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
-      {/* ===== Left Grid + Blur (outside card, never overlapping) ===== */}
-      {/* <div
-        className="absolute"
-        style={{
-          top: "60%",
-          left: "clamp(-7rem, -14vw, -2rem)", // pushes grid far left on mobile
-          transform: "translateY(-50%)",
-          pointerEvents: "none",
-          zIndex: 0,
-        }}
-      > */}
-        {/* Blur behind left grid */}
-        {/* <div
-          className="absolute blur-[8.1px]  translate-y-[80%] sm:translate-y-[50%]  md:translate-x-3 lg:translate-x-5 lg:translate-y-[40%]  animate-glow2"
-          style={{
-            width: "clamp(90px, 20vw, 180px)",
-            height: "clamp(90px, 20vw, 180px)",
-            background: "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-            rotate: "180deg",
-            borderRadius: "50%",
-           
-
-          }}
-        />
-
-        <div className="relative flex items-center justify-center w-[clamp(48px,8vw,100px)] h-[clamp(48px,8vw,100px)]">
-          <Grid />
-        </div>
-      </div> */}
-
-  {/* Blur behind right grid */}
-  {/* <div
-    className="-right-[42%] py-4  top-40 relative w-[300px] h-60  blur-[8.1px] md:translate-x-[10%] lg:translate-x-[45%] md:-translate-y-[80%] translate-x-[25%] -translate-y-[80%] lg:-translate-y-[60%] animate-glow2"
-    style={{
-      background:
-        "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-      rotate: "180deg",
-      borderRadius: "50%",
-      zIndex: 10, // 👈 stays at bottom
-    }}
-  >
-
-   
-  
-  
-
-
-</div> */}
 {/* PointerGrid at top-right edge of screen with glow */}
 <div
   className="absolute z-30 translate-x-1/4 -translate-y-1/4"

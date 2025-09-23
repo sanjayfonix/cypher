@@ -399,9 +399,24 @@ body {
   animation: zoom-fade 4s ease-in-out infinite;
 }
 
+.translate-for-lg{
+  transform: translateX(80);
+}
 
 @media (min-width:1387px){
 .change-flex{
   flex-direction: row;
+}
+}
+
+@media (max-width:1387px){
+  .translate-for-lg{
+  transform: translateX(120);
+}
+}
+
+@media (max-width:900px){
+  .translate-for-lg{
+  transform: translateX(0);
 }
 }

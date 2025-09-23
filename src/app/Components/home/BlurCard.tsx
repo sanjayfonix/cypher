@@ -75,8 +75,8 @@ const BlurCard = () => {
 </div>
 
 {/* On mobile, show both grids above card */}
-<div className="absolute flex sm:hidden justify-between w-full px-6 -top-12">
-  {/* Left half circle */}
+{/* <div className="absolute flex sm:hidden justify-between w-full px-6 -top-12">
+ 
   <div className="relative flex items-center justify-center">
     <div
       className="absolute blur-[10px] animate-glow2"
@@ -91,7 +91,7 @@ const BlurCard = () => {
     />
     <PointerGrid width={100} height={100} />
   </div>
-  {/* Right half circle */}
+
   <div className="relative flex items-center justify-center">
     <div
       className="absolute blur-[10px] animate-glow2"
@@ -106,7 +106,8 @@ const BlurCard = () => {
     />
     <PointerGrid width={100} height={100} />
   </div>
-</div>
+</div> */}
+
       {/* Main Card */}
       <div className="relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
         {/* First Decorative Blur Div */}

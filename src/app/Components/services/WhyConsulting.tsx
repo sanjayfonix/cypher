@@ -56,15 +56,16 @@ export const WhyConsulting = () => {
       img: "/services1.png",
       maxW: "md:max-w-[32%]",
     },
-    {
-      text: "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
-      img: "/services2.png",
-      maxW: "md:max-w-[35%]",
-    },
+    
     {
       text: "Unlock actionable insights and secure your future",
       img: "/services3.png",
       maxW: "md:max-w-[32%]",
+    },
+    {
+      text: "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
+      img: "/services2.png",
+      maxW: "md:max-w-[35%]",
     },
   ];
 
@@ -144,7 +145,7 @@ export const WhyConsulting = () => {
               {/* Image */}
               <img
                 src={row.img}
-                className="w-[40%] w-[43%] h-auto object-cover"
+                className={`${i===2?'scale-x-[-1]':''} w-[40%] h-auto object-cover`}
                 alt={`service-${i + 1}`}
               />
 

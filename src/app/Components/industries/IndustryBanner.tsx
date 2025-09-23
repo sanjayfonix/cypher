@@ -52,10 +52,20 @@ export const IndustryBanner = () => {
         
           </div>               
           </div>
+           <AnimationLoop/>
         </div>
       </div>
-     <div className=" relative w-full -top-100 z-0 mb-90 -left-20">
-          <svg className="absolute inset-0 top-0 w-[calc(100%+120px)]" preserveAspectRatio="none" height={800} viewBox="0 -100 1440 700">
+      
+    
+     
+    </>
+  );
+};
+
+
+const AnimationLoop=()=>{
+  return<div className="block  md:mt-0 md:relative  z-1 mb-90 ">
+          <svg className="absolute h-fit inset-0 top-0 w-[calc(100%+80px)]" preserveAspectRatio="none" height={800} viewBox="0 -100 1440 700">
             <circle
   cx={1250}
   cy={280}
@@ -126,8 +136,4 @@ export const IndustryBanner = () => {
         </defs>
         </svg>  
         </div>
-    </>
-  );
-};
-
-
+}

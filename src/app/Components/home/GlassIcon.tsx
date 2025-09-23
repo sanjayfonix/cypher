@@ -6,7 +6,7 @@ interface GlassIconProps {
   icon: React.ReactNode;
   hoverComp?: React.ReactNode;
   isHoverProperty?: boolean;
-  size?: number;
+  size?:number;
   borderOpacity?: number;
   borderThickness?: number;
   arcLength?: number;
@@ -18,7 +18,7 @@ export const GlassIcon = ({
   icon,
   hoverComp,
   isHoverProperty,
-  size = 96,
+  size,
   borderOpacity = 0.75,
   borderThickness = 1,
   arcLength = 130,
@@ -32,8 +32,8 @@ export const GlassIcon = ({
     <div
       className="relative aspect-square flex items-center justify-center rounded-full"
       style={{
-        width: size,
-        height: size,
+        width: size?size:'clamp(40px, 10vw, 60px)',
+        height:size?size:'clamp(40px, 10vw, 60px)',
         boxShadow:isShadow===true?'0px 3px 6px #157AFF8A':'none'
         
  // 🔹 added shadow

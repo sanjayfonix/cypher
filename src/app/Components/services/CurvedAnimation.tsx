@@ -13,9 +13,10 @@ export default function SemicircularArcs({
     { cx: 385, cy: 20 },
     { cx: 335, cy: 160 },
     { cx: 150, cy: 90 },
+    { cx: 255, cy: 90 },
   ];
 
-  const texts = ['Fraud Detection', 'Digital Forensics', 'OSINT'];
+  const texts = ['Fraud Detection', 'Digital Forensics', 'OSINT','Investigative Services'];
 
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -60,6 +61,7 @@ export default function SemicircularArcs({
 {hoveredIndex===0&&<circle cx='390' cy='20' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
 {hoveredIndex===1&&<circle cx='345' cy='160' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
 {hoveredIndex===2&&<circle cx='150' cy='85' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
+{hoveredIndex===3&&<circle cx='250' cy='85' r={40} fill='#157AFF' className='blur-[30px] opacity-50'/>}
         {/* Pointers */}
         {pointerPositions.map((pos, i) => (
           <circle
@@ -83,8 +85,8 @@ export default function SemicircularArcs({
         {pointerPositions.map((pos, i) => (
   <foreignObject
   key={`label-${i}`}
-  x={i === 0 ? pos.cx + 20 : i === 1 ? pos.cx + 20 : pos.cx + 10}
-  y={i === 0 ? pos.cy + 10 : i === 1 ? pos.cy - 10 : pos.cy - 70}
+  x={i === 0 ? pos.cx + 20 : i === 1 ? pos.cx + 20 :i===3?pos.cx+20: pos.cx + 10}
+  y={i === 0 ? pos.cy + 10 : i === 1 ? pos.cy - 10 :i===3?pos.cy-13:pos.cy - 70}
   width={170}
   height={40}
   className='relative'
