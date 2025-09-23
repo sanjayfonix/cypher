@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import HowItWorks from "@/app/Components/search/Howwork";
 import SearchResultTab from "@/app/Components/home/SearchResultTab";
 import { Facebook, Mail, User } from "lucide-react";
+import { GlassIcon } from "@/app/Components/home/GlassIcon";
 
 export default function HomeBanner() {
   // ✅ Array of result cards (you can easily expand it)
@@ -160,7 +161,7 @@ export default function HomeBanner() {
         {tabsData.map((tab, idx) => (
           <SearchResultTab
             key={idx}
-            icon={tab.icon}
+            icon={<GlassIcon icon={<tab.icon/>}/>}
             title={tab.title}
             queryVal={tab.queryVal}
             date={tab.date}
