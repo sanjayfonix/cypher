@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { motion } from "framer-motion";
-
+ 
 const teamData = [
   {
     id: 1,
@@ -25,7 +25,7 @@ const teamData = [
     image: "/images/img3.png",
   },
 ];
-
+ 
 export default function TeamSection() {
   return (
     <section className="relative w-full container bg-black text-white px-4 sm:px-8 lg:px-28 py-12 sm:py-16">
@@ -82,7 +82,7 @@ export default function TeamSection() {
           backgroundColor: "#167BFF",
         }}
       />
-
+ 
       {/* Title */}
       <div className="text-center mb-12 sm:mb-16">
         <h2 className="text-3xl sm:text-[40px] md:text-[48px] font-bold mb-2">
@@ -92,10 +92,10 @@ export default function TeamSection() {
           Investigative | Intelligence | Transformed
         </p>
       </div>
-
+ 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
         {/* Left Side - Content */}
-        <div className="space-y-8 sm:space-y-8">
+        <div className="space-y-10 sm:space-y-12">
           {teamData.map((member, index) => (
             <motion.div
               key={member.id}
@@ -107,9 +107,9 @@ export default function TeamSection() {
                 <span className="text-7xl sm:text-8xl font-bold text-gray-500">
                   0
                 </span>
-
+ 
                 {/* Glowing Blue Number - Overlapping */}
-                <span className="absolute top-0 left-10 text-7xl sm:text-[110px] font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.7)]">
+                <span className="absolute top-0 left-10 text-7xl sm:text-8xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600 drop-shadow-[0_0_20px_rgba(59,130,246,0.7)]">
                   {member.id}
                 </span>
               </div>
@@ -122,32 +122,28 @@ export default function TeamSection() {
             </motion.div>
           ))}
         </div>
-
+ 
         {/* Right Side - Images */}
         <div className="relative flex flex-col justify-center p-6 items-center lg:items-end gap-0 mt-8 lg:mt-0">
           {teamData.map((member, idx) => (
             <motion.div
               key={member.id}
               whileHover={{ scale: 1.05 }}
-              className={`relative max-w-[250px] sm:max-w-[300px] 
-                ${idx === 0 ? "lg:translate-x-24" : ""} 
-                ${idx === 1 ? "lg:-translate-x-20 lg:-translate-y-10" : ""} 
-                ${idx === 2 ? "lg:-translate-y-20 lg:translate-x-24" : ""}`}
+              className={`relative border border-[#6D6D6D] rounded-4xl overflow-hidden h-[350px]
+              [box-shadow:0px_0px_108.3px_0px_#157AFF80]
+              ${idx === 0 ? "lg:translate-x-12" : ""}
+              ${idx === 1 ? "lg:-translate-x-24 lg:-translate-y-10" : ""}
+              ${idx === 2 ?  "lg:translate-x-20 lg:-translate-y-20"  : ""}`}
             >
-               
-    
  
-    {/* Image */}
-    <div className={`${idx===1?'-top-40 left-8':idx===2?'-top-80 -left-4':''} relative rounded-2xl h-105 overflow-hidden z-10`}>
-     
-      <img
-        src={member.image}
-        alt={member.title}
-       className="h-full w-150 object-fill"
-        
-      />
-      </div>
-     
+              <Image
+                src={member.image}
+                alt={member.title}
+                width={230}
+                height={350}
+                className=" object-top size-full"
+              />
+             
             </motion.div>
           ))}
         </div>
@@ -155,3 +151,5 @@ export default function TeamSection() {
     </section>
   );
 }
+ 
+ 

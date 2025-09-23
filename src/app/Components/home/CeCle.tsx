@@ -10,7 +10,7 @@ const CESessions = () => {
   return (
     <>
       {/* Main Section */}
-      <div className="flex justify-center items-center mt-6 px-4 sm:px-0">
+      <div className="flex justify-center container items-center mt-6 px-4 sm:px-0">
         <div className="w-full  border border-[#6D6D6D]/50 p-6 sm:p-10 md:p-12 bg-gradient-to-b from-black via-[#030A14] to-[#167BFF]/70 rounded-3xl shadow-2xl overflow-hidden">
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10">
             

@@ -14,7 +14,7 @@ const Items = [
 export default function IntegrityAtCore() {
 
   return (
-    <div className="shadow-[0px_4px_4px_0px_#00000040] p-4 sm:p-6 md:p-10">
+    <div className="shadow-[0px_4px_4px_0px_#00000040] p-4 sm:p-6 md:p-10 container">
       <div className="relative w-full rounded-[32px] border border-[#6D6D6D] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 bg-[url('/integrity.png')] bg-cover bg-center opacity-30 z-0" />
