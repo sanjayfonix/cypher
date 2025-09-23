@@ -129,18 +129,21 @@ export default function TeamSection() {
             <motion.div
               key={member.id}
               whileHover={{ scale: 1.05 }}
-              className={`relative rounded-2xl overflow-hidden shadow-[0_0_25px_rgba(59,130,246,0.9)] max-w-[250px] sm:max-w-[300px] 
+              className={`relative border border-[#6D6D6D] rounded-4xl overflow-hidden h-[350px]
+              [box-shadow:0px_0px_108.3px_0px_#157AFF80]
               ${idx === 0 ? "lg:translate-x-12" : ""} 
-              ${idx === 1 ? "lg:-translate-x-20 lg:-translate-y-10" : ""} 
-              ${idx === 2 ? "lg:-translate-y-20" : ""}`}
+              ${idx === 1 ? "lg:-translate-x-24 lg:-translate-y-10" : ""} 
+              ${idx === 2 ?  "lg:translate-x-20 lg:-translate-y-20"  : ""}`}
             >
+
               <Image
                 src={member.image}
                 alt={member.title}
                 width={230}
-                height={258}
-                className="  "
+                height={350}
+                className=" object-top size-full"
               />
+              
             </motion.div>
           ))}
         </div>

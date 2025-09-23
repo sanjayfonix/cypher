@@ -16,7 +16,7 @@ import {User,Facebook,Mail,} from 'lucide-react'
 
 export default function HomePage() {
   return (
-    <div className="w-full bg-[var(--primary)] container">
+    <div className=" bg-[var(--primary)] container">
      <HomeBanner/>
     <GlobalThreatIntelligence/> 
       <WhereInvestigation/>
