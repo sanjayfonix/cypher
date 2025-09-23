@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { ServicesIcon } from "@/assets/icon";
+import { PointerGrid } from "../home/GridAnimation";
 
 export const History = () => {
   const sectionsRef = useRef<HTMLDivElement[]>([]);
@@ -79,22 +80,37 @@ export const History = () => {
   ];
 
   return (
-    <div className="relative container flex flex-col md:flex-row gap-10 p-4 sm:p-8 md:p-10">
+    <div className="overflow-hidden relative container flex flex-col md:flex-row gap-10 p-4 sm:p-8 md:p-10">
       {/* Blue blur background */}
-      <div
-        className="absolute pointer-events-none z-0 blur-[30px] animate-blink"
-        style={{
-          width: "50%",
-          height: 250,
-          bottom: 3,
-          left: "1%",
-          transform: "translateX(-80%)",
-          opacity: 0.4,
-          borderRadius: "50%",
-          backgroundColor: "#167BFF",
-        }}
-      />
-
+     <div
+             className="absolute z-30 hidden sm:flex items-center justify-center"
+             style={{
+               bottom:'0%',
+               left: "0",
+               transform: "translateX(-50%)", // half outside screen, half visible
+             }}
+           >
+             <div className="relative flex items-center justify-center">
+               {/* Glow behind */}
+               <div
+                 className="absolute blur-[10px] animate-glow2"
+                 style={{
+                   width: "250px",
+                   height: "250px",
+                   borderRadius: "50%",
+                   background:
+                     "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+                   zIndex: -1,
+                 }}
+               />
+               <PointerGrid
+                 horizontal={{ direction: "right", y: 183, fromX:250, toX: 50 }}
+                 width={150}
+                 height={150}
+               />
+             </div>
+           </div>
+        
       {/* Left section */}
       <div className="flex flex-col items-start md:items-end md:w-1/2 text-center md:text-right">
         <h2 className="text-white text-2xl sm:text-3xl md:text-4xl font-bold leading-snug">
@@ -124,7 +140,7 @@ export const History = () => {
             >
               {/* Vertical line */}
               {i !== 2 && (
-                <div className="absolute left-0 top-0 w-[2px] h-[calc(100%+48px)] sm:h-[calc(100%+64px)] bg-[#6D6D6D]">
+                <div className="absolute hidden md:block left-0 top-0 w-[2px] h-[calc(100%+48px)] sm:h-[calc(100%+64px)] bg-[#6D6D6D]">
                   {isActive && (
                     <div
                       className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-300"
@@ -135,7 +151,7 @@ export const History = () => {
               )}
 
               {/* Circle marker */}
-              <div className="absolute -left-2 sm:-left-2 w-4 h-4 rounded-full bg-[#6D6D6D]">
+              <div className="absolute hidden md:block -left-2 sm:-left-2 w-4 h-4 rounded-full bg-[#6D6D6D]">
                 {isActive && (
                   <div className="w-4 h-4 rounded-full bg-[#1057B5] flex items-center justify-center">
                     <ServicesIcon />

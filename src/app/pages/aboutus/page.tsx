@@ -10,10 +10,10 @@ export default function AboutPage() {
   return (
 
     <div >
-      <AboutHeader/>  
-      <History/>
-      <WhyCyphr/> 
-      <TeamSection/>
+       <AboutHeader/>  
+      {/* <History/>
+       <WhyCyphr/>  */}
+   {/* <TeamSection/> */}
       <MissionSection/>
       <ContactSection />
     </div>
