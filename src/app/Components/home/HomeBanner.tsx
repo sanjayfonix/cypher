@@ -186,7 +186,7 @@ export default function HomeBanner() {
             </button>
           </Link>
         </div>
-
+        <div className="block sm:hidden mt-8"/>
         <AnimateBannerPaths />
       </div>
     </div>

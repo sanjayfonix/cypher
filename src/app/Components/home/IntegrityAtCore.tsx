@@ -42,7 +42,7 @@ export default function IntegrityAtCore() {
                   }
                 >
                   <div
-                    className={`${item.id===1?'md:mt-4':'mt-0'} hover:-rotate-6  flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit`}
+                    className={`${item.id===1?'md:mt-4':'mt-0'} ${item.id===1?'hover:-rotate-6':'hover:rotate-6'}  flex flex-row gap-3 sm:gap-4 items-center rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 w-full sm:w-fit`}
                     
                   >
                     <div className="flex items-center justify-center rounded-full p-[0.5px] aspect-square shadow-[0px_0px_10px_0px_#157AFF66]">
@@ -70,7 +70,7 @@ export default function IntegrityAtCore() {
           </div>
 
           {/* Bottom Cards */}
-          <div className="flex flex-wrap justify-start md:justify-between items-start gap-4 mx-4 max-w-[70%] w-full sm:max-w-4xl">
+          <div className="flex flex-wrap justify-start sm:justify-between items-start gap-4 mx-4 max-w-[70%] w-full sm:max-w-4xl">
             {Items.slice(2).map((item) => (
              
                 <Link
@@ -82,7 +82,7 @@ export default function IntegrityAtCore() {
                 >
                  <div
   className={`
-    hover:rotate-5 flex flex-row gap-3 sm:gap-4 items-center 
+    ${item.id===3?'hover:rotate-6':'hover:-rotate-6'} flex flex-row gap-3 sm:gap-4 items-center 
     rounded-[8px] bg-[#09346Bb3] backdrop-blur-md py-2 px-3 sm:px-4 
     w-full sm:w-fit
 

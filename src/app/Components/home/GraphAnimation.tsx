@@ -3,7 +3,7 @@
 import { motion, Transition } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 
-// Hexagon-like path nodes (kept from your original)
+// Nodes for hexagon-like polygon
 const nodes = [
   { x: 300, y: 220, place: "Los Angeles" },
   { x: 500, y: 230, place: "San Diego" },
@@ -22,7 +22,6 @@ const edgeTimes = [
   ["5:30", "7:00"],
 ];
 
-// ✅ Correctly typed bounce transition
 const bounceTransition: Transition = {
   duration: 0.95,
   repeat: Infinity,
@@ -92,33 +91,23 @@ export default function TrackingAnimation() {
       .join(" ") +
     ` Z`;
 
-  // Ripple configs tuned to video feel
   const rippleConfigs = [
     { duration: 1, size: 12, color: "#C20000", delay: 0 },
     { duration: 2, size: 26, color: "#A30000", delay: 0.2 },
-     { duration: 2.3, size: 26, color: "#A30000", delay: 0.2 },
-    
-    { duration:2.5, size: 28, color: "#69D4FF", delay: 0.4, cxOffset: -5 },
+    { duration: 2.3, size: 26, color: "#A30000", delay: 0.2 },
+    { duration: 2.5, size: 28, color: "#69D4FF", delay: 0.4, cxOffset: -5 },
   ];
 
   return (
-    <div className="relative w-full h-[700px] bg-[#0a0f1a] grid place-items-center overflow-hidden">
-        <div className="relative w-full h-[800px] bg-[#0a0f1a] grid place-items-center overflow-hidden">
-  {/* === TOP LEFT TRACKING BOX === */}
-  <div className="absolute top-6 left-6 px-3 py-2 border border-[#3B6AB1] bg-[#0a0f1a]/60 rounded">
-    <p className="text-[16px] text-white font-medium">Loc8 Tracking: Subject A</p>
-    <p className="text-[16px] text-red-500 font-semibold">{edgeTimes[activeEdge[0]].join('-')}</p>
-  </div>
-  </div>
-      {/* Graph background */}
-      <svg width="700" height="800" className="absolute" color="#0E1B33">
+    <div className="relative w-full h-[300px] sm:h-[1000px] md:h-[900px] lg:[700px] bg-[#0a0f1a] overflow-hidden">
+      {/* === FULL BACKGROUND GRID === */}
+      <svg
+        viewBox="0 0 700 800"
+        className="absolute inset-0 w-full h-full"
+        preserveAspectRatio="none"
+      >
         <defs>
-          <pattern
-            id="grid"
-            width="40"
-            height="40"
-            patternUnits="userSpaceOnUse"
-          >
+          <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
             <path
               d="M 40 0 L 0 0 0 40"
               fill="none"
@@ -138,7 +127,7 @@ export default function TrackingAnimation() {
             />
           </filter>
 
-          {/* subtle inner glow */}
+          {/* glow filter */}
           <filter id="glow">
             <feGaussianBlur stdDeviation="3.5" result="coloredBlur" />
             <feMerge>
@@ -147,13 +136,29 @@ export default function TrackingAnimation() {
             </feMerge>
           </filter>
         </defs>
-
         <rect width="100%" height="100%" fill="url(#grid)" />
       </svg>
 
-      <svg width="700" height="700" className="absolute left-1/20 top-[15%]">
+      {/* === TOP LEFT LABEL === */}
+      <div className="absolute top-6 left-6 z-20 px-3 py-2 border border-[#3B6AB1] bg-[#0a0f1a]/80 rounded">
+        <p className="text-[14px] md:text-[16px] text-white font-medium">
+          Loc8 Tracking: Subject A
+        </p>
+        <p className="text-[14px] md:text-[16px] text-red-500 font-semibold">
+          {edgeTimes[activeEdge[0]].join("-")}
+        </p>
+      </div>
+
+      {/* === POLYGON + POINTER === */}
+      <svg
+        viewBox="0 -100 550 700"
+        className="absolute inset-0 w-full h-full mt-12 sm:mt-0"
+        preserveAspectRatio="xMidYMid meet"
+      >
+        {/* Polygon path */}
         <path d={pathData} fill="none" stroke="#3B6AB1" strokeWidth="1.5" />
 
+        {/* Nodes */}
         {nodes.map((node, i) => {
           const isActive = activeEdge.includes(i);
           const edgeIndex = activeEdge[0];
@@ -177,7 +182,7 @@ export default function TrackingAnimation() {
                     y={node.y - 28}
                     textAnchor="middle"
                     fill="white"
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: "12px", fontWeight: 500 }}
                   >
                     {timeLabel}
                   </text>
@@ -186,7 +191,7 @@ export default function TrackingAnimation() {
                     y={node.y - 15}
                     textAnchor="middle"
                     fill="white"
-                    style={{ fontSize: "16px" }}
+                    style={{ fontSize: "12px", fontWeight: 500 }}
                   >
                     {node.place}
                   </text>
@@ -211,11 +216,10 @@ export default function TrackingAnimation() {
               scale: [1, 0.78, 1],
               opacity: [0.45, 0.2, 0.45],
             }}
-           
             style={{ transformOrigin: "center" }}
           />
 
-          {/* Red pointer with bounce */}
+          {/* Red pointer */}
           <motion.circle
             r={7.2}
             fill="#C20000"
@@ -223,8 +227,6 @@ export default function TrackingAnimation() {
             animate={{ y: [0, -10, 0], scale: [1, 1.03, 1] }}
             
           />
-
-         
 
           {/* Ripple rings */}
           {rippleConfigs.map((cfg, idx) => (
@@ -251,4 +253,6 @@ export default function TrackingAnimation() {
     </div>
   );
 }
+
+
 

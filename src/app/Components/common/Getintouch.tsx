@@ -46,11 +46,11 @@ export default function ContactSection() {
         overflow-hidden
       "
     >
-       <div className="absolute z-30 left-0 bottom-0  -translate-x-1/3">
+       <div className="hidden lg:block absolute z-30 left-0 bottom-0  -translate-x-1/3">
                     <div className="relative flex items-center justify-center">
-                      <PointerGrid width={400} height={300} horizontal={{direction:'right',y:30 ,
-            fromX: 60,
-            toX: 100}}/>
+                      <PointerGrid width={400} height={300} horizontal={{direction:'right',y:185 ,
+            fromX: 200,
+            toX: 80}}/>
                     </div>
                     </div>
       {/* Background Glow */}

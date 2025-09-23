@@ -398,3 +398,10 @@ body {
 .animate-zoom-fade {
   animation: zoom-fade 4s ease-in-out infinite;
 }
+
+
+@media (min-width:1387px){
+.change-flex{
+  flex-direction: row;
+}
+}

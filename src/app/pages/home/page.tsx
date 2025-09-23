@@ -19,14 +19,14 @@ export default function HomePage() {
     <div className="w-full bg-[var(--primary)] container">
      {/* <HomeBanner/> */}
       {/* <GlobalThreatIntelligence/>  */}
-      {/* <WhereInvestigation/> */}
-    <HowItWorks/>
-      {/* <IntegrityAtCore/> */}
-    {/* <BlurCard/>
-     <div className="p-4 lg:p-0">
+      <WhereInvestigation/>
+    {/* <HowItWorks/> */}
+      {/* <IntegrityAtCore/>
+     <BlurCard/> */}
+     {/* <div className="p-4 lg:p-0">
      <ContactSection />
      </div>
-     <CESessions/> */}
+     <CESessions/>  */}
      
     </div> 
   );

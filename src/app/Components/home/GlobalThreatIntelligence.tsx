@@ -151,9 +151,10 @@ export default function GlobalThreatIntelligence() {
       )}
 
       {tabIndex === 0 && (
-        <div className="bg-black text-white font-sans flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
-          <Radar />
-          <SecurityFeatures />
+    
+        <div className="bg-black text-white font-sans flex flex-col change-flex items-center justify-center gap-8 lg:gap-12">
+ <Radar />
+      <SecurityFeatures /> 
         </div>
 
       )}
@@ -214,7 +215,7 @@ function SecurityFeatures() {
   ];
 
   return (
-    <div className="bg-black flex items-start py-10">
+    <div className="bg-black flex items-start py-10 overflow-hidden">
       <div className="grid grid-cols-2 gap-20 relative">
         {[0, 1].map((col, idx) => (
           <div key={col} className="relative flex flex-col items-center">
@@ -231,7 +232,7 @@ function SecurityFeatures() {
                 >
                   <div ref={lineRef} className={`absolute top-[125px] left-1/5 transform -translate-x-1/2 ${realInd === 1 || realInd === 3 ? 'h-[calc(100%)]' : ' h-[calc(250%)]'} w-0 border border-[#696969]`}>
 
-                    {/* Animated pointer */}    <motion.div
+                     <motion.div
                       className="absolute left-1/2 -translate-x-1/2"
                       initial={{ y: -5 }}
                       animate={{ y: realInd === 1 || realInd === 3 ? lineHeight - 50 : lineHeight * 2.5 - 50 }}
@@ -243,7 +244,7 @@ function SecurityFeatures() {
                       }}
                     >
                    <div className="relative w-[24px] h-[60px]">
-      {/* Main droplet */}
+   
       <div
         className="
           absolute inset-0
@@ -258,8 +259,8 @@ function SecurityFeatures() {
 
                   </div>
 
-                  {/* Icon Circle */}
-                  <div className="relative  px-5 rounded-full flex items-center justify-center">
+                  
+                  <div className="relative  px-5 rounded-full flex items-center justify-center ">
                     <div>
                     <GlassIcon hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
                     </div>
@@ -267,8 +268,8 @@ function SecurityFeatures() {
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg">{feature.title}</h3>
-                    <p className="text-gray-400 max-w-[70%]">{feature.desc}</p>
+                    <h3 className="font-bold text-lg max-w-[50%]">{feature.title}</h3>
+                    <p className="text-gray-400 max-w-[50%] lg:max-w-[70%]">{feature.desc}</p>
                   </div>
                 </div>
               ))}

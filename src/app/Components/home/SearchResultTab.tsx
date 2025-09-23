@@ -31,39 +31,37 @@ export default function SearchResultTab({
         }}
       >
         {/* First row */}
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full">
+        <div className="flex flex-col items-center sm:items-start sm:flex-row gap-3 sm:gap-4 md:gap-6 w-full">
           {/* Icon */}
-          <div
-            className="flex-shrink-0 flex items-center justify-center min-w-[44px] sm:min-w-[56px] md:min-w-[64px] aspect-square p-2 rounded-full"
-            style={{
-              background:
-                "linear-gradient(180deg, rgba(3, 10, 20, 0.2) 28.22%, rgba(21, 122, 255, 0.2) 185.84%)",
-            }}
-          >
+          
             {icon}
-          </div>
+          
 
           {/* Text container */}
           <div className="flex flex-col gap-2 min-w-0 flex-1">
-            <span className="font-sans font-medium text-base sm:text-xl md:text-2xl text-white break-words">
+            <span className="font-sans font-medium text-base sm:text-xl md:text-2xl text-white break-words text-center sm:text-left">
               {title}
             </span>
 
             {/* User ID + Query */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2 sm:gap-0 w-full min-w-0">
-              {/* User ID Block */}
-              <div className="flex items-center gap-2.5 px-3 sm:px-4 py-1.5 rounded-t-full sm:rounded-l-full sm:rounded-tr-none bg-[#09346B80] w-full sm:w-auto">
-                <span className="font-sans text-white text-xs sm:text-sm md:text-base truncate">
-                  User ID:
-                </span>
-              </div>
+            <div className="flex flex-row items-center sm:gap-0 max-w-[90%]">
+              {/* User ID + Query */}
+<div className="flex flex-wrap sm:flex-nowrap items-center max-w-full gap-0">
+  {/* User ID Block */}
+  <div className="flex items-center gap-2.5 px-3 sm:px-4 py-1.5 rounded-t-full rounded-l-full rounded-tr-none bg-[#09346B80] min-w-0">
+    <span className="font-sans text-white text-xs sm:text-sm md:text-base truncate">
+      User ID 
+    </span>
+  </div>
 
-              {/* Query Block */}
-              <div className="flex items-center gap-2.5 px-3 sm:px-6 py-1.5 rounded-b-full sm:rounded-r-full sm:rounded-bl-none bg-[#B1B1B129] flex-1 min-w-0">
-                <span className="font-inter font-normal text-xs sm:text-sm md:text-base text-[#CACACA] truncate">
-                  Query: {queryVal}
-                </span>
-              </div>
+  {/* Query Block */}
+  <div className="flex items-center gap-2.5 px-3 sm:px-6 py-1.5 rounded-b-full rounded-r-full rounded-bl-none bg-[#B1B1B129] min-w-0 flex-1">
+    <span className="font-inter font-normal text-xs sm:text-sm md:text-base text-[#CACACA] truncate">
+      Query: {queryVal}
+    </span>
+  </div>
+</div>
+
             </div>
           </div>
         </div>
@@ -73,7 +71,7 @@ export default function SearchResultTab({
           {rowsData.map((row, index) => (
             <div
               key={index}
-              className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 px-1 sm:px-2 py-2 border-b-[0.5px] border-b-[#B1B1B18A] min-w-0 w-full"
+              className="flex flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 px-1 sm:px-2 py-2 border-b-[0.5px] border-b-[#B1B1B18A] min-w-0"
             >
               <span className="font-inter font-normal text-xs sm:text-sm md:text-base text-white break-words flex-1 min-w-0">
                 {row.label}
@@ -98,7 +96,7 @@ export default function SearchResultTab({
           ))}
 
           {/* Date row */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 sm:gap-0 px-1 sm:px-2 py-2 min-w-0 w-full">
+          <div className="flex flex-row flex-wrap justify-between items-start sm:items-center gap-2 sm:gap-0 px-1 sm:px-2 py-2 min-w-0 w-full">
             <span className="font-inter font-normal text-xs sm:text-sm md:text-base text-white">
               Facebook Login Option
             </span>

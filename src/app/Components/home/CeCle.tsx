@@ -38,7 +38,7 @@ const CESessions = () => {
                 </button>
 
                 <Link href={"/pages/discoveredu"} className="w-full sm:w-auto">
-                  <button className="custom-button with-border bg-transparent text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full">
+                  <button className="custom-button with-border bg-transparent text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full text-ellipses">
                     Discover Our Educational Programs <Toparrow />
                   </button>
                 </Link>
