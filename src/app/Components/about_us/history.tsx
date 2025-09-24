@@ -85,7 +85,7 @@ export const History = () => {
      <div
              className="absolute z-30 hidden sm:flex items-center justify-center"
              style={{
-               bottom:'0%',
+               bottom:'2%',
                left: "0",
                transform: "translateX(-50%)", // half outside screen, half visible
              }}

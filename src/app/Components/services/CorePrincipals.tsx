@@ -201,7 +201,7 @@ export default function CorePrincipals() {
                 setTabIndex(1)
               }
             }} 
-            className="relative top-5 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+            className="relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
             {tabIndex === 1 ? <DropUp /> : <DropDown />}
             </button>           

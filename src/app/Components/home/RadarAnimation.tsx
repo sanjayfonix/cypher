@@ -161,7 +161,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         {/* Background grid + circles */}
         <g>
           <circle cx={CX} cy={CY} r={RADIUS + 18} fill="url(#bgGrad)" />
-          {[40, 120, 200, 280].map((r, i) => (
+          {[60, 140, 220, 300].map((r, i) => (
             <circle
               key={i}
               cx={CX}

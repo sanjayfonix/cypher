@@ -409,17 +409,19 @@ body {
 }
 }
 
+
 @media (max-width:1387px){
   .translate-for-lg{
   transform: translateX(120);
 }
 }
 
-@media (max-width:900px){
+@media (max-width:1024px){
   .translate-for-lg{
   transform: translateX(0);
 }
 }
+
 
 .scroll-snap-y {
   scroll-snap-type: y mandatory;

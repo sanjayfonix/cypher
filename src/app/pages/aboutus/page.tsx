@@ -11,9 +11,9 @@ export default function AboutPage() {
 
     <div >
        <AboutHeader/>  
-      {/* <History/>
-       <WhyCyphr/>  */}
-   {/* <TeamSection/> */}
+       <History/>
+       <WhyCyphr/> 
+  <TeamSection/> 
       <MissionSection/>
       <ContactSection />
     </div>

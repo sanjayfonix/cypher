@@ -216,9 +216,9 @@ function SecurityFeatures() {
 
   return (
     <div className="bg-black flex flex-wrap items-start py-10 overflow-hidden">
-      <div className="grid sm:grid-cols-1 lg:grid-cols-2 sm:gap-0 lg:gap-20 relative">
+      <div className="grid sm:grid-cols-1 md:grid-cols-2 sm:gap-0 lg:gap-20 relative">
         {[0, 1].map((col, idx) => (
-          <div key={col} className="relative flex flex-col sm:flex-row  lg:flex-col sm:items-start md:items-center">
+          <div key={col} className="relative flex flex-col md:flex=row lg:flex-col sm:items-start lg:items-center">
             {/* Vertical line starting from center of top icon */}
 
 
@@ -261,15 +261,43 @@ function SecurityFeatures() {
 
                   
                   <div className="relative  px-5 rounded-full flex items-center justify-center ">
-                    <div>
+                    <div className="flex flex-col gap-8 items-center">
                     <GlassIcon size={100} hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
+                    <div ref={lineRef} className={`block lg:hidden h-20 w-0 border border-[#696969]`}>
+
+                     <motion.div
+                      className="absolute left-1/2 -translate-x-1/2"
+                      initial={{ y: -5 }}
+                      animate={{ y:  lineHeight-30  }}
+                      transition={{
+                        duration: 4,
+                        repeat: Infinity,
+                        repeatType: "loop",
+                        ease: "linear",
+                      }}
+                    >
+                   <div className="relative w-[24px] h-[60px]">
+   
+      <div
+        className="
+          absolute inset-0
+          bg-gradient-to-b from-[#006EFF] to-[#093C80]
+          [clip-path:polygon(50%_0%,25%_80%,40%_100%,60%_100%,75%_80%)]
+          shadow-[0_2px_4px_rgba(0,110,255,0.5),0_4px_6px_rgba(9,60,128,0.5)]
+        "
+      />
+    </div>
+                    </motion.div>
+
+
+                  </div>
                     </div>
                   </div>
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg max-w-[50%]">{feature.title}</h3>
-                    <p className="text-gray-400 max-w-[50%] md:max-w-[70%]">{feature.desc}</p>
+                    <h3 className="font-bold text-lg max-w-[100%] lg:max-w-[50%]">{feature.title}</h3>
+                    <p className="text-gray-400 max-w-[100%] lg:max-w-[58%]">{feature.desc}</p>
                   </div>
                 </div>
               ))}

@@ -229,69 +229,140 @@ const AnimatedPathWithPointer: React.FC<{
 
 export const AnimateBannerPaths: React.FC = () => {
   return (
-    
-    <svg className="lg:w-[1000px] md:w-[700px] sm:w-[500] w-full h-full" viewBox="0 0 1300 400" fill="none">
-      <svg x={'369'} y={'-105'} width="509" height="619" viewBox="0 0 509 509" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g opacity="0.6" filter="url(#filter0_f_1128_929)">
-<circle cx="254.5" cy="254.5" r="150.5" fill="#167BFF" fill-opacity="0.4"/>
-</g>
-<ellipse opacity="0.9" cx="254.5" cy="261.5" rx="186.5" ry="156.5" fill="url(#paint0_linear_1128_929)"/>
-<defs>
-<filter id="filter0_f_1128_929" x="0" y="0" width="509" height="509" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-<feGaussianBlur stdDeviation="52" result="effect1_foregroundBlur_1128_929"/>
-</filter>
-<linearGradient id="paint0_linear_1128_929" x1="254.5" y1="418" x2="254.5" y2="378.032" gradientUnits="userSpaceOnUse">
-<stop stop-color="#167BFF"/>
-<stop offset="1" stop-color="#3B6499" stop-opacity="0"/>
-</linearGradient>
-</defs>
-</svg>
+    <svg
+      className="w-full max-w-[1300px] h-auto mx-auto"
+      viewBox="0 0 1300 400"
+      preserveAspectRatio="xMidYMid meet"
+      fill="none"
+    >
+      <svg
+        x={"369"}
+        y={"-105"}
+        width="509"
+        height="619"
+        viewBox="0 0 509 509"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g opacity="0.6" filter="url(#filter0_f_1128_929)">
+          <circle
+            cx="254.5"
+            cy="254.5"
+            r="150.5"
+            fill="#167BFF"
+            fillOpacity="0.4"
+          />
+        </g>
+        <ellipse
+          opacity="0.9"
+          cx="254.5"
+          cy="261.5"
+          rx="186.5"
+          ry="156.5"
+          fill="url(#paint0_linear_1128_929)"
+        />
+        <defs>
+          <filter
+            id="filter0_f_1128_929"
+            x="0"
+            y="0"
+            width="509"
+            height="509"
+            filterUnits="userSpaceOnUse"
+            colorInterpolationFilters="sRGB"
+          >
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
+            <feBlend
+              mode="normal"
+              in="SourceGraphic"
+              in2="BackgroundImageFix"
+              result="shape"
+            />
+            <feGaussianBlur
+              stdDeviation="52"
+              result="effect1_foregroundBlur_1128_929"
+            />
+          </filter>
+          <linearGradient
+            id="paint0_linear_1128_929"
+            x1="254.5"
+            y1="418"
+            x2="254.5"
+            y2="378.032"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#167BFF" />
+            <stop offset="1" stopColor="#3B6499" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       {/* Concentric circles */}
-      <circle className="animate-blink" cx="619" cy="169.75" r="73.5" stroke="#0C438C"/>
-      <circle className="animate-blink"  opacity="0.2" cx="619" cy="171.75" r="90.5" stroke="#0C438C" />
-      <circle className="animate-blink"  opacity="0.1" cx="619" cy="171.75" r="108.5" stroke="#0C438C" />
-      <g mask="url(#pointersMask)"><AnimatedPathWithPointer
-        speed={1}
-        d="M147 295H193.967C207.639 295 220.714 289.402 230.15 279.508L284.527 222.492C293.962 212.598 307.038 207 320.71 207H581
+      <circle
+        className="animate-blink"
+        cx="619"
+        cy="169.75"
+        r="73.5"
+        stroke="#0C438C"
+      />
+      <circle
+        className="animate-blink"
+        opacity="0.2"
+        cx="619"
+        cy="171.75"
+        r="90.5"
+        stroke="#0C438C"
+      />
+      <circle
+        className="animate-blink"
+        opacity="0.1"
+        cx="619"
+        cy="171.75"
+        r="108.5"
+        stroke="#0C438C"
+      />
+
+      <g mask="url(#pointersMask)">
+        <AnimatedPathWithPointer
+          speed={1}
+          d="M147 295H193.967C207.639 295 220.714 289.402 230.15 279.508L284.527 222.492C293.962 212.598 307.038 207 320.71 207H581
           M652 207H955.399C970.169 207 984.183 213.53 993.683 224.839L1037.64 277.161C1047.14 288.47 1061.15 295 1075.92 295H1091"
-        colorId="grad1"
-        gradient={["#016FFF", "#093C80"]}
-        offset={0}
-      />
-      <AnimatedPathWithPointer
-        speed={3}
-        d="M147 49H167.374C184.77 49 200.916 58.0421 210.006 72.875L234.671 113.125C243.761 127.958 259.907 137 277.303 137H575 
+          colorId="grad1"
+          gradient={["#016FFF", "#093C80"]}
+          offset={0}
+        />
+        <AnimatedPathWithPointer
+          speed={3}
+          d="M147 49H167.374C184.77 49 200.916 58.0421 210.006 72.875L234.671 113.125C243.761 127.958 259.907 137 277.303 137H575 
           M658 137H917.289C930.961 137 944.037 131.402 953.472 121.508L1007.85 64.492C1017.28 54.5983 1030.36 49 1044.03 49H1091"
-        colorId="grad2"
-        gradient={["#016FFF", "#093C80"]}
-        offset={100}
-      />
-      <AnimatedPathWithPointer
-        speed={2}
-        d="M95.3013 172C224.447 172 579.999 172 565.999 170 M670 172C1013.55 172 1142.7 172 1142.7 172"
-        colorId="grad3"
-        gradient={["#016FFF", "#093C80"]}
-        offset={200}
-      />
+          colorId="grad2"
+          gradient={["#016FFF", "#093C80"]}
+          offset={100}
+        />
+        <AnimatedPathWithPointer
+          speed={2}
+          d="M95.3013 172C224.447 172 579.999 172 565.999 170 M670 172C1013.55 172 1142.7 172 1142.7 172"
+          colorId="grad3"
+          gradient={["#016FFF", "#093C80"]}
+          offset={200}
+        />
       </g>
 
-        {/* Static icons & elements */}
+      {/* Static icons & elements */}
       <foreignObject x="565.751" y="115.5" height={140} width={140}>
         <GlassIcon size={105} icon={<MiddleIcon />} />
       </foreignObject>
-        <foreignObject x="62.7495" y="7" height={92} width={92}>
+      <foreignObject x="62.7495" y="7" height={92} width={92}>
         <g filter="url(#filter0_d_1_437)">
           <div style={{ width: 84, height: 84, borderRadius: "50%" }}>
-            <GlassIcon  arcLength={220} isShadow={true} size={84} icon={<Peoples />} />
+            <GlassIcon arcLength={220} isShadow={true} size={84} icon={<Peoples />} />
           </div>
         </g>
       </foreignObject>
       <foreignObject x="12.7495" y="120" height={92} width={92}>
         <g filter="url(#filter0_d_1_437)">
           <div style={{ width: 84, height: 84, borderRadius: "50%" }}>
-            <GlassIcon  arcLength={220} isShadow={true} size={84} icon={<FaceScan />} />
+            <GlassIcon arcLength={220} isShadow={true} size={84} icon={<FaceScan />} />
           </div>
         </g>
       </foreignObject>
@@ -301,37 +372,30 @@ export const AnimateBannerPaths: React.FC = () => {
       <foreignObject x="1090.75" y="7" height={92} width={92}>
         <g filter="url(#filter5_d_1_437)">
           <div style={{ width: 84, height: 84, borderRadius: "50%" }}>
-            <GlassIcon arcLength={220} isShadow={true}  size={84} icon={<Badge />} />
+            <GlassIcon arcLength={220} isShadow={true} size={84} icon={<Badge />} />
           </div>
         </g>
       </foreignObject>
       <foreignObject x="1142.5" y="129.5" height={92} width={92}>
         <g filter="url(#filter5_d_1_437)">
-          <GlassIcon  arcLength={220} isShadow={true} size={84} icon={<Database />} />
+          <GlassIcon arcLength={220} isShadow={true} size={84} icon={<Database />} />
         </g>
       </foreignObject>
       <foreignObject x="1090.75" y="252" height={92} width={92}>
         <g filter="url(#filter5_d_1_437)">
-          <GlassIcon  arcLength={220} isShadow={true} size={84} icon={<Handshake />} />
+          <GlassIcon arcLength={220} isShadow={true} size={84} icon={<Handshake />} />
         </g>
       </foreignObject>
-      {/* 3 animated paths */}
-      
-
-
-
-      
-
 
       {/* Shared filters */}
       <defs>
         <filter id="glowFilter" x="-50%" y="-50%" width="200%" height="200%">
-  <feGaussianBlur stdDeviation="12" result="blur" />
-  <feMerge>
-    <feMergeNode in="blur" />
-    <feMergeNode in="SourceGraphic" />
-  </feMerge>
-</filter>
+          <feGaussianBlur stdDeviation="12" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
         <filter id="shadow" x="0" y="0" width="200%" height="200%">
           <feDropShadow
             dx="0"
@@ -362,32 +426,40 @@ export const AnimateBannerPaths: React.FC = () => {
             result="effect1_foregroundBlur_1128_929"
           />
         </filter>
-<linearGradient id="paint0_linear_1128_929" x1="0" y1="0" x2="0" y2="1" gradientUnits="userBoundingBox">
-<stop stop-color="#167BFF"/>
-<stop offset="1" stop-color="#3B6499" stop-opacity="0"/>
-</linearGradient>
-<mask id="pointersMask">
-    {/* Everything visible by default */}
-    <rect x="0" y="0" width="1300" height="400" fill="white" />
+        <linearGradient
+          id="paint0_linear_1128_929"
+          x1="0"
+          y1="0"
+          x2="0"
+          y2="1"
+          gradientUnits="userBoundingBox"
+        >
+          <stop stopColor="#167BFF" />
+          <stop offset="1" stopColor="#3B6499" stopOpacity="0" />
+        </linearGradient>
 
-    {/* Hide area for middle icon */}
-   <rect 
-      x="565.75" 
-      y="115.5" 
-      width="106" 
-      height="106" 
-      rx="70"  /* rounded to match circular GlassIcon */
-      fill="black" 
-    />
+        <mask id="pointersMask">
+          {/* Everything visible by default */}
+          <rect x="0" y="0" width="1300" height="400" fill="white" />
 
-    {/* Hide areas for corner icons */}
-    <circle cx="105" cy="50" r="40" fill="black" />
-    <circle cx="60" cy="160" r="35" fill="black" />
-    <circle cx="100" cy="270" r="50" fill="black" />
-    <circle cx="1115" cy="50" r="25" fill="black" />
-    <circle cx="1165" cy="150" r="30" fill="black" />
-    <circle cx="1115" cy="270" r="30" fill="black" />
-  </mask>
+          {/* Hide area for middle icon */}
+          <rect
+            x="565.75"
+            y="115.5"
+            width="106"
+            height="106"
+            rx="70"
+            fill="black"
+          />
+
+          {/* Hide areas for corner icons */}
+          <circle cx="105" cy="50" r="40" fill="black" />
+          <circle cx="60" cy="160" r="35" fill="black" />
+          <circle cx="100" cy="270" r="50" fill="black" />
+          <circle cx="1115" cy="50" r="25" fill="black" />
+          <circle cx="1165" cy="150" r="30" fill="black" />
+          <circle cx="1115" cy="270" r="30" fill="black" />
+        </mask>
       </defs>
     </svg>
   );

@@ -11,51 +11,63 @@ const ServiceBlurCard = () => {
   return (
     <div className="relative mb-4 flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
 {/* PointerGrid at top-right edge of screen with glow */}
-<div
-  className="absolute z-30 translate-x-1/4 -translate-y-1/4"
-  style={{
-    top: "0", // aligns with top of card
-    right: "0", 
-    // stick to screen edge
-  }}
->
-  <div className="relative flex items-center justify-center">
-    {/* Glow behind */}
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "200px",
-        height: "200px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.9) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1, // sits behind grid
-      }}
-    />
-    <PointerGrid width={150} height={150} />
-  </div>
-</div>
+ <div
+        className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
+        
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
+            style={{
+              
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <div className="relative -left-8">
+            <PointerGrid
 
-{/* Existing PointerGrid in center with glow */}
-<div className="absolute z-30 left-0 top-1/2 translate-y-1/4 -translate-x-1/3">
-  <div className="relative flex items-center justify-center">
-    {/* Glow behind */}
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "200px",
-        height: "200px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1,
-      }}
-    />
-    <PointerGrid horizontal={{direction:'right',y:30 ,
-    fromX: 60,
-    toX: 100}} width={150} height={150} />
-  </div>
-</div>
+              width={150}
+              height={150}
+            />
+          </div>
+        </div>
+      </div>
+
+
+
+      {/* Left Grid Glow */}
+      <div
+        className="relative lg:left-0 left-[-43%] hidden sm:flex  lg:absolute lg:bottom-0 z-30  items-center justify-center"
+        style={{
+         
+          
+          transform: "translateX(-50%)", // half outside screen, half visible
+        }}
+      >
+        <div className="relative flex items-center justify-center mb-4">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:w-[170px] md:h-[170px]"
+            style={{
+              
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <PointerGrid
+            horizontal={{ direction: "right", y: 30, fromX: 60, toX: 100 }}
+            width={150}
+            height={150}
+          />
+        </div>
+      </div>
+  
 
       {/* ===== Main Card ===== */}
       <div

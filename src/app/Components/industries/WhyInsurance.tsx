@@ -8,10 +8,8 @@ import { GlassIcon } from "../home/GlassIcon";
 import Link from "next/link";
 
 export const WhyIndustriesCarrier = () => {
-
-
   return (
-    <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6">
+    <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6 ">
 
       {/* Left Column: Text + Button */}
       <div className="flex flex-col gap-8 relative animate-fade-in opacity-0">
@@ -32,87 +30,88 @@ export const WhyIndustriesCarrier = () => {
             </p>
           </div>
         </header>
-<div>
-        <Link href={'/pages/contactus'}><button 
-         
-          className="custom-button with-border bg-transparent"
-        >Contact our expert <Toparrow/>
-        </button></Link>
+
+        <div>
+          <Link href={'/pages/contactus'}>
+            <button className="custom-button with-border bg-transparent">
+              Contact our expert <Toparrow/>
+            </button>
+          </Link>
         </div>
       </div>
 
       {/* Right Column: Cards */}
       <div className="relative max-w-3xl">
+        {/* IMPORTANT: stack on mobile, grid (3 cols) from md */}
+        <div className="flex flex-col md:grid md:grid-cols-[1fr_auto_1fr] gap-4 md:gap-8 items-start">
 
-        {/* Divider */}
-        
+          {/* Left Cards Column */}
+          <div className="flex flex-col gap-14 mt-0 md:mt-20">
+            {/* Card 1 */}
+            <Card className="self-start flex flex-col lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
+              <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon/>} size={60}/></div>
+                <div className="flex flex-col gap-4 ">
+                  <CardTitle>Detect Fraud Early</CardTitle>
+                  <CardDescription>
+                    Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
+                  </CardDescription>
+                </div>
+              </CardContent>
+            </Card>
 
-        {/* Left Cards Column */}
-        <div
-        className="grid grid-cols-[1fr_auto_1fr] md:flex gap-4  md:gap-8 ">
-        <div className="md:mt-20 flex flex-col gap-14 mt-2 sm:mt-0">
-          {/* Card 1 */}
-          <Card className="flex flex-col flex-1 lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
-            <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
-              <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon/>} size={60}/></div>
-              <div className="flex flex-col gap-4 ">
-                <CardTitle>Detect Fraud Early</CardTitle>
-                <CardDescription>
-                  Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
-                </CardDescription>
-              </div>
-            </CardContent>
-          </Card>
+            <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />
 
-          <div className="hidden w-full h-0 border-[#5B5B5B] border md:block  " />
-        
-          {/* Card 2 */}
-          <Card className="flex flex-1 items-start mb-4 gap-6 bg-transparent border-none shadow-none">
-            <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
-              <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon/>} size={60}/></div>
-              <div className="flex flex-col gap-4">
-                <CardTitle>Build Better Risk Profiles</CardTitle>
-                <CardDescription>
-                  Create accurate risk profiles and assess client risks to make better underwriting decisions and improve risk management.
-                </CardDescription>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-       <div className="block w-0 border border-[#5B5B5B] " />
-        {/* Right Cards Column */}
-        <div className="flex flex-col gap-14  mt-2 ">
-          {/* Card 3 */}
-          <Card className="flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
-            <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
-              <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon/>} size={60}/></div>
-              <div className="flex flex-col gap-4">
-                <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
-                <CardDescription>
-                  Minimize payouts and improve operational efficiency by detecting fraud and streamlining the claims process.
-                </CardDescription>
-              </div>
-            </CardContent>
-          </Card>
+            {/* Card 2 */}
+            <Card className="self-start flex flex-1 items-start mb-4 gap-6 bg-transparent border-none shadow-none">
+              <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon/>} size={60}/></div>
+                <div className="flex flex-col gap-4">
+                  <CardTitle>Build Better Risk Profiles</CardTitle>
+                  <CardDescription>
+                    Create accurate risk profiles and assess client risks to make better underwriting decisions and improve risk management.
+                  </CardDescription>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
- <div className="w-full hidden h-0 border-[#5B5B5B] border md:block  " />
+          {/* vertical divider only on md+ */}
+          <div className="block h-full w-0 border border-[#5B5B5B]" />
 
-          {/* Card 4 */}
-          <Card className="flex mb-4 flex-1 items-start gap-6 bg-transparent border-none shadow-none">
-            <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
-              <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon/>} size={60}/></div>
-              <div className="flex flex-col gap-4">
-                <CardTitle>Ensure Legal Compliance</CardTitle>
-                <CardDescription>
-                  Ensure fraud detection and investigations are legally defensible, providing courtroom-ready reports and compliance.
-                </CardDescription>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+          {/* Right Cards Column */}
+          <div className="flex flex-col gap-14 mt-0">
+            {/* Card 3 */}
+            <Card className="self-start flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+              <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon/>} size={60}/></div>
+                <div className="flex flex-col gap-4">
+                  <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
+                  <CardDescription>
+                    Minimize payouts and improve operational efficiency by detecting fraud and streamlining the claims process.
+                  </CardDescription>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />
+
+            {/* Card 4 */}
+            <Card className="self-start flex mb-4 flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+              <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon/>} size={60}/></div>
+                <div className="flex flex-col gap-4">
+                  <CardTitle>Ensure Legal Compliance</CardTitle>
+                  <CardDescription>
+                    Ensure fraud detection and investigations are legally defensible, providing courtroom-ready reports and compliance.
+                  </CardDescription>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+
         </div>
       </div>
     </section>
   );
 };
-

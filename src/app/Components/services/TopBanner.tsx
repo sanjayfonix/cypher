@@ -16,10 +16,8 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Left */}
       <div
-        className="absolute pointer-events-none -z-1 animate-glow2"
+        className="absolute pointer-events-none -z-1 animate-glow2 w-[250px] sm:w-[320px] h-[220px] sm:h-[280px]"
         style={{
-          width: "320px",
-          height: "250px",
           top: "-100px",
           left: "-150px",
           background: "#167BFF",
@@ -32,12 +30,10 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Right */}
       <div
-        className="absolute pointer-events-none z-2 animate-glow2"
+        className="absolute pointer-events-none z-2 animate-glow2 w-[250px] h-[220px] sm:h-[280px]"
         style={{
-          width: "320px",
-          height: "250px",
           top: "-100px",
-          right: "-150px",
+          right: "-120px",
           background: "#167BFF",
           opacity: 0.5,
           filter: "blur(50px)",
@@ -61,7 +57,7 @@ export const TopBanner = () => {
 
 
           <Link href={"/pages/search"}>
-          <button  className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
+          <button  className="custom-button with-shadow bg-[#1057B5] w-full"   >Start Investigating</button>
             
           </Link>
 
