@@ -1,16 +1,16 @@
 "use client";
-
-import { useEffect, useState } from "react";
+ 
+ 
 import HowItWorks from "@/app/Components/search/Howwork";
 import SearchResultTab from "@/app/Components/home/SearchResultTab";
 import { Facebook, Mail, User } from "lucide-react";
 import { GlassIcon } from "@/app/Components/home/GlassIcon";
-
+ 
 export default function HomeBanner() {
   // ✅ Array of result cards (you can easily expand it)
   const tabsData = [
     {
-      icon: <User />,
+      icon: User,
       title: "John Doe",
       queryVal: "Find Account",
       date: "2025-09-11",
@@ -21,7 +21,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: <Facebook />,
+      icon: Facebook,
       title: "Jane Smith",
       queryVal: "Reset Password",
       date: "2025-09-10",
@@ -32,7 +32,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: <Mail />,
+      icon: Mail,
       title: "Alex Johnson",
       queryVal: "Update Email",
       date: "2025-09-09",
@@ -43,7 +43,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: <User />,
+      icon: User,
       title: "Emily Davis",
       queryVal: "Verify Account",
       date: "2025-09-08",
@@ -54,7 +54,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: <Facebook />,
+      icon: Facebook,
       title: "Michael Brown",
       queryVal: "Deactivate Account",
       date: "2025-09-07",
@@ -65,7 +65,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: <Mail />,
+      icon: Mail,
       title: "Sarah Wilson",
       queryVal: "Change Password",
       date: "2025-09-06",
@@ -76,7 +76,7 @@ export default function HomeBanner() {
       ],
     },
   ];
-
+ 
   return (
     <>
       <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover overflow-hidden flex flex-col items-center justify-start py-16 sm:py-20 px-4 sm:px-12 lg:px-28">
@@ -134,28 +134,28 @@ export default function HomeBanner() {
             backgroundColor: "#1470E8",
           }}
         />
-
+ 
         {/* Heading Section */}
         <div className="flex flex-col items-center justify-start gap-4 sm:gap-6 z-10 text-center max-w-[900px]">
           <p className="text-2xl sm:text-4xl lg:text-6xl font-bold text-white leading-tight">
             How it works
           </p>
-
+ 
           <p className="text-xs sm:text-base md:text-[1rem] text-[#F1F1F1] leading-relaxed px-2">
             Using advanced algorithms, OSINT methodology and investigative <br className="hidden sm:block" />
             technologies, Webutation scours social media, public records, and other <br className="hidden sm:block" />
             digital footprints to provide actionable intelligence.
           </p>
         </div>
-
+ 
         <HowItWorks />
       </div>
-
+ 
       {/* Search Results Title */}
       <div className="font-sans text-2xl sm:text-3xl font-bold text-white text-center underline decoration-gray-600 underline-offset-4 mt-10">
         Search Results
       </div>
-
+ 
       {/* Search Result Grid */}
       <div className="grid p-4 sm:p-6 gap-4 sm:gap-6 container grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2">
         {tabsData.map((tab, idx) => (
@@ -172,3 +172,5 @@ export default function HomeBanner() {
     </>
   );
 }
+ 
+ 
