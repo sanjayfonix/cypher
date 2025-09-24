@@ -10,7 +10,7 @@ export default function HomeBanner() {
   // ✅ Array of result cards (you can easily expand it)
   const tabsData = [
     {
-      icon: User,
+      icon: <User />,
       title: "John Doe",
       queryVal: "Find Account",
       date: "2025-09-11",
@@ -21,7 +21,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: Facebook,
+      icon: <Facebook />,
       title: "Jane Smith",
       queryVal: "Reset Password",
       date: "2025-09-10",
@@ -32,7 +32,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: Mail,
+      icon: <Mail />,
       title: "Alex Johnson",
       queryVal: "Update Email",
       date: "2025-09-09",
@@ -43,7 +43,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: User,
+      icon: <User />,
       title: "Emily Davis",
       queryVal: "Verify Account",
       date: "2025-09-08",
@@ -54,7 +54,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: Facebook,
+      icon: <Facebook />,
       title: "Michael Brown",
       queryVal: "Deactivate Account",
       date: "2025-09-07",
@@ -65,7 +65,7 @@ export default function HomeBanner() {
       ],
     },
     {
-      icon: Mail,
+      icon: <Mail />,
       title: "Sarah Wilson",
       queryVal: "Change Password",
       date: "2025-09-06",
