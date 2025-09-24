@@ -23,7 +23,7 @@ export default function HomePage() {
       <HowItWorks />
       <IntegrityAtCore />
       <BlurCard />
-      <div className="p-4 lg:p-0">
+      <div className="p-4 lg:p-0 mb-8">
         <ContactSection />
       </div>
       <CESessions />

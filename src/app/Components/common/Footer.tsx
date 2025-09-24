@@ -9,9 +9,9 @@ export default function Footer() {
     <footer className="text-white pt-16 pb-8 px-4 mt-8 md:px-8 relative overflow-hidden">
       {/* Background Effects */}
       <div className="relative z-10 p-4">
-        <div className="absolute pointer-events-none z-0 blur-[100.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]" />
+        <div className="absolute pointer-events-none -z-1 blur-[100.1px] -top-[31px] opacity-60 w-full h-10 bg-[#1057B5]" />
         <div
-          className="absolute pointer-events-none z-0 blur-[50px]"
+          className="absolute pointer-events-none  blur-[50px]"
           style={{
             width: "100%",
             maxWidth: "1440px",
