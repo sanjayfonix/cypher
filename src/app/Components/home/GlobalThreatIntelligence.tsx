@@ -263,7 +263,7 @@ function SecurityFeatures() {
                   <div className="relative  px-5 rounded-full flex items-center justify-center ">
                     <div className="flex flex-col gap-8 items-center">
                     <GlassIcon size={100} hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
-                    <div ref={lineRef} className={`block lg:hidden h-20 w-0 border border-[#696969]`}>
+                    {/* <div ref={lineRef} className={`block sm:hidden h-20 w-0 border border-[#696969]`}>
 
                      <motion.div
                       className="absolute left-1/2 -translate-x-1/2"
@@ -290,13 +290,13 @@ function SecurityFeatures() {
                     </motion.div>
 
 
-                  </div>
+                  </div> */}
                     </div>
                   </div>
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg max-w-[100%] lg:max-w-[50%]">{feature.title}</h3>
+                    <h3 className="font-bold text-lg max-w-[100%] lg:max-w-[58%]">{feature.title}</h3>
                     <p className="text-gray-400 max-w-[100%] lg:max-w-[58%]">{feature.desc}</p>
                   </div>
                 </div>

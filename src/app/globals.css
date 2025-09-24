@@ -407,6 +407,9 @@ body {
 .change-flex{
   flex-direction: row;
 }
+.text-scale{
+  max-width: 70%;
+}
 }
 
 
@@ -419,6 +422,9 @@ body {
 @media (max-width:1024px){
   .translate-for-lg{
   transform: translateX(0);
+}
+.text-scale{
+  max-width: 58%;
 }
 }
 
