@@ -36,7 +36,7 @@ const EmpowerTeam = () => {
             boxShadow: "0px 0px 80px 0px #157AFF80",
             top: "-40%",
             left: "20%",
-            zIndex: 1,
+            zIndex: -1,
           }}
         ></div>
 
@@ -52,7 +52,7 @@ const EmpowerTeam = () => {
             bottom: "-10%",
             right: "20%",
             borderRadius: "50%",
-            zIndex: 0,
+            zIndex: -1,
           }}
         ></div>
 
@@ -69,19 +69,19 @@ const EmpowerTeam = () => {
           </div>
 
           {/* Buttons Section */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
+          <div className="flex  flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
             <button onClick={() => {
               const navToSection = document.getElementById('contact-us')
               if (navToSection) {
                 navToSection.scrollIntoView({ behavior: 'smooth' })
               }
-            }} className="custom-button bg-[#1057B5] with-shadow"
+            }} className="custom-button bg-[#1057B5] with-shadow w-full sm:w-fit"
 
 
 
 
             >Book a Consultation</button>
-            <button className="custom-button with-border bg-transparent"
+            <button className="custom-button with-border bg-transparent w-full sm:w-fit"
 
 
 

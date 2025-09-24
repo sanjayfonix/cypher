@@ -8,38 +8,34 @@ import { Toparrow } from "@/assets/icon";
 export const AboutHeader = () => {
     return (
         <div className="bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover ">
-            <div className="relative  containerr  flex flex-col lg:flex-row items-center justify-between py-20 px-6 sm:px-12 lg:px-28 h-auto">
+            <div className="overflow-hidden relative  container  flex flex-col lg:flex-row items-center justify-between py-20 px-6 sm:px-12 lg:px-28 h-auto">
                 <div>
 
                 </div>
                 {/* Glowing Background Effects */}
-                <div className="absolute pointer-events-none z-0 blur-[185.1px] -top-[31px] opacity-60 w-[100%] h-10 bg-[#1057B5]" />
+                <div className="absolute pointer-events-none blur-[185.1px] -top-[31px] opacity-60 w-[100%] h-10 bg-[#1057B5]" />
                 <div
-                    className="absolute pointer-events-none z-0 blur-[50px]"
+                    className=" lg:right-[10%] lg:top-52 top-1/2 right-[20%] absolute pointer-events-none z-0 h-[200px] sm:h-[320px] w-[180px] sm:w-[200px] blur-[50px]"
                     style={{
-                        width: "25%",
-                        height: 192,
-                        top: 200,
-                        left: "60%",
+                        
+                        
                         transform: "translateX(40%)",
                         opacity: 0.4,
                         borderRadius: "50%",
                         backgroundColor: "#167BFF",
                     }}
                 />
-                <div
-                    className="absolute pointer-events-none z-0 blur-[50px]"
-                    style={{
-                        width: "30%",
-                        height: 192,
-                        top: 35,
-                        // left: "50%",
-                        transform: "translateX(-70%)",
-                        opacity: 0.5,
-                        borderRadius: "50%",
-                        backgroundColor: "#167BFF",
-                    }}
-                />
+              <div
+        className="absolute z-0 translate-x-[-40%] pointer-events-none  animate-glow2 h-[250px] sm:h-[320px] w-[220px] sm:w-[280px]"
+        style={{
+          top: "-100px",
+          left: "0px",
+          background: "#167BFF",
+          opacity: 0.5,
+          filter: "blur(50px)",
+          borderRadius: "50%",
+        }}
+      />
 
                 {/* LEFT CONTENT */}
                 <div className="flex flex-col items-start justify-center gap-6 z-10 w-full lg:w-1/2 text-left">
@@ -139,7 +135,7 @@ export const AboutHeader = () => {
                         </div>
                     </div>
                 </div> */}
-                <div className="flex justify-center items-center">
+                <div className="flex relative z-10 justify-center items-center">
                     <Image
                         src="/images/aboutheader.png"
                         alt="About Header"

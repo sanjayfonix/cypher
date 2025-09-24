@@ -45,10 +45,10 @@ export const TopBanner = () => {
       {/* Content */}
       <div className="flex bg-transparent flex-col items-center justify-start gap-4 z-10 text-center max-w-[95%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
         <p className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight font-sans">
-          Advance Your Expertise with Accredited CE & CLE Programs
+          Advance Your Expertise with<br/> Accredited CE & CLE Programs
         </p>
 
-        <p className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-full sm:max-w-[80%] md:max-w-[65%]">
+        <p className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-full md:max-w-[53%] sm:max-w-[80%]">
           Stay ahead of emerging risks with ethical, investigator-led courses designed for insurance carriers, legal professionals, corporate leaders, and investigators. Earn CE/CLE credits while learning actionable intelligence techniques.
         </p>
 

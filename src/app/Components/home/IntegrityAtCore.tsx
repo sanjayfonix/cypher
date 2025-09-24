@@ -35,6 +35,7 @@ export default function IntegrityAtCore() {
             {Items.slice(0, 2).map((item) => (
              
                 <Link
+                key={item.id}
                   href={
                     item.id === 1
                       ? "/pages/industries/insurance"
@@ -74,6 +75,7 @@ export default function IntegrityAtCore() {
             {Items.slice(2).map((item) => (
              
                 <Link
+                key={item.id}
                   href={
                     item.id === 3
                       ? "/pages/industries/law"

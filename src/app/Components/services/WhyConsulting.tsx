@@ -169,7 +169,12 @@ export const WhyConsulting = () => {
 
       {/* Button */}
       <div className="relative -top-5 flex justify-center mt-8">
-        <button className="custom-button with-shadow bg-[#1057B5]">
+        <button onClick={() => {
+              const navToSection = document.getElementById('contact-us')
+              if (navToSection) {
+                navToSection.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}  className="custom-button with-shadow bg-[#1057B5]">
           Book a Consultation
         </button>
       </div>

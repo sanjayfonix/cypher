@@ -15,7 +15,7 @@ export default function AboutPage() {
        <WhyCyphr/> 
   <TeamSection/> 
       <MissionSection/>
-      <ContactSection />
+      <div className="px-4 "><ContactSection /></div>
     </div>
   );
 }

@@ -435,3 +435,11 @@ body {
 .scroll-snap-start {
   scroll-snap-align: start;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none; /* IE/Edge */
+  scrollbar-width: none; /* Firefox */
+}

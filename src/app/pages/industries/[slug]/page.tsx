@@ -17,7 +17,7 @@ export default function IndustriesPage() {
       <WhyIndustriesCarrier />
       <KeySegments />
       <IndustriesBlurCard />
-      <ContactSection />
+      <div className="px-4"><ContactSection /></div>
     </div>
     </>
   );

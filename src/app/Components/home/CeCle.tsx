@@ -1,8 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import Link from "next/link";
 import { Toparrow } from "@/assets/icon";
+import { Dialog, Transition } from "@headlessui/react";
+import BookingForm from "../common/BookingForm";
 
 const CESessions = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,6 +76,49 @@ const CESessions = () => {
         </div>
       )} 
       */}
+      <Transition appear show={isOpen} as={Fragment}>
+        <Dialog as="div" className="relative z-50 overflow-y-auto" onClose={()=>setIsOpen(false)}>
+          {/* Background overlay */}
+          <Transition.Child
+            as={Fragment}
+            enter="ease-out duration-300"
+            enterFrom="opacity-0"
+            enterTo="opacity-100"
+            leave="ease-in duration-200"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+          >
+          <div className="fixed inset-0 backdrop-blur-sm bg-white/20" />
+          </Transition.Child>
+          <div className="fixed inset-0 flex items-center justify-center p-4">
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 scale-90"
+              enterTo="opacity-100 scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 scale-100"
+              leaveTo="opacity-0 scale-90"
+            >
+              <Dialog.Panel
+  className="w-full max-w-7xl no-scrollbar transform overflow-hidden rounded-2xl p-6  transition-all relative
+             max-h-[95vh] overflow-y-auto"
+>
+                {/* Insert your form here */}
+                <BookingForm isForm={true}/>
+
+                {/* Close Button */}
+                <button
+                  onClick={()=>setIsOpen(false)}
+                  className="absolute text-white top-12 right-14  hover:text-blue-500"
+                >
+                  ✕
+                </button>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </Dialog>
+      </Transition>
     </>
   );
 };

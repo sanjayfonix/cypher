@@ -62,7 +62,7 @@ export default function ProgramPage({ params }: any) {
 
   return (
     <div className="min-h-screen bg-[#0E1014] text-white px-4 sm:px-6 py-8 sm:py-12">
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-4">
         {/* LEFT CONTENT */}
         <div className="flex-1">
           {/* Header Card */}
@@ -77,7 +77,7 @@ export default function ProgramPage({ params }: any) {
                 </div>
               </div>
             </div>
-            <p className="text-sm sm:text-base mt-4 text-[#A0A4AE]">{program.description}</p>
+            <p className="text-sm sm:text-base mt-8 text-[#A0A4AE]">{program.description}</p>
             <div className="flex flex-wrap gap-2 mt-2 items-center text-sm sm:text-base">
               <StarIcon /> 
               <span className="text-[#A0A4AE]">{program.rating}</span>
@@ -137,26 +137,26 @@ export default function ProgramPage({ params }: any) {
               )}
             </div>
 
-            <div className={`transition-all duration-300 overflow-hidden ${openCredits ? "max-h-[1000px]" : "max-h-0"}`}>
+            <div className={`transition-all duration-300 rounded-br-lg rounded-bl-lg overflow-hidden ${openCredits ? "max-h-[1000px]" : "max-h-0"}`}>
               <div className="mt-4 overflow-x-auto">
                 <table className="min-w-full border border-[#373737] rounded-lg bg-[#1E1E1E]">
                   <thead>
                     <tr>
-                      <th className="py-2 px-4 bg-[#09346B] text-xs sm:text-base text-white text-left">Credit States</th>
-                      <th className="py-2 px-4 bg-[#09346B] text-xs sm:text-base text-white text-left">Status</th>
-                      <th className="py-2 px-4 bg-[#09346B] text-xs sm:text-base text-white text-left">Credits</th>
-                      <th className="py-2 px-4 bg-[#09346B] text-xs sm:text-base text-white text-left">Until</th>
+                      <th className="py-3 px-6 bg-[#09346B] text-xs sm:text-base text-white text-left">Credit States</th>
+                      <th className="py-3 px-6 bg-[#09346B] text-xs sm:text-base text-white text-left">Status</th>
+                      <th className="py-3 px-6 bg-[#09346B] text-xs sm:text-base text-white text-left">Credits</th>
+                      <th className="py-3 px-6 bg-[#09346B] text-xs sm:text-base text-white text-left">Earn credit until</th>
                     </tr>
                   </thead>
                   <tbody>
                     {credits.map((row, i) => (
                       <tr key={i} className="border-t border-[#373737] hover:bg-[#262B34]">
-                        <td className="p-3 text-xs sm:text-sm">{row.state}</td>
-                        <td className="p-3 text-xs sm:text-sm" style={{ color: row.status === "Approved" ? "#00C781" : "#FF3B30" }}>
+                        <td className="py-4 px-6 text-xs sm:text-sm">{row.state}</td>
+                        <td className="py-4 px-6 text-xs sm:text-sm" style={{ color: row.status === "Approved" ? "#00C781" : "#FF3B30" }}>
                           {row.status}
                         </td>
-                        <td className="p-3 text-xs sm:text-sm text-white">{row.credits}</td>
-                        <td className="p-3 text-xs sm:text-sm text-white">{row.until}</td>
+                        <td className="py-4 px-6 text-xs sm:text-sm text-white">{row.credits}</td>
+                        <td className="py-4 px-6 text-xs sm:text-sm text-white">{row.until}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -167,7 +167,7 @@ export default function ProgramPage({ params }: any) {
         </div>
 
         {/* RIGHT SIDEBAR */}
-        <div className="w-full lg:w-[320px] bg-[#030A14] border border-[#6D6D6D] rounded-2xl p-6 flex flex-col gap-4">
+        <div className="w-full h-fit sticky top-0 lg:w-[320px] bg-[#030A14] border border-[#6D6D6D] rounded-2xl p-6 flex flex-col gap-4">
           <div className="w-full h-[200px] sm:h-[300px] bg-[#D9D9D9] rounded-lg"></div>
           <div>
             <div className="flex justify-between items-center">
@@ -181,7 +181,6 @@ export default function ProgramPage({ params }: any) {
             </ul>
           </div>
           <button className="custom-button with-shadow bg-[#1057B5]">Get this course</button>
-          <button className="custom-button with-border bg-transparent">Try it with free trial</button>
         </div>
       </div>
     </div>

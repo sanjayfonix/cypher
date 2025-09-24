@@ -3,9 +3,11 @@
 import { Toparrow } from "@/assets/icon";
 import React from "react";
 
-export default function BookingForm() {
+export default function BookingForm({isForm=false}:{isForm?:boolean}) {
   return (
-    <div className="container px-4 sm:px-6 lg:px-[48px] py-8 sm:py-12">
+    <div style={{
+      borderRadius:isForm?'32px':0
+    }} className="container px-4 sm:px-6 lg:px-[48px] py-8 sm:py-12">
       <div className="w-full border border-[#5B5B5B] rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 lg:p-[48px]">
         <h1 className="text-white text-2xl sm:text-3xl md:text-[32px] font-bold mb-6 sm:mb-8 text-center sm:text-left leading-snug">
           Book Your CE/CLE Public Speaking Session
@@ -197,7 +199,7 @@ export default function BookingForm() {
               type="checkbox"
               id="agreement"
               name="agreement"
-              className="h-[16px] w-[16px] rounded bg-[#2A2A2A] border-gray-600 text-blue-600 focus:ring-blue-500"
+              className="appearance-none border border-[#F1F1F1] h-[16px] w-[16px] bg-[#2A2A2A] text-blue-600 focus:ring-blue-500"
               required
             />
             <label htmlFor="agreement" className="text-[#E3E3E3] text-[14px]">

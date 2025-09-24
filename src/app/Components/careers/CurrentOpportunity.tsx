@@ -37,7 +37,7 @@ export default function CurrentOpportunities() {
           <h2 className="text-3xl md:text-[48px] font-bold font-sans mb-8">
             Current Opportunities
           </h2>
-          <p className="text-[#F1F1F1] tracking-normal mb-6 font-inter font-normal text-base max-w-[90%]">
+          <p className="text-[#F1F1F1] tracking-normal mb-6 font-inter font-normal text-base sm:max-w-[90%]">
             Explore a range of exciting career opportunities with us. We are
             constantly looking for talented individuals to join our team in
             various roles. Whether you're an experienced professional or just

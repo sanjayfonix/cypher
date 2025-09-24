@@ -62,7 +62,7 @@ export default function EducationCards() {
         {programs.map((program) => (
           <div
             key={program.id}
-            className="rounded-4xl border border-[#6D6D6D99] bg-gradient-to-b from-[#030A14] to-[#167Bff]/40 p-6 shadow-lg hover:shadow-blue-500/30 transition"
+            className="flex flex-col justify-between rounded-4xl border border-[#6D6D6D99] bg-gradient-to-b from-[#030A14] to-[#167Bff]/40 p-6 shadow-lg hover:shadow-blue-500/30 transition"
           >
             {/* Icon */}
             <div className="flex items-center gap-4 mb-4">

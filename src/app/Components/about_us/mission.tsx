@@ -65,7 +65,7 @@ export default function MissionSection() {
   return (
     <section
       ref={containerRef}
-      className="overflow-hidden relative container bg-black mx-auto lg:mx-0 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 md:px-20 py-12 gap-10 sm:gap-12 md:gap-16 lg:gap-20 h-auto min-h-[700px] mb-5 overflow-hidden"
+      className="overflow-hidden relative container bg-black mx-auto lg:mx-0 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 md:px-20 py-12 gap-10 sm:gap-12 md:gap-16 lg:gap-20 h-auto min-h-[700px] mb-5"
     >
       <div
               className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
@@ -109,7 +109,7 @@ export default function MissionSection() {
           ))}
 
           {/* Center Icon */}
-          <div className="absolute w-[50px] h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-black border border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex items-center justify-center text-blue-400">
+          <div className="absolute w-[50px] z-20 h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-black border border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex items-center justify-center text-blue-400">
             <Image src="/images/missionimg2.png" alt="Mission Center" width={40} height={40} className="w-[65%] h-[65%]" />
           </div>
 

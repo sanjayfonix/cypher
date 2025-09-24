@@ -72,7 +72,7 @@ export const CareerBanner = () => {
 
         {/* Subtitle */}
         <p
-          className={`mt-4 text-sm sm:text-base text-[#F1F1F1] font-normal leading-relaxed ${inter.className}`}
+          className={`mt-4 text-sm sm:text-base text-[#F1F1F1] font-normal leading-relaxed max-w-[75%] ${inter.className}`}
         >
           We're here to provide expert support with actionable intelligence and
           advanced investigative solutions tailored to your needs.

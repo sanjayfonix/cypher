@@ -1,10 +1,11 @@
 // components/BlurCard.tsx
 "use client";
+import Link from "next/link";
 import React from "react";
 
 const PotentialTeam = () => {
   return (
-    <div className="relative w-full max-w-[1000px] mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col items-center justify-center overflow-visible">
+    <div className="relative w-full max-w-[1000px] mt-64 mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col items-center justify-center overflow-visible">
       {/* ===== Main Card ===== */}
       <div
         className="
@@ -29,7 +30,7 @@ const PotentialTeam = () => {
             boxShadow: "0px 0px 80px 0px #157AFF80",
             top: "-40%",
             left: "20%",
-            zIndex: 1,
+            zIndex: -1,
           }}
         ></div>
 
@@ -45,7 +46,7 @@ const PotentialTeam = () => {
             bottom: "-10%",
             right: "20%",
             borderRadius: "50%",
-            zIndex: 0,
+            zIndex: -1,
           }}
         ></div>
 
@@ -65,11 +66,11 @@ const PotentialTeam = () => {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-2">
-            <button
+            <Link href={'/pages/search'}><button
               className="custom-button bg-[#1057B5] with-shadow w-full sm:w-auto"
             >
               Start Investigating
-            </button>
+            </button></Link>
             {/* <button className="custom-button with-border bg-transparent w-full sm:w-auto">
               Request a Custom Program <Toparrow />
             </button> */}
