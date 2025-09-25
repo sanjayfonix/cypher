@@ -99,7 +99,7 @@ export default function TrackingAnimation() {
   ];
 
   return (
-    <div className="relative w-full h-[300px] sm:h-[700px] md:h-[900px] lg:[300px] bg-[#0a0f1a] overflow-hidden">
+    <div className="relative w-full sm:h-full h-[350px]  bg-[#0a0f1a] overflow-hidden">
       {/* === FULL BACKGROUND GRID === */}
       <svg
         viewBox="0 0 700 800"
@@ -151,7 +151,7 @@ export default function TrackingAnimation() {
 
       {/* === POLYGON + POINTER === */}
       <svg
-        viewBox="0 -100 550 700"
+        viewBox="0 -150 550 700"
         className="absolute inset-0 w-full h-full mt-12 sm:mt-0"
         preserveAspectRatio="xMidYMid meet"
       >

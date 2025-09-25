@@ -76,7 +76,7 @@ export default function WhereInvestigation() {
           {/* Social Media Intelligence */}
           <div className="group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
-          
+          <TravelingBorder borderRadius={24} anticlockwise={true}/>
 
 
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
@@ -190,8 +190,9 @@ export default function WhereInvestigation() {
 
 
             </div>
+<div>
 
-<TravelingBorder borderRadius={24} anticlockwise={true}/>
+</div>
 
           </div>
         </div>
