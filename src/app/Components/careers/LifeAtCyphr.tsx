@@ -3,7 +3,7 @@
 import { Laptop, ShieldCheck, Users, Award } from "lucide-react";
 import { Card, CardContent } from "../industries/Card";
 import { GlassIcon } from "../home/GlassIcon";
-import { Computer, HandShakeIcon, Collab, Winner } from "@/assets/icon";
+import { Computer, HandShakeIcon, Collab, Winner, BlueComputer, BlueCollab, BlueWinner, BlueHandShakeIcon } from "@/assets/icon";
 
 export default function LifeAtCyphr() {
   return (
@@ -42,7 +42,7 @@ export default function LifeAtCyphr() {
               <Card className="flex flex-col lg:flex-row items-start bg-transparent border-none shadow-none">
                 <CardContent className="flex w-full flex-col md:flex-row items-start  p-0">
                   <div className="h-20 w-20 sm:h-24 sm:w-24 object-cover">
-                    <GlassIcon icon={<Computer />} size={60} />
+                    <GlassIcon isHoverProperty={true} hoverComp={<BlueComputer/>} icon={<Computer />} size={60} />
                   </div>
                   <div className="flex flex-col gap-3 sm:gap-4">
                     <p className="font-medium text-xl sm:text-2xl font-sans text-[#F1F1F1] tracking-normal  md:max-w-[70%]">
@@ -61,7 +61,7 @@ export default function LifeAtCyphr() {
               <Card className="flex items-start gap-6 bg-transparent border-none shadow-none">
                 <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0">
                   <div className="h-20 w-20 sm:h-24 sm:w-24 object-cover">
-                    <GlassIcon icon={<HandShakeIcon />} size={60} />
+                    <GlassIcon isHoverProperty={true} hoverComp={<BlueHandShakeIcon/>}  icon={<HandShakeIcon />} size={60} />
                   </div>
                   <div className="flex flex-col gap-3 sm:gap-4">
                     <p className="font-medium text-xl sm:text-2xl font-sans tracking-normal md:max-w-[70%]">
@@ -85,7 +85,7 @@ export default function LifeAtCyphr() {
               <Card className="flex items-start gap-6 bg-transparent border-none shadow-none">
                 <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0">
                   <div className="h-20 w-20 sm:h-24 sm:w-24 object-cover">
-                    <GlassIcon icon={<Collab />} size={60} />
+                    <GlassIcon isHoverProperty={true} hoverComp={<BlueCollab/>} icon={<Collab />} size={60} />
                   </div>
                   <div className="flex flex-col gap-3 sm:gap-4">
                     <p className="font-medium text-xl sm:text-2xl font-sans tracking-normal md:max-w-[60%]">
@@ -105,7 +105,7 @@ export default function LifeAtCyphr() {
               <Card className="flex items-start gap-6 bg-transparent border-none shadow-none">
                 <CardContent className="flex flex-col md:flex-row items-start  p-0">
                   <div className="h-20 w-20 sm:h-24 sm:w-24 object-cover">
-                    <GlassIcon icon={<Winner />} size={60} />
+                    <GlassIcon isHoverProperty={true} hoverComp={<BlueWinner/>} icon={<Winner />} size={60} />
                   </div>
                   <div className="flex flex-col gap-3 sm:gap-4">
                     <p className="font-medium text-xl sm:text-2xl font-sans tracking-normal  md:max-w-[70%]">

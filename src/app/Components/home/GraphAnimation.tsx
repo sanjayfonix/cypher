@@ -99,7 +99,7 @@ export default function TrackingAnimation() {
   ];
 
   return (
-    <div className="relative w-full h-[300px] sm:h-[1000px] md:h-[900px] lg:[700px] bg-[#0a0f1a] overflow-hidden">
+    <div className="relative w-full h-[300px] sm:h-[700px] md:h-[900px] lg:[300px] bg-[#0a0f1a] overflow-hidden">
       {/* === FULL BACKGROUND GRID === */}
       <svg
         viewBox="0 0 700 800"

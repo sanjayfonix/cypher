@@ -53,7 +53,13 @@ export const TopBanner = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4 w-full sm:w-auto items-center justify-center">
-          <button className="custom-button with-shadow bg-[#1057B5] w-full sm:w-auto">
+          <button onClick={()=>{
+              const navToSection = document.getElementById('courses')
+              if (navToSection) {
+                navToSection.scrollIntoView({ behavior: 'smooth' })
+              }
+
+          }} className="custom-button with-shadow bg-[#1057B5] w-full sm:w-auto">
             Explore Courses
           </button>
           <button className="custom-button with-border bg-transparent w-full sm:w-auto">

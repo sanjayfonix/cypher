@@ -227,7 +227,7 @@ export default function CorePrincipals() {
 export function TravelingBorder({
   borderRadius = 32,
   speed = 150,
-  wedgeLength = 120,
+  wedgeLength = 230,
   minThickness = 0.2,
   maxThickness = 3,
   inset = 0,
@@ -297,7 +297,7 @@ Z`;
         ? (length - ((elapsed * speed) % length)) % length
         : (elapsed * speed) % length;
 
-      const steps = 10;
+      const steps = Math.max(20, Math.floor(wedgeLength / 5));;
       const stepSize = wedgeLength / steps;
 
       const top: { x: number; y: number }[] = [];

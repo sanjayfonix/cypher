@@ -176,7 +176,7 @@ export default function OpportunityPage({ params }: any) {
                         Apply for this job
                     </button>
                     <button
-                        className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent"
+                        className="hidden lg:block w-full sm:w-fit custom-button with-border bg-transparent"
                     >
                         Share
                         <Toparrow />

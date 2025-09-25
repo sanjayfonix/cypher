@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Toparrow } from "@/assets/icon";
-import { AnimateBannerPaths } from "./AnimatePath";
+
+import dynamic from "next/dynamic";
 
 const HEADLINES = [
   "Investigative Intelligence Transformed",
@@ -23,6 +24,11 @@ const ROLES = [
 "Facial Recognition",
 "Object Recognition"
 ];
+
+const AnimateBannerPaths = dynamic(() => import("./AnimatePath").then(mod => mod.AnimateBannerPaths), {
+  ssr: false, // don’t render on server
+  loading: () => <div className="h-[300px] w-full" /> // optional fallback
+});
 
 export default function HomeBanner() {
   const [headlineIndex, setHeadlineIndex] = useState(0);

@@ -4,6 +4,7 @@ import { Mail, MapPin, ArrowRight } from "lucide-react";
 
 import { Bell, Email, Headquators } from "@/assets/icon";
 import Button from "../common/Button";
+import { PointerGrid } from "../home/GridAnimation";
 
 export default function GetContact() {
   const [form, setForm] = useState({
@@ -38,6 +39,17 @@ export default function GetContact() {
   return (
     <div className="mt-10">
       <div className="relative container text-white flex flex-col md:flex-row items-start justify-between p-6 md:p-12">
+        
+          
+       
+               <div className="hidden lg:block absolute z-30 left-0 bottom-0  -translate-x-1/3">
+                            <div className="relative flex items-center justify-center">
+                              <PointerGrid width={200} height={200} horizontal={{direction:'right',y:185 ,
+                    fromX: 200,
+                    toX: 80}}/>
+                            </div>
+                            </div>
+                            
         {/* Background Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_30%)] pointer-events-none" />
 

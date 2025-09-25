@@ -1,9 +1,14 @@
+'use client'
 import { Graph, HammerIcon, HistoryIcon, PatternIcon, Search5, Search6, TargetIcon } from "@/assets/icon";
 import GridItem from "./GridItem";
 import Image from "next/image";
-import TrackingAnimation from "./GraphAnimation";
+import dynamic from "next/dynamic";
 
 
+const TrackingAnimation = dynamic(() => import("./GraphAnimation"), {
+  ssr: false,
+  loading: () => <div className="h-[700px] w-full" /> // fallback placeholder
+});
 
 export default function Loc8Intelligence() {
   return (

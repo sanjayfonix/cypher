@@ -72,7 +72,7 @@ const IndustriesBlurCard = () => {
               <button className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
 
             </Link>
-            <button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button>
+             <Link href={"/pages/services/consulting"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
 
 
 

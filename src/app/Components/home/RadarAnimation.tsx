@@ -8,6 +8,11 @@ const CX = SIZE / 2;
 const CY = SIZE / 2;
 const RADIUS = 310;
 
+// helper
+function precise(num: number, decimals = 4) {
+  return parseFloat(num.toFixed(decimals));
+}
+
 type Point = {
   id: string;
   label: string;
@@ -23,8 +28,8 @@ const points: Point[] = [
     return {
       id: "investigation",
       label: "Investigation",
-      x: (CX + r * Math.cos((angle * Math.PI) / 180))-0,
-      y: (CY + r * Math.sin((angle * Math.PI) / 180)),
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
       color: "#cfe9ff",
     };
   })(),
@@ -34,8 +39,8 @@ const points: Point[] = [
     return {
       id: "data",
       label: "Data Analysis",
-      x: CX + r * Math.cos((angle * Math.PI) / 180),
-      y: CY + r * Math.sin((angle * Math.PI) / 180),
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
       color: "#7fb7ff",
     };
   })(),
@@ -45,8 +50,8 @@ const points: Point[] = [
     return {
       id: "risk",
       label: "Risk Assessment",
-      x: CX + r * Math.cos((angle * Math.PI) / 180),
-      y: CY + r * Math.sin((angle * Math.PI) / 180),
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
       color: "#7fb7ff",
     };
   })(),
@@ -56,34 +61,96 @@ const points: Point[] = [
     return {
       id: "malintent",
       label: "Malintent",
-      x: CX + r * Math.cos((angle * Math.PI) / 180) + 18,
-      y: CY + r * Math.sin((angle * Math.PI) / 180) - 4,
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180) + 18),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180) - 4),
       color: "#ff3d6e",
     };
   })(),
 ];
 
+// ✅ Install navigation guard once
+function installNavigationGuardOnce() {
+  if (typeof window === "undefined") return;
+  const w = window as any;
+  if (w.__navGuardInstalled) return;
+  w.__navGuardInstalled = true;
+
+  const markNav = () => {
+    w.__navigationStarted = true;
+    setTimeout(() => {
+      w.__navigationStarted = false;
+    }, 2500);
+  };
+
+  document.addEventListener(
+    "click",
+    (e) => {
+      try {
+        let el = e.target as HTMLElement | null;
+        while (el && el.tagName !== "A") el = el.parentElement;
+        if (el && (el as HTMLAnchorElement).getAttribute) {
+          const href = (el as HTMLAnchorElement).getAttribute("href");
+          const target = (el as HTMLAnchorElement).getAttribute("target");
+          if (href && href.startsWith("/") && target !== "_blank") {
+            markNav();
+          }
+        }
+      } catch {}
+    },
+    { capture: true, passive: true }
+  );
+
+  window.addEventListener(
+    "popstate",
+    () => {
+      markNav();
+    },
+    { passive: true }
+  );
+}
+
 export default function RadarAccurate({ size = 420 }: { size?: number }) {
   const [angle, setAngle] = useState(0);
   const rafRef = useRef<number | null>(null);
-  const lastRef = useRef(performance.now());
+  const lastRef = useRef<number | null>(null);
   const [activeHit, setActiveHit] = useState<string | null>(null);
   const hitTimeout = useRef<number | null>(null);
 
-  // Sweep loop (slower speed)
+  // Sweep loop
   useEffect(() => {
-    const speedDegPerSec = 20; // ⬅ much slower now
-    function tick(now: number) {
-      const dt = (now - lastRef.current) / 1000;
-      lastRef.current = now;
-      setAngle((a) => (a + speedDegPerSec * dt) % 360);
-      rafRef.current = requestAnimationFrame(tick);
-    }
-    rafRef.current = requestAnimationFrame(tick);
-    return () => {
+  installNavigationGuardOnce();
+
+  // ✅ Reset nav flag when Radar mounts
+  (window as any).__navigationStarted = false;
+
+  const speedDegPerSec = 20;
+
+  function tick(now: number) {
+    if ((window as any).__navigationStarted) {
       if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    };
-  }, []);
+      return;
+    }
+
+    if (lastRef.current === null) {
+      lastRef.current = now;
+    }
+    const dt = (now - (lastRef.current as number)) / 1000;
+    lastRef.current = now;
+    setAngle((a) => (a + speedDegPerSec * dt) % 360);
+    rafRef.current = requestAnimationFrame(tick);
+  }
+
+  lastRef.current = performance.now();
+  rafRef.current = requestAnimationFrame(tick);
+
+  return () => {
+    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    if (hitTimeout.current) {
+      window.clearTimeout(hitTimeout.current);
+      hitTimeout.current = null;
+    }
+  };
+}, []);
 
   // Hit detection
   useEffect(() => {
@@ -108,9 +175,9 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         return;
       }
     }
-  }, [angle]);
+  }, [angle, activeHit]);
 
-  // Label helper (unchanged for other nodes)
+  // Label helper
   function Label({ x, y, text }: { x: number; y: number; text: string }) {
     return (
       <g transform={`translate(${x},${y})`}>
@@ -125,8 +192,14 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           opacity={0.55}
         />
         <text
-          x={text==='Investigation'?-20:12}
-          y={text==='Risk Assessment'?-30:text==='Data Analysis'?-15:12}
+          x={text === "Investigation" ? -20 : 12}
+          y={
+            text === "Risk Assessment"
+              ? -30
+              : text === "Data Analysis"
+              ? -15
+              : 12
+          }
           fontSize={14}
           fill="#d9f0ff"
           style={{ fontFamily: "Inter, system-ui, sans-serif" }}
@@ -140,7 +213,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
   return (
     <div className="flex items-center justify-start">
       <svg
-        viewBox={`0 0 ${SIZE+40} ${SIZE}`}
+        viewBox={`0 0 ${SIZE + 40} ${SIZE}`}
         width={size}
         height={size}
         className="w-full h-auto max-w-full rounded-full drop-shadow-lg"
@@ -189,61 +262,53 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           />
         </g>
 
-        {/* Malintent (bigger + rectangle inside circle) */}
-        {/* Malintent (with soft pin/stamp effect) */}
-<g>
-  {/* Outer border rings */}
-  <circle
-    cx={points[3].x}
-    cy={points[3].y}
-    r={36}
-    fill="none"
-    stroke="rgba(255,61,110,0.35)"
-    strokeWidth={2}
-  />
-  <circle
-    cx={points[3].x}
-    cy={points[3].y}
-    r={26}
-    fill="none"
-    stroke="rgba(255,61,110,0.5)"
-    strokeWidth={2}
-  />
-
-  {/* Soft stamp glow (slightly larger + transparent) */}
-  <circle
-    cx={points[3].x}
-    cy={points[3].y}
-    r={18}
-    fill="rgba(255,61,110,0.25)"
-  />
-
-  {/* Inner solid pin */}
-  <circle cx={points[3].x} cy={points[3].y} r={10} fill={points[3].color} />
-
-  {/* Translucent label rectangle */}
-  <rect
-    x={points[3].x - 42}
-    y={points[3].y - 12}
-    width={84}
-    height={24}
-    rx={4}
-    ry={4}
-    fill="rgba(255,61,110,0.6)"   // translucent red
-    stroke="rgba(255,61,110,0.8)" // stronger border
-    strokeWidth={1}
-  />
-  <text
-    x={points[3].x}
-    y={points[3].y + 6}
-    textAnchor="middle"
-    fontSize={16}
-    fill="#fff"
-    fontWeight="600"
-  >
-    Malintent
-  </text>
-</g>
+        {/* Malintent special node */}
+        <g>
+          <circle
+            cx={points[3].x}
+            cy={points[3].y}
+            r={36}
+            fill="none"
+            stroke="rgba(255,61,110,0.35)"
+            strokeWidth={2}
+          />
+          <circle
+            cx={points[3].x}
+            cy={points[3].y}
+            r={26}
+            fill="none"
+            stroke="rgba(255,61,110,0.5)"
+            strokeWidth={2}
+          />
+          <circle
+            cx={points[3].x}
+            cy={points[3].y}
+            r={18}
+            fill="rgba(255,61,110,0.25)"
+          />
+          <circle cx={points[3].x} cy={points[3].y} r={10} fill={points[3].color} />
+          <rect
+            x={points[3].x - 42}
+            y={points[3].y - 12}
+            width={84}
+            height={24}
+            rx={4}
+            ry={4}
+            fill="rgba(255,61,110,0.6)"
+            stroke="rgba(255,61,110,0.8)"
+            strokeWidth={1}
+          />
+          <text
+            x={points[3].x}
+            y={points[3].y + 6}
+            textAnchor="middle"
+            fontSize={16}
+            fill="#fff"
+            fontWeight="600"
+          >
+            Malintent
+          </text>
+        </g>
 
         {/* Labels for other nodes */}
         <Label x={points[0].x - 18} y={points[0].y - 36} text={points[0].label} />
@@ -269,12 +334,12 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           </g>
         ))}
 
-        {/* Sweep Beam (full radius, slower) */}
+        {/* Sweep Beam */}
         <g transform={`rotate(${angle}, ${CX}, ${CY})`}>
           <line
             x1={CX}
             y1={CY}
-            x2={CX + RADIUS+12}
+            x2={CX + RADIUS + 12}
             y2={CY}
             stroke="#9fe7ff"
             strokeWidth={2.5}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import Button from "../common/Button";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function KeySegments() {
   return (
@@ -72,7 +73,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className='custom-button with-border bg-transparent'>Support Your TPA Team <Toparrow/></button>
+              <Link href={'/pages/contactus'}><button className='custom-button with-border bg-transparent'>Support Your TPA Team <Toparrow/></button></Link>
             </div>
           </motion.div>
         </div>
@@ -113,7 +114,7 @@ export default function KeySegments() {
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className="custom-button bg-transparent with-border" >Request Risk Profiling <Toparrow/></button>
+              <Link href={'/pages/contactus'}><button className="custom-button bg-transparent with-border" >Request Risk Profiling <Toparrow/></button></Link>
             </div>
           </motion.div>
 

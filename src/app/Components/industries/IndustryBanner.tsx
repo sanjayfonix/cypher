@@ -36,13 +36,13 @@ export const IndustryBanner = () => {
         {/* Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 mt-6 bg-black sm:w-fit w-full z-20 rounded-2xl">
           <Link href={"/pages/search"}>
-            <button className="custom-button with-shadow w-full bg-[#1057B5]">
+            <button className="custom-button with-shadow w-full sm:w-fit bg-[#1057B5]">
               Start Investigating
             </button>
           </Link>
-          <button className="with-border custom-button bg-transparent">
+          <Link href={'/pages/contactus'}><button className="w-full sm:w-fit with-border custom-button bg-transparent">
             Talk to an Expert <Toparrow />
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

@@ -1,13 +1,22 @@
 'use client'
 
 import { BigProtectIc, BlueFbIcon, BlueInstaIcon, BlueWhatsappIcon, BlueXIcon, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
-import { TravelingBorder } from "../services/CorePrincipals";
 import { useState,useEffect } from "react";
 import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
 import { GlassCard } from "./GlassCard";
-import { PointerGrid } from "./GridAnimation";
+import dynamic from "next/dynamic";
 
+
+const TravelingBorder = dynamic(
+  () => import("../services/CorePrincipals").then(mod => mod.TravelingBorder),
+  { ssr: false, loading: () => null }
+);
+
+const PointerGrid = dynamic(
+  () => import("./GridAnimation").then(mod => mod.PointerGrid),
+  { ssr: false, loading: () => null }
+);
 
 
 export default function WhereInvestigation() {
@@ -19,7 +28,7 @@ export default function WhereInvestigation() {
     <div onMouseEnter={() => {
       setHovering(true)
       console.log('hovering')
-    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white px-4 sm:px-6 md:px-10 lg:px-16 py-6 sm:py-8 md:py-12 flex flex-col items-center overflow-hidden">
+    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white con flex flex-col items-center overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
