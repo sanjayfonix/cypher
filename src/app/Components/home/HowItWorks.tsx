@@ -91,8 +91,8 @@ export default function HowItWorks() {
   const [mode, setMode] = useState(0);
   const [type, setType] = useState(0);
   return (
-    <div className="container">
-      <div className="flex  flex-col lg:flex-row mt-20 items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]  bg-repeat">
+    <div className="">
+      <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
         {/* Left Column */}
         <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
           {/* First Text */}

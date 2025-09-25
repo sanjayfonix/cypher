@@ -22,12 +22,12 @@ export default function LegalPage() {
   };
 
   return (
-    <div className="flex min-h-screen container text-gray-300">
+    <div className="flex min-h-screen container text-white">
       {/* Fixed Sidebar */}
-      <aside className="hidden lg:block w-64 h-auto mt-10 sticky top-24 self-start">
-        <div className="flex flex-col border border-[#3c414a] bg-[#0f1012]">
+      <aside className="hidden lg:block border-[0.5px]  rounded-xl border-[#3c414a] w-64 h-auto mt-10 sticky top-24 self-start">
+        <div className=" flex flex-col  rounded-xl bg-[#0f1012]">
           <button
-            className="text-left p-2 flex justify-between border-b border-[#3c414a] cursor-pointer hover:text-white hover:bg-blue-500 transition"
+            className="text-left p-2 flex justify-between border-b rounded-t-xl  border-[#3C414A] cursor-pointer hover:text-white hover:bg-blue-500 transition"
             onClick={() => scrollToSection(privacyRef)}
           >
             Privacy Policy
@@ -51,7 +51,7 @@ export default function LegalPage() {
           </button>
 
           <button
-            className="text-left p-2 flex justify-between cursor-pointer hover:text-white hover:bg-blue-500 transition"
+            className="text-left p-2 flex justify-between cursor-pointer rounded-b-xl hover:text-white hover:bg-blue-500 transition"
             onClick={() => scrollToSection(securityRef)}
           >
             Security
