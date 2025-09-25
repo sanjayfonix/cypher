@@ -28,7 +28,7 @@ export default function WhereInvestigation() {
     <div onMouseEnter={() => {
       setHovering(true)
       console.log('hovering')
-    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white con flex flex-col items-center overflow-hidden">
+    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white px-4 sm:px-0 flex flex-col items-center overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
