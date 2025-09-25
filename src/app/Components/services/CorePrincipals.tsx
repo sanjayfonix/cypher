@@ -363,7 +363,7 @@ Z`;
   }, [pathData, speed, wedgeLength, minThickness, maxThickness, anticlockwise]);
 
   return (
-    <div ref={containerRef} className="absolute z-20 inset-0 pointer-events-none">
+    <div ref={containerRef} className="absolute z-40 inset-0 pointer-events-none">
       {pathData && (
         <svg className="absolute w-full h-full overflow-visible">
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />

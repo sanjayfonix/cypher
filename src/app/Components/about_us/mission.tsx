@@ -20,7 +20,6 @@ export default function MissionSection() {
 
     const calcIndexFromScroll = () => {
       // === NEW: on small devices (mobile), disable scroll-based updates ===
-      // Tailwind's md breakpoint ~ 768px; change threshold here if you want a different cutoff.
       if (typeof window !== "undefined" && window.innerWidth < 900) {
         return;
       }
@@ -68,32 +67,25 @@ export default function MissionSection() {
       className="overflow-hidden relative container bg-black mx-auto lg:mx-0 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 md:px-20 py-12 gap-10 sm:gap-12 md:gap-16 lg:gap-20 h-auto min-h-[700px] mb-5"
     >
       <div
-              className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
-              
-            >
-              <div className="relative flex items-center justify-center">
-                {/* Glow behind */}
-                <div
-                  className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
-                  style={{
-                    
-                    borderRadius: "50%",
-                    background:
-                      "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-                    zIndex: -1,
-                  }}
-                />
-                <div className="relative -left-8">
-                  <PointerGrid
-      
-                    width={150}
-                    height={150}
-                  />
-                </div>
-              </div>
-            </div>
+        className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
+            style={{
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <div className="relative -left-8">
+            <PointerGrid width={150} height={150} />
+          </div>
+        </div>
+      </div>
 
-     
       {/* LEFT SIDE: RADAR */}
       <div className="sticky left-0 md:left-[30%] lg:left-0 lg:top-24 self-start w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] flex items-center justify-center mx-auto md:mx-0">
         <div className="relative w-full h-full rounded-full border border-blue-500/60 flex items-center justify-center">

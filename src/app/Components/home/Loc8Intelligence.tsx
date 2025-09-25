@@ -23,7 +23,7 @@ export default function Loc8Intelligence() {
         </p>
       </div>
 
-      <div className="flex flex-col py-5 gap-6 sm:flex-row">
+      <div className="flex  flex-col py-5 gap-6 sm:flex-row">
         {/* Left Div → Image */}
         <div className="flex-1">
          <TrackingAnimation/>
