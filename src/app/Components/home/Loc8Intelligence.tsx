@@ -1,5 +1,5 @@
 'use client'
-import { Graph, HammerIcon, HistoryIcon, PatternIcon, Search5, Search6, TargetIcon } from "@/assets/icon";
+import { BlueHistoryIcon, BlueSearch5, BlueSearch6, BlueTargetIcon, Graph, HammerIcon, HistoryIcon, PatternIcon, Search5, Search6, TargetIcon } from "@/assets/icon";
 import GridItem from "./GridItem";
 import Image from "next/image";
 import dynamic from "next/dynamic";
@@ -34,6 +34,7 @@ export default function Loc8Intelligence() {
         {/* Right Div → 2x2 Grid */}
         <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 sm:grid-rows-2 gap-6 mt-6 lg:mt-0">
           <GridItem
+          hoverComponent={<BlueTargetIcon/>}
             icon={<TargetIcon />}
             text="Real-Time Location Data"
             subtext="Track individuals' movements in real-time, gaining insights into location patterns to aid investigations and support timely decisions."
@@ -41,18 +42,21 @@ export default function Loc8Intelligence() {
           />
           <GridItem
             icon={<HistoryIcon />}
+            hoverComponent={<BlueHistoryIcon/>}
             text="Location-Based Analytics"
             subtext="Analyze geographic hotspots and movement patterns to gain a comprehensive understanding of trends and behaviors over time."
             isCol={true}
           />
           <GridItem
             icon={<Search5 />}
+            hoverComponent={<BlueSearch5/>}
             text="Behavioral Trend Recognition"
             subtext="Identify repetitive behaviors, routines, and patterns for proactive decision-making, improving security by predicting future actions."
             isCol={true}
           />
           <GridItem
             icon={<Search6 />}
+            hoverComponent={<BlueSearch6/>}
             text="Cross-Network Integration"
             subtext="Integrate data from multiple mobile networks to provide a 360-degree view of individuals’ interactions and movements across regions."
             isCol={true}

@@ -123,12 +123,12 @@ export default function GlobalThreatIntelligence() {
   );
 }
 
+
+
 function SecurityFeatures() {
-
-
   const lineRef = useRef<HTMLDivElement>(null);
   const [lineHeight, setLineHeight] = useState(80);
-  const [hoverIndex,setHoverIndex]=useState(-1);
+  const [hoverIndex, setHoverIndex] = useState(-1);
 
   useEffect(() => {
     if (!lineRef.current) return;
@@ -150,26 +150,26 @@ function SecurityFeatures() {
     {
       title: "Malintent",
       desc: "Active protection against evolving digital threats",
-      icon: <Shield/>,
-      icon2:<BlueShield/>
+      icon: <Shield />,
+      icon2: <BlueShield />,
     },
     {
       title: "Investigation",
       desc: "Forensic examination of security incidents",
       icon: <Search2 />,
-      icon2:<Search2Blue/>
+      icon2: <Search2Blue />,
     },
     {
       title: "Risk Assessment",
       desc: "Continuous evaluation of vulnerability exposure",
       icon: <Search3 />,
-      icon2:<Search3Blue/>
+      icon2: <Search3Blue />,
     },
     {
       title: "Data Analysis",
       desc: "Pattern recognition across massive datasets",
       icon: <Search4 />,
-      icon2:<Search4Blue/>
+      icon2: <Search4Blue />,
     },
   ];
 
@@ -177,10 +177,11 @@ function SecurityFeatures() {
     <div className="bg-black flex flex-wrap items-start py-10 overflow-hidden">
       <div className="grid sm:grid-cols-1 md:grid-cols-2 sm:gap-0 lg:gap-20 relative">
         {[0, 1].map((col, idx) => (
-          <div key={col} className="relative flex flex-col md:flex=row lg:flex-col sm:items-start lg:items-center">
+          <div
+            key={col}
+            className="relative flex flex-col md:flex=row lg:flex-col sm:items-start lg:items-center"
+          >
             {/* Vertical line starting from center of top icon */}
-
-
             {features
               .filter((_, idx) => idx % 2 === col)
               .map((feature, realInd) => (
@@ -189,33 +190,30 @@ function SecurityFeatures() {
                   className={`flex items-start  text-white gap-4 mb-20 relative z-10 
                     ${realInd === 1 ? "translate-for-lg" : ""}`}
                 >
-                  <div ref={lineRef} className={`hidden lg:block absolute top-[125px] left-1/7 transform -translate-x-1/2 ${realInd === 1 || realInd === 3 ? 'h-[calc(100%)]' : ' h-[calc(250%)]'} w-0 border border-[#696969]`}>
-
-                     <motion.div
-                      className="absolute left-1/2 -translate-x-1/2"
-                      initial={{ y: -5 }}
-                      animate={{ y: realInd === 1 || realInd === 3 ? lineHeight - 50 : lineHeight * 2.5 - 50 }}
-                      transition={{
-                        duration: 4,
-                        repeat: Infinity,
-                        repeatType: "loop",
-                        ease: "linear",
-                      }}
-                    >
-                   
-   
-      <WaterDrop/>
-    
-                    </motion.div>
-
-
+                  <div
+                    ref={lineRef}
+                    className={`hidden lg:block absolute top-[125px] left-1/7 transform -translate-x-1/2 ${
+                      realInd === 1 || realInd === 3
+                        ? "h-[calc(100%)]"
+                        : " h-[calc(250%)]"
+                    } w-0 border border-[#696969]`}
+                  >
+                    {/* ✅ Extracted Animation */}
+                    <WaterDropAnimation
+                      lineHeight={lineHeight}
+                      isShort={realInd === 1 || realInd === 3}
+                    />
                   </div>
 
-                  
                   <div className="relative  px-5 rounded-full flex items-center justify-center ">
                     <div className="flex flex-col gap-8 items-center">
-                    <GlassIcon size={100} hoverComp={feature.icon2} isHoverProperty={true} icon={feature.icon} />
-                    {/* <div ref={lineRef} className={`block sm:hidden h-20 w-0 border border-[#696969]`}>
+                      <GlassIcon
+                        size={100}
+                        hoverComp={feature.icon2}
+                        isHoverProperty={true}
+                        icon={feature.icon}
+                      />
+                      {/* <div ref={lineRef} className={`block sm:hidden h-20 w-0 border border-[#696969]`}>
 
                      <motion.div
                       className="absolute left-1/2 -translate-x-1/2"
@@ -248,8 +246,12 @@ function SecurityFeatures() {
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg max-w-[100%] responsive-max">{feature.title}</h3>
-                    <p className="text-gray-400 max-w-[100%] responsive-max">{feature.desc}</p>
+                    <h3 className="font-bold text-lg max-w-[100%] responsive-max">
+                      {feature.title}
+                    </h3>
+                    <p className="text-gray-400 max-w-[100%] responsive-max">
+                      {feature.desc}
+                    </p>
                   </div>
                 </div>
               ))}
@@ -261,6 +263,35 @@ function SecurityFeatures() {
 }
 
 
+
+
+function WaterDropAnimation({
+  lineHeight,
+  isShort,
+}: {
+  lineHeight: number;
+  isShort: boolean;
+}) {
+  return (
+    <motion.div
+      // 👇 key forces re-render when lineHeight changes
+      key={lineHeight + (isShort ? "-short" : "-long")}
+      className="absolute left-1/2 -translate-x-1/2"
+      initial={{ y: -5 }}
+      animate={{
+        y: isShort ? lineHeight - 50 : lineHeight * 2.5 - 50,
+      }}
+      transition={{
+        duration: 4,
+        repeat: Infinity,
+        repeatType: "loop",
+        ease: "linear",
+      }}
+    >
+      <WaterDrop />
+    </motion.div>
+  );
+}
 
 
 
