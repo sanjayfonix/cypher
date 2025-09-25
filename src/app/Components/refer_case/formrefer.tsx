@@ -313,7 +313,7 @@ const CaseDetails = () => {
         {currentStep > 0 && (
           <button
             onClick={onPrev}
-            className="custom-button relative bottom-4 with-shadow bg-[#1057B5] w-full sm:w-[100px] mx-2"
+            className="custom-button relative bottom-4 with-shadow bg-[#1057B5] w-[80%] sm:w-[100px] mx-2"
           >
             Back
           </button>

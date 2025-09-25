@@ -1,6 +1,6 @@
 'use client'
 
-import { BigProtectIc, BlueFbIcon, BlueWhatsappIcon, BlueXIcon, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
+import { BigProtectIc, BlueFbIcon, BlueInstaIcon, BlueWhatsappIcon, BlueXIcon, DiamondGlow, FbIcon, InstaIcon, Toparrow, WhatsappIcon, XIcon } from "@/assets/icon";
 import { TravelingBorder } from "../services/CorePrincipals";
 import { useState,useEffect } from "react";
 import { GlassIcon } from "./GlassIcon";
@@ -91,32 +91,40 @@ export default function WhereInvestigation() {
             <div className={` relative flex h-full items-end justify-center mx-auto w-[80%] max-w-[367px] aspect-square`}>
               {/* Small floating circles */}
 
-              <div className="absolute top-[23%] left-[5%] w-fit aspect-square
-  flex justify-center items-center rounded-full 
-  bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-x-[80px] translate-y-[60px] opacity-0 
-  transition-all duration-500 
-  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
-  <GlassIcon  hoverComp={<InstaIcon/>} isHoverProperty={true} icon={<InstaIcon />} />
-</div>
+            <div
+  className="absolute z-50 top-[23%] left-[5%] w-fit aspect-square
+    flex justify-center items-center rounded-full 
+    bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] 
+    shadow-[0_0_40px_0_#157AFF99]
+    transform translate-x-[80px] translate-y-[60px] opacity-0 
+    transition-all duration-500 
+    group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+>
+    <GlassIcon 
+      icon={<InstaIcon />} 
+      hoverComp={<BlueInstaIcon />} 
+      isHoverProperty={true} 
+    />
+  </div>
+
               <div className="absolute w-fit  aspect-square
-  flex justify-center items-center rounded-full 
+  flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 top-4  left-[25%]">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 md:top-4 top-4  left-[25%]">
                 <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true}  icon={<XIcon />} />
               </div>
               <div className="absolute  w-fit sm:w-[60px] aspect-square
-  flex justify-center items-center rounded-full 
+  flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 top-4 left-[59%] ">
+  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 md:top-4 top-4 left-[59%] ">
                 <GlassIcon  hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
-             <div className="absolute top-[23%] left-[85%] w-fit aspect-square
-  flex justify-center items-center rounded-full 
+             <div className=" absolute top-[23%] left-[85%] w-fit aspect-square
+  flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform -translate-x-[80px] translate-y-[60px] opacity-0 
   transition-all duration-500 
-  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">
+  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">   
   <GlassIcon  hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
@@ -147,8 +155,8 @@ export default function WhereInvestigation() {
                  backdrop-blur-[20px]
                  border-2 border-t-3 border-b-0 border-white/20
                  shadow-[0_0_10px_0_#157AFF66]
-                 sm:shadow-[0_0_20px_0_#157AFF66]
-                 lg:shadow-[0_0_40px_0_#157AFF66]
+                 sm:shadow-[0_0_30px_0_#157AFF66]
+                 
                  bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)]
                  before:absolute before:inset-0 
                  before:rounded-tl-lg before:rounded-tr-lg

@@ -443,6 +443,28 @@ body {
   -ms-overflow-style: none; /* IE/Edge */
   scrollbar-width: none; /* Firefox */
 }
+.responsive-max {
+  max-width: 58%; /* default for <= 1387px */
+}
+
+@media (min-width: 300px) {
+  .responsive-max {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-max {
+    max-width: 58%;
+  }
+}
+
+@media (min-width: 1388px) {
+  .responsive-max {
+    max-width: 70%;
+  }
+}
+
 
 nextjs-portal {
   display: none;

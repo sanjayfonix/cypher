@@ -99,44 +99,45 @@ export default function GlobalThreatIntelligence() {
       </h1>
 
       {/* Tabs */}
-      <div className="flex rounded-full overflow-hidden w-full mb-8 sm:mb-12 border border-gray-800">
-        <button
-          onClick={() => setTabIndex(0)}
-          style={{
-            cursor: 'pointer',
-            transition: "1s ease-out",
-            boxShadow:
-              tabIndex === 0
-                ? "0px 0px 10px 0px #89BFFF inset,0px 0px 4px 0px #268AFF"
-                : "none",
-            backgroundColor: tabIndex === 0 ? "#1057B5" : "#1F1F1FD6",
-          }}
-          className="flex-1 text-white py-3 px-4 flex items-center justify-center gap-2"
-        >
-          <img src={"/shield-flash-line.svg"} className="w-3 h-3 sm:w-6 sm:h-6" />
-          <span className="text-xs sm:text-lg md:text-xl font-medium font-sans">
-            Threat Radar
-          </span>
-        </button>
-        <button
-          onClick={() => setTabIndex(1)}
-          style={{
-            cursor: 'pointer',
-            transition: "1s ease-out",
-            boxShadow:
-              tabIndex === 1
-                ? "0px 0px 10px 0px #89BFFF inset,0px 0px 4px 0px #268AFF"
-                : "none",
-            backgroundColor: tabIndex === 1 ? "#1057B5" : "#1F1F1FD6",
-          }}
-          className="flex-1 text-white py-3 px-4 flex items-center justify-center gap-2"
-        >
-          <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
-          <span className="text-xs sm:text-lg md:text-xl font-medium font-sans">
-            Cellular Intelligence
-          </span>
-        </button>
-      </div>
+ <div className="relative flex w-full mb-8 sm:mb-12 border border-gray-800 rounded-full bg-[#1F1F1FD6] overflow-hidden">
+  {/* Sliding Active Indicator */}
+  <div
+    className={`absolute top-0 h-full w-1/2 rounded-full bg-[#1057B5] shadow-[inset_0_0_10px_#89BFFF,0_0_4px_#268AFF] transition-transform duration-500 ease-in-out`}
+    style={{ transform: `translateX(${tabIndex * 100}%)` }}
+  ></div>
+
+  {/* Tab 1 */}
+  <button
+    onClick={() => setTabIndex(0)}
+    className="flex-1 relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+  >
+    <img src={"/shield-flash-line.svg"} className="w-3 h-3 sm:w-6 sm:h-6" />
+    <span
+      className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${
+        tabIndex === 0 ? "text-white font-semibold" : "text-gray-300"
+      }`}
+    >
+      Threat Radar
+    </span>
+  </button>
+
+  {/* Tab 2 */}
+  <button
+    onClick={() => setTabIndex(1)}
+    className="flex-1 relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+  >
+    <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
+    <span
+      className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${
+        tabIndex === 1 ? "text-white font-semibold" : "text-gray-300"
+      }`}
+    >
+      Cellular Intelligence
+    </span>
+  </button>
+</div>
+
+
 
       {/* Description */}
       {tabIndex === 0 && (
@@ -289,8 +290,8 @@ function SecurityFeatures() {
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg max-w-[100%] lg:max-w-[58%]">{feature.title}</h3>
-                    <p className="text-gray-400 max-w-[100%] lg:max-w-[58%]">{feature.desc}</p>
+                    <h3 className="font-bold text-lg max-w-[100%] responsive-max">{feature.title}</h3>
+                    <p className="text-gray-400 max-w-[100%] responsive-max">{feature.desc}</p>
                   </div>
                 </div>
               ))}

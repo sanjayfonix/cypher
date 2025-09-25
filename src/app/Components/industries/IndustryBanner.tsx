@@ -72,7 +72,7 @@ export const AnimationLoop = () => {
 
         <circle
           cx={970}
-          cy={378}
+          cy={358}
           className="blur-[40px]"
           strokeWidth={20}
           r={50}

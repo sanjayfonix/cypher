@@ -189,7 +189,7 @@ export default function HowItWorks() {
                       color: type === 1 ? '#1E1E1E' : 'black',
                       fontWeight: mode === 1 ? 'medium' : 'normal'
                     }}
-                    className="font-sans text-base sm:text-lg md:text-xl">
+                    className="font-sans min-w-[150px] text-base sm:text-lg md:text-xl">
                     Phone Number
                   </span>
                 </button>

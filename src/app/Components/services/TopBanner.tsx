@@ -12,8 +12,8 @@ interface ButtonProps{
 export const TopBanner = () => {
 
   return (
-    <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat p-8 sm:p-16 lg:p-20  overflow-hidden flex flex-col items-center justify-start">
-
+    <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover p-8 sm:p-16 lg:p-20  overflow-hidden flex flex-col items-center justify-start">
+        
       {/* Quarter Blur - Top Left */}
       <div
         className="absolute pointer-events-none -z-1 animate-glow2 w-[250px] sm:w-[320px] h-[220px] sm:h-[280px]"
@@ -30,10 +30,9 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Right */}
       <div
-        className="absolute pointer-events-none z-2 animate-glow2 w-[250px] h-[220px] sm:h-[280px]"
+        className="absolute right-[-140px] sm:right-[-120px] pointer-events-none z-2 animate-glow2 w-[250px] sm:w-[320px] h-[220px] sm:h-[280px]"
         style={{
           top: "-100px",
-          right: "-120px",
           background: "#167BFF",
           opacity: 0.5,
           filter: "blur(50px)",

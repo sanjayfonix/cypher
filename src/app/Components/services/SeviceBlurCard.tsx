@@ -67,6 +67,29 @@ const ServiceBlurCard = () => {
           />
         </div>
       </div>
+
+      {/* <div className="relative sm:hidden flex items-center justify-center">
+              
+                <div
+                  className="absolute blur-[10px] animate-glow2"
+                  style={{
+                    width: "170px",
+                    height: "170px",
+                    borderRadius: "50%",
+                    background:
+                      "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+                    zIndex: -1,
+                  }}
+                />
+                <div className="relative -left-8">
+                  <PointerGrid
+      
+                    width={150}
+                    height={150}
+                  />
+                </div>
+              </div> */}
+        
   
 
       {/* ===== Main Card ===== */}

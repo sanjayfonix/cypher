@@ -74,42 +74,69 @@ const BlurCard = () => {
         </div>
       </div>
 
-      {/* On mobile, show both grids above card */}
-      {/* <div className="absolute flex sm:hidden justify-between w-full px-6 -top-12">
- 
-  <div className="relative flex items-center justify-center">
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "140px",
-        height: "140px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1,
-      }}
-    />
-    <PointerGrid width={100} height={100} />
-  </div>
+      <div
+        className="absolute z-30 sm:hidden  items-center justify-center"
+        style={{
+          top: "0%",
+          left: "0",
+          transform: "translateX(-50%)", // half outside screen, half visible
+        }}
+      >
+        
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2"
+            style={{
+              width: "170px",
+              height: "170px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <PointerGrid
+            horizontal={{ direction: "right", y: 30, fromX: 60, toX: 100 }}
+            width={100}
+            height={150}
+          />
+        </div>
+      </div>
 
-  <div className="relative flex items-center justify-center">
-    <div
-      className="absolute blur-[10px] animate-glow2"
-      style={{
-        width: "140px",
-        height: "140px",
-        borderRadius: "50%",
-        background:
-          "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-        zIndex: -1,
-      }}
-    />
-    <PointerGrid width={100} height={100} />
-  </div>
-</div> */}
+       <div
+        className="absolute z-30  items-center justify-center"
+        style={{
+          top: "0%",
+          right: "0",
+          transform: "translateX(50%)", // half outside screen, half visible
+        }}
+      >
+        <div className="relative sm:hidden flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2"
+            style={{
+              width: "170px",
+              height: "170px",
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <div className="relative -left-8">
+            <PointerGrid
+
+              width={150}
+              height={150}
+            />
+          </div>
+        </div>
+      </div>
 
       {/* Main Card */}
-      <div className="relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
+      <div className="mt-40 sm:mt-0 relative overflow-hidden flex flex-col gap-6 sm:gap-10 lg:gap-[32px] p-6 sm:p-10 lg:p-[48px] rounded-[16px] border border-[#515151] bg-[#121212] relative z-10">
         {/* First Decorative Blur Div */}
         <div
           className="absolute blur-[157.2px]"

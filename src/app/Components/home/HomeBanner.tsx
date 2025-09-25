@@ -143,7 +143,7 @@ export default function HomeBanner() {
       />
 
       {/* Content */}
-      <div className="flex flex-col items-center justify-start gap-4 sm:gap-6 md:gap-8 z-10 text-center w-full max-w-[95%] sm:max-w-[700px] md:max-w-[900px]">
+      <div className="flex flex-col items-center justify-start gap-4 sm:gap-6 md:gap-8 z-10 text-center w-full max-w-[98%]">
         {/* Headline */}
         <p className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-snug sm:leading-tight">
           {text}

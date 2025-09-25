@@ -193,16 +193,16 @@ export default function Navbar() {
 
           {/* Desktop Right Buttons */}
           <div className="hidden md:flex items-center gap-4 md:gap-2">
-            <button className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent">
+            <Link href={'/pages/conntactus'}><button className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent">
               Get in touch
-            </button>
-            <button
-              onClick={() => router.push("/pages/contactus")}
+            </button></Link>
+            <Link href={'/pages/refer_case'}><button
+              
               className="min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]"
             >
               Refer a Case
               <Toparrow />
-            </button>
+            </button></Link>
           </div>
 
           {/* Placeholder for mobile */}

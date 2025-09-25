@@ -1,5 +1,5 @@
 
-import { AcademiaIcon, EmployersIcon, InsuranceIcon, LawIcon } from "@/assets/icon";
+import { AcademiaIcon, EmployersIcon, InsuranceIcon, LawIcon,CIrcleIn } from "@/assets/icon";
 import Link from "next/link";
 import { GlassIcon } from "./GlassIcon";
 import { GlassCard } from "./GlassCard";
@@ -18,7 +18,9 @@ export default function IntegrityAtCore() {
       <div className="relative w-full rounded-[32px] border border-[#6D6D6D] overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0 bg-[url('/integrity.png')] bg-cover bg-center opacity-30 z-0" />
-
+       {/* <div className="absolute -inset-1 z-1">
+        <CIrcleIn/>
+        </div> */}
         {/* Content */}
         <div className="relative z-10 flex flex-col items-center gap-8 sm:gap-14 md:gap-16 pt-8 sm:pt-[76px] px-4 sm:px-10 md:px-[68px] pb-8 sm:pb-[76px]">
           
