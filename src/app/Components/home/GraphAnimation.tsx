@@ -142,7 +142,7 @@ export default function TrackingAnimation() {
       {/* === TOP LEFT LABEL === */}
       <div className="absolute top-6 left-6 z-20 px-3 py-2 border border-[#3B6AB1] bg-[#0a0f1a]/80 rounded">
         <p className="text-[14px] md:text-[16px] text-white font-medium">
-          Loc8 Tracking: Subject A
+          Cellular Intelligence: Subject A
         </p>
         <p className="text-[14px] md:text-[16px] text-red-500 font-semibold">
           {edgeTimes[activeEdge[0]].join("-")}

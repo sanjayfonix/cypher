@@ -1,17 +1,17 @@
 import CurrentOpportunities from "@/app/Components/careers/CurrentOpportunity";
 import { CareerBanner } from "@/app/Components/careers/Header";
-import LifeAtCyphr from "@/app/Components/careers/LifeAtCyphr";
+import LifeAtcyphr from "@/app/Components/careers/LifeAtCyphr";
 import PotentialTeam from "@/app/Components/careers/Potential";
-import WhyWorkAtCyphr from "@/app/Components/careers/Whywork";
+import WhyWorkAtcyphr from "@/app/Components/careers/Whywork";
 
 
 export default function ContactPage() {
   return (
     <div >
      <CareerBanner/>
-     <WhyWorkAtCyphr/>
+     <WhyWorkAtcyphr/>
      <CurrentOpportunities/>
-     <LifeAtCyphr/>
+     <LifeAtcyphr/>
      <PotentialTeam/>
     </div>
   );

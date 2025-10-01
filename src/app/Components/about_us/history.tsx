@@ -62,7 +62,7 @@ export const History = () => {
       year: "2007",
       title: "Digital Prowess & Early Social Media OSINT",
       points: [
-        "Small Point: Petrie refined his digital investigative skills with online research.",
+        // "Small Point: Petrie refined his digital investigative skills with online research.",
         "Key Case: Tracked a missing teen within 17 minutes using MySpace data.",
         "Impact: Teen was found safe; years later became a family man.",
         "Innovation: First social media investigative platform launched.",

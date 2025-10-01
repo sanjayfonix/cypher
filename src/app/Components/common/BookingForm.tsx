@@ -199,7 +199,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               type="checkbox"
               id="agreement"
               name="agreement"
-              className="appearance-none border border-[#F1F1F1] h-[16px] w-[16px] bg-[#2A2A2A] text-blue-600 focus:ring-blue-500"
+              className="appearance-none checked:after:content-['✔'] checked:border-blue-500 checked:after:text-sm
+    checked:after:flex checked:after:items-center checked:after:justify-center border border-[#F1F1F1] min-h-[16px] min-w-[16px] bg-[#2A2A2A] text-blue-600 focus:ring-blue-500"
               required
             />
             <label htmlFor="agreement" className="text-[#E3E3E3] text-[14px]">

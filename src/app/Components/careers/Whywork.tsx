@@ -2,7 +2,7 @@
 
 import { Bulb, CareerSearch, Global, Stats } from "@/assets/icon";
 
-export default function WhyWorkAtCyphr() {
+export default function WhyWorkAtcyphr() {
   const items = [
     {
       icon: <CareerSearch />,

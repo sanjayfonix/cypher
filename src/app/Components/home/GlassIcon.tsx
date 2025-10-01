@@ -17,7 +17,7 @@ interface GlassIconProps {
 export const GlassIcon = ({
   icon,
   hoverComp,
-  isHoverProperty,
+  isHoverProperty=false,
   size,
   borderOpacity = 0.75,
   borderThickness = 1,
@@ -30,7 +30,7 @@ export const GlassIcon = ({
   return (
 
     <div
-      className="relative aspect-square flex items-center justify-center rounded-full"
+      className={`relative ${isHoverProperty?'cursor-pointer':''} aspect-square flex items-center justify-center rounded-full`}
       style={{
         width: size?size:'clamp(40px, 10vw, 60px)',
         height:size?size:'clamp(40px, 10vw, 60px)',

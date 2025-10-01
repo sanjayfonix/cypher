@@ -102,9 +102,9 @@ export default function HowItWorks() {
 
           {/* Second Text */}
           <p className="text-left font-inter font-normal text-sm sm:text-base md:text-lg text-white">
-            Using advanced algorithms, OSINT methodology and investigative technologies, Webutation
+            "Using advanced algorithms, OSINT methodology and investigative technologies, Webutation
             scours social media, public records, and other digital footprints to provide actionable
-            intelligence.
+            intelligence."
           </p>
         </div>
 

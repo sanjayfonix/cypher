@@ -62,7 +62,7 @@ export const TopBanner = () => {
           }} className="custom-button with-shadow bg-[#1057B5] w-full sm:w-auto">
             Explore Courses
           </button>
-          <button className="custom-button with-border bg-transparent w-full sm:w-auto">
+          <button className="text-ellipsis whitespace-nowrap  w-[100%] custom-button with-border bg-transparent sm:w-auto">
             Request a Custom Program <Toparrow />
           </button>
         </div>
