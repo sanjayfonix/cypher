@@ -5,7 +5,7 @@ import { Card, CardContent } from "../industries/Card";
 import { GlassIcon } from "../home/GlassIcon";
 import { Computer, HandShakeIcon, Collab, Winner, BlueComputer, BlueCollab, BlueWinner, BlueHandShakeIcon } from "@/assets/icon";
 
-export default function LifeAtCyphr() {
+export default function LifeAtcyphr() {
   return (
     <section className="container text-white ">
       {/* Section Heading */}

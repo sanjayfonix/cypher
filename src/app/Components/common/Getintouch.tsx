@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Email, Headquators, Toparrow } from "@/assets/icon";
 import { GlassIcon } from "../home/GlassIcon";
 import { PointerGrid } from "../home/GridAnimation";
+import Link from "next/link";
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -228,9 +229,9 @@ export default function ContactSection() {
           />
           <p className="text-sm text-gray-300 leading-snug">
             I accept the terms and conditions of Social Links’ DPA (
-            <span className="text-blue-400 underline cursor-pointer">
+            <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
               Data Processing Agreement
-            </span>) and authorize the company to contact me for relevant purposes.
+            </span>)</Link> and authorize the company to contact me for relevant purposes.
           </p>
         </div>
 

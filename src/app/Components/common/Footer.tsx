@@ -30,16 +30,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Logo + Description - Full width on mobile, spans 2 columns on larger screens */}
           <div className="lg:col-span-2">
-            <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start mb-6">            
               <Image
-                src="/images/fotterimage2.png"
-                alt="Footer Icon"
-                width={50}
-                height={50}
-                className="border border-[#042433]"
-              />
-              <Image
-                src="/images/footer_logo_image.png"
+                src="/images/smallLogo.png"
                 alt="Footer Logo"
                 width={304}
                 height={38}

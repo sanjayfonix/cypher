@@ -36,8 +36,8 @@ export default function Loc8Intelligence() {
           <GridItem
           hoverComponent={<BlueTargetIcon/>}
             icon={<TargetIcon />}
-            text="Real-Time Location Data"
-            subtext="Track individuals' movements in real-time, gaining insights into location patterns to aid investigations and support timely decisions."
+            text="Persona Journey Mapping"
+            subtext="Pattern-of-life analysis uses cellular app data to investigate individuals' behavioral patterns, movements, and interactions over time for actionable intelligence"
             isCol={true}
           />
           <GridItem

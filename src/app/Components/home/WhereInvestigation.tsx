@@ -8,6 +8,26 @@ import { GlassCard } from "./GlassCard";
 import dynamic from "next/dynamic";
 
 
+
+const useIsTouch = () => {
+  const [isTouch, setIsTouch] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(hover: none) and (pointer: coarse)");
+    setIsTouch(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsTouch(e.matches);
+    if (mq.addEventListener) mq.addEventListener("change", handler);
+    else mq.addListener(handler);
+    return () => {
+      if (mq.removeEventListener) mq.removeEventListener("change", handler);
+      else mq.removeListener(handler);
+    };
+  }, []);
+  return isTouch;
+};
+
+
+
 const TravelingBorder = dynamic(
   () => import("../services/CorePrincipals").then(mod => mod.TravelingBorder),
   { ssr: false, loading: () => null }
@@ -22,13 +42,12 @@ const PointerGrid = dynamic(
 export default function WhereInvestigation() {
   const [isHovering, setHovering] = useState(false);
 
+  const isTouch = useIsTouch();
+const [tapped, setTapped] = useState(false);
   
 
   return (
-    <div onMouseEnter={() => {
-      setHovering(true)
-      console.log('hovering')
-    }} onMouseLeave={() => setHovering(false)} className="bg-black text-white px-4 sm:px-0 flex flex-col items-center overflow-hidden">
+    <div className="bg-black text-white container px-4  flex flex-col items-center overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
@@ -74,7 +93,8 @@ export default function WhereInvestigation() {
           </div>
 
           {/* Social Media Intelligence */}
-          <div className="group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
+          <div  onMouseEnter={() =>setHovering(true) }
+      onMouseLeave={() =>  setHovering(false)} className="group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
           <TravelingBorder borderRadius={24} anticlockwise={true}/>
 
@@ -101,13 +121,13 @@ export default function WhereInvestigation() {
               {/* Small floating circles */}
 
             <div
-  className="absolute z-50 top-[23%] left-[5%] w-fit aspect-square
+  className={`${isHovering?'translate-y-0 translate-x-0 opacity-100':'translate-x-[80px] translate-y-[60px] opacity-0'} absolute z-50 top-[23%] left-[5%] w-fit aspect-square
     flex justify-center items-center rounded-full 
     bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] 
     shadow-[0_0_40px_0_#157AFF99]
-    transform translate-x-[80px] translate-y-[60px] opacity-0 
+    transform 
     transition-all duration-500 
-    group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100"
+`}
 >
     <GlassIcon 
       icon={<InstaIcon />} 
@@ -116,24 +136,24 @@ export default function WhereInvestigation() {
     />
   </div>
 
-              <div className="absolute w-fit  aspect-square
+              <div className={`absolute w-fit  aspect-square
   flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 md:top-4 top-4  left-[25%]">
+  transform transition-all duration-500 ${isHovering?'translate-y-0 opacity-100':'translate-y-[80px] opacity-0'} sm:top-0 md:top-4 top-4  left-[25%]`}>
                 <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true}  icon={<XIcon />} />
               </div>
-              <div className="absolute  w-fit sm:w-[60px] aspect-square
+              <div className={`absolute  w-fit sm:w-[60px] aspect-square
   flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform translate-y-[80px] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100 sm:top-0 md:top-4 top-4 left-[59%] ">
+  transform ${isHovering?'translate-y-0 opacity-100':'translate-y-[80px] opacity-0'} transition-all duration-500  sm:top-0 md:top-4 top-4 left-[59%]`}>
                 <GlassIcon  hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
-             <div className=" absolute top-[23%] left-[85%] w-fit aspect-square
+             <div className={`absolute top-[23%] left-[85%] w-fit aspect-square
   flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
-  transform -translate-x-[80px] translate-y-[60px] opacity-0 
-  transition-all duration-500 
-  group-hover:translate-x-0 group-hover:translate-y-0 group-hover:opacity-100">   
+  transform 
+  transition-all duration-500 ${isHovering?'translate-y-0 translate-x-0 opacity-100':'-translate-x-[80px] translate-y-[60px] opacity-0'}
+  `}>   
   <GlassIcon  hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
@@ -142,7 +162,7 @@ export default function WhereInvestigation() {
                <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-full aspect-square">
   {/* Diamond Glow */}
   <div
-    className="group-hover:opacity-100 transition-all duration-1000 opacity-0 
+    className=" group-hover:opacity-100 transition-all duration-1000 opacity-0 
                absolute inset-0 flex justify-center items-center 
                top-[72%] sm:top-[75%] 
                w-[calc(100%+50px)]

@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const SIZE = 600;
 const CX = SIZE / 2;
 const CY = SIZE / 2;
-const RADIUS = 310;
+const RADIUS = 280;
 
 // helper
 function precise(num: number, decimals = 4) {
@@ -33,6 +33,7 @@ const points: Point[] = [
       color: "#cfe9ff",
     };
   })(),
+
   (() => {
     const angle = 145;
     const r = RADIUS - 120;
@@ -64,6 +65,17 @@ const points: Point[] = [
       x: precise(CX + r * Math.cos((angle * Math.PI) / 180) + 18),
       y: precise(CY + r * Math.sin((angle * Math.PI) / 180) - 4),
       color: "#ff3d6e",
+    };
+  })(),
+(() => {
+    const angle = 10;
+    const r = RADIUS-120;
+    return {
+      id: "digital",
+      label: "Malintent",
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180) + 18),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180) - 184),
+     color: "#7fb7ff",
     };
   })(),
 ];
@@ -214,8 +226,8 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
     <div className="flex items-center justify-start">
       <svg
         viewBox={`0 0 ${SIZE + 40} ${SIZE}`}
-        width={size}
-        height={size}
+        width={size+100}
+        height={size+100}
         className="w-full h-full max-w-full rounded-full drop-shadow-lg"
       >
         <defs>
@@ -234,7 +246,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         {/* Background grid + circles */}
         <g>
           <circle cx={CX} cy={CY} r={RADIUS + 18} fill="url(#bgGrad)" />
-          {[60, 140, 220, 300].map((r, i) => (
+          {[80, 160, 220, 280].map((r, i) => (
             <circle
               key={i}
               cx={CX}
@@ -314,11 +326,13 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         <Label x={points[0].x - 18} y={points[0].y - 36} text={points[0].label} />
         <Label x={points[1].x - 54} y={points[1].y - 8} text={points[1].label} />
         <Label x={points[2].x - 68} y={points[2].y + 8} text={points[2].label} />
+        <Label x={points[3].x +48} y={points[2].y + 8} text={points[3].label} />
+       
 
         {/* Points */}
         {points.slice(0, 3).map((p) => (
           <g key={p.id}>
-            {(p.id === "data" || p.id === "risk" || p.id === "investigation") && (
+            {(p.id === "data" || p.id === "risk" || p.id === "investigation"||p.id==='digital') && (
               <circle
                 cx={p.x}
                 cy={p.y}
@@ -339,7 +353,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           <line
             x1={CX}
             y1={CY}
-            x2={CX + RADIUS + 12}
+            x2={CX + RADIUS }
             y2={CY}
             stroke="#9fe7ff"
             strokeWidth={2.5}

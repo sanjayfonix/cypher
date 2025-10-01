@@ -46,10 +46,10 @@ export const AboutHeader = () => {
                     <p
                         className={`text-sm sm:text-base md:text-lg text-[#F1F1F1]`}
                     >
-                        "With comprehensive expertise, we tackle critical challenges head-on.
+                        With comprehensive expertise, we tackle critical challenges head-on.
                         Our solutions empower businesses to make informed, confident
                         decisions. Trust us to drive your success through innovative strategies
-                        and data-driven insights."
+                        and data-driven insights.
                     </p>
 
 

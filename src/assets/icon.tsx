@@ -121,6 +121,10 @@ export const ServicesIcon = () => (
     <g filter="url(#filter0_dddi_1_1657)">
       <rect x="24" y="24" width="54" height="54" rx="27" fill="#1057B5" />
       <rect x="35.8799" y="35.8799" width="30.9622" height="30.4263" fill="url(#pattern0_1_1657)" />
+      <svg width="101" height="63" viewBox="0 0 101 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+</svg>
+
     </g>
     <defs>
       <filter id="filter0_dddi_1_1657" x="0" y="0" width="102" height="102" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">

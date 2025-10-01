@@ -10,20 +10,21 @@ const teamData = [
       "Michael’s curiosity and entrepreneurial spirit led him to pioneer Cyphr, combining traditional investigative methods with advanced digital intelligence. With a knack for navigating complex data—both digital and non-digital—he focuses on addressing risks, protecting brands, and benefiting individuals and employers, all while keeping the process engaging and innovative.",
     image: "/images/img1.png",
   },
-  {
+    {
     id: 2,
-    title: "Brett Huselton - Vice President of Strategy and Growth",
-    description:
-      "With two decades of experience in building growth-oriented services, Michael merged his expertise in neuroscience and psychology with his forensic and data analysis skills. Recognizing the power of data liquidity and strategic forensic assessment, he is shaping the future of investigative science, just as advancements have revolutionized healthcare science.",
-    image: "/images/img2.png",
-  },
-  {
-    id: 3,
     title: "Max Terzi - CTO ",
     description:
       "Driven by a track record of success, Michael is building the next-generation Investigative Services platform, which adapts across industries and use cases, from custom to scalable solutions. By combining modern AI with forensic advancements, he bridges the gap between intelligence methodologies and real-world strategies.",
     image: "/images/img3.png",
   },
+  {
+    id: 3,
+    title: "Brett Huselton - ADVISOR - Strategy",
+    description:
+      "With two decades of experience in building growth-oriented services, Michael merged his expertise in neuroscience and psychology with his forensic and data analysis skills. Recognizing the power of data liquidity and strategic forensic assessment, he is shaping the future of investigative science, just as advancements have revolutionized healthcare science.",
+    image: "/images/img2.png",
+  },
+
 ];
 
 export default function TeamSection() {
@@ -90,18 +91,18 @@ export default function TeamSection() {
             <motion.div
               key={member.id}
               whileHover={{ scale: 1.05 }}
-              className={`relative border border-[#6D6D6D] rounded-3xl overflow-hidden h-[350px] w-[230px] shadow-[0px_0px_108px_0px_#157AFF80]
-              ${idx === 0 ? "lg:translate-x-6" : ""}
+              className={`relative border border-[#6D6D6D] rounded-3xl overflow-hidden h-[334px] w-[274px] shadow-[0px_0px_108px_0px_#157AFF80]
+              ${idx === 0 ? "lg:translate-x-10" : ""}
               ${idx === 1 ? "lg:-translate-x-12 lg:-translate-y-10" : ""}
               ${idx === 2 ? "lg:translate-x-10 lg:-translate-y-20" : ""}`}
             >
-              <Image
+              {member.id!==3&&<Image
                 src={member.image}
                 alt={member.title}
-                width={230}
-                height={350}
+                width={294}
+                height={290}
                 className="object-top w-full h-full"
-              />
+              />}
             </motion.div>
           ))}
         </div>

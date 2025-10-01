@@ -67,7 +67,7 @@ export default function GlobalThreatIntelligence() {
   {/* Tab 1 */}
   <button
     onClick={() => setTabIndex(0)}
-    className="flex-1 relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+    className="flex-1 cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
   >
     <img src={"/shield-flash-line.svg"} className="w-3 h-3 sm:w-6 sm:h-6" />
     <span
@@ -82,7 +82,7 @@ export default function GlobalThreatIntelligence() {
   {/* Tab 2 */}
   <button
     onClick={() => setTabIndex(1)}
-    className="flex-1 relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+    className="flex-1  cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
   >
     <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
     <span
@@ -128,9 +128,16 @@ export default function GlobalThreatIntelligence() {
 function SecurityFeatures() {
   const lineRef = useRef<HTMLDivElement>(null);
   const [lineHeight, setLineHeight] = useState(80);
+  const [screenSize, setScreenSize] = useState({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
   const [hoverIndex, setHoverIndex] = useState(-1);
 
   useEffect(() => {
+    if(screenSize.width===1024){
+      console.log('hello you are 1024px wide')
+    }
     if (!lineRef.current) return;
 
     const observer = new ResizeObserver((entries) => {
@@ -192,7 +199,7 @@ function SecurityFeatures() {
                 >
                   <div
                     ref={lineRef}
-                    className={`hidden lg:block absolute top-[125px] left-1/7 transform -translate-x-1/2 ${
+                    className={`isHidden absolute top-[125px] left-1/7 transform -translate-x-1/2 ${
                       realInd === 1 || realInd === 3
                         ? "h-[calc(100%)]"
                         : " h-[calc(250%)]"
@@ -279,7 +286,7 @@ function WaterDropAnimation({
       className="absolute left-1/2 -translate-x-1/2"
       initial={{ y: -5 }}
       animate={{
-        y: isShort ? lineHeight - 50 : lineHeight * 2.5 - 50,
+        y: isShort ? lineHeight - 60 : lineHeight * 2.5 - 60,
       }}
       transition={{
         duration: 4,
