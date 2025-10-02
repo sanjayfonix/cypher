@@ -6,6 +6,7 @@ import { GlassIcon } from "./GlassIcon";
 import Link from "next/link";
 import { GlassCard } from "./GlassCard";
 import dynamic from "next/dynamic";
+import { AltGrid } from "./GridAnimation2";
 
 
 
@@ -47,7 +48,7 @@ const [tapped, setTapped] = useState(false);
   
 
   return (
-    <div className="bg-black text-white container px-4  flex flex-col items-center overflow-hidden">
+    <div className="bg-black text-white container px-4  flex flex-col items-center ">
       {/* Header */}
       <div className="text-center max-w-4xl mx-auto">
         <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 sm:mb-4">
@@ -68,7 +69,8 @@ const [tapped, setTapped] = useState(false);
             
            
           <div className="absolute bottom-0 -right-6 z-30 w-[35%] max-w-[180px] aspect-square">
-  <PointerGrid width="100%" height="100%" />
+  {/* <AltGrid width={'100%'} isAlternativeGrid={true} height={'100%'} vertical={ [{ x: 51.143, fromY: 146.084, toY: 300.084, direction: "down" },{ x: 51.143, fromY: 146.084, toY: 300.084, direction: "down" }] }/> */}
+  <PointerGrid width={'100%'} height={'100%'}/>
 </div>
 
 
@@ -94,11 +96,24 @@ const [tapped, setTapped] = useState(false);
 
           {/* Social Media Intelligence */}
           <div  onMouseEnter={() =>setHovering(true) }
-      onMouseLeave={() =>  setHovering(false)} className="group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
+      onMouseLeave={() =>  setHovering(false)} className=" group relative Z-30 bg-[linear-gradient(110.77deg,rgba(3,10,20,0)_0%,rgba(22,123,255,0.12)_91.47%)] border border-[#6D6D6D] rounded-3xl shadow-lg flex flex-col h-full">
             {/* Bottom radial glow */}
-          <TravelingBorder borderRadius={24} anticlockwise={true}/>
-
-
+          
+            <TravelingBorder borderRadius={24} anticlockwise={true}/>
+       
+<div className="absolute inset-0  overflow-hidden flex justify-center items-end">
+  <div
+    className={`${isHovering?'opacity-100':'opacity-0'}  transition-all duration-1000 
+               absolute inset-0 flex justify-center items-center 
+               top-[80%] sm:top-[83%] 
+               w-[calc(100%+50px)]
+               -left-5  
+               blur-[20px] sm:blur-[30px]`}
+  >
+    <DiamondGlow />
+  </div>
+</div>
+{/* transition-all duration-1000 group-hover:opacity-100 opacity-0 */}
             <div className="p-5 sm:p-6 flex flex-col gap-2 z-20">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white font-sans">
                 Social Media Intelligence
@@ -157,21 +172,13 @@ const [tapped, setTapped] = useState(false);
   <GlassIcon  hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
-              <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
+              <div className=" h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">
                 {/* ...floating circles */}
-               <div className="overflow-hidden h-full relative flex items-end justify-center mx-auto w-full aspect-square">
+               <div className="h-full relative flex items-end justify-center mx-auto w-full aspect-square">
   {/* Diamond Glow */}
-  <div
-    className=" group-hover:opacity-100 transition-all duration-1000 opacity-0 
-               absolute inset-0 flex justify-center items-center 
-               top-[72%] sm:top-[75%] 
-               w-[calc(100%+50px)]
-               -left-4  
-               blur-[20px] sm:blur-[30px]"
-  >
-    <DiamondGlow />
-  </div>
+ 
 
+{/* group-hover:opacity-100 */}
   {/* Vertical rectangle container */}
   <div className="overflow-hidden relative mx-auto w-[60%] sm:w-[220px] md:w-[180px] lg:w-[250px]  h-[65%] sm:h-[85%] md:h-[75%] flex flex-col justify-start">
     <div

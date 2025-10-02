@@ -36,7 +36,7 @@ export default function Footer() {
                 alt="Footer Logo"
                 width={304}
                 height={38}
-                className="max-w-[80%] sm:max-w-full"
+                className="h-auto w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md text-[16px] text-center sm:text-left mx-auto sm:mx-0">

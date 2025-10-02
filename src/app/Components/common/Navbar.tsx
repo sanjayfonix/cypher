@@ -90,6 +90,7 @@ export default function Navbar() {
               alt="Logo"
               width={203}
               height={28}
+              className="h-auto w-auto"
             />
           </Link>
 
@@ -139,7 +140,7 @@ export default function Navbar() {
                 <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
                   {services.map((item, index) => (
                     <Link
-                     prefetch={false}
+                     
                       key={index}
                       href={item.href}
                       className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
