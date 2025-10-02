@@ -30,7 +30,7 @@ const points: Point[] = [
       label: "Investigation",
       x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
       y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
-      color: "#cfe9ff",
+      color: "#7fb7ff",
     };
   })(),
 
@@ -45,6 +45,7 @@ const points: Point[] = [
       color: "#7fb7ff",
     };
   })(),
+
   (() => {
     const angle = 220;
     const r = RADIUS - 90;
@@ -56,6 +57,7 @@ const points: Point[] = [
       color: "#7fb7ff",
     };
   })(),
+
   (() => {
     const angle = 10;
     const r = 40;
@@ -67,15 +69,30 @@ const points: Point[] = [
       color: "#ff3d6e",
     };
   })(),
-(() => {
-    const angle = 10;
-    const r = RADIUS-120;
+
+  // === Digital Forensics ===
+  (() => {
+    const angle = 300; // top-right
+    const r = 160; // second grid circle
     return {
       id: "digital",
-      label: "Malintent",
-      x: precise(CX + r * Math.cos((angle * Math.PI) / 180) + 18),
-      y: precise(CY + r * Math.sin((angle * Math.PI) / 180) - 184),
-     color: "#7fb7ff",
+      label: "Digital Forensics",
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
+      color: "#7fb7ff",
+    };
+  })(),
+
+  // === NEW: Fraud Detection ===
+  (() => {
+    const angle = 95; // top-left quadrant
+    const r = 245; // outermost grid circle
+    return {
+      id: "fraud",
+      label: "Fraud Detection",
+      x: precise(CX + r * Math.cos((angle * Math.PI) / 180)),
+      y: precise(CY + r * Math.sin((angle * Math.PI) / 180)),
+      color: "#7fb7ff",
     };
   })(),
 ];
@@ -130,39 +147,38 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
 
   // Sweep loop
   useEffect(() => {
-  installNavigationGuardOnce();
+    installNavigationGuardOnce();
 
-  // ✅ Reset nav flag when Radar mounts
-  (window as any).__navigationStarted = false;
+    (window as any).__navigationStarted = false;
 
-  const speedDegPerSec = 20;
+    const speedDegPerSec = 20;
 
-  function tick(now: number) {
-    if ((window as any).__navigationStarted) {
-      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-      return;
-    }
+    function tick(now: number) {
+      if ((window as any).__navigationStarted) {
+        if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+        return;
+      }
 
-    if (lastRef.current === null) {
+      if (lastRef.current === null) {
+        lastRef.current = now;
+      }
+      const dt = (now - (lastRef.current as number)) / 1000;
       lastRef.current = now;
+      setAngle((a) => (a + speedDegPerSec * dt) % 360);
+      rafRef.current = requestAnimationFrame(tick);
     }
-    const dt = (now - (lastRef.current as number)) / 1000;
-    lastRef.current = now;
-    setAngle((a) => (a + speedDegPerSec * dt) % 360);
+
+    lastRef.current = performance.now();
     rafRef.current = requestAnimationFrame(tick);
-  }
 
-  lastRef.current = performance.now();
-  rafRef.current = requestAnimationFrame(tick);
-
-  return () => {
-    if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
-    if (hitTimeout.current) {
-      window.clearTimeout(hitTimeout.current);
-      hitTimeout.current = null;
-    }
-  };
-}, []);
+    return () => {
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+      if (hitTimeout.current) {
+        window.clearTimeout(hitTimeout.current);
+        hitTimeout.current = null;
+      }
+    };
+  }, []);
 
   // Hit detection
   useEffect(() => {
@@ -226,8 +242,8 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
     <div className="flex items-center justify-start">
       <svg
         viewBox={`0 0 ${SIZE + 40} ${SIZE}`}
-        width={size+100}
-        height={size+100}
+        width={size + 100}
+        height={size + 100}
         className="w-full h-full max-w-full rounded-full drop-shadow-lg"
       >
         <defs>
@@ -326,13 +342,13 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         <Label x={points[0].x - 18} y={points[0].y - 36} text={points[0].label} />
         <Label x={points[1].x - 54} y={points[1].y - 8} text={points[1].label} />
         <Label x={points[2].x - 68} y={points[2].y + 8} text={points[2].label} />
-        <Label x={points[3].x +48} y={points[2].y + 8} text={points[3].label} />
-       
+        <Label x={points[4].x - 58} y={points[4].y - 34} text={points[4].label} />
+        <Label x={points[5].x - 55} y={points[5].y - 38} text={points[5].label} />
 
-        {/* Points */}
-        {points.slice(0, 3).map((p) => (
-          <g key={p.id}>
-            {(p.id === "data" || p.id === "risk" || p.id === "investigation"||p.id==='digital') && (
+        {/* Points (investigation, data, risk, digital, fraud) */}
+        {points.map((p, i) =>
+          p.id !== "malintent" ? (
+            <g key={p.id}>
               <circle
                 cx={p.x}
                 cy={p.y}
@@ -342,18 +358,18 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
                 strokeWidth={1.5}
                 opacity={0.8}
               />
-            )}
-            <circle cx={p.x} cy={p.y} r={6} fill={p.color} opacity={0.95} />
-            <circle cx={p.x} cy={p.y} r={2} fill="#eaffff" />
-          </g>
-        ))}
+              <circle cx={p.x} cy={p.y} r={6} fill={p.color} opacity={0.95} />
+              <circle cx={p.x} cy={p.y} r={2} fill="#eaffff" />
+            </g>
+          ) : null
+        )}
 
         {/* Sweep Beam */}
         <g transform={`rotate(${angle}, ${CX}, ${CY})`}>
           <line
             x1={CX}
             y1={CY}
-            x2={CX + RADIUS }
+            x2={CX + RADIUS}
             y2={CY}
             stroke="#9fe7ff"
             strokeWidth={2.5}
@@ -379,7 +395,11 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
                     exit={{ opacity: 0 }}
                     transition={{ duration: 0.7, ease: "easeOut" }}
                   />
-                  {(p.id === "data" || p.id === "risk" || p.id === "investigation") && (
+                  {(p.id === "data" ||
+                    p.id === "risk" ||
+                    p.id === "investigation" ||
+                    p.id === "digital" ||
+                    p.id === "fraud") && (
                     <motion.circle
                       cx={p.x}
                       cy={p.y}

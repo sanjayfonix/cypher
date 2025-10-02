@@ -1,13 +1,12 @@
 
 'use client';
-import { BlueShield, FallDownIcon, Find, Graph, Health, Search2, Search2Blue, Search3, Search3Blue, Search4, Search4Blue, Shield, WaterDrop } from "@/assets/icon";
+import { BlueShield, Search2, Search2Blue, Search3, Search3Blue, Search4, Search4Blue, Shield, WaterDrop } from "@/assets/icon";
 import React, { useState, useRef, useEffect } from 'react'
 import Loc8Intelligence from "./Loc8Intelligence";
 
-import { GlassIcon } from "./GlassIcon";
-import { TravelingBorder } from "../services/CorePrincipals";
+import { GlassIcon } from "./GlassIcon";;
 import { motion } from "framer-motion";
-import { li } from "framer-motion/client";
+
 import dynamic from "next/dynamic";
 
 
@@ -128,16 +127,25 @@ export default function GlobalThreatIntelligence() {
 function SecurityFeatures() {
   const lineRef = useRef<HTMLDivElement>(null);
   const [lineHeight, setLineHeight] = useState(80);
-  const [screenSize, setScreenSize] = useState({
-        width: window.innerWidth,
-        height: window.innerHeight,
-      });
+
+  // ✅ Safe initial value
+  const [screenSize, setScreenSize] = useState({ width: 0, height: 0 });
+
   const [hoverIndex, setHoverIndex] = useState(-1);
 
   useEffect(() => {
-    if(screenSize.width===1024){
-      console.log('hello you are 1024px wide')
+    // ✅ Only runs in browser
+    function updateSize() {
+      setScreenSize({ width: window.innerWidth, height: window.innerHeight });
     }
+
+    updateSize(); // set once
+    window.addEventListener("resize", updateSize);
+
+    return () => window.removeEventListener("resize", updateSize);
+  }, []);
+
+  useEffect(() => {
     if (!lineRef.current) return;
 
     const observer = new ResizeObserver((entries) => {
