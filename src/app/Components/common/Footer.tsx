@@ -32,7 +32,7 @@ export default function Footer() {
           <div className="lg:col-span-2">
             <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start mb-6">            
               <Image
-                src="/images/smallLogo.png"
+                src="/images/SmallLogo.png"
                 alt="Footer Logo"
                 width={304}
                 height={38}
