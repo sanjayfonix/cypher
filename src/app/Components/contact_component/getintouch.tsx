@@ -1,10 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Mail, MapPin, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight, Phone, } from "lucide-react";
 
 import { Bell, Email, Headquators } from "@/assets/icon";
 import Button from "../common/Button";
 import { PointerGrid } from "../home/GridAnimation";
+import Link from "next/link";
+import { GlassIcon } from "../home/GlassIcon";
+import Head from "next/head";
 
 export default function GetContact() {
   const [form, setForm] = useState({
@@ -65,34 +68,38 @@ export default function GetContact() {
           </p>
 
           {/* Contact Info */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Email />
-            </div>
-            <div>
-              <p className="text-gray-100 text-lg md:text-2xl font-bold">
-                Email Id
-              </p>
-              <p className="text-gray-300">Loremipsum16@gmail.com</p>
-            </div>
-          </div>
+          
 
           <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Headquators />
-            </div>
+            
+             <GlassIcon arcLength={150} size={46} icon={<Headquators />}>
+             
+            </GlassIcon>
+            
             <div>
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
-                Headquarters
+                Location
               </p>
-              <p className="text-gray-300">New York , NY</p>
+              <p className="text-gray-300">Loremipsum Insert Address if applicable</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Headquators />
+         <div className="flex items-center gap-3 mb-4">
+            <GlassIcon arcLength={150} size={46} icon={<Email />}>
+             
+            </GlassIcon>
+            <div>
+              <p className="text-gray-100 text-lg md:text-2xl font-bold">
+                Email ID
+              </p>
+              <p className="text-gray-300">mike@Cyphr.llc</p>
             </div>
+          </div>
+          <div className="flex items-center gap-3 mb-4">
+            
+              <GlassIcon arcLength={150} size={46} icon={<Phone color="#157AFF"/>}>
+             
+            </GlassIcon>
+            
             <div>
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
                 Phone
@@ -244,9 +251,9 @@ export default function GetContact() {
             />
             <p className="text-sm text-gray-300">
               I accept the terms and conditions of Social Links’ DPA (
-              <span className="text-blue-400 underline cursor-pointer">
+              <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
                 Data Processing Agreement
-              </span>
+              </span></Link>
               ) and authorize the company to contact me for relevant purposes.
             </p>
           </div>
