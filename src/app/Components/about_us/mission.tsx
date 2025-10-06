@@ -109,8 +109,8 @@ export default function MissionSection() {
           ))}
 
           {/* Center Icon */}
-          <div className="absolute w-[50px] z-20 h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-black border border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex items-center justify-center text-blue-400">
-            <Image src="/images/missionimg2.png" alt="Mission Center" width={40} height={40} className="w-[65%] h-[65%]" />
+          <div className="cursor-pointer absolute w-[50px] z-20 h-[50px] sm:w-[60px] sm:h-[60px] md:w-[70px] md:h-[70px] rounded-full bg-black border border-blue-400 shadow-[0_0_30px_rgba(59,130,246,0.6)] flex items-center justify-center text-blue-400">
+            <Image src="/images/missionMiddle.png" alt="Mission Center" width={30} height={20} className="w-[50%] h-[35%] ml-2" />
           </div>
 
           {/* Radar Sweep */}
@@ -130,7 +130,7 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(0)}
           >
             <div
-              className={`p-2 sm:p-3 rounded-full bg-black border ${
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
                 activeIndex === 0
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
@@ -145,7 +145,7 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(1)}
           >
             <div
-              className={`p-2 sm:p-3 rounded-full bg-black border ${
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
                 activeIndex === 1
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
@@ -160,7 +160,7 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(2)}
           >
             <div
-              className={`p-2 sm:p-3 rounded-full bg-black border ${
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
                 activeIndex === 2
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
@@ -175,7 +175,7 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(3)}
           >
             <div
-              className={`p-2 sm:p-3 rounded-full bg-black border ${
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
                 activeIndex === 3
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"

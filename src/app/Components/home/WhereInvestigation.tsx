@@ -148,6 +148,7 @@ const [tapped, setTapped] = useState(false);
       icon={<InstaIcon />} 
       hoverComp={<BlueInstaIcon />} 
       isHoverProperty={true} 
+      arcLength={120}
     />
   </div>
 
@@ -155,13 +156,13 @@ const [tapped, setTapped] = useState(false);
   flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform transition-all duration-500 ${isHovering?'translate-y-0 opacity-100':'translate-y-[80px] opacity-0'} sm:top-0 md:top-4 top-4  left-[25%]`}>
-                <GlassIcon hoverComp={<BlueXIcon/>} isHoverProperty={true}  icon={<XIcon />} />
+                <GlassIcon  arcLength={120} hoverComp={<BlueXIcon/>} isHoverProperty={true}  icon={<XIcon />} />
               </div>
               <div className={`absolute  w-fit sm:w-[60px] aspect-square
   flex justify-center z-50 items-center rounded-full 
   bg-[linear-gradient(180deg,rgba(3,10,20,0.2)_28.22%,rgba(21,122,255,0.2)_185.84%)] shadow-[0_0_40px_0_#157AFF99]
   transform ${isHovering?'translate-y-0 opacity-100':'translate-y-[80px] opacity-0'} transition-all duration-500  sm:top-0 md:top-4 top-4 left-[59%]`}>
-                <GlassIcon  hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
+                <GlassIcon  arcLength={120} hoverComp={<BlueWhatsappIcon/>} isHoverProperty={true} icon={<WhatsappIcon />} />
               </div>
              <div className={`absolute top-[23%] left-[85%] w-fit aspect-square
   flex justify-center z-50 items-center rounded-full 
@@ -169,7 +170,7 @@ const [tapped, setTapped] = useState(false);
   transform 
   transition-all duration-500 ${isHovering?'translate-y-0 translate-x-0 opacity-100':'-translate-x-[80px] translate-y-[60px] opacity-0'}
   `}>   
-  <GlassIcon  hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
+  <GlassIcon  arcLength={120} hoverComp={<BlueFbIcon/>} isHoverProperty={true} icon={<FbIcon />} /></div>
 
               {/* Vertical rectangle */}
               <div className=" h-full relative flex items-end justify-center mx-auto w-[100%] aspect-square">

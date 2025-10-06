@@ -37,7 +37,7 @@ export default function Loc8Intelligence() {
           hoverComponent={<BlueTargetIcon/>}
             icon={<TargetIcon />}
             text="Persona Journey Mapping"
-            subtext="Pattern-of-life analysis uses cellular app data to investigate individuals' behavioral patterns, movements, and interactions over time for actionable intelligence"
+            subtext="Pattern-of-life analysis uses cellular app data to investigate individuals' behavioral patterns, movements, and interactions over time for actionable intelligence."
             isCol={true}
           />
           <GridItem

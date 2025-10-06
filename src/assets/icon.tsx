@@ -116,16 +116,22 @@ export const ServicesIcon = () => (
     viewBox="0 0 102 102"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
   >
     <g filter="url(#filter0_dddi_1_1657)">
+      {/* Background Circle */}
       <rect x="24" y="24" width="54" height="54" rx="27" fill="#1057B5" />
-      <rect x="35.8799" y="35.8799" width="30.9622" height="30.4263" fill="url(#pattern0_1_1657)" />
-      <svg width="101" height="63" viewBox="0 0 101 63" fill="none" xmlns="http://www.w3.org/2000/svg">
 
-</svg>
+      {/* Foreground Group */}
+      <g transform="scale(0.36) translate(105,115)">
+       
+<path transform="scale(0.8)" fill-rule="evenodd" clip-rule="evenodd" d="M46 31.6646L17 63H0L29.5 31.6328L4.19617e-05 0H16L46 31.6646Z" fill="white"/>
+<rect  width="45" height="10" transform="translate(40, 42)" fill="white"/>
 
+      </g>
+       
     </g>
+
+   
     <defs>
       <filter id="filter0_dddi_1_1657" x="0" y="0" width="102" height="102" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
         <feFlood floodOpacity="0" result="BackgroundImageFix" />
@@ -750,15 +756,11 @@ export const Handshake = () => (
 )
 
 export const MiddleIcon = () => (
-  <svg width="88" height="86" viewBox="0 0 88 86" fill="none" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-    <rect x="0.75148" y="0.5" width="87.03" height="85.5237" fill="url(#pattern0_1113_85)" />
-    <defs>
-      <pattern id="pattern0_1113_85" patternContentUnits="objectBoundingBox" width="1" height="1">
-        <use xlinkHref="#image0_1113_85" transform="scale(0.00934579)" />
-      </pattern>
-      <image id="image0_1113_85" width="107" height="107" preserveAspectRatio="none" xlinkHref="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGsAAABrCAYAAABwv3wMAAAACXBIWXMAABM5AAATOQGPwlYBAAADHklEQVR4nO3bPagcVRjG8Zm9k3CJNn5UinbGL6yCio2FIaKiWBhUsLMwCIqNpDEIFnZamBCQVFpcrALBBESwU1DbQBBSBLS5Ri3uYnZzdt73mdfibjEczpUoumcD/199Yf7wcPayM7NNAwAAAAAAAAAAAAAAAAAAAAAAAPxnIuIBdz9uZs/VbsHfSCndL+laLEn6oHYT9uDu78aIpMHd36rdhQIzeyYykuTur9ZuQ4GkjwuDLczs6dptyETERNLnhcH+7Pv+8dp9yETEPkkXCoP9nlJ6sHYfMhFxQNJ3hcF+ns/n99TuQ2ZnZ+d2SRcLg12aTqd31O5DZjab3S3pSmGw77e3t2+p3YdMSumgpKuFwb6KiP21+5CJiEOSpoXBtiJiUrsPGTM7LOl6YbBParehwMyOSvJ8MHd/r3YbCtz9mKQhO11DRLxRuw0F7n6i8HHoZvZS7TYUSDpZGOy6mT1Vuw2Z2L2PuFUYbBoRh2r3IRMR+5fft/LBfk0p3Ve7D5mIuFXSD4XBLkfEvtp9yCxvS6V8sMVi8UjtNoxERCfpbOFk/cb9wzUSEa2kM4Wh5n3fP1m7DyOSPiwMZWb2Yu02jLj7O4WhBnd/vXYbRtz9NUnKx3L347XbMGJmz0paFE7VR7XbMNL3/RPjt3ZHPguea62PxWLxsKQ/CifqfPDld31ExL2SfikM9W1EHKjdh6WIuFPST4WhLkbEbbX7sBS79/1+LAx1ZTab3VW7D0uxe0f968JQV1NKB2v3YSl2n1V9URiKZ1XrRtKpwlA8BV437v5+YSg3s6O12zDi7m+W3lxy92O12zDS9/1je7wTeKJ2GzL5b4qXp+pk7S4U9H3/6Phk8R77v9Ou6kJmdmQymbwcEZc2NjZOt21re/2tu7/dtu0rTdOs+y9JFhGx1XXdp6u42MrGulFm9nzXdedrd/xDR9q2/eb/vsjafRS1bXvTvbUkaSXNazeWpC+HYZjX7rhRwzBcc/cLq7jW2n0MNk3TpJQe6rruheYm+J/l7uc2Nzcv1w4BAAAAAAAAAAAAAAAAAAAAAAAAAOztL8qrbBCyblGBAAAAAElFTkSuQmCC" />
-    </defs>
-  </svg>
+ <svg transform='scale(0.7) translate(7,0)' width="101" height="63" viewBox="0 0 101 63" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M46 31.6646L17 63H0L29.5 31.6328L4.19617e-05 0H16L46 31.6646Z" fill="white"/>
+<rect width="55" height="10" transform="translate(46 53)" fill="white"/>
+</svg>
+
 )
 
 
