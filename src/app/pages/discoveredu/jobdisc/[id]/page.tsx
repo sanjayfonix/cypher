@@ -139,6 +139,7 @@ export default function ProgramPage({ params }: any) {
 
             <div className={`transition-all duration-300 rounded-br-lg rounded-bl-lg overflow-hidden ${openCredits ? "max-h-[1000px]" : "max-h-0"}`}>
               <div className="mt-4 overflow-x-auto">
+                <div className="bg-[#1E1E1E] rounded-t-lg py-5 px-6 border-[#373737] text-white font-inter text-lg font-medium">Close all credits available</div>
                 <table className="min-w-full border border-[#373737] rounded-lg bg-[#1E1E1E]">
                   <thead>
                     <tr>

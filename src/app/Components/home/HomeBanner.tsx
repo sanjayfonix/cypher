@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Toparrow } from "@/assets/icon";
-import { AnimateBannerPaths } from "./AnimatePath";
+
+import dynamic from "next/dynamic";
 
 const HEADLINES = [
   "Investigative Intelligence Transformed",
@@ -23,6 +24,11 @@ const ROLES = [
 "Facial Recognition",
 "Object Recognition"
 ];
+
+const AnimateBannerPaths = dynamic(() => import("./AnimatePath").then(mod => mod.AnimateBannerPaths), {
+  ssr: false, // don’t render on server
+  loading: () => <div className="h-[300px] w-full" /> // optional fallback
+});
 
 export default function HomeBanner() {
   const [headlineIndex, setHeadlineIndex] = useState(0);
@@ -168,7 +174,7 @@ export default function HomeBanner() {
 
         {/* Subtext */}
         <p className="text-[0.75rem] sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] leading-relaxed sm:leading-snug">
-          cyphr combines real world investigative experience that combines forensic expertise OSINT disciplines and <br className="hidden lg:block"/> modern data intelligence to give you defensible answers when you need them the most.
+          Cyphr combines real world investigative experience that combines forensic expertise, OSINT disciplines and <br className="hidden lg:block"/> modern data intelligence to give you defensible answers when you need them the most.
         </p>
 
         {/* Buttons */}

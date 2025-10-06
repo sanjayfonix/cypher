@@ -107,6 +107,7 @@ export const AnimatedPath: React.FC<{
 
   return (
     <>
+    <svg xmlns="http://www.w3.org/2000/svg">
      <g>
       <path ref={pathRef} d={d} fill="none" stroke="#0C438C" />
       <path ref={pointerRef} fill={`url(#${colorId})`} filter="url(#shadow)" />
@@ -117,6 +118,7 @@ export const AnimatedPath: React.FC<{
         </linearGradient>
       </defs>
       </g>
+      </svg>
     </>
   );
 }

@@ -36,7 +36,7 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
     direction: "left",
   },
   vertical = [
-    { x: 139.143, fromY: 146.084, toY: 0, direction: "up" },
+    { x: 139.143, fromY: 146.084, toY: 20, direction: "up" },
     { x: 139.143, fromY: 184.982, toY: 255, direction: "down" },
   ],
 }) => {
@@ -197,4 +197,8 @@ export const PointerGrid: React.FC<PointerGridProps> = ({
     </svg>
   );
 };
+
+
+
+
 

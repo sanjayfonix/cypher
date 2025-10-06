@@ -68,7 +68,7 @@ export default function CurrentOpportunities() {
                 onClick={() =>
                   router.push(`/pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
                 }
-                className="hidden lg:block min-w-[130px] mt-4 custom-button with-border bg-transparent"
+                className="text-ellipsis whitespace-nowrap min-w-[130px] md:w-fit w-[100%] mt-4 custom-button with-border bg-transparent"
               >
                 Read full job description
                 <Toparrow />

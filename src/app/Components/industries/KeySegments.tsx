@@ -5,6 +5,7 @@ import Image from "next/image";
 import React from "react";
 import Button from "../common/Button";
 import { motion } from "framer-motion";
+import Link from "next/link";
 
 export default function KeySegments() {
   return (
@@ -59,20 +60,21 @@ export default function KeySegments() {
               <h4 className="font-bold text-xl lg:text-2xl">We help TPAs:</h4>
               <ul className="flex flex-col gap-2">
                 {[
-                  "Detect inconsistencies between statements and digital footprints",
-                  "Deny or challenge questionable claims",
-                  "Reduce payouts and operational costs",
-                  "Improve overall claims efficiency",
+                  "Aggressively combat fraudulent claims and optimize claims management through actionable, legally defensible intelligence",
+"Uncover inconsistencies between claimants' statements and their digital footprint, providing irrefutable evidence of fraudulent activity that traditional methods often miss",
+"Deny or challenge questionable claims, minimize payouts, reduce operational costs, and improve overall claims processing efficiency",
+"Enhancing their value proposition to insurance carriers and self-insured employers",
+                  
                 ].map((text, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#E3E3E3] text-base">
-                    <span className="inline-flex w-5 h-5 shrink-0"><Tick/></span> <span>{text}</span>
+                    <span className="inline-flex w-auto h-auto shrink-0"><Tick/></span> <span>{text}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className='custom-button with-border bg-transparent'>Support Your TPA Team <Toparrow/></button>
+              <Link href={'/pages/contactus'}><button className='custom-button with-border bg-transparent'>Support Your TPA Team <Toparrow/></button></Link>
             </div>
           </motion.div>
         </div>
@@ -101,19 +103,22 @@ export default function KeySegments() {
               <h4 className="font-bold text-xl lg:text-2xl">With Cyphr, you can:</h4>
               <ul className="flex flex-col gap-2">
                 {[
-                  "Offer clients better terms by demonstrating reduced risk",
-                  "Improve profitability with fraud-resistant assessments",
-                  "Reduce exposure to fraudulent claims and liabilities",
+                  "Offer a critical edge in risk assessment and due diligence through actionable, legally defensible intelligence",
+"Deliver a comprehensive risk profile of potential clients and investments",
+"Secure better terms for your clients by demonstrating reduced risk",
+"Enable reinsurance companies to make more informed decisions about underwriting and portfolio management",
+"Improve profit and reduce exposure to fraudulent claims",
+                  
                 ].map((text, i) => (
                   <li key={i} className="flex items-center gap-3 text-[#E3E3E3] text-base">
-                    <span className="inline-flex w-5 h-5 shrink-0"><Tick/></span> <span>{text}</span>
+                    <span className="inline-flex w-auto h-auto shrink-0"><Tick/></span> <span>{text}</span>
                   </li>
                 ))}
               </ul>
             </div>
 
             <div className="sm:w-3/4 lg:w-1/2 mt-2">
-              <button className="custom-button bg-transparent with-border" >Request Risk Profiling <Toparrow/></button>
+              <Link href={'/pages/contactus'}><button className="custom-button bg-transparent with-border" >Request Risk Profiling <Toparrow/></button></Link>
             </div>
           </motion.div>
 

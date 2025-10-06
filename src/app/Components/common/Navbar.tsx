@@ -11,9 +11,11 @@ export default function Navbar() {
   const pathname = usePathname();
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [showDropDown,setShowDropDown]=useState(-1);
+  const [showServicesDown,setShowServicesDown]=useState(false);
   const router = useRouter();
 
-  // Refs for dropdowns
+  // Refs for desktop dropdowns
   const servicesRef = useRef<HTMLDivElement | null>(null);
   const industriesRef = useRef<HTMLDivElement | null>(null);
 
@@ -25,11 +27,20 @@ export default function Navbar() {
     setOpenMenu(openMenu === menu ? null : menu);
   };
 
+  const navigateAndClose = async(href: string) => {
+  // push returns a Promise; close the UI after navigation completes
+  await router.push(href)
+    setIsSidebarOpen(false);
+    setOpenMenu(null);
+
+};
+
+
   const services = [
-    { label: "Consulting and Advisory", href: "/pages/services/consulting" },
-    { label: "Brand Defense", href: "/pages/services/brand-defence" },
     { label: "Social Media Intelligence", href: "/pages/services/social-intel" },
-    { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
+    { label: "Consulting and Advisory", href: "/pages/services/consulting" },
+     { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
+    { label: "Brand Defense", href: "/pages/services/brand-defence" },
   ];
 
   const industries = [
@@ -42,9 +53,11 @@ export default function Navbar() {
   const handleLinkClick = () => {
     setIsSidebarOpen(false);
     setOpenMenu(null);
+    setShowDropDown(-1);
+    setShowServicesDown(false);
   };
 
-  // Close dropdown on outside click
+  // Close desktop dropdown on outside click
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -58,9 +71,7 @@ export default function Navbar() {
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   return (
@@ -73,12 +84,13 @@ export default function Navbar() {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="flex gap-2">
+          <Link href="/"   className="flex gap-2">
             <Image
               src="/images/SmallLogo.png"
               alt="Logo"
               width={203}
               height={28}
+              className="h-auto w-auto"
             />
           </Link>
 
@@ -86,6 +98,7 @@ export default function Navbar() {
           <div className="hidden md:flex flex-nowrap whitespace-nowrap bg-[#3c414a] items-center gap-4 border border-white/20 rounded-full px-4 py-2 ">
             {/* Home */}
             <Link
+         
               href="/"
               className={`px-3 py-1 text-sm rounded-full transition-all ${
                 pathname === "/"
@@ -98,6 +111,7 @@ export default function Navbar() {
 
             {/* About */}
             <Link
+
               href="/pages/aboutus"
               className={`px-3 py-1 text-sm rounded-full transition-all ${
                 pathname === "/pages/aboutus"
@@ -108,7 +122,7 @@ export default function Navbar() {
               About Us
             </Link>
 
-            {/* Services Dropdown (click only) */}
+            {/* Services Dropdown */}
             <div ref={servicesRef} className="relative">
               <button
                 onClick={() => toggleMenu("services")}
@@ -126,6 +140,7 @@ export default function Navbar() {
                 <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
                   {services.map((item, index) => (
                     <Link
+                     
                       key={index}
                       href={item.href}
                       className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
@@ -143,7 +158,7 @@ export default function Navbar() {
               )}
             </div>
 
-            {/* Industries Dropdown (click only) */}
+            {/* Industries Dropdown */}
             <div ref={industriesRef} className="relative">
               <button
                 onClick={() => toggleMenu("industries")}
@@ -161,6 +176,7 @@ export default function Navbar() {
                 <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
                   {industries.map((item, index) => (
                     <Link
+                     
                       key={index}
                       href={item.href}
                       className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
@@ -180,6 +196,7 @@ export default function Navbar() {
 
             {/* Legal */}
             <Link
+             
               href="/pages/legal"
               className={`px-3 py-1 rounded-full transition-all ${
                 pathname === "/pages/legal"
@@ -193,27 +210,221 @@ export default function Navbar() {
 
           {/* Desktop Right Buttons */}
           <div className="hidden md:flex items-center gap-4 md:gap-2">
-            <Link href={'/pages/conntactus'}><button className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent">
+            <Link  href={'/pages/contactus'}><button className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent">
               Get in touch
             </button></Link>
-            <Link href={'/pages/refer_case'}><button
-              
+            <button
+              onClick={() => router.push("/pages/refer_case")}
               className="min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]"
             >
               Refer a Case
               <Toparrow />
-            </button></Link>
+            </button>
+             <Link href={'/'}>
+          <button className="custom-button with-border bg-transparent w-full">
+            Login
+          </button>
+        </Link>
           </div>
 
           {/* Placeholder for mobile */}
           <div className="md:hidden invisible">
             <Menu size={24} />
           </div>
+             
         </div>
       </nav>
 
-      {/* Mobile Sidebar (unchanged, still click-based) */}
-      {/* ... keep your mobile sidebar code same as before ... */}
+     {/* ✅ Mobile Sidebar (fixed patch for dropdown navigation) */}
+<div
+  className={`fixed top-0 left-0 h-full w-80 bg-black z-50 transform transition-transform duration-300 ease-in-out ${
+    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+  } md:hidden`}
+  // stopPropagation so clicks inside the sidebar don't accidentally hit the overlay
+  onClick={(e) => e.stopPropagation()}
+>
+  <div className="p-6 flex flex-col h-full">
+    <div className="flex justify-between items-center mb-8">
+      <Link href="/" className="flex gap-2" onClick={handleLinkClick}>
+        <Image
+          src="/images/SmallLogo.png"
+          alt="Logo"
+          width={203}
+          height={28}
+        />
+      </Link>
+      <button onClick={toggleSidebar} className="text-white">
+        <X size={24} />
+      </button>
+    </div>
+
+    <div className="flex flex-col space-y-4">
+      {/* Home */}
+      <Link
+        href="/"
+        className={`px-4 py-3 rounded-full transition-all ${
+          pathname === "/"
+            ? "bg-gray-100 text-black"
+            : "text-gray-100 hover:bg-white/10"
+        }`}
+        onClick={handleLinkClick}
+      >
+        Home
+      </Link>
+
+      {/* About */}
+      <Link
+        href="/pages/aboutus"
+        className={`px-4 py-3 rounded-full transition-all ${
+          pathname === "/pages/aboutus"
+            ? "bg-gray-100 text-black"
+            : "text-gray-100 hover:bg-white/10"
+        }`}
+        onClick={handleLinkClick}
+      >
+        About Us
+      </Link>
+
+      {/* Services (mobile) - NOTE: using button + router.push + delayed close */}
+      <div className="relative">
+        <button
+          onClick={() =>{
+            if(showDropDown===1){
+              setShowDropDown(-1)
+            }
+            else{
+              setShowDropDown(1)
+            }
+          }}
+          className="flex items-center justify-between w-full px-4 py-3 rounded-full text-gray-100 cursor-pointer hover:bg-white/10"
+        >
+          Services
+          <ChevronDown
+            size={16}
+            className={`transition-transform ${
+              openMenu === "services-mobile" ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+
+      
+          <div className={`${showDropDown===1?'block':'hidden'} mt-2 ml-6 bg-[#1A1A1A] text-white rounded-xl p-2`}>
+            {services.map((item, index) => (
+              <Link href={item.href} onClick={handleLinkClick}><button
+                key={index}
+                type="button"
+                
+               
+                className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
+                  pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
+                }`}
+              >
+                {item.label}
+                <ArrowUpRight size={16} />
+              </button></Link>
+            ))}
+          </div>
+        
+      </div>
+
+      {/* Industries (mobile) - same pattern */}
+      <div className="relative">
+        <button
+          onClick={() =>{
+            setOpenMenu(
+              openMenu === "industries-mobile" ? null : "industries-mobile"
+            )
+            if(showDropDown===0){
+              setShowDropDown(-1)
+            }
+            else{
+              setShowDropDown(0);
+            }
+          }
+          }
+          className="flex items-center justify-between w-full px-4 py-3 rounded-full text-gray-100 cursor-pointer hover:bg-white/10"
+        >
+          Industries
+          <ChevronDown
+            size={16}
+            className={`transition-transform ${
+              openMenu === "industries-mobile" ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+
+       
+          <div className={`${showDropDown===0?'block':'hidden'} mt-2 ml-6 bg-[#1A1A1A] text-white rounded-xl p-2`}>
+            {industries.map((item, index) => (
+              <Link href={item.href}><button
+                key={index}
+                type="button"
+                className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${
+                  pathname === item.href ? "bg-white/10" : "hover:bg-[#8A8A8A]"
+                }`}
+                onClick={handleLinkClick}
+              >
+                {item.label}
+                <ArrowUpRight size={16} />
+              </button></Link>
+            ))}
+          </div>
+      
+      </div>
+
+      {/* Contact */}
+      <Link
+        href="/pages/contactus"
+        className={`px-4 py-3 rounded-full transition-all ${
+          pathname === "/pages/contactus"
+            ? "bg-gray-100 text-black"
+            : "text-gray-100 hover:bg-white/10"
+        }`}
+        onClick={handleLinkClick}
+      >
+        Contact Us
+      </Link>
+
+      {/* Legal */}
+      <Link
+        href="/pages/legal"
+        className={`px-4 py-3 rounded-full transition-all ${
+          pathname === "/pages/legal"
+            ? "bg-gray-100 text-black"
+            : "text-gray-100 hover:bg-white/10"
+        }`}
+        onClick={handleLinkClick}
+      >
+        Legal
+      </Link>
+    </div>
+
+    {/* Mobile Buttons */}
+    <div className="mt-auto pt-8 flex flex-col space-y-4">
+      <div className="w-full">
+        <Link onClick={handleLinkClick}  href={'/pages/refer_case'}>
+          <button className="custom-button with-border bg-transparent w-full">
+            Refer a case <Toparrow/>
+          </button>
+        </Link>
+      </div>
+      <div className="w-full">
+        <Link onClick={handleLinkClick}  href={'/pages/contactus'}>
+          <button className="custom-button with-shadow bg-[#1057B5] w-full">
+            Get in touch <Toparrow/>
+          </button>
+        </Link>
+     
+      </div>
+         <Link onClick={handleLinkClick}  href={'/'}>
+          <button className="custom-button with-border bg-transparent w-full">
+            Login
+          </button>
+        </Link>
+    </div>
+  </div>
+</div>
+
 
       {/* Overlay */}
       {isSidebarOpen && (

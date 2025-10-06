@@ -37,7 +37,7 @@ const features = [
     },
 ];
 
-export default function WhyCyphr() {
+export default function Whycyphr() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
     return (

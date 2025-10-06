@@ -30,7 +30,7 @@ export const TopBanner = () => {
 
       {/* Quarter Blur - Top Right */}
       <div
-        className="absolute right-[-140px] sm:right-[-120px] pointer-events-none z-2 animate-glow2 w-[250px] sm:w-[320px] h-[220px] sm:h-[280px]"
+        className="absolute right-[-140px] sm:right-[-140px] pointer-events-none z-2 animate-glow2 w-[250px] sm:w-[320px] h-[220px] sm:h-[280px]"
         style={{
           top: "-100px",
           background: "#167BFF",

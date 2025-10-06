@@ -3,7 +3,15 @@
 
 
 
+  
 
+@theme inline {
+  --breakpoint-xs:400px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
 /* styles/globals.css */
 
 :root {
@@ -159,12 +167,7 @@
 
 
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+
 
 @media (prefers-color-scheme: dark) {
   :root {
@@ -447,6 +450,16 @@ body {
   max-width: 58%; /* default for <= 1387px */
 }
 
+.isHidden{
+  display:block;
+}
+
+@media (max-width:1025px){
+  .isHidden{
+   display:none !important;
+  }
+}
+
 @media (min-width: 300px) {
   .responsive-max {
     max-width: 100%;
@@ -469,3 +482,6 @@ body {
 nextjs-portal {
   display: none;
 }
+
+
+

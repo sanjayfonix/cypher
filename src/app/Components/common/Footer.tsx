@@ -30,20 +30,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Logo + Description - Full width on mobile, spans 2 columns on larger screens */}
           <div className="lg:col-span-2">
-            <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start mb-6">
+            <div className="flex flex-col sm:flex-row gap-4 items-center sm:items-start mb-6">            
               <Image
-                src="/images/fotterimage2.png"
-                alt="Footer Icon"
-                width={50}
-                height={50}
-                className="border border-[#042433]"
-              />
-              <Image
-                src="/images/footer_logo_image.png"
+                src="/images/SmallLogo.png"
                 alt="Footer Logo"
                 width={304}
                 height={38}
-                className="max-w-[80%] sm:max-w-full"
+                className="h-auto w-auto"
               />
             </div>
             <p className="text-gray-300 mb-6 leading-relaxed max-w-md text-[16px] text-center sm:text-left mx-auto sm:mx-0">
@@ -55,10 +48,10 @@ export default function Footer() {
 
           {/* Services Section */}
           <div className="text-center sm:text-left">
-            <h3 className="font-semibold text-[20px] mb-6 sm:mb-10 text-gray-200 tracking-wider border-b-2 border-blue-500 inline-block pb-2 sm:pb-4">
+            <h3 className="ml-4 font-semibold text-[20px] mb-6 sm:mb-10 text-gray-200 tracking-wider border-b-2 border-blue-500 inline-block pb-2 sm:pb-4">
               Services
             </h3>
-            <ul className="space-y-4 sm:space-y-6">
+            <ul className="ml-4 space-y-4 sm:space-y-6">
               <li>
                 <Link href="/pages/services/consulting" className="text-gray-200 hover:text-white transition-colors text-[16px] block">
                   Consulting and Advisory
@@ -85,17 +78,17 @@ export default function Footer() {
           {/* Company + Legal - Stack on mobile, side by side on larger screens */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
             <div className="text-center sm:text-left">
-              <h3 className="font-semibold text-[20px] mb-6 sm:mb-10 text-gray-200 tracking-wider border-b-2 border-blue-500 inline-block pb-2 sm:pb-4">
+              <h3 className="ml-4 font-semibold text-[20px] mb-6 sm:mb-10 text-gray-200 tracking-wider border-b-2 border-blue-500 inline-block pb-2 sm:pb-4">
                 Company
               </h3>
-              <ul className="space-y-4 sm:space-y-6">
+              <ul className="ml-4  space-y-4 sm:space-y-6">
                 <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">About</Link></li>
                 <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Why Cyphr</Link></li>
                 <li><Link href="/pages/contactus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Contact</Link></li>
                 <li><Link href="/pages/careers" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Career</Link></li>
               </ul>
             </div>
-            <div className="text-center sm:text-left">
+            <div className="hidden text-center sm:text-left">
               <h3 className="font-semibold text-[20px] mb-6 sm:mb-10 text-gray-200 tracking-wider border-b-2 border-blue-500 inline-block pb-2 sm:pb-4">
                 Legal
               </h3>
@@ -119,10 +112,10 @@ export default function Footer() {
             <div className="flex flex-col w-1/2 sm:flex-row items-center  justify-between gap-6 order-1 md:order-2">
               {/* Legal Links - Stack on mobile, row on larger screens */}
               <div className="flex flex-wrap justify-center gap-4 sm:gap-4 md:gap-6">
-                <Link href="/privacy-policy" className="text-gray-300 hover:text-white text-[16px] transition-colors">Privacy Policy</Link>
-                <Link href="/terms" className="text-gray-300 hover:text-white text-[16px] transition-colors">Terms of Service</Link>
-                <Link href="/data-processing" className="text-gray-300 hover:text-white text-[16px] transition-colors">Data Processing</Link>
-                <Link href="/security" className="text-gray-300 hover:text-white text-[16px] transition-colors">Security</Link>
+                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Privacy Policy</Link>
+                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Terms of Service</Link>
+                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Data Processing</Link>
+                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Security</Link>
               </div>
 
               {/* Social Icons */}

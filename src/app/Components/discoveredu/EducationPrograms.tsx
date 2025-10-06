@@ -47,7 +47,7 @@ const features = [
 
 export default function EducationPrograms() {
   return (
-    <section className="container text-white py-12 sm:py-16 px-4 sm:px-6 md:px-12">
+    <section  className="container text-white py-12 sm:py-16 px-4 sm:px-6 md:px-12">
       {/* Heading */}
       <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
         <h2 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 sm:mb-8 leading-snug">

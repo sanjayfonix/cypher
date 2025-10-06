@@ -81,7 +81,7 @@ const EmpowerTeam = () => {
 
 
             >Book a Consultation</button>
-            <button className="custom-button with-border bg-transparent w-full sm:w-fit"
+            <button className="text-ellipsis whitespace-nowrap  custom-button with-border bg-transparent w-full sm:w-fit"
 
 
 

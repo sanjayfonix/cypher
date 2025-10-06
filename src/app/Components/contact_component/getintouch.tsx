@@ -1,9 +1,13 @@
 "use client";
 import { useState } from "react";
-import { Mail, MapPin, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight, Phone, } from "lucide-react";
 
 import { Bell, Email, Headquators } from "@/assets/icon";
 import Button from "../common/Button";
+import { PointerGrid } from "../home/GridAnimation";
+import Link from "next/link";
+import { GlassIcon } from "../home/GlassIcon";
+import Head from "next/head";
 
 export default function GetContact() {
   const [form, setForm] = useState({
@@ -38,6 +42,17 @@ export default function GetContact() {
   return (
     <div className="mt-10">
       <div className="relative container text-white flex flex-col md:flex-row items-start justify-between p-6 md:p-12">
+        
+          
+       
+               <div className="hidden lg:block absolute z-30 left-0 bottom-0  -translate-x-1/3">
+                            <div className="relative flex items-center justify-center">
+                              <PointerGrid width={200} height={200} horizontal={{direction:'right',y:185 ,
+                    fromX: 200,
+                    toX: 80}}/>
+                            </div>
+                            </div>
+                            
         {/* Background Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_30%)] pointer-events-none" />
 
@@ -53,34 +68,38 @@ export default function GetContact() {
           </p>
 
           {/* Contact Info */}
-          <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Email />
-            </div>
-            <div>
-              <p className="text-gray-100 text-lg md:text-2xl font-bold">
-                Email Id
-              </p>
-              <p className="text-gray-300">Loremipsum16@gmail.com</p>
-            </div>
-          </div>
+          
 
           <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Headquators />
-            </div>
+            
+             <GlassIcon arcLength={150} size={46} icon={<Headquators />}>
+             
+            </GlassIcon>
+            
             <div>
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
-                Headquarters
+                Location
               </p>
-              <p className="text-gray-300">New York , NY</p>
+              <p className="text-gray-300">Loremipsum Insert Address if applicable</p>
             </div>
           </div>
-
-          <div className="flex items-center gap-3 mb-4">
-            <div className="border-t border-b rounded-t-full rounded-b-full">
-              <Headquators />
+         <div className="flex items-center gap-3 mb-4">
+            <GlassIcon arcLength={150} size={46} icon={<Email />}>
+             
+            </GlassIcon>
+            <div>
+              <p className="text-gray-100 text-lg md:text-2xl font-bold">
+                Email ID
+              </p>
+              <p className="text-gray-300">mike@Cyphr.llc</p>
             </div>
+          </div>
+          <div className="flex items-center gap-3 mb-4">
+            
+              <GlassIcon arcLength={150} size={46} icon={<Phone color="#157AFF"/>}>
+             
+            </GlassIcon>
+            
             <div>
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
                 Phone
@@ -232,9 +251,9 @@ export default function GetContact() {
             />
             <p className="text-sm text-gray-300">
               I accept the terms and conditions of Social Links’ DPA (
-              <span className="text-blue-400 underline cursor-pointer">
+              <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
                 Data Processing Agreement
-              </span>
+              </span></Link>
               ) and authorize the company to contact me for relevant purposes.
             </p>
           </div>

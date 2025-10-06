@@ -102,9 +102,9 @@ export default function HowItWorks() {
 
           {/* Second Text */}
           <p className="text-left font-inter font-normal text-sm sm:text-base md:text-lg text-white">
-            Using advanced algorithms, OSINT methodology and investigative technologies, Webutation
+            "Using advanced algorithms, OSINT methodology and investigative technologies, Webutation
             scours social media, public records, and other digital footprints to provide actionable
-            intelligence.
+            intelligence."
           </p>
         </div>
 
@@ -228,7 +228,7 @@ export default function HowItWorks() {
         </div>
       </div>
       {searchresults && <div className="font-sans text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF]">Search Results</div>}
-      {searchresults && <div className="grid p-6 grid-cols-1 sm:grid-cols-2 gap-2 gap-y-6">
+      {searchresults && <div className="grid container p-6 grid-cols-1 sm:grid-cols-2 gap-2 gap-y-6">
         {tabsData.map((item, i) => {
           return <SearchResultTab key={i} icon={<GlassIcon size={70} icon={<item.icon />} />} title={item.title} queryVal={item.queryVal} date={item.date} rowsData={item.rowsData} />
         })}

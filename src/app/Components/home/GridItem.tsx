@@ -1,6 +1,7 @@
 import { inter } from "@/app/layout";
 import { GlassIcon } from "./GlassIcon";
 import { Shield } from "@/assets/icon";
+import { hover } from "framer-motion";
 
 
 interface GridItemProps {
@@ -8,19 +9,19 @@ interface GridItemProps {
     text:string;
     subtext:string;
     isCol:boolean;
-
+    hoverComponent?:React.ReactNode;
 }
 
 
 
-export default function GridItem({ icon, text, subtext, isCol = true }: GridItemProps) {
+export default function GridItem({ icon,hoverComponent, text, subtext, isCol = true }: GridItemProps) {
   return (
     <div
       className={`flex ${isCol ? "flex-col" : "flex-row"} gap-4 
                   sm:gap-6 md:gap-8 lg:gap-10`}
     >
       {/* Circular Avatar */}
-      <GlassIcon icon={icon}/>
+      <GlassIcon size={80} isHoverProperty={true} hoverComp={hoverComponent} icon={icon}/>
       
       
 

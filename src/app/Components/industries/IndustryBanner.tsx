@@ -24,25 +24,27 @@ export const IndustryBanner = () => {
       {/* Content */}
       <div className="relative w-full md:w-[85%] flex flex-col gap-4 z-20">
         <h1 className="font-sans font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
-          Stop Fraud. Protect Profits. Strengthen Trust.
+          {/* Stop Fraud. Protect Profits. Strengthen Trust. */}
+          Leverage investigator-led approaches to deliver irrefutable evidence of fraudulent activity
         </h1>
 
         <p className="font-inter font-normal max-w-[93vw] md:max-w-[800px] text-sm sm:text-base md:text-lg text-[#F1F1F1]">
-          Cyphr delivers investigator-led intelligence that helps insurance carriers
+          {/* Cyphr delivers investigator-led intelligence that helps insurance carriers
           detect fraud, deny false claims, recover funds, and safeguard long-term
-          profitability.
+          profitability. */}
+          We empower insurance carriers to deny claims, recover funds, and deter future fraud, resulting in significant cost savings and improved profitability
         </p>
 
         {/* Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 mt-6 bg-black sm:w-fit w-full z-20 rounded-2xl">
           <Link href={"/pages/search"}>
-            <button className="custom-button with-shadow w-full bg-[#1057B5]">
+            <button className="custom-button with-shadow w-full sm:w-fit bg-[#1057B5]">
               Start Investigating
             </button>
           </Link>
-          <button className="with-border custom-button bg-transparent">
+          <Link href={'/pages/contactus'}><button className="w-full sm:w-fit with-border custom-button bg-transparent">
             Talk to an Expert <Toparrow />
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

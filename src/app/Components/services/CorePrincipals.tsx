@@ -87,7 +87,7 @@ export default function CorePrincipals() {
       {/* Second Row */}
       <div className={`flex flex-col sm:flex-row ${tabIndex!==-1?'items-start':'items-stretch'} gap-6 sm:gap-8`}>
         {/* Investigative Services Support */}
-        <div onMouseEnter={()=>setTabIndex(0)} onMouseLeave={()=>setTabIndex(-1)} className="relative border border-[#515151] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+        <div  className="relative border border-[#515151] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
           <TravelingBorder />
 
           <div className="relative flex justify-center">
@@ -130,10 +130,11 @@ export default function CorePrincipals() {
               style={{
                 cursor:'pointer'
               }}
+              onMouseEnter={()=>setTabIndex(0)} onMouseLeave={()=>setTabIndex(-1)}
               onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
-              className="flex relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
+              className="flex z-20 relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
             >
-              {tabIndex === 0 ? <DropUp /> : <DropDown />}
+              {tabIndex === 0 ? <DropDown /> : <DropUp />}
             </button>
           </div>
 
@@ -150,8 +151,8 @@ export default function CorePrincipals() {
         </div>
 
         {/* Continuing Education */}
-        <div onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)} ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
-         <TravelingBorder />
+        <div  ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+         <TravelingBorder/>
         
            <div className="relative sm:my-16 lg:my-4 w-1/2  mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
                
@@ -192,7 +193,7 @@ export default function CorePrincipals() {
               We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.
             </p>   
             <button 
-
+            onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)}
             onClick={()=>{
               if(tabIndex===1){
                 setTabIndex(-1)
@@ -201,20 +202,20 @@ export default function CorePrincipals() {
                 setTabIndex(1)
               }
             }} 
-            className="relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+            className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
-            {tabIndex === 1 ? <DropUp /> : <DropDown />}
+            {tabIndex === 1 ? <DropDown /> : <DropUp />}
             </button>           
           </div>
           
-           {tabIndex === 1 && (
+        {tabIndex === 1 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
-              <li className="flex items-center gap-2"><Tick/> Uncover hidden connections and threats</li>
-              <li className="flex items-center gap-2"><Tick/> Validate evidence with digital forensics</li>
-              <li className="flex items-center gap-2"><Tick/> Deliver courtroom-ready reports</li>
-              <li className="flex items-center gap-2"><Tick/> Support or augment your existing investigations</li>
-            </ul>
-          )}
+              <li className="flex items-center gap-2"><Tick/> Stay ahead of evolving cyber and fraud tactics</li>
+              <li className="flex items-center gap-2"><Tick/> Enhance professional skills and credentials</li>
+              <li className="flex items-center gap-2"><Tick/> Learn through real-world case studies</li>
+              <li className="flex items-center gap-2"><Tick/> Meet compliance and accreditation requirements</li>
+            </ul>)}
+          
         </div>
       </div>
     </div>
@@ -227,7 +228,7 @@ export default function CorePrincipals() {
 export function TravelingBorder({
   borderRadius = 32,
   speed = 150,
-  wedgeLength = 120,
+  wedgeLength = 130,
   minThickness = 0.2,
   maxThickness = 3,
   inset = 0,
@@ -297,7 +298,7 @@ Z`;
         ? (length - ((elapsed * speed) % length)) % length
         : (elapsed * speed) % length;
 
-      const steps = 10;
+      const steps = Math.max(20, Math.floor(wedgeLength / 5));;
       const stepSize = wedgeLength / steps;
 
       const top: { x: number; y: number }[] = [];
@@ -363,7 +364,7 @@ Z`;
   }, [pathData, speed, wedgeLength, minThickness, maxThickness, anticlockwise]);
 
   return (
-    <div ref={containerRef} className="absolute z-20 inset-0 pointer-events-none">
+    <div ref={containerRef} className="absolute z-40 inset-0 pointer-events-none">
       {pathData && (
         <svg className="absolute w-full h-full overflow-visible">
           <path ref={pathRef} d={pathData} fill="none" stroke="transparent" />

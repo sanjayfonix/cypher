@@ -67,12 +67,12 @@ const IndustriesBlurCard = () => {
           </div>
 
           {/* Buttons Section */}
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
+          <div className="flex w-full flex-col sm:flex-row justify-center items-center gap-4 mb-2">
             <Link href={"/pages/search"}>
               <button className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
 
             </Link>
-            <button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button>
+             <Link href={"/pages/services/consulting"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
 
 
 

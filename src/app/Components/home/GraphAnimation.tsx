@@ -99,7 +99,7 @@ export default function TrackingAnimation() {
   ];
 
   return (
-    <div className="relative w-full h-[300px] sm:h-[1000px] md:h-[900px] lg:[700px] bg-[#0a0f1a] overflow-hidden">
+    <div className="relative w-full sm:h-full h-[350px]  bg-[#0a0f1a] overflow-hidden">
       {/* === FULL BACKGROUND GRID === */}
       <svg
         viewBox="0 0 700 800"
@@ -142,7 +142,7 @@ export default function TrackingAnimation() {
       {/* === TOP LEFT LABEL === */}
       <div className="absolute top-6 left-6 z-20 px-3 py-2 border border-[#3B6AB1] bg-[#0a0f1a]/80 rounded">
         <p className="text-[14px] md:text-[16px] text-white font-medium">
-          Loc8 Tracking: Subject A
+          Cellular Intelligence: Subject A
         </p>
         <p className="text-[14px] md:text-[16px] text-red-500 font-semibold">
           {edgeTimes[activeEdge[0]].join("-")}
@@ -151,7 +151,7 @@ export default function TrackingAnimation() {
 
       {/* === POLYGON + POINTER === */}
       <svg
-        viewBox="0 -100 550 700"
+        viewBox="0 -150 550 700"
         className="absolute inset-0 w-full h-full mt-12 sm:mt-0"
         preserveAspectRatio="xMidYMid meet"
       >

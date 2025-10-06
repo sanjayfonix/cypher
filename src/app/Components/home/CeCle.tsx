@@ -31,17 +31,22 @@ const CESessions = () => {
               </p>
 
               {/* Buttons */}
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mt-4 sm:mt-6 w-full sm:w-auto">
+              <div className=" flex flex-col sm:flex-row gap-3 sm:gap-5 mt-4 sm:mt-6 w-full sm:w-auto">
                 <button
                   onClick={() => setIsOpen(true)}
-                  className="custom-button with-shadow bg-[#1057B5] text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl"
+                  className="text-ellipses whitespace-nowrap custom-button with-shadow bg-[#1057B5] text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl"
                 >
                   Book a Speaking Session <Toparrow />
                 </button>
 
-                <Link href={"/pages/discoveredu"} className="w-full sm:w-auto">
-                  <button className="custom-button with-border bg-transparent text-sm sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full text-ellipses">
+                <Link href={"/pages/discoveredu"} className="text-ellipses whitespace-nowrap block max-xs:hidden w-full sm:w-auto">
+                  <button className="text-sm custom-button with-border bg-transparent  sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full">
                     Discover Our Educational Programs <Toparrow />
+                  </button>
+                </Link>
+                                <Link href={"/pages/discoveredu"} className="hidden max-xs:block w-full sm:w-auto">
+                  <button className="text-sm custom-button with-border bg-transparent  sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full">
+                   Educational Programs <Toparrow />
                   </button>
                 </Link>
               </div>
@@ -102,7 +107,7 @@ const CESessions = () => {
             >
               <Dialog.Panel
   className="w-full max-w-7xl no-scrollbar transform overflow-hidden rounded-2xl p-6  transition-all relative
-             max-h-[95vh] overflow-y-auto"
+             max-h-[80vh] overflow-y-auto"
 >
                 {/* Insert your form here */}
                 <BookingForm isForm={true}/>
