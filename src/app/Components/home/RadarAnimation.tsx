@@ -261,8 +261,9 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
 
         {/* Background grid + circles */}
         <g>
-          <circle cx={CX} cy={CY} r={RADIUS + 18} fill="url(#bgGrad)" />
-          {[80, 160, 220, 280].map((r, i) => (
+          <circle cx={CX} cy={CY} r={RADIUS + 18} stroke="#10324a"
+    strokeWidth={1.2} opacity={0.8} fill="url(#bgGrad)" />
+          {[80, 150, 220, 280].map((r, i) => (
             <circle
               key={i}
               cx={CX}
@@ -276,15 +277,15 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
           ))}
           <line
             x1={CX}
-            y1={CY - RADIUS - 10}
+            y1={CY - RADIUS - 20}
             x2={CX}
-            y2={CY + RADIUS + 10}
+            y2={CY + RADIUS+20 }
             stroke="#0b445f"
           />
           <line
-            x1={CX - RADIUS - 10}
+            x1={CX - RADIUS -20}
             y1={CY}
-            x2={CX + RADIUS + 10}
+            x2={CX + RADIUS +20}
             y2={CY}
             stroke="#0b445f"
           />
