@@ -107,7 +107,7 @@ const CESessions = () => {
             >
               <Dialog.Panel
   className="w-full max-w-7xl no-scrollbar transform overflow-hidden rounded-2xl p-6  transition-all relative
-             max-h-[95vh] overflow-y-auto"
+             max-h-[80vh] overflow-y-auto"
 >
                 {/* Insert your form here */}
                 <BookingForm isForm={true}/>
