@@ -228,7 +228,7 @@ export default function ContactSection() {
             className="mt-1 accent-blue-500"
           />
           <p className="text-sm text-gray-300 leading-snug">
-            I accept the terms and conditions of Social Links’ DPA (
+            I accept the terms and conditions of Webutation’s DPA (
             <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
               Data Processing Agreement
             </span>)</Link> and authorize the company to contact me for relevant purposes.

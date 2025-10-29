@@ -54,8 +54,10 @@ export const History = () => {
       year: "1994",
       title: "Early PI Work & OSINT Awakening",
       points: [
-        "Key Case: A claimant feigning a debilitating back injury was exposed through a staged karate class.",
-        "Insight Gained: The internet and emerging OSINT techniques could transform investigations, amplifying reach and efficiency.",
+"At 22, Petrie began his career as a private investigator, relying on traditional surveillance techniques—stakeouts, tailing suspects, and field investigations", 
+"Unlike the old-school PIs, he explored early internet tools: Bulletin Board Systems (BBS), Usenet threads, and rudimentary search engines",
+"Key Case: A claimant feigning a debilitating back injury was exposed through a staged karate class, captured via a hidden VHS camcorder",
+"Insight Gained: The internet and emerging OSINT techniques could transform investigations, amplifying reach and efficiency"
       ],
     },
     {
@@ -63,18 +65,24 @@ export const History = () => {
       title: "Digital Prowess & Early Social Media OSINT",
       points: [
         // "Small Point: Petrie refined his digital investigative skills with online research.",
-        "Key Case: Tracked a missing teen within 17 minutes using MySpace data.",
-        "Impact: Teen was found safe; years later became a family man.",
-        "Innovation: First social media investigative platform launched.",
+      " As internet capabilities expanded, Petrie refined his digital investigative skills, integrating online research into traditional PI work",
+      "Key Case: Tracked a missing teen within 17 minutes by analyzing MySpace profiles, comment threads, and tagged photos—demonstrating the power of early social media OSINT",
+      "Impact: The teen was found safe; years later, he is a family man, a testament to the power of digital investigations",
+     "Innovation: Launched his first social media investigative platform, integrating web crawling, metadata scraping, and human analysis"
+
+
+
       ],
     },
     {
       year: "2014",
       title: "Founding Social Detection & OSINT Evolution",
       points: [
-        "Small Point: Advances in machine learning, APIs, and geolocation expanded investigative tech.",
-        "Breakthrough: Social Detection used NLP, cloud computing, and OSINT frameworks.",
-        "Legacy: Transformed into a sophisticated OSINT-driven platform.",
+        "Advances in machine learning, APIs, and geolocation data fueled the expansion of Petrie’s investigative technology",
+
+"Breakthrough: Social Detection leveraged natural language processing, cloud computing, and evolving OSINT frameworks to revolutionize digital investigations",
+
+"Legacy: What began with a camcorder and dial-up modem transformed into a sophisticated OSINT-driven investigative platform, reshaping the field with each new technological leap"
       ],
     },
   ];

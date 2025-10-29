@@ -14,14 +14,14 @@ const teamData = [
     id: 2,
     title: "Max Terzi - CTO ",
     description:
-      "Driven by a track record of success, Michael is building the next-generation Investigative Services platform, which adapts across industries and use cases, from custom to scalable solutions. By combining modern AI with forensic advancements, he bridges the gap between intelligence methodologies and real-world strategies.",
+      "Driven by a track record of success, Max over sees the development team who are building the next-generation Investigative Services platform, which adapts across industries and use cases, from custom to scalable solutions. By combining modern AI with forensic advancements, he bridges the gap between intelligence methodologies and real-world strategies.",
     image: "/images/img3.png",
   },
   {
     id: 3,
     title: "Brett Huselton - ADVISOR - Strategy",
     description:
-      "With two decades of experience in building growth-oriented services, Michael merged his expertise in neuroscience and psychology with his forensic and data analysis skills. Recognizing the power of data liquidity and strategic forensic assessment, he is shaping the future of investigative science, just as advancements have revolutionized healthcare science.",
+      "A neuroscience and psychology biotech nerd that spent two decades building growth-oriented services businesses leveraging clinical, commercial and other real world evidence sources in a highly regulated healthcare sector that recognized the converging power of data liquidity, strategic forensic assessment and sophisticated infrastructure and analysis could change the fragmented landscape of investigational science just as it has.",
     image: "/images/img2.png",
   },
 
@@ -96,7 +96,9 @@ export default function TeamSection() {
               ${idx === 1 ? "lg:-translate-x-12 lg:-translate-y-10" : ""}
               ${idx === 2 ? "lg:translate-x-10 lg:-translate-y-20" : ""}`}
             >
-              {member.id!==3&&<Image
+              {
+              // member.id!==3&&
+              <Image
                 src={member.image}
                 alt={member.title}
                 width={294}
