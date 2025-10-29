@@ -9,31 +9,31 @@ const features = [
         icon: <Laptop className="text-white w-6 h-6" />,
         title: "Ciphers: The Art of Encryption",
         description:
-            "Ciphers are used to secure communication by encrypting and decrypting information.",
+            "As a base literal meaning, a cipher (or cypher) is an approach (often an algorithm) for encrypting or decrypting something through a series of specific sequences.",
     },
     {
         icon: <Lock className="text-white w-6 h-6" />,
         title: "The Role of Ciphers in Security",
         description:
-            "Ciphers play a crucial role in protecting sensitive data by concealing messages from unauthorized access.",
+            "In the realm of secret communication and information security, the use of ciphers played a crucial role throughout history. These cryptographic techniques were (and still are) employed to conceal the meaning of messages, protecting sensitive information from unauthorized access help to serve the purpose of obscuring communication. ",
     },
     {
         icon: <MessageSquare className="text-white w-6 h-6" />,
         title: "Ciphers Shaping Communication",
         description:
-            "Ciphers shaped global communication, enabling secure and private exchanges throughout history.",
+            "Cyphers were at the core of many unique means to facilitate communications, and enable transformative progress, communicate in sophisticated yet private means – and shaped the historical landscape, industrial nations and powerbases of economies, armies, governments and more.",
     },
     {
         icon: <Shield className="text-white w-6 h-6" />,
         title: "Cryptography: Securing Data Transmission",
         description:
-            "Cryptography is a foundation for secure information transmission, ensuring privacy, security, and risk management.",
+            "Cryptography is a fundamental building block of information transmission in a secure, codified manner with an intent to deceive, or conceal – a fundamental ground for competition, security, privacy and understanding information risk management. ",
     },
     {
         icon: <Brain className="text-white w-6 h-6" />,
         title: "Cyphr’s Expertise in Intelligence",
         description:
-            "Cyphr combines psychology, technology, and methodology to uncover what’s hidden and solve complex data challenges.",
+            "Cyphr understands the psychology, technology, methodology and strategy to ‘find what was not meant to be found’ and ‘solve what may not be self-evident to the eye’ and the strategy to find truth in the informational chaos ",
     },
 ];
 
@@ -69,36 +69,40 @@ export default function Whycyphr() {
                                     ease: "easeOut",
                                 }}
                                 /* ADDED min-w-0 so flex children can shrink (prevents overflow) */
-                                className="relative flex items-center max-w-5xl mx-auto w-full gap-6 p-2 min-w-0"
+                                className="relative flex items-start   gap-6 p-2 min-w-0"
                             >
                                 {/* Gradient bar - same behavior, slight width tweak for tiny screens */}
-                                <div
-                                    className={`absolute top-1/2 transform -translate-y-1/2 md:h-[150px] lg:h-[100px] pointer-events-none
-                                        ${isLeft
-                                            ? "w-[90%] md:w-2/3 right-0 md:rounded-l-full bg-gradient-to-r from-[#157aff] via-[#0c3b7c] to-[#000000]"
-                                            : "w-[90%] md:w-2/3 left-0 md:rounded-r-full bg-gradient-to-r from-[#000000] via-[#0c3b7c] to-[#157aff]"
-                                        }`}
-                                    style={{ maxWidth: "100%" }}
-                                />
+                               <div
+  className={`relative w-full  overflow-hidden rounded-full
+    ${isLeft
+      ? "md:bg-gradient-to-r md:w-[70%] md:translate-x-1/8 md:from-[#157aff] md:via-[#0c3b7c] md:to-[#000000] md:self-end"
+      : "md:bg-gradient-to-r md:w-[90%] md:from-[#000000] md:via-[#0c3b7c] md:to-[#157aff]"
+    }`}
+>
+  {/* Inner flex container that controls layout */}
+  <div
+    className={`flex  items-center justify-between gap-4 p-6 md:p-8
+      ${isLeft ? "flex-col md:flex-row" : "flex-col md:flex-row-reverse "}`}
+  >
+       {/* Icon content */}
+    <div className="flex-shrink-0">
+      <GlassIcon icon={item.icon} fadeSize={45} size={60} />
+    </div>
+    {/* Text content */}
+    <div
+      className={`text-center md:text-left flex-1 min-w-0
+        ${isLeft ? "md:text-left" : "md:text-right"}`}
+    >
+      <h3 className="text-[24px] font-semibold">{item.title}</h3>
+      <p className="text-gray-300 text-[16px] mt-1 max-w-3xl break-words">
+        {item.description}
+      </p>
+    </div>
 
-                                {/* Content - keeps original order (text then GlassIcon),
-                                    but stacks on small screens to avoid overflow */}
-                                <div
-                                    className={`relative flex flex-col md:flex-row items-center gap-2 w-full md:w-2/3 min-w-0
-                                        ${isLeft ? "md:ml-auto md:flex-row-reverse md:text-left text-center" : "md:mr-auto md:flex-row md:text-right text-center"}`}
-                                >
-                                    <div className="md:order-1 order-2 min-w-0">
-                                        <h3 className="text-[24px] font-semibold">{item.title}</h3>
-                                        <p className="text-gray-300 text-[16px] mt-1 max-w-3xl break-words">
-                                            {item.description}
-                                        </p>
-                                    </div>
+ 
+  </div>
+</div>
 
-                                    {/* ensure icon doesn't force width; let it keep its size but not grow */}
-                                    <div className="order-1 md:order-2 flex-shrink-0">
-                                        <GlassIcon icon={item.icon} fadeSize={45} size={60} />
-                                    </div>
-                                </div>
                             </motion.div>
                         </div>
                     );

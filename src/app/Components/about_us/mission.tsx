@@ -6,9 +6,14 @@ import { PointerGrid } from "../home/GridAnimation";
 
 const contentData = [
   { id: 1, icon: "/images/mission1.png", title: "Mission: What We Do...", description: "Unite digital intelligence with forensic investigative strategies to uncover credible, actionable insights that deliver client outcomes.", highlight: "Forensic. Value. Delivered." },
-  { id: 2, icon: "/images/mission2.png", title: "Purpose: Why we do it...", description: "To optimize the collective power of foundational open-source intelligence methods, a seasoned forensic investigative team and modern scalable infrastructure answer complex questions at scale.", highlight: "Inquisitive. Focused. Creative" },
-  { id: 3, icon: "/images/mission3.png", title: "Vision: What we aspire to be...", description: "Unite digital intelligence with forensic investigative strategies to uncover credible, actionable insights that deliver client outcomes.", highlight: "Forensic. Value. Delivered." },
-  { id: 4, icon: "/images/mission4.png", title: "Our Ethical Commitment", description: "We hold ourselves to the highest ethical standards in everything we do. Integrity, respect, and responsibility guide our work in digital intelligence and forensic investigations.", highlight: "Integrity. Responsibility. Ethical Practice." },
+  { id: 2, icon: "/images/mission2.png", title: "Purpose: Why we do it...", description: "To optimize the collective power of foundational open-source intelligence methods, a tenured forensic investigative team and a modern scalable real-world data infrastructure to answer complex questions at scale to change the way companies compete and protect themselves, their employees and their bottom line", highlight: "Inquisitive. Focused. Creative" },
+  { id: 3, icon: "/images/mission3.png", title: "Vision: What we aspire to be...", description: "The leading provider of digital intelligence and investigative outcomes services – delivering on the promise of modern, and comprehensive insights that inform, educate and mitigate risk", highlight: "Collect. Connect. Inform. " },
+  { id: 4, icon: "/images/mission4.png", title: "Our Ethical Commitment", description: `Cyphr holds ourselves to the highest ethical standards in everything we do. Our commitment extends across four key areas: 
+    Integrity in Business 
+    Conduct, Ethical Data Collection, 
+    Use Respect & Responsibility Toward People, 
+    Responsible Investigative Practices, 
+    Through these principles, Cyphr aims to set a new standard for trust, responsibility, and impact in digital intelligence and forensic investigations.`, highlight: "Integrity. Responsibility. Ethical Practice." },
 ];
 
 export default function MissionSection() {

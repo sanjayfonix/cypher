@@ -250,7 +250,7 @@ export default function GetContact() {
               className="mt-1 accent-blue-500"
             />
             <p className="text-sm text-gray-300">
-              I accept the terms and conditions of Social Links’ DPA (
+              I accept the terms and conditions of Webutation’s DPA (
               <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
                 Data Processing Agreement
               </span></Link>

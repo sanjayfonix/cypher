@@ -4,8 +4,29 @@ import Link from "next/link";
 import { AnimatedPath } from "../home/AnimatePath";
 import { GlassIcon } from "../home/GlassIcon";
 
+interface IndustryBannerProps {
+  content:{
+heading: {
+    id: number;
+    text: string;
+  },
+  description: {
+    id: number;
+    list: string[];
+  },
+  primaryButton: {
+    id: number;
+    text: string;
+  },
+  secondaryButton: {
+    id: number;
+    text: string;
+  },
+  };
+}
 
-export const IndustryBanner = () => {
+
+export const IndustryBanner = ({content}:IndustryBannerProps) => {
   return (
     <div className="relative w-full bg-[url(/grid.png)] bg-no-repeat flex flex-col gap-8 px-4 lg:px-20 md:px-12 py-5 overflow-hidden">
       {/* Quarter Blur - Top Left */}
@@ -25,14 +46,14 @@ export const IndustryBanner = () => {
       <div className="relative w-full md:w-[85%] flex flex-col gap-4 z-20">
         <h1 className="font-sans font-bold text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white leading-tight">
           {/* Stop Fraud. Protect Profits. Strengthen Trust. */}
-          Leverage investigator-led approaches to deliver irrefutable evidence of fraudulent activity
+          {content.heading.text}
         </h1>
 
         <p className="font-inter font-normal max-w-[93vw] md:max-w-[800px] text-sm sm:text-base md:text-lg text-[#F1F1F1]">
-          {/* Cyphr delivers investigator-led intelligence that helps insurance carriers
-          detect fraud, deny false claims, recover funds, and safeguard long-term
-          profitability. */}
-          We empower insurance carriers to deny claims, recover funds, and deter future fraud, resulting in significant cost savings and improved profitability
+           {content.description.list.map((item, index) => (
+            <p  key={index}>{item}</p>
+            // <li key={index}>{item}</li>
+          ))}
         </p>
 
         {/* Buttons */}
