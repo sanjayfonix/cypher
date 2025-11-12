@@ -6,6 +6,31 @@ import { easeInOut } from "framer-motion";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
+  const [phoneResult,setPhoneResult] = useState<null|[]>(null);
+
+  const [searchLoading,setSearchLoading] = useState(false);
+
+  const fetchResult=async()=>{
+    try{
+      
+    if(type===1 && mode===1){
+      setSearchLoading(true);
+      const result = await fetchPhoneSearchResult({query:phone,OstIndAKey:''});
+      console.log('phone search result is ',result);
+      if(result){
+        setPhoneResult(result);
+        
+      }
+    }
+  }
+  catch(e){
+    console.log(e);
+
+  }
+  finally{
+    setSearchLoading(false)
+  }
+  }
 
   const tabsData = [
     {
@@ -90,8 +115,10 @@ export default function HowItWorks() {
 
   const [mode, setMode] = useState(0);
   const [type, setType] = useState(0);
+  const [phone,setPhone] = useState('');
   return (
     <div className="">
+              {searchLoading&&<div className="text-white text-xl">Loading...</div>}
       <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
         {/* Left Column */}
         <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
@@ -211,11 +238,11 @@ export default function HowItWorks() {
                 </button>
               </div>
               {type === 0 && <UsernameForm />}
-              {type === 1 && <CustomForm formType={1} />}
-              {type === 2 && <CustomForm formType={2} />}
+              {type === 1 && <CustomForm formType={1} controller={phone} setController={setPhone}/>}
+              {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone}/>}
               {/* Search Button */}
               <div className="p-4">
-                <button onClick={() => setSearchResults(!searchresults)} className="custom-button w-full with-shadow bg-[#1057B5]">Search Now <Toparrow />
+                <button onClick={() => fetchResult()} className="custom-button w-full with-shadow bg-[#1057B5]">Search Now <Toparrow />
                 </button>
               </div>
 
@@ -227,11 +254,14 @@ export default function HowItWorks() {
           </p>
         </div>
       </div>
+
+       {phoneResult!==null&&phoneResult.length>0&&<p className="text-2xl text-white">{phoneResult}</p>}
       {searchresults && <div className="font-sans text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF]">Search Results</div>}
       {searchresults && <div className="grid container p-6 grid-cols-1 sm:grid-cols-2 gap-2 gap-y-6">
         {tabsData.map((item, i) => {
           return <SearchResultTab key={i} icon={<GlassIcon size={70} icon={<item.icon />} />} title={item.title} queryVal={item.queryVal} date={item.date} rowsData={item.rowsData} />
         })}
+       
       </div>}
     </div>
   );
@@ -245,6 +275,7 @@ import { Toparrow } from "@/assets/icon";
 import SearchResultTab from "./SearchResultTab";
 import { Banknote, Facebook, Instagram, Mail, Phone, User, X } from "lucide-react";
 import { GlassIcon } from "./GlassIcon";
+import { fetchPhoneSearchResult } from "@/api/apiFunctions";
 
 export function UsernameForm() {
   return (
@@ -291,9 +322,11 @@ export function UsernameForm() {
 
 interface formInput {
   formType: number;
+  controller:string;
+  setController:(val:string)=>void;
 }
 
-export function CustomForm({ formType }: formInput) {
+export function CustomForm({ formType,controller,setController }: formInput) {
   return (
     <div className="w-full  p-4">
       {/* Full Name */}
@@ -301,6 +334,8 @@ export function CustomForm({ formType }: formInput) {
         <label className="block text-sm text-white font-inter mb-4">{formType === 1 ? 'Phone Number' : 'Email'}</label>
         <div className="flex items-end justify-between gap-4 flex-wrap sm:flex-nowrap">
           <input
+            value={controller}
+            onChange={(e)=>setController(e.target.value)}
             type="text"
             placeholder={formType === 1 ? "Enter Phone Number" : "Enter Email address"}
             className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500 py-3 px-4"

@@ -1,3 +1,4 @@
+import { fetchPhoneSearchResult } from "@/api/apiFunctions";
 import ContactSection from "@/app/Components/common/Getintouch";
 import BlurCard from "@/app/Components/home/BlurCard";
 import CESessions from "@/app/Components/home/CeCle";
@@ -14,7 +15,12 @@ import IntegrityAtCore from "@/app/Components/home/IntegrityAtCore";
 import WhereInvestigation from "@/app/Components/home/WhereInvestigation";
 
 
-export default function HomePage() {
+export default async function HomePage() {
+//  const seachResult = await fetchSearchResult('',{
+//   type:'email',
+//   query:'hatk808@gmail.com',
+//   OstIndAKey:process.env.apiKey!
+//  })
   return (
     <div className=" bg-[var(--primary)] ">
       <HomeBanner />
