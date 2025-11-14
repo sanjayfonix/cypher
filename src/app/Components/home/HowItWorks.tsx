@@ -3,33 +3,46 @@ import { useState } from "react";
 import Button from "../common/Button"; // Make sure to import your Button component
 import { Bounce } from "gsap";
 import { easeInOut } from "framer-motion";
+import { Loader2 } from "lucide-react";
+import { fetchPhoneSearchResult } from "@/api/apiFunctions";
+import { Toparrow } from "@/assets/icon";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
-  const [phoneResult,setPhoneResult] = useState<null|[]>(null);
+  const [phoneResult,setPhoneResult] = useState<any[]|null>(null);
 
   const [searchLoading,setSearchLoading] = useState(false);
 
   const fetchResult=async()=>{
     try{
-      
-    if(type===1 && mode===1){
-      setSearchLoading(true);
-      const result = await fetchPhoneSearchResult({query:phone,OstIndAKey:''});
-      console.log('phone search result is ',result);
-      if(result){
-        setPhoneResult(result);
+      // Validation
+      if(type===1 && mode===1){
+        if(!phone || phone.trim() === ''){
+          return;
+        }
         
+        setSearchLoading(true);
+        
+        const result = await fetchPhoneSearchResult({query:phone,OstIndAKey:''});
+        console.log('phone search result is ',result);
+        
+        if(result && Array.isArray(result) && result.length > 0){
+          setPhoneResult(result);
+          setSearchResults(true);
+        } else {
+          setPhoneResult(null);
+          setSearchResults(false);
+        }
       }
     }
-  }
-  catch(e){
-    console.log(e);
-
-  }
-  finally{
-    setSearchLoading(false)
-  }
+    catch(e: any){
+      console.error('Search error:', e);
+      setPhoneResult(null);
+      setSearchResults(false);
+    }
+    finally{
+      setSearchLoading(false);
+    }
   }
 
   const tabsData = [
@@ -118,7 +131,6 @@ export default function HowItWorks() {
   const [phone,setPhone] = useState('');
   return (
     <div className="">
-              {searchLoading&&<div className="text-white text-xl">Loading...</div>}
       <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
         {/* Left Column */}
         <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
@@ -242,7 +254,29 @@ export default function HowItWorks() {
               {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone}/>}
               {/* Search Button */}
               <div className="p-4">
-                <button onClick={() => fetchResult()} className="custom-button w-full with-shadow bg-[#1057B5]">Search Now <Toparrow />
+                <button 
+                  type="button"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    fetchResult();
+                  }} 
+                  disabled={searchLoading}
+                  className={`custom-button w-full with-shadow bg-[#1057B5] flex items-center justify-center gap-2 ${
+                    searchLoading ? 'opacity-70 cursor-not-allowed' : ''
+                  }`}
+                >
+                  {searchLoading ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin text-white" />
+                      <span className="text-white">Searching...</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>Search Now</span>
+                      <Toparrow />
+                    </>
+                  )}
                 </button>
               </div>
 
@@ -255,14 +289,82 @@ export default function HowItWorks() {
         </div>
       </div>
 
-       {phoneResult!==null&&phoneResult.length>0&&<p className="text-2xl text-white">{phoneResult}</p>}
-      {searchresults && <div className="font-sans text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF]">Search Results</div>}
-      {searchresults && <div className="grid container p-6 grid-cols-1 sm:grid-cols-2 gap-2 gap-y-6">
-        {tabsData.map((item, i) => {
-          return <SearchResultTab key={i} icon={<GlassIcon size={70} icon={<item.icon />} />} title={item.title} queryVal={item.queryVal} date={item.date} rowsData={item.rowsData} />
-        })}
-       
-      </div>}
+      {/* Search Results Display */}
+      {phoneResult && phoneResult.length > 0 && (
+        <div className="container mx-auto px-4 py-8">
+          <div className="font-sans text-2xl sm:text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF] mb-8">
+            Search Results ({phoneResult.length} platform{phoneResult.length !== 1 ? 's' : ''} found)
+          </div>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {phoneResult.map((item: any, index: number) => {
+              if (item.status !== 'found') return null;
+              
+              const platformName = item.module || 'Unknown';
+              const categoryName = item.category?.name || 'Unknown Category';
+              const specData = item.spec_format?.[0] || {};
+              
+              return (
+                <div 
+                  key={index} 
+                  className="bg-[#1A1A1A] border border-[#3C414A] rounded-lg p-4 sm:p-6 hover:border-[#167BFF] transition-colors"
+                >
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h3 className="text-white font-semibold text-lg sm:text-xl mb-1">
+                        {platformName}
+                      </h3>
+                      <p className="text-gray-400 text-xs sm:text-sm">{categoryName}</p>
+                    </div>
+                    <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">
+                      Found
+                    </span>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    {specData.registered && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Registered:</span> Yes
+                      </div>
+                    )}
+                    {specData.name && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Name:</span> {specData.name.value}
+                      </div>
+                    )}
+                    {specData.email && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Email:</span> {specData.email.value}
+                      </div>
+                    )}
+                    {specData.phone && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Phone:</span> {specData.phone.value}
+                      </div>
+                    )}
+                    {specData.username && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Username:</span> {specData.username.value}
+                      </div>
+                    )}
+                    {specData.location && (
+                      <div className="text-sm text-gray-300">
+                        <span className="text-gray-500">Location:</span> {specData.location.value}
+                      </div>
+                    )}
+                  </div>
+                  
+                  {item.reliable_source && (
+                    <div className="mt-4 pt-4 border-t border-[#3C414A]">
+                      <span className="text-xs text-blue-400">✓ Reliable Source</span>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -271,11 +373,9 @@ export default function HowItWorks() {
 // components/SearchForm.tsx
 
 
-import { Toparrow } from "@/assets/icon";
 import SearchResultTab from "./SearchResultTab";
 import { Banknote, Facebook, Instagram, Mail, Phone, User, X } from "lucide-react";
 import { GlassIcon } from "./GlassIcon";
-import { fetchPhoneSearchResult } from "@/api/apiFunctions";
 
 export function UsernameForm() {
   return (

@@ -1,25 +1,35 @@
-
-import api, { baseUrl } from "./axios";
-
-interface SearchParams{
- query:string;
-    OstIndAKey:string;
-    
+interface SearchParams {
+  query: string;
+  OstIndAKey?: string;
 }
 
-export const fetchPhoneSearchResult = async ( params:SearchParams) => {
+/**
+ * Fetches phone search results from OSINT API via Next.js proxy route
+ * This avoids CORS issues by making the request server-side
+ */
+export const fetchPhoneSearchResult = async (params: SearchParams) => {
   try {
-    const apiUrl=`${baseUrl}type=phone&query=${params.query}`;
-    console.log('entire api url is',apiUrl);
-    const response = await api.get(apiUrl,{
-        headers:{
-           'accept':'application/json',
-            'api-key':'42cdda464cbcf354980afe5ee4fb8bc7'
-        }
+    // Use Next.js API proxy route instead of direct API call
+    const proxyUrl = `/api/proxy?type=phone&query=${encodeURIComponent(params.query)}`;
+    
+    console.log('Calling proxy route:', proxyUrl);
+    
+    const response = await fetch(proxyUrl, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     });
-    return response.data;
+
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(errorData.error || `API request failed with status ${response.status}`);
+    }
+
+    const data = await response.json();
+    return data;
   } catch (error) {
-    console.error("Error fetching data:", error);
+    console.error("Error fetching phone search result:", error);
     throw error; // Re-throw to handle in component if needed
   }
 };
