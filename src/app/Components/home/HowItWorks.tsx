@@ -73,7 +73,7 @@ export default function HowItWorks() {
         setSearchLoading(true);
         
         const result = await fetchEmailSearchResult({query:phone,OstIndAKey:''});
-        console.log('email search result is ',result);
+        console.log('email search result iss ',result);
         
         if(result && Array.isArray(result) && result.length > 0){
           setPhoneResult(result);
