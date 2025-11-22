@@ -1,25 +1,28 @@
 'use client'
-import { useState } from "react";
-import Button from "../common/Button"; // Make sure to import your Button component
-import { Bounce } from "gsap";
-import { easeInOut } from "framer-motion";
+import { useMemo, useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
 import { Loader2 } from "lucide-react";
-import { fetchPhoneSearchResult, fetchEmailSearchResult, fetchNameSearchResult } from "@/api/apiFunctions";
+import {
+  fetchPhoneSearchResult,
+  fetchEmailSearchResult,
+  fetchNameSearchResult,
+} from "@/api/apiFunctions";
 import { Toparrow } from "@/assets/icon";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
-  const [phoneResult,setPhoneResult] = useState<any[]|null>(null);
+  const [phoneResult, setPhoneResult] = useState<any[] | null>(null);
 
   const [searchLoading,setSearchLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
 
-  const fetchResult=async()=>{
-    try{
+  const fetchResult = async () => {
+    try {
       // Validation for Name/Username search (type === 0)
-      if(type===0 && mode===1){
-        if(!fullName || fullName.trim() === ''){
+      if (type === 0 && mode === 1) {
+        if (!fullName || fullName.trim() === "") {
           return;
         }
         
@@ -27,74 +30,125 @@ export default function HowItWorks() {
         
         // Build query with name, city, and state if provided
         let query = fullName.trim();
-        if(city && city.trim()) query += ` ${city.trim()}`;
-        if(state && state.trim()) query += ` ${state.trim()}`;
+        if (city && city.trim()) query += ` ${city.trim()}`;
+        if (state && state.trim()) query += ` ${state.trim()}`;
         
-        const result = await fetchNameSearchResult({query: query, OstIndAKey:''});
-        console.log('name search result is ',result);
+        const result = await fetchNameSearchResult({ query: query, OstIndAKey: "" });
+        console.log("name search result is ", result);
         
-        if(result && Array.isArray(result) && result.length > 0){
+        if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
-        } else {
+        }
+        else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
         }
       }
       // Validation for Phone Number search (type === 1)
-      else if(type===1 && mode===1){
-        if(!phone || phone.trim() === ''){
+      else if (type === 1 && mode === 1) {
+        if (!phone || phone.trim() === "") {
           return;
         }
         
         setSearchLoading(true);
         
-        const result = await fetchPhoneSearchResult({query:phone,OstIndAKey:''});
-        console.log('phone search result is ',result);
+        const result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
+        console.log("phone search result is ", result);
         
-        if(result && Array.isArray(result) && result.length > 0){
+        if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
-        } else {
+        }
+        else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
         }
       }
       // Validation for Email search (type === 2)
-      else if(type===2 && mode===1){
-        if(!phone || phone.trim() === ''){
+      else if (type === 2 && mode === 1) {
+        if (!phone || phone.trim() === "") {
           return;
         }
         
         setSearchLoading(true);
         
-        const result = await fetchEmailSearchResult({query:phone,OstIndAKey:''});
-        console.log('email search result iss ',result);
+        const result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
+        console.log("email search result iss ", result);
         
-        if(result && Array.isArray(result) && result.length > 0){
+        if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
-        } else {
+        }
+        else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
         }
       }
     }
-    catch(e: any){
-      console.error('Search error:', e);
+    catch (e: any) {
+      console.error("Search error:", e);
       setPhoneResult(null);
       setSearchResults(false);
     }
-    finally{
+    finally {
       setSearchLoading(false);
     }
-  }
+  };
+
+  const desiredFields = useMemo(
+    () => [
+      { key: "name", label: "Name" },
+      { key: "picture_url", label: "Picture URL" },
+      { key: "username", label: "Username" },
+      { key: "profile_url", label: "Profile URL" },
+      { key: "followers", label: "Followers" },
+      { key: "following", label: "Following" },
+      { key: "bio", label: "Bio" },
+      { key: "age", label: "Age" },
+      { key: "birthday", label: "Birthday" },
+      { key: "location", label: "Location" },
+      { key: "first_name", label: "First Name" },
+      { key: "last_name", label: "Last Name" },
+      { key: "email_hint", label: "Email Hint" },
+      { key: "phone_hint", label: "Phone Hint" },
+    ],
+    []
+  );
+
+  const formatValue = (value: any, type: string | undefined) => {
+    if (value === null || value === undefined || value === "") {
+      return "Not available";
+    }
+    if (type === "bool") return value ? "Yes" : "No";
+    if (type === "datetime") {
+      try {
+        return new Date(value).toLocaleDateString();
+      } catch {
+        return value.toString();
+      }
+    }
+    if (Array.isArray(value)) {
+      return value.length ? value.join(", ") : "Not available";
+    }
+    return value.toString();
+  };
+
+  const isImageUrl = (value: unknown) => {
+    if (typeof value !== "string") return false;
+    try {
+      const url = new URL(value);
+      return /\.(png|jpe?g|gif|webp|svg)$/i.test(url.pathname);
+    } catch {
+      return false;
+    }
+  };
 
   const tabsData = [
     {
@@ -374,20 +428,6 @@ export default function HowItWorks() {
         const endIndex = startIndex + itemsPerPage;
         const currentResults = allResults.slice(startIndex, endIndex);
 
-        // Format value based on type
-        const formatValue = (value: any, type: string) => {
-          if (type === 'bool') return value ? 'Yes' : 'No';
-          if (type === 'datetime' && value) {
-            try {
-              return new Date(value).toLocaleDateString();
-            } catch {
-              return value;
-            }
-          }
-          if (Array.isArray(value)) return value.join(', ') || 'None';
-          return value?.toString() || 'N/A';
-        };
-
         return (
           <div className="container mx-auto px-4 py-8">
             <div className="font-sans text-2xl sm:text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF] mb-8">
@@ -399,33 +439,44 @@ export default function HowItWorks() {
                 const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource } = result;
                 
                 // Extract all fields from spec_format
-                const allFields: { key: string; properKey: string; value: any; type: string }[] = [];
-                
-                // Add all direct fields from spec_format
-                Object.keys(specData).forEach((key) => {
-                  if (key !== 'platform_variables' && specData[key]?.value !== undefined) {
-                    allFields.push({
-                      key: key,
-                      properKey: specData[key].proper_key || key,
-                      value: specData[key].value,
-                      type: specData[key].type || 'str'
-                    });
+                const getFieldValue = (fieldKey: string) => {
+                  const directField = specData[fieldKey];
+                  if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
+                    return { value: directField.value, type: directField.type };
                   }
-                });
-                
-                // Add platform_variables
-                if (specData.platform_variables && Array.isArray(specData.platform_variables)) {
-                  specData.platform_variables.forEach((pv: any) => {
-                    if (pv.value !== undefined && pv.value !== null && pv.value !== '') {
-                      allFields.push({
-                        key: pv.key,
-                        properKey: pv.proper_key || pv.key,
-                        value: pv.value,
-                        type: pv.type || 'str'
-                      });
+                  if (Array.isArray(specData.platform_variables)) {
+                    const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
+                    if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
+                      return { value: platformField.value, type: platformField.type };
                     }
-                  });
-                }
+                  }
+                  return { value: null, type: undefined };
+                };
+
+                const displayFields = desiredFields.map((field) => {
+                  const fieldData = getFieldValue(field.key);
+                  return {
+                    ...field,
+                    value: fieldData.value,
+                    type: fieldData.type,
+                  };
+                });
+
+                const pictureField = displayFields.find((field) => field.key === "picture_url");
+                const profileField = displayFields.find((field) => field.key === "profile_url");
+
+                const pictureSource =
+                  pictureField && typeof pictureField.value === "string" && pictureField.value
+                    ? pictureField.value
+                    : null;
+                const profileImageSource =
+                  profileField &&
+                  typeof profileField.value === "string" &&
+                  isImageUrl(profileField.value)
+                    ? profileField.value
+                    : null;
+
+                const cardImage = pictureSource || profileImageSource;
                 
                 return (
                   <div 
@@ -446,40 +497,81 @@ export default function HowItWorks() {
                     </div>
                     
                     {/* Display profile image if available */}
-                    {specData.picture_url?.value && (
-                      <div className="mb-4 flex justify-center">
-                        <img 
-                          src={specData.picture_url.value} 
-                          alt={`${platformName} profile`}
-                          className="w-16 h-16 rounded-full object-cover border-2 border-[#3C414A]"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).style.display = 'none';
-                          }}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Display all fields dynamically */}
-                    <div className="space-y-2 max-h-96 overflow-y-auto">
-                      {allFields.map((field, fieldIndex) => (
-                        <div key={fieldIndex} className="text-sm">
-                          <span className="text-gray-500 font-medium">{field.properKey}:</span>{' '}
-                          <span className="text-gray-300">
-                            {field.key === 'profile_url' ? (
-                              <a 
-                                href={field.value} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="text-blue-400 hover:text-blue-300 underline break-all"
-                              >
-                                {field.value}
-                              </a>
-                            ) : (
-                              formatValue(field.value, field.type)
-                            )}
-                          </span>
+                    <div className="mb-4 flex justify-center">
+                      {cardImage && typeof cardImage === "string" ? (
+                        <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-[#3C414A]">
+                          <img
+                            src={cardImage}
+                            alt={`${platformName} profile image`}
+                            className="object-cover w-20 h-20"
+                          />
                         </div>
-                      ))}
+                      ) : (
+                        <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#3C414A] text-xs text-gray-400">
+                          No Photo
+                        </div>
+                      )}
+                    </div>
+                    
+                    {/* Display selected fields */}
+                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                      {displayFields.map((field) => {
+                        const fieldValue = formatValue(field.value, field.type);
+                        const showImageValue =
+                          (field.key === "picture_url" || field.key === "profile_url") &&
+                          isImageUrl(field.value);
+
+                        if (field.key === "picture_url" || field.key === "profile_url") {
+                          return (
+                            <div key={field.key} className="text-sm">
+                              <span className="text-gray-500 font-medium">{field.label}:</span>
+                              {showImageValue && typeof field.value === "string" ? (
+                                <div className="mt-2 flex items-center gap-3">
+                                  <div className="relative h-16 w-16 overflow-hidden rounded-full border border-[#3C414A]">
+                                    <img
+                                      src={field.value}
+                                      alt={`${platformName} ${field.label}`}
+                                     
+                                      className="object-cover w-16 h-16"
+                                      
+                                    />
+                                  </div>
+                                  {field.key === "profile_url" && typeof field.value === "string" && (
+                                    <Link
+                                      href={field.value}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-blue-400 transition hover:text-blue-300"
+                                    >
+                                      View Profile
+                                    </Link>
+                                  )}
+                                </div>
+                              ) : field.key === "profile_url" && typeof field.value === "string" ? (
+                                <div className="mt-2">
+                                  <Link
+                                    href={field.value}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center justify-center rounded-full border border-[#167BFF] px-3 py-1 text-xs font-medium text-white hover:bg-[#0C448C]"
+                                  >
+                                    Open Profile
+                                  </Link>
+                                </div>
+                              ) : (
+                                <span className="ml-1 text-gray-300">{fieldValue}</span>
+                              )}
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div key={field.key} className="text-sm">
+                            <span className="text-gray-500 font-medium">{field.label}:</span>{" "}
+                            <span className="text-gray-300">{fieldValue}</span>
+                          </div>
+                        );
+                      })}
                     </div>
                     
                     {reliableSource && (
