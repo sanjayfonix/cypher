@@ -17,6 +17,8 @@ export default function HowItWorks() {
   const [searchLoading,setSearchLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
+  const [internalSearchQuery, setInternalSearchQuery] = useState("");
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   const fetchResult = async () => {
     try {
@@ -105,7 +107,6 @@ export default function HowItWorks() {
   const desiredFields = useMemo(
     () => [
       { key: "name", label: "Name" },
-      { key: "picture_url", label: "Picture URL" },
       { key: "username", label: "Username" },
       { key: "profile_url", label: "Profile URL" },
       { key: "followers", label: "Followers" },
@@ -148,6 +149,36 @@ export default function HowItWorks() {
     } catch {
       return false;
     }
+  };
+
+  const prettifyUrl = (value: string) => {
+    try {
+      const parsed = new URL(value);
+      const path = parsed.pathname === "/" ? "" : parsed.pathname;
+      return `${parsed.hostname.replace(/^www\./, "")}${path}`;
+    } catch {
+      return value;
+    }
+  };
+
+  const getStatusBadge = (status?: string) => {
+    const normalized = (status || "").toLowerCase();
+    if (normalized === "found") {
+      return {
+        label: "Found",
+        className: "bg-[#0F2A1C] text-[#45F39A] border border-[#1F6B47]",
+      };
+    }
+    if (normalized === "pending") {
+      return {
+        label: "Pending",
+        className: "bg-[#33260F] text-[#F0C05A] border border-[#775A1A]",
+      };
+    }
+    return {
+      label: normalized ? normalized.charAt(0).toUpperCase() + normalized.slice(1) : "Status",
+      className: "bg-[#331616] text-[#FF7A7A] border border-[#7A2C2C]",
+    };
   };
 
   const tabsData = [
@@ -416,27 +447,107 @@ export default function HowItWorks() {
               specFormatArray,
               specIndex,
               itemIndex: index,
-              reliableSource: item.reliable_source
+              reliableSource: item.reliable_source,
+              query: item.query,
+              status: item.status,
             });
           });
         });
 
         // Calculate pagination
         const totalResults = allResults.length;
-        const totalPages = Math.ceil(totalResults / itemsPerPage);
-        const startIndex = (currentPage - 1) * itemsPerPage;
-        const endIndex = startIndex + itemsPerPage;
-        const currentResults = allResults.slice(startIndex, endIndex);
+
+        // Filter results based on internal search query
+        const filteredResults = allResults.filter((result) => {
+          if (!internalSearchQuery.trim()) return true;
+          
+          const query = internalSearchQuery.toLowerCase();
+          const { platformName, categoryName, specData } = result;
+          
+          // Search in platform name and category
+          if (platformName?.toLowerCase().includes(query)) return true;
+          if (categoryName?.toLowerCase().includes(query)) return true;
+          
+          // Search in spec_format fields
+          const checkValue = (val: any): boolean => {
+            if (typeof val === 'string') return val.toLowerCase().includes(query);
+            if (typeof val === 'number') return val.toString().includes(query);
+            return false;
+          };
+          
+          // Check direct fields
+          if (specData.name && checkValue(specData.name.value)) return true;
+          if (specData.username && checkValue(specData.username.value)) return true;
+          if (specData.email && checkValue(specData.email.value)) return true;
+          if (specData.phone && checkValue(specData.phone.value)) return true;
+          if (specData.location && checkValue(specData.location.value)) return true;
+          
+          // Check platform_variables
+          if (Array.isArray(specData.platform_variables)) {
+            for (const pv of specData.platform_variables) {
+              if (checkValue(pv.value)) return true;
+            }
+          }
+          
+          return false;
+        });
+        
+        const filteredTotal = filteredResults.length;
+        const filteredTotalPages = Math.ceil(filteredTotal / itemsPerPage);
+        const filteredStartIndex = (currentPage - 1) * itemsPerPage;
+        const filteredEndIndex = filteredStartIndex + itemsPerPage;
+        const currentResults = filteredResults.slice(filteredStartIndex, filteredEndIndex);
 
         return (
+          <>
           <div className="container mx-auto px-4 py-8">
-            <div className="font-sans text-2xl sm:text-3xl font-bold text-white text-center w-fit mx-auto p-[10px] border-b-[0.25px] border-b-[#FFFFFF] mb-8">
-              Search Results ({totalResults} result{totalResults !== 1 ? 's' : ''} found)
+            {/* Search Results Header */}
+            <div className="mb-6">
+              <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
+                Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
+              </div>
+              
+              {/* Search Filter - Full Width */}
+              <div className="w-full">
+                <div className="rounded-2xl border border-[#1E2535] p-4 bg-[#0B0F1A]">
+                  <div className="relative">
+                    <input
+                      id="search-input"
+                      type="text"
+                      value={internalSearchQuery}
+                      onChange={(e) => {
+                        setInternalSearchQuery(e.target.value);
+                        setCurrentPage(1);
+                      }}
+                      placeholder="Name, username, email, phone..."
+                      className="w-full rounded-lg border border-[#27304A] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#7A8299] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
+                    />
+                    {internalSearchQuery && (
+                      <button
+                        onClick={() => {
+                          setInternalSearchQuery("");
+                          setCurrentPage(1);
+                        }}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8299] hover:text-white transition-colors"
+                        aria-label="Clear search"
+                      >
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
+
             
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mb-8">
+            <div className="flex flex-col lg:flex-row gap-6">
+              {/* Results Grid */}
+              <div className="flex-1">
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
               {currentResults.map((result, resultIndex) => {
-                const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource } = result;
+                const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
                 
                 // Extract all fields from spec_format
                 const getFieldValue = (fieldKey: string) => {
@@ -461,122 +572,124 @@ export default function HowItWorks() {
                     type: fieldData.type,
                   };
                 });
-
-                const pictureField = displayFields.find((field) => field.key === "picture_url");
-                const profileField = displayFields.find((field) => field.key === "profile_url");
-
+                const profileField = getFieldValue("profile_url");
+                const pictureField = getFieldValue("picture_url");
                 const pictureSource =
-                  pictureField && typeof pictureField.value === "string" && pictureField.value
+                  typeof pictureField.value === "string" && pictureField.value
                     ? pictureField.value
                     : null;
                 const profileImageSource =
-                  profileField &&
-                  typeof profileField.value === "string" &&
-                  isImageUrl(profileField.value)
+                  typeof profileField.value === "string" && isImageUrl(profileField.value)
                     ? profileField.value
                     : null;
 
                 const cardImage = pictureSource || profileImageSource;
+                const statusBadge = getStatusBadge(status);
+                const specName = specData?.name?.value;
+                const specTitle = specData?.title?.value;
+                const cardTitle = specName || specTitle || platformName;
+                const profileUrl = typeof profileField.value === "string" ? profileField.value : "";
                 
                 return (
                   <div 
                     key={`${result.itemIndex}-${specIndex}-${resultIndex}`} 
-                    className="bg-[#1A1A1A] border border-[#3C414A] rounded-lg p-4 sm:p-6 hover:border-[#167BFF] transition-colors"
+                    className="relative flex h-full flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_25px_80px_rgba(4,7,16,0.7)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_35px_90px_rgba(22,123,255,0.25)]"
                   >
-                    <div className="flex items-start justify-between mb-4">
-                      <div>
-                        <h3 className="text-white font-semibold text-lg sm:text-xl mb-1">
-                          {platformName}
+                    <div className="flex items-start justify-between gap-4">
+                      <div className="flex flex-col">
+                        <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#7D879C]">
+                          {categoryName}
+                        </p>
+                        <h3 className="text-lg sm:text-xl font-semibold text-white">
+                          {cardTitle}
                           {specFormatArray.length > 1 && ` (${specIndex + 1})`}
                         </h3>
-                        <p className="text-gray-400 text-xs sm:text-sm">{categoryName}</p>
                       </div>
-                      <span className="px-2 py-1 bg-green-500/20 text-green-400 text-xs rounded">
-                        Found
+                      <span className={`rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${statusBadge.className}`}>
+                        {statusBadge.label}
                       </span>
                     </div>
                     
-                    {/* Display profile image if available */}
-                    <div className="mb-4 flex justify-center">
-                      {cardImage && typeof cardImage === "string" ? (
-                        <div className="relative h-20 w-20 overflow-hidden rounded-full border-2 border-[#3C414A]">
+                    <div className="mt-5 flex items-center gap-4 rounded-2xl border border-[#192032] bg-[#0F1524] p-4">
+                      <div 
+                        className="relative h-20 w-20 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
+                        onClick={() => cardImage && setSelectedImage(cardImage)}
+                      >
+                        {cardImage ? (
                           <img
                             src={cardImage}
-                            alt={`${platformName} profile image`}
-                            className="object-cover w-20 h-20"
+                            alt={`${cardTitle} profile image`}
+                            className="h-full w-full rounded-full object-cover"
+                            loading="lazy"
                           />
-                        </div>
-                      ) : (
-                        <div className="flex h-20 w-20 items-center justify-center rounded-full border-2 border-[#3C414A] text-xs text-gray-400">
-                          No Photo
-                        </div>
-                      )}
+                        ) : (
+                          <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
+                            No Photo
+                          </div>
+                        )}
+                        <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
+                      </div>
+                      <div className="flex flex-1 flex-col gap-1 text-sm text-[#B4BCD1]">
+                        <span className="text-[0.65rem] uppercase tracking-[0.35em] text-[#6A7390]">Platform</span>
+                        <span className="text-base font-semibold text-white">{platformName}</span>
+                        {query && (
+                          <span className="text-xs text-[#7D879C] break-all">
+                             {query}
+                          </span>
+                        )}
+                      </div>
                     </div>
                     
                     {/* Display selected fields */}
-                    <div className="space-y-3 max-h-96 overflow-y-auto">
+                    <div className="mt-5 space-y-3 max-h-96 overflow-y-auto scrollbar-hide pr-1">
                       {displayFields.map((field) => {
                         const fieldValue = formatValue(field.value, field.type);
-                        const showImageValue =
-                          (field.key === "picture_url" || field.key === "profile_url") &&
-                          isImageUrl(field.value);
 
-                        if (field.key === "picture_url" || field.key === "profile_url") {
+                        if (field.key === "profile_url") {
+                          const profileDisplay = profileUrl ? prettifyUrl(profileUrl) : "Not available";
+                          const truncatedDisplay = profileDisplay.length > 40 ? profileDisplay.substring(0, 40) + "..." : profileDisplay;
                           return (
-                            <div key={field.key} className="text-sm">
-                              <span className="text-gray-500 font-medium">{field.label}:</span>
-                              {showImageValue && typeof field.value === "string" ? (
-                                <div className="mt-2 flex items-center gap-3">
-                                  <div className="relative h-16 w-16 overflow-hidden rounded-full border border-[#3C414A]">
-                                    <img
-                                      src={field.value}
-                                      alt={`${platformName} ${field.label}`}
-                                     
-                                      className="object-cover w-16 h-16"
-                                      
-                                    />
-                                  </div>
-                                  {field.key === "profile_url" && typeof field.value === "string" && (
-                                    <Link
-                                      href={field.value}
-                                      target="_blank"
-                                      rel="noopener noreferrer"
-                                      className="text-blue-400 transition hover:text-blue-300"
-                                    >
-                                      View Profile
-                                    </Link>
-                                  )}
-                                </div>
-                              ) : field.key === "profile_url" && typeof field.value === "string" ? (
-                                <div className="mt-2">
-                                  <Link
-                                    href={field.value}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center justify-center rounded-full border border-[#167BFF] px-3 py-1 text-xs font-medium text-white hover:bg-[#0C448C]"
-                                  >
-                                    Open Profile
-                                  </Link>
-                                </div>
+                            <div key={field.key} className="flex items-center justify-between gap-3 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-sm">
+                              <div className="flex flex-col flex-1 min-w-0">
+                                <span className="text-gray-400 font-medium">{field.label}</span>
+                                <span
+                                  className="text-xs text-[#7D879C] leading-relaxed truncate"
+                                  title={profileUrl || undefined}
+                                >
+                                  {truncatedDisplay}
+                                </span>
+                              </div>
+                              {profileUrl ? (
+                                <Link
+                                  href={profileUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
+                                >
+                                  Visit
+                                </Link>
                               ) : (
-                                <span className="ml-1 text-gray-300">{fieldValue}</span>
+                                <span className="text-xs text-gray-500">N/A</span>
                               )}
                             </div>
                           );
                         }
 
                         return (
-                          <div key={field.key} className="text-sm">
-                            <span className="text-gray-500 font-medium">{field.label}:</span>{" "}
-                            <span className="text-gray-300">{fieldValue}</span>
+                          <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-sm">
+                            <span className="text-gray-400 font-medium">{field.label}</span>
+                            <p className="mt-1 text-[0.9rem] text-gray-200 leading-relaxed">
+                              {fieldValue}
+                            </p>
                           </div>
                         );
                       })}
                     </div>
                     
                     {reliableSource && (
-                      <div className="mt-4 pt-4 border-t border-[#3C414A]">
-                        <span className="text-xs text-blue-400">✓ Reliable Source</span>
+                      <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-3 text-xs text-[#69B3FF]">
+                        <span className="font-semibold tracking-wide">✓ Reliable Source</span>
+                        <span className="text-[#7D879C]">Verified by OSINT</span>
                       </div>
                     )}
                   </div>
@@ -585,10 +698,10 @@ export default function HowItWorks() {
             </div>
 
             {/* Pagination Controls */}
-            {totalPages > 1 && (
+            {filteredTotalPages > 1 && (
               <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
                 <div className="text-sm text-gray-400">
-                  Showing {startIndex + 1} to {Math.min(endIndex, totalResults)} of {totalResults} results
+                  Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
                 </div>
                 
                 <div className="flex items-center gap-2">
@@ -607,11 +720,11 @@ export default function HowItWorks() {
 
                   {/* Page Numbers */}
                   <div className="flex items-center gap-1">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => {
+                    {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
                       // Show first page, last page, current page, and pages around current
                       if (
                         page === 1 ||
-                        page === totalPages ||
+                        page === filteredTotalPages ||
                         (page >= currentPage - 1 && page <= currentPage + 1)
                       ) {
                         return (
@@ -643,10 +756,10 @@ export default function HowItWorks() {
 
                   {/* Next Button */}
                   <button
-                    onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
-                    disabled={currentPage === totalPages}
+                    onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
+                    disabled={currentPage === filteredTotalPages}
                     className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      currentPage === totalPages
+                      currentPage === filteredTotalPages
                         ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
                         : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
                     }`}
@@ -656,7 +769,42 @@ export default function HowItWorks() {
                 </div>
               </div>
             )}
+              </div>
+            </div>
           </div>
+          
+          {/* Image Popup Modal */}
+          {selectedImage && (
+            <div 
+              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2"
+              onClick={() => setSelectedImage(null)}
+              style={{ backdropFilter: 'none' }}
+            >
+              <div className="relative w-full h-full max-w-7xl flex items-center justify-center">
+                <button
+                  onClick={() => setSelectedImage(null)}
+                  className="absolute top-4 right-4 z-10 rounded-full bg-[#1E2535] p-3 text-white hover:bg-[#167BFF] transition-colors shadow-lg"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+                <img
+                  src={selectedImage}
+                  alt="Profile preview"
+                  className="w-auto h-auto max-w-[95vw] max-h-[95vh] min-w-[400px] min-h-[400px] object-contain rounded-xl shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                  style={{ 
+                    imageRendering: 'auto',
+                    filter: 'none',
+                    objectFit: 'contain'
+                  }}
+                  loading="eager"
+                />
+              </div>
+            </div>
+          )}
+          </>
         );
       })()}
     </div>
