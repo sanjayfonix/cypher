@@ -502,14 +502,15 @@ export default function HowItWorks() {
           <>
           <div className="container mx-auto px-4 py-8">
             {/* Search Results Header */}
-            <div className="mb-6">
-              <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
+            <div className="mb-6 flex flex-col sm:flex-row justify-between items-center">
+              <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl w-full">
                 Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
               </div>
               
               {/* Search Filter - Full Width */}
-              <div className="w-full">
-                <div className="rounded-2xl border border-[#1E2535] p-4 bg-[#0B0F1A]">
+              <div className="w-full flex flex-row items-center gap-2">
+                <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl w-100">Search Results by</div>
+                <div className="rounded-2xl border border-[#595959] p-4 bg-[#0B0F1A] w-full">
                   <div className="relative">
                     <input
                       id="search-input"
@@ -520,7 +521,7 @@ export default function HowItWorks() {
                         setCurrentPage(1);
                       }}
                       placeholder="Name, username, email, phone..."
-                      className="w-full rounded-lg border border-[#27304A] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#7A8299] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
+                      className="w-full rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#b6c0e0] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
                     />
                     {internalSearchQuery && (
                       <button
