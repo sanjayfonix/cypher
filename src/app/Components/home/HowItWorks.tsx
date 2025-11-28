@@ -1,8 +1,7 @@
-'use client'
+'use client';
 import { useMemo, useState } from "react";
 import Link from "next/link";
-import Image from "next/image";
-import { Loader2 } from "lucide-react";
+import { Loader2, Banknote, Facebook, Instagram, Mail, Phone, X } from "lucide-react";
 import {
   fetchPhoneSearchResult,
   fetchEmailSearchResult,
@@ -23,82 +22,105 @@ export default function HowItWorks() {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [detailsModalData, setDetailsModalData] = useState<ResultDetailsData | null>(null);
 
+  // NEW: internal tab for OSINT vs Breach
+  const [breachTab, setBreachTab] = useState<"normal" | "breach">("normal");
+
+  const [mode, setMode] = useState(0);
+  const [type, setType] = useState(0);
+  const [phone, setPhone] = useState('');
+  const [fullName, setFullName] = useState('');
+  const [city, setCity] = useState('');
+  const [state, setState] = useState('');
+  const [usernamePhone, setUsernamePhone] = useState('');
+  const [usernameEmail, setUsernameEmail] = useState('');
+  const [keyword, setKeyword] = useState('');
+
   const fetchResult = async () => {
     try {
-      // Validation for Name/Username search (type === 0)
+      // Username search (type = 0, mode = 1)
       if (type === 0 && mode === 1) {
-        if (!fullName || fullName.trim() === "") {
-          return;
-        }
+        if (!fullName || fullName.trim() === "") return;
 
         setSearchLoading(true);
 
-        // Build query with only full name (optional fields will be used for client-side filtering)
-        let query = fullName.trim();
+        const query = fullName.trim();
 
         const result = await fetchNameSearchResult({ query: query, OstIndAKey: "" });
-        console.log("name search result is ", result);
 
-        if (result && Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
+        // REMOVE hibp MODULES (legacy breach module)
+        const filtered = Array.isArray(result)
+          ? result.filter((r: any) => r?.module?.toLowerCase() !== "hibp")
+          : [];
+
+        console.log("name search filtered result is ", filtered);
+
+        if (filtered.length > 0) {
+          setPhoneResult(filtered);
           setSearchResults(true);
-          setCurrentPage(1); // Reset to first page on new search
-          setSelectedCategory("all"); // Reset category filter
-        }
-        else {
+        } else {
           setPhoneResult(null);
           setSearchResults(false);
-          setCurrentPage(1);
-          setSelectedCategory("all");
         }
+
+        setCurrentPage(1);
+        setSelectedCategory("all");
+        setBreachTab("normal");
       }
-      // Validation for Phone Number search (type === 1)
+
+      // Phone search (type = 1, mode = 1)
       else if (type === 1 && mode === 1) {
-        if (!phone || phone.trim() === "") {
-          return;
-        }
+        if (!phone || phone.trim() === "") return;
 
         setSearchLoading(true);
 
         const result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
-        console.log("phone search result is ", result);
 
-        if (result && Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
+        // REMOVE hibp MODULES (legacy breach module)
+        const filtered = Array.isArray(result)
+          ? result.filter((r: any) => r?.module?.toLowerCase() !== "hibp")
+          : [];
+
+        console.log("phone search filtered result is ", filtered);
+
+        if (filtered.length > 0) {
+          setPhoneResult(filtered);
           setSearchResults(true);
-          setCurrentPage(1); // Reset to first page on new search
-          setSelectedCategory("all"); // Reset category filter
-        }
-        else {
+        } else {
           setPhoneResult(null);
           setSearchResults(false);
-          setCurrentPage(1);
-          setSelectedCategory("all");
         }
+
+        setCurrentPage(1);
+        setSelectedCategory("all");
+        setBreachTab("normal");
       }
-      // Validation for Email search (type === 2)
+
+      // Email search (type = 2, mode = 1)
       else if (type === 2 && mode === 1) {
-        if (!phone || phone.trim() === "") {
-          return;
-        }
+        if (!phone || phone.trim() === "") return;
 
         setSearchLoading(true);
 
         const result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
-        console.log("email search result iss ", result);
 
-        if (result && Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
+        // REMOVE hibp MODULES (legacy breach module)
+        const filtered = Array.isArray(result)
+          ? result.filter((r: any) => r?.module?.toLowerCase() !== "hibp")
+          : [];
+
+        console.log("email search filtered result iss ", filtered);
+
+        if (filtered.length > 0) {
+          setPhoneResult(filtered);
           setSearchResults(true);
-          setCurrentPage(1); // Reset to first page on new search
-          setSelectedCategory("all"); // Reset category filter
-        }
-        else {
+        } else {
           setPhoneResult(null);
           setSearchResults(false);
-          setCurrentPage(1);
-          setSelectedCategory("all");
         }
+
+        setCurrentPage(1);
+        setSelectedCategory("all");
+        setBreachTab("normal");
       }
     }
     catch (e: any) {
@@ -269,15 +291,6 @@ export default function HowItWorks() {
     },
   ];
 
-  const [mode, setMode] = useState(0);
-  const [type, setType] = useState(0);
-  const [phone, setPhone] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [usernamePhone, setUsernamePhone] = useState('');
-  const [usernameEmail, setUsernameEmail] = useState('');
-  const [keyword, setKeyword] = useState('');
   return (
     <div id="how-it-works" className="">
       <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
@@ -327,7 +340,8 @@ export default function HowItWorks() {
                   color: mode === 1 ? 'white' : '#E3E3E3',
                   fontWeight: mode === 1 ? 'bold' : 'normal',
                 }} className="font-sans  text-lg sm:text-xl md:text-2xl ">
-                  OSINT              </span>
+                  OSINT
+                </span>
               </button>
 
               <button onClick={() => setMode(2)} style={{
@@ -340,7 +354,8 @@ export default function HowItWorks() {
                   color: mode === 2 ? 'white' : '#E3E3E3',
                   fontWeight: mode === 2 ? 'bold' : 'normal',
                 }} className="font-sans  text-lg sm:text-xl md:text-2xl ">
-                  Data Breach              </span>
+                  Data Breach
+                </span>
               </button>
 
             </div>
@@ -452,9 +467,20 @@ export default function HowItWorks() {
 
       {/* Search Results Display */}
       {phoneResult && phoneResult.length > 0 && (() => {
-        // Flatten all results (handle multiple spec_format entries per platform)
+        // Breach results: module === "HaveIBeenPwnd!"
+        const breachResults = phoneResult.filter((item: any) =>
+        item.module?.toLowerCase().includes("haveibeenpwn")
+        );
+
+        // Flatten all OSINT-style results (exclude breach modules)
         const allResults: any[] = [];
         phoneResult.forEach((item: any, index: number) => {
+          // skip breach items from normal OSINT result cards
+          if (item.module && typeof item.module === "string" &&
+            item.module.toLowerCase() === "haveibeenpwnd!") {
+            return;
+          }
+
           if (item.status !== 'found') return;
 
           const platformName = item.module || 'Unknown';
@@ -505,12 +531,12 @@ export default function HowItWorks() {
 
           // Filter by optional fields (client-side filtering)
           const { specData } = result;
-          
+
           // Filter by City
           if (city && city.trim()) {
-            const resultCity = getFieldValueFromResult(specData, "city") || 
-                              getFieldValueFromResult(specData, "location") ||
-                              "";
+            const resultCity = getFieldValueFromResult(specData, "city") ||
+              getFieldValueFromResult(specData, "location") ||
+              "";
             if (!resultCity.includes(city.toLowerCase().trim())) {
               return false;
             }
@@ -519,8 +545,8 @@ export default function HowItWorks() {
           // Filter by State
           if (state && state.trim()) {
             const resultState = getFieldValueFromResult(specData, "state") ||
-                              getFieldValueFromResult(specData, "location") ||
-                              "";
+              getFieldValueFromResult(specData, "location") ||
+              "";
             if (!resultState.includes(state.toLowerCase().trim())) {
               return false;
             }
@@ -529,8 +555,8 @@ export default function HowItWorks() {
           // Filter by Phone Number
           if (usernamePhone && usernamePhone.trim()) {
             const resultPhone = getFieldValueFromResult(specData, "phone") ||
-                               getFieldValueFromResult(specData, "phone_hint") ||
-                               "";
+              getFieldValueFromResult(specData, "phone_hint") ||
+              "";
             if (!resultPhone.includes(usernamePhone.toLowerCase().trim())) {
               return false;
             }
@@ -539,8 +565,8 @@ export default function HowItWorks() {
           // Filter by Email
           if (usernameEmail && usernameEmail.trim()) {
             const resultEmail = getFieldValueFromResult(specData, "email") ||
-                               getFieldValueFromResult(specData, "email_hint") ||
-                               "";
+              getFieldValueFromResult(specData, "email_hint") ||
+              "";
             if (!resultEmail.includes(usernameEmail.toLowerCase().trim())) {
               return false;
             }
@@ -550,7 +576,7 @@ export default function HowItWorks() {
           if (keyword && keyword.trim()) {
             const keywordLower = keyword.toLowerCase().trim();
             let found = false;
-            
+
             // Check all possible fields
             const fieldsToCheck = ["name", "username", "email", "phone", "location", "city", "state", "bio", "first_name", "last_name"];
             for (const fieldKey of fieldsToCheck) {
@@ -560,7 +586,7 @@ export default function HowItWorks() {
                 break;
               }
             }
-            
+
             // Also check platform_variables
             if (!found && Array.isArray(specData.platform_variables)) {
               for (const pv of specData.platform_variables) {
@@ -570,7 +596,7 @@ export default function HowItWorks() {
                 }
               }
             }
-            
+
             if (!found) {
               return false;
             }
@@ -619,383 +645,416 @@ export default function HowItWorks() {
         return (
           <>
             <div className="container mx-auto px-4 py-8">
-              {/* Search Results Header */}
-              <div className="mb-6 flex flex-col gap-4">
-                <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
-                  Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
-                </div>
+              {/* Internal Result Tabs: OSINT vs Breach */}
+              <div className="mb-4 flex flex-wrap gap-3">
+                <button
+                  type="button"
+                  onClick={() => setBreachTab("normal")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    breachTab === "normal"
+                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                  }`}
+                >
+                  OSINT Results ({filteredTotal})
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setBreachTab("breach")}
+                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                    breachTab === "breach"
+                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                  }`}
+                >
+                  Breach ({breachResults.length})
+                </button>
+              </div>
 
-                {/* Category Filter and Search Filter */}
-                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                  {/* Category Dropdown */}
-                  <div className="w-full sm:w-auto">
-                    <label className="block text-sm text-white mb-2 font-semibold">Filter by Category</label>
-                    <select
-                      value={selectedCategory}
-                      onChange={(e) => {
-                        setSelectedCategory(e.target.value);
-                        setCurrentPage(1);
-                      }}
-                      className="w-full sm:w-64 rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 text-sm md:text-base text-white focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF] cursor-pointer"
-                    >
-                      <option value="all">All Categories ({allResults.length})</option>
-                      {uniqueCategories.map((category) => {
-                        const count = allResults.filter((r) => r.categoryName === category).length;
-                        return (
-                          <option key={category} value={category}>
-                            {category} ({count})
-                          </option>
-                        );
-                      })}
-                    </select>
-                  </div>
+              {breachTab === "normal" && (
+                <>
+                  {/* Search Results Header */}
+                  <div className="mb-6 flex flex-col gap-4">
+                    <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
+                      Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
+                    </div>
 
-                  {/* Search Filter */}
-                  <div className="flex-1 w-full">
-                    <label className="block text-sm text-white mb-2 font-semibold">Search Results by</label>
-                    <div className="relative">
-                      <input
-                        id="search-input"
-                        type="text"
-                        value={internalSearchQuery}
-                        onChange={(e) => {
-                          setInternalSearchQuery(e.target.value);
-                          setCurrentPage(1);
-                        }}
-                        placeholder="Name, username, email, phone..."
-                        className="w-full rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#b6c0e0] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
-                      />
-                      {internalSearchQuery && (
-                        <button
-                          onClick={() => {
-                            setInternalSearchQuery("");
+                    {/* Category Filter and Search Filter */}
+                    <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                      {/* Category Dropdown */}
+                      <div className="w-full sm:w-auto">
+                        <label className="block text-sm text-white mb-2 font-semibold">Filter by Category</label>
+                        <select
+                          value={selectedCategory}
+                          onChange={(e) => {
+                            setSelectedCategory(e.target.value);
                             setCurrentPage(1);
                           }}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8299] hover:text-white transition-colors"
-                          aria-label="Clear search"
+                          className="w-full sm:w-64 rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 text-sm md:text-base text-white focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF] cursor-pointer"
                         >
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                          </svg>
-                        </button>
+                          <option value="all">All Categories ({allResults.length})</option>
+                          {uniqueCategories.map((category) => {
+                            const count = allResults.filter((r) => r.categoryName === category).length;
+                            return (
+                              <option key={category} value={category}>
+                                {category} ({count})
+                              </option>
+                            );
+                          })}
+                        </select>
+                      </div>
+
+                      {/* Search Filter */}
+                      <div className="flex-1 w-full">
+                        <label className="block text-sm text-white mb-2 font-semibold">Search Results by</label>
+                        <div className="relative">
+                          <input
+                            id="search-input"
+                            type="text"
+                            value={internalSearchQuery}
+                            onChange={(e) => {
+                              setInternalSearchQuery(e.target.value);
+                              setCurrentPage(1);
+                            }}
+                            placeholder="Name, username, email, phone..."
+                            className="w-full rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#b6c0e0] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
+                          />
+                          {internalSearchQuery && (
+                            <button
+                              onClick={() => {
+                                setInternalSearchQuery("");
+                                setCurrentPage(1);
+                              }}
+                              className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8299] hover:text-white transition-colors"
+                              aria-label="Clear search"
+                            >
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col lg:flex-row gap-6">
+                    {/* Results Grid */}
+                    <div className="flex-1">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                        {currentResults.map((result, resultIndex) => {
+                          const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
+
+                          // Extract all fields from spec_format
+                          const getFieldValue = (fieldKey: string) => {
+                            const directField = specData[fieldKey];
+                            if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
+                              return { value: directField.value, type: directField.type };
+                            }
+                            if (Array.isArray(specData.platform_variables)) {
+                              const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
+                              if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
+                                return { value: platformField.value, type: platformField.type };
+                              }
+                            }
+                            return { value: null, type: undefined };
+                          };
+
+                          // Get all fields with data from desiredFields
+                          const displayFields = desiredFields
+                            .map((field) => {
+                              const fieldData = getFieldValue(field.key);
+                              return {
+                                ...field,
+                                value: fieldData.value,
+                                type: fieldData.type,
+                              };
+                            })
+                            .filter((field) => {
+                              // Only show fields that have actual data
+                              const value = field.value;
+                              if (value === null || value === undefined || value === "") return false;
+                              if (typeof value === "string" && value.trim() === "") return false;
+                              if (Array.isArray(value) && value.length === 0) return false;
+                              return true;
+                            });
+
+                          // Get additional fields from platform_variables that have data
+                          const additionalFields: any[] = [];
+                          if (Array.isArray(specData.platform_variables)) {
+                            specData.platform_variables.forEach((pv: any) => {
+                              // Skip if already in desiredFields
+                              if (desiredFields.some((df) => df.key === pv.key)) return;
+
+                              // Only add if has value
+                              if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
+                                if (typeof pv.value === "string" && pv.value.trim() === "") return;
+                                if (Array.isArray(pv.value) && pv.value.length === 0) return;
+
+                                additionalFields.push({
+                                  key: pv.key,
+                                  label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+                                  value: pv.value,
+                                  type: pv.type,
+                                });
+                              }
+                            });
+                          }
+
+                          // Combine displayFields with additionalFields
+                          const allDisplayFields = [...displayFields, ...additionalFields];
+
+                          const profileField = getFieldValue("profile_url");
+                          const pictureField = getFieldValue("picture_url");
+                          const idField = getFieldValue("id");
+                          const profileUrl = typeof profileField.value === "string" ? profileField.value : "";
+                          const pictureSource =
+                            typeof pictureField.value === "string" && pictureField.value
+                              ? pictureField.value
+                              : null;
+                          const profileImageSource =
+                            typeof profileField.value === "string" && isImageUrl(profileField.value)
+                              ? profileField.value
+                              : null;
+
+                          const cardImage = pictureSource || profileImageSource;
+                          const statusBadge = getStatusBadge(status);
+                          const specName = specData?.name?.value;
+                          const specTitle = specData?.title?.value;
+                          const cardTitle = specName || specTitle || platformName;
+                          const recordId =
+                            idField.value !== null &&
+                            idField.value !== undefined &&
+                            idField.value !== ""
+                              ? idField.value
+                              : null;
+
+                          const formattedFields: ResultField[] = allDisplayFields.map((field) => ({
+                            key: field.key,
+                            label: field.label,
+                            formattedValue:
+                              field.key === "profile_url"
+                                ? profileUrl
+                                  ? prettifyUrl(profileUrl)
+                                  : "Not available"
+                                : formatValue(field.value, field.type),
+                          }));
+                          const previewFields = formattedFields.slice(0, 1);
+                          const hasMoreFields = formattedFields.length > previewFields.length;
+
+                          return (
+                            <div
+                              key={`${result.itemIndex}-${specIndex}-${resultIndex}`}
+                              className="relative flex h-full min-h-[24rem] flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_50px_110px_rgba(22,123,255,0.25)]"
+                            >
+                              <div className="flex items-start justify-between gap-3">
+                                <div className="flex flex-col">
+                                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[#7D879C]">
+                                    {categoryName}
+                                  </p>
+                                  <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
+                                    {cardTitle}
+                                    {specFormatArray.length > 1 && ` (${specIndex + 1})`}
+                                  </h3>
+                                  {recordId && (
+                                    <p className="text-[0.65rem] text-[#9CA3AF] mt-1 break-all">
+                                      ID: {recordId}
+                                    </p>
+                                  )}
+                                </div>
+                                <span className={`rounded-full px-2.5 py-0.5 text-[0.6rem] font-semibold tracking-wide ${statusBadge.className}`}>
+                                  {statusBadge.label}
+                                </span>
+                              </div>
+
+                              <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[#192032] bg-[#0F1524] p-3">
+                                <div
+                                  className="relative h-14 w-14 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
+                                  onClick={() => cardImage && setSelectedImage(cardImage)}
+                                >
+                                  {cardImage ? (
+                                    <img
+                                      src={cardImage}
+                                      alt={`${cardTitle} profile image`}
+                                      className="h-full w-full rounded-full object-cover"
+                                      loading="lazy"
+                                    />
+                                  ) : (
+                                    <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
+                                      No Photo
+                                    </div>
+                                  )}
+                                  <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
+                                </div>
+                                <div className="flex flex-1 flex-col gap-1 text-xs text-[#B4BCD1]">
+                                  <span className="text-[0.55rem] uppercase tracking-[0.3em] text-[#6A7390]">Platform</span>
+                                  <span className="text-sm font-semibold text-white">{platformName}</span>
+                                  {query && (
+                                    <span className="text-[0.7rem] text-[#7D879C] break-all">
+                                      {query}
+                                    </span>
+                                  )}
+                                </div>
+                              </div>
+
+                              {/* Display selected fields - only show fields with data */}
+                              {formattedFields.length > 0 && (
+                                <div className="mt-4 space-y-2.5">
+                                  {previewFields.map((field) => {
+                                    if (field.key === "profile_url") {
+                                      const truncatedDisplay =
+                                        field.formattedValue.length > 40
+                                          ? `${field.formattedValue.substring(0, 40)}...`
+                                          : field.formattedValue;
+                                      return (
+                                        <div key={field.key} className="flex items-center justify-between gap-2.5 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-xs">
+                                          <div className="flex flex-col flex-1 min-w-0">
+                                            <span className="text-gray-400 font-medium">{field.label}</span>
+                                            <span
+                                              className="text-[0.7rem] text-[#7D879C] leading-relaxed truncate"
+                                              title={profileUrl || undefined}
+                                            >
+                                              {truncatedDisplay}
+                                            </span>
+                                          </div>
+                                          {profileUrl ? (
+                                            <Link
+                                              href={profileUrl}
+                                              target="_blank"
+                                              rel="noopener noreferrer"
+                                              className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
+                                            >
+                                              Visit
+                                            </Link>
+                                          ) : (
+                                            <span className="text-xs text-gray-500">N/A</span>
+                                          )}
+                                        </div>
+                                      );
+                                    }
+
+                                    return (
+                                      <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-xs">
+                                        <span className="text-gray-400 font-medium">{field.label}</span>
+                                        <p className="mt-1 text-[0.8rem] text-gray-200 leading-relaxed">
+                                          {field.formattedValue}
+                                        </p>
+                                      </div>
+                                    );
+                                  })}
+                                  {hasMoreFields && (
+                                    <button
+                                      type="button"
+                                      className="w-full rounded-2xl border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
+                                      onClick={() =>
+                                        setDetailsModalData({
+                                          title: cardTitle,
+                                          category: categoryName,
+                                          platform: platformName,
+                                          statusBadge,
+                                          recordId,
+                                          query: query || null,
+                                          profileUrl: profileUrl || null,
+                                          reliableSource: Boolean(reliableSource),
+                                          fields: formattedFields,
+                                          cardImage,
+                                        })
+                                      }
+                                    >
+                                      View more details
+                                    </button>
+                                  )}
+                                </div>
+                              )}
+
+                              {reliableSource && (
+                                <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-2.5 text-[0.65rem] text-[#69B3FF]">
+                                  <span className="font-semibold tracking-wide">✓ Reliable Source</span>
+                                  <span className="text-[#7D879C]">Verified by Webutation</span>
+                                </div>
+                              )}
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* Pagination Controls */}
+                      {filteredTotalPages > 1 && (
+                        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
+                          <div className="text-sm text-gray-400">
+                            Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
+                          </div>
+
+                          <div className="flex items-center gap-2">
+                            {/* Previous Button */}
+                            <button
+                              onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                              disabled={currentPage === 1}
+                              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === 1
+                                  ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                                  : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                                }`}
+                            >
+                              Previous
+                            </button>
+
+                            {/* Page Numbers */}
+                            <div className="flex items-center gap-1">
+                              {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
+                                // Show first page, last page, current page, and pages around current
+                                if (
+                                  page === 1 ||
+                                  page === filteredTotalPages ||
+                                  (page >= currentPage - 1 && page <= currentPage + 1)
+                                ) {
+                                  return (
+                                    <button
+                                      key={page}
+                                      onClick={() => setCurrentPage(page)}
+                                      className={`min-w-[40px] px-3 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === page
+                                          ? 'bg-[#167BFF] text-white border border-[#167BFF]'
+                                          : 'bg-[#3C414A] text-gray-300 hover:bg-[#515151] border border-[#3C414A]'
+                                        }`}
+                                    >
+                                      {page}
+                                    </button>
+                                  );
+                                } else if (
+                                  page === currentPage - 2 ||
+                                  page === currentPage + 2
+                                ) {
+                                  return (
+                                    <span key={page} className="text-gray-500 px-2">
+                                      ...
+                                    </span>
+                                  );
+                                }
+                                return null;
+                              })}
+                            </div>
+
+                            {/* Next Button */}
+                            <button
+                              onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
+                              disabled={currentPage === filteredTotalPages}
+                              className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === filteredTotalPages
+                                  ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                                  : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                                }`}
+                            >
+                              Next
+                            </button>
+                          </div>
+                        </div>
                       )}
                     </div>
                   </div>
-                </div>
-              </div>
+                </>
+              )}
 
-
-              <div className="flex flex-col lg:flex-row gap-6">
-                {/* Results Grid */}
-                <div className="flex-1">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
-                    {currentResults.map((result, resultIndex) => {
-                      const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
-
-                      // Extract all fields from spec_format
-                      const getFieldValue = (fieldKey: string) => {
-                        const directField = specData[fieldKey];
-                        if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
-                          return { value: directField.value, type: directField.type };
-                        }
-                        if (Array.isArray(specData.platform_variables)) {
-                          const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
-                          if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
-                            return { value: platformField.value, type: platformField.type };
-                          }
-                        }
-                        return { value: null, type: undefined };
-                      };
-
-                      // Get all fields with data from desiredFields
-                      const displayFields = desiredFields
-                        .map((field) => {
-                          const fieldData = getFieldValue(field.key);
-                          return {
-                            ...field,
-                            value: fieldData.value,
-                            type: fieldData.type,
-                          };
-                        })
-                        .filter((field) => {
-                          // Only show fields that have actual data
-                          const value = field.value;
-                          if (value === null || value === undefined || value === "") return false;
-                          if (typeof value === "string" && value.trim() === "") return false;
-                          if (Array.isArray(value) && value.length === 0) return false;
-                          return true;
-                        });
-
-                      // Get additional fields from platform_variables that have data
-                      const additionalFields: any[] = [];
-                      if (Array.isArray(specData.platform_variables)) {
-                        specData.platform_variables.forEach((pv: any) => {
-                          // Skip if already in desiredFields
-                          if (desiredFields.some((df) => df.key === pv.key)) return;
-
-                          // Only add if has value
-                          if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
-                            if (typeof pv.value === "string" && pv.value.trim() === "") return;
-                            if (Array.isArray(pv.value) && pv.value.length === 0) return;
-
-                            additionalFields.push({
-                              key: pv.key,
-                              label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
-                              value: pv.value,
-                              type: pv.type,
-                            });
-                          }
-                        });
-                      }
-
-                      // Combine displayFields with additionalFields
-                      const allDisplayFields = [...displayFields, ...additionalFields];
-
-                      const profileField = getFieldValue("profile_url");
-                      const pictureField = getFieldValue("picture_url");
-                      const idField = getFieldValue("id");
-                      const profileUrl = typeof profileField.value === "string" ? profileField.value : "";
-                      const pictureSource =
-                        typeof pictureField.value === "string" && pictureField.value
-                          ? pictureField.value
-                          : null;
-                      const profileImageSource =
-                        typeof profileField.value === "string" && isImageUrl(profileField.value)
-                          ? profileField.value
-                          : null;
-
-                      const cardImage = pictureSource || profileImageSource;
-                      const statusBadge = getStatusBadge(status);
-                      const specName = specData?.name?.value;
-                      const specTitle = specData?.title?.value;
-                      const cardTitle = specName || specTitle || platformName;
-                      const recordId =
-                        idField.value !== null &&
-                        idField.value !== undefined &&
-                        idField.value !== ""
-                          ? idField.value
-                          : null;
-
-                      const formattedFields: ResultField[] = allDisplayFields.map((field) => ({
-                        key: field.key,
-                        label: field.label,
-                        formattedValue:
-                          field.key === "profile_url"
-                            ? profileUrl
-                              ? prettifyUrl(profileUrl)
-                              : "Not available"
-                            : formatValue(field.value, field.type),
-                      }));
-                      const previewFields = formattedFields.slice(0, 1);
-                      const hasMoreFields = formattedFields.length > previewFields.length;
-
-                      return (
-                        <div
-                          key={`${result.itemIndex}-${specIndex}-${resultIndex}`}
-                          className="relative flex h-full min-h-[24rem] flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_50px_110px_rgba(22,123,255,0.25)]"
-                        >
-                          <div className="flex items-start justify-between gap-3">
-                            <div className="flex flex-col">
-                              <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[#7D879C]">
-                                {categoryName}
-                              </p>
-                              <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
-                                {cardTitle}
-                                {specFormatArray.length > 1 && ` (${specIndex + 1})`}
-                              </h3>
-                              {recordId && (
-                                <p className="text-[0.65rem] text-[#9CA3AF] mt-1 break-all">
-                                  ID: {recordId}
-                                </p>
-                              )}
-                            </div>
-                            <span className={`rounded-full px-2.5 py-0.5 text-[0.6rem] font-semibold tracking-wide ${statusBadge.className}`}>
-                              {statusBadge.label}
-                            </span>
-                          </div>
-
-                          <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[#192032] bg-[#0F1524] p-3">
-                            <div
-                              className="relative h-14 w-14 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
-                              onClick={() => cardImage && setSelectedImage(cardImage)}
-                            >
-                              {cardImage ? (
-                                <img
-                                  src={cardImage}
-                                  alt={`${cardTitle} profile image`}
-                                  className="h-full w-full rounded-full object-cover"
-                                  loading="lazy"
-                                />
-                              ) : (
-                                <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
-                                  No Photo
-                                </div>
-                              )}
-                              <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
-                            </div>
-                            <div className="flex flex-1 flex-col gap-1 text-xs text-[#B4BCD1]">
-                              <span className="text-[0.55rem] uppercase tracking-[0.3em] text-[#6A7390]">Platform</span>
-                              <span className="text-sm font-semibold text-white">{platformName}</span>
-                              {query && (
-                                <span className="text-[0.7rem] text-[#7D879C] break-all">
-                                  {query}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-
-                          {/* Display selected fields - only show fields with data */}
-                          {formattedFields.length > 0 && (
-                            <div className="mt-4 space-y-2.5">
-                              {previewFields.map((field) => {
-                                if (field.key === "profile_url") {
-                                  const truncatedDisplay =
-                                    field.formattedValue.length > 40
-                                      ? `${field.formattedValue.substring(0, 40)}...`
-                                      : field.formattedValue;
-                                  return (
-                                    <div key={field.key} className="flex items-center justify-between gap-2.5 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-xs">
-                                      <div className="flex flex-col flex-1 min-w-0">
-                                        <span className="text-gray-400 font-medium">{field.label}</span>
-                                        <span
-                                          className="text-[0.7rem] text-[#7D879C] leading-relaxed truncate"
-                                          title={profileUrl || undefined}
-                                        >
-                                          {truncatedDisplay}
-                                        </span>
-                                      </div>
-                                      {profileUrl ? (
-                                        <Link
-                                          href={profileUrl}
-                                          target="_blank"
-                                          rel="noopener noreferrer"
-                                          className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
-                                        >
-                                          Visit
-                                        </Link>
-                                      ) : (
-                                        <span className="text-xs text-gray-500">N/A</span>
-                                      )}
-                                    </div>
-                                  );
-                                }
-
-                                return (
-                                  <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-xs">
-                                    <span className="text-gray-400 font-medium">{field.label}</span>
-                                    <p className="mt-1 text-[0.8rem] text-gray-200 leading-relaxed">
-                                      {field.formattedValue}
-                                    </p>
-                                  </div>
-                                );
-                              })}
-                              {hasMoreFields && (
-                                <button
-                                  type="button"
-                                  className="w-full rounded-2xl border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
-                                  onClick={() =>
-                                    setDetailsModalData({
-                                      title: cardTitle,
-                                      category: categoryName,
-                                      platform: platformName,
-                                      statusBadge,
-                                      recordId,
-                                      query: query || null,
-                                      profileUrl: profileUrl || null,
-                                      reliableSource: Boolean(reliableSource),
-                                      fields: formattedFields,
-                                      cardImage,
-                                    })
-                                  }
-                                >
-                                  View more details
-                                </button>
-                              )}
-                            </div>
-                          )}
-
-                          {reliableSource && (
-                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-2.5 text-[0.65rem] text-[#69B3FF]">
-                              <span className="font-semibold tracking-wide">✓ Reliable Source</span>
-                              <span className="text-[#7D879C]">Verified by Webutation</span>
-                            </div>
-                          )}
-                        </div>
-                      );
-                    })}
-                  </div>
-
-                  {/* Pagination Controls */}
-                  {filteredTotalPages > 1 && (
-                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
-                      <div className="text-sm text-gray-400">
-                        Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
-                      </div>
-
-                      <div className="flex items-center gap-2">
-                        {/* Previous Button */}
-                        <button
-                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                          disabled={currentPage === 1}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === 1
-                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
-                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
-                            }`}
-                        >
-                          Previous
-                        </button>
-
-                        {/* Page Numbers */}
-                        <div className="flex items-center gap-1">
-                          {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
-                            // Show first page, last page, current page, and pages around current
-                            if (
-                              page === 1 ||
-                              page === filteredTotalPages ||
-                              (page >= currentPage - 1 && page <= currentPage + 1)
-                            ) {
-                              return (
-                                <button
-                                  key={page}
-                                  onClick={() => setCurrentPage(page)}
-                                  className={`min-w-[40px] px-3 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === page
-                                      ? 'bg-[#167BFF] text-white border border-[#167BFF]'
-                                      : 'bg-[#3C414A] text-gray-300 hover:bg-[#515151] border border-[#3C414A]'
-                                    }`}
-                                >
-                                  {page}
-                                </button>
-                              );
-                            } else if (
-                              page === currentPage - 2 ||
-                              page === currentPage + 2
-                            ) {
-                              return (
-                                <span key={page} className="text-gray-500 px-2">
-                                  ...
-                                </span>
-                              );
-                            }
-                            return null;
-                          })}
-                        </div>
-
-                        {/* Next Button */}
-                        <button
-                          onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
-                          disabled={currentPage === filteredTotalPages}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === filteredTotalPages
-                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
-                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
-                            }`}
-                        >
-                          Next
-                        </button>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
+              {breachTab === "breach" && (
+                <BreachResultsView results={breachResults} />
+              )}
             </div>
 
             {/* Image Popup Modal */}
@@ -1041,13 +1100,159 @@ export default function HowItWorks() {
   );
 }
 
+/**
+ * Breach tab view – shows all "HaveIBeenPwnd!" modules with timeline, tags, domain, counts etc.
+ */
+function BreachResultsView({ results }: { results: any[] }) {
+  if (!results || results.length === 0) {
+    return (
+      <div className="mt-8 text-center text-gray-400">
+        No breach records found for this query.
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-6">
+      <div className="mb-6 font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
+        Breach Results ({results.length} breach{results.length !== 1 ? "es" : ""} found)
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6">
+        {results.map((item: any, index: number) => {
+          const body = item.body || {};
+          const tags = Array.isArray(item.tags) ? item.tags : [];
+          const hibpTimeline = item.timeline?.group_items?.hibp || [];
+
+          const sortedTimeline = [...hibpTimeline].sort(
+            (a, b) => Number(b.year) - Number(a.year)
+          );
+
+          const title = body.Title || item.module || "Breach";
+          const domain = body.Domain || "Unknown domain";
+          const breachDate = body["Breach Date"] || "N/A";
+          const addedDate = body["Added Date"] || "N/A";
+          const modifiedDate = body["Modified Date"] || "N/A";
+          const pwnCount = body["Pwn Count"] ?? "N/A";
+
+          return (
+            <div
+              key={index}
+              className="relative flex h-full flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#101320] via-[#080B14] to-[#05060A] p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)]"
+            >
+              {/* Image + title */}
+              <div className="flex items-start gap-4">
+                <div className="h-16 w-16 rounded-xl bg-[#0B0F1A] border border-[#27304A] overflow-hidden flex items-center justify-center">
+                  {item.image ? (
+                    <img
+                      src={item.image}
+                      alt={title}
+                      className="h-full w-full object-cover"
+                      loading="lazy"
+                    />
+                  ) : (
+                    <span className="text-[0.6rem] text-[#7A8299] px-2 text-center">
+                      No Image
+                    </span>
+                  )}
+                </div>
+                <div className="flex flex-col flex-1 min-w-0">
+                  <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[#7D879C]">
+                    Breach Source
+                  </p>
+                  <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
+                    {title}
+                  </h3>
+                  <p className="text-[0.75rem] text-[#9CA3AF] mt-1 truncate">
+                    {domain}
+                  </p>
+                </div>
+              </div>
+
+              {/* Pwn Count + dates */}
+              <div className="mt-4 grid grid-cols-1 gap-2 text-xs text-gray-200">
+                <div className="flex items-center justify-between rounded-xl border border-[#141B2C] bg-[#0C1323] px-3 py-2">
+                  <span className="text-gray-400 font-medium">Pwn Count</span>
+                  <span className="font-semibold text-[#F97373]">
+                    {pwnCount}
+                  </span>
+                </div>
+                <div className="rounded-xl border border-[#141B2C] bg-[#0C1323] px-3 py-2 space-y-1">
+                  <div className="flex justify-between text-[0.7rem]">
+                    <span className="text-gray-400">Breach Date</span>
+                    <span className="text-gray-100">{breachDate}</span>
+                  </div>
+                  <div className="flex justify-between text-[0.7rem]">
+                    <span className="text-gray-400">Added Date</span>
+                    <span className="text-gray-100">{addedDate}</span>
+                  </div>
+                  <div className="flex justify-between text-[0.7rem]">
+                    <span className="text-gray-400">Modified Date</span>
+                    <span className="text-gray-100">{modifiedDate}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tags */}
+              {tags.length > 0 && (
+                <div className="mt-4">
+                  <p className="text-[0.7rem] text-gray-400 mb-2 font-medium">Tags</p>
+                  <div className="flex flex-wrap gap-2">
+                    {tags.map((t: any, i: number) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 text-[0.7rem] rounded-full bg-[#162033] text-[#69B3FF] border border-[#1F3B63]"
+                      >
+                        {t.tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Timeline */}
+              {sortedTimeline.length > 0 && (
+                <div className="mt-5">
+                  <p className="text-[0.7rem] text-gray-400 mb-2 font-medium">Timeline</p>
+                  <div className="space-y-2">
+                    {sortedTimeline.map((t: any, i: number) => (
+                      <div
+                        key={i}
+                        className="rounded-lg bg-[#0F1524] border border-[#27304A] p-3 text-[0.7rem] text-gray-200"
+                      >
+                        <div className="flex justify-between mb-1">
+                          <span className="font-semibold">Year</span>
+                          <span>{t.year}</span>
+                        </div>
+                        <div className="flex justify-between mb-1">
+                          <span className="text-gray-400">Start</span>
+                          <span>{t.start || "N/A"}</span>
+                        </div>
+                        {t.end && (
+                          <div className="flex justify-between mb-1">
+                            <span className="text-gray-400">End</span>
+                            <span>{t.end}</span>
+                          </div>
+                        )}
+                        {t.content && (
+                          <p className="mt-1 text-gray-300 leading-relaxed">
+                            {t.content}
+                          </p>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
 
 // components/SearchForm.tsx
-
-
-import SearchResultTab from "./SearchResultTab";
-import { Banknote, Facebook, Instagram, Mail, Phone, User, X } from "lucide-react";
-import { GlassIcon } from "./GlassIcon";
 
 interface UsernameFormProps {
   fullName: string;
