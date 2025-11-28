@@ -80,7 +80,7 @@ export default function GetContact() {
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
                 Location
               </p>
-              <p className="text-gray-300">Loremipsum Insert Address if applicable</p>
+              <p className="text-gray-300">Philadelphia</p>
             </div>
           </div>
          <div className="flex items-center gap-3 mb-4">
@@ -91,7 +91,7 @@ export default function GetContact() {
               <p className="text-gray-100 text-lg md:text-2xl font-bold">
                 Email ID
               </p>
-              <p className="text-gray-300">mike@Cyphr.llc</p>
+              <p className="text-gray-300"> info@webutation.com</p>
             </div>
           </div>
           <div className="flex items-center gap-3 mb-4">

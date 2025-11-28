@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, ArrowUpRight, Menu, X } from "lucide-react";
+import { ChevronDown, ArrowUpRight, Menu, X, Search } from "lucide-react";
 import Button from "./Button";
 import { Toparrow } from "@/assets/icon";
 
@@ -220,11 +220,30 @@ export default function Navbar() {
               Refer a Case
               <Toparrow />
             </button>
-             <Link href={'/'}>
-          <button className="custom-button with-border bg-transparent w-full">
-            Login
+          <button 
+            onClick={() => {
+              if (pathname === '/') {
+                // If already on home page, scroll to section
+                const element = document.getElementById('how-it-works');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              } else {
+                // If not on home page, navigate with hash
+                router.push('/#how-it-works');
+                // Wait for navigation to complete, then scroll
+                setTimeout(() => {
+                  const element = document.getElementById('how-it-works');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }, 300);
+              }
+            }}
+            className="custom-button with-border bg-transparent w-full"
+          >
+            <Search size={20}/> <span>Search</span>
           </button>
-        </Link>
           </div>
 
           {/* Placeholder for mobile */}

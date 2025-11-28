@@ -14,11 +14,12 @@ export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
   const [phoneResult, setPhoneResult] = useState<any[] | null>(null);
 
-  const [searchLoading,setSearchLoading] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 9;
   const [internalSearchQuery, setInternalSearchQuery] = useState("");
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
 
   const fetchResult = async () => {
     try {
@@ -27,26 +28,26 @@ export default function HowItWorks() {
         if (!fullName || fullName.trim() === "") {
           return;
         }
-        
+
         setSearchLoading(true);
-        
-        // Build query with name, city, and state if provided
+
+        // Build query with only full name (optional fields will be used for client-side filtering)
         let query = fullName.trim();
-        if (city && city.trim()) query += ` ${city.trim()}`;
-        if (state && state.trim()) query += ` ${state.trim()}`;
-        
+
         const result = await fetchNameSearchResult({ query: query, OstIndAKey: "" });
         console.log("name search result is ", result);
-        
+
         if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
+          setSelectedCategory("all"); // Reset category filter
         }
         else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
+          setSelectedCategory("all");
         }
       }
       // Validation for Phone Number search (type === 1)
@@ -54,21 +55,23 @@ export default function HowItWorks() {
         if (!phone || phone.trim() === "") {
           return;
         }
-        
+
         setSearchLoading(true);
-        
+
         const result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
         console.log("phone search result is ", result);
-        
+
         if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
+          setSelectedCategory("all"); // Reset category filter
         }
         else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
+          setSelectedCategory("all");
         }
       }
       // Validation for Email search (type === 2)
@@ -76,21 +79,23 @@ export default function HowItWorks() {
         if (!phone || phone.trim() === "") {
           return;
         }
-        
+
         setSearchLoading(true);
-        
+
         const result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
         console.log("email search result iss ", result);
-        
+
         if (result && Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
           setCurrentPage(1); // Reset to first page on new search
+          setSelectedCategory("all"); // Reset category filter
         }
         else {
           setPhoneResult(null);
           setSearchResults(false);
           setCurrentPage(1);
+          setSelectedCategory("all");
         }
       }
     }
@@ -264,12 +269,15 @@ export default function HowItWorks() {
 
   const [mode, setMode] = useState(0);
   const [type, setType] = useState(0);
-  const [phone,setPhone] = useState('');
+  const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
   const [city, setCity] = useState('');
   const [state, setState] = useState('');
+  const [usernamePhone, setUsernamePhone] = useState('');
+  const [usernameEmail, setUsernameEmail] = useState('');
+  const [keyword, setKeyword] = useState('');
   return (
-    <div className="">
+    <div id="how-it-works" className="">
       <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
         {/* Left Column */}
         <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
@@ -388,22 +396,34 @@ export default function HowItWorks() {
                   </span>
                 </button>
               </div>
-              {type === 0 && <UsernameForm fullName={fullName} setFullName={setFullName} city={city} setCity={setCity} state={state} setState={setState} />}
-              {type === 1 && <CustomForm formType={1} controller={phone} setController={setPhone}/>}
-              {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone}/>}
+              {type === 0 && <UsernameForm
+                fullName={fullName}
+                setFullName={setFullName}
+                city={city}
+                setCity={setCity}
+                state={state}
+                setState={setState}
+                usernamePhone={usernamePhone}
+                setUsernamePhone={setUsernamePhone}
+                usernameEmail={usernameEmail}
+                setUsernameEmail={setUsernameEmail}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />}
+              {type === 1 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
+              {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
               {/* Search Button */}
               <div className="p-4">
-                <button 
+                <button
                   type="button"
                   onClick={(e) => {
                     e.preventDefault();
                     e.stopPropagation();
                     fetchResult();
-                  }} 
+                  }}
                   disabled={searchLoading}
-                  className={`custom-button w-full with-shadow bg-[#1057B5] flex items-center justify-center gap-2 ${
-                    searchLoading ? 'opacity-70 cursor-not-allowed' : ''
-                  }`}
+                  className={`custom-button w-full with-shadow bg-[#1057B5] flex items-center justify-center gap-2 ${searchLoading ? 'opacity-70 cursor-not-allowed' : ''
+                    }`}
                 >
                   {searchLoading ? (
                     <>
@@ -434,11 +454,11 @@ export default function HowItWorks() {
         const allResults: any[] = [];
         phoneResult.forEach((item: any, index: number) => {
           if (item.status !== 'found') return;
-          
+
           const platformName = item.module || 'Unknown';
           const categoryName = item.category?.name || 'Unknown Category';
           const specFormatArray = item.spec_format || [];
-          
+
           specFormatArray.forEach((specData: any, specIndex: number) => {
             allResults.push({
               platformName,
@@ -454,44 +474,140 @@ export default function HowItWorks() {
           });
         });
 
-        // Calculate pagination
-        const totalResults = allResults.length;
+        // Get unique categories
+        const uniqueCategories = Array.from(new Set(allResults.map((r) => r.categoryName))).sort();
 
-        // Filter results based on internal search query
+        // Helper function to get field value from result
+        const getFieldValueFromResult = (resultSpecData: any, fieldKey: string): string | null => {
+          // Check direct fields
+          const directField = resultSpecData[fieldKey];
+          if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
+            return String(directField.value).toLowerCase().trim();
+          }
+          // Check platform_variables
+          if (Array.isArray(resultSpecData.platform_variables)) {
+            const platformField = resultSpecData.platform_variables.find((pv: any) => pv.key === fieldKey);
+            if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
+              return String(platformField.value).toLowerCase().trim();
+            }
+          }
+          return null;
+        };
+
+        // Filter results based on category, internal search query, and optional filter fields
         const filteredResults = allResults.filter((result) => {
+          // Filter by category
+          if (selectedCategory !== "all" && result.categoryName !== selectedCategory) {
+            return false;
+          }
+
+          // Filter by optional fields (client-side filtering)
+          const { specData } = result;
+          
+          // Filter by City
+          if (city && city.trim()) {
+            const resultCity = getFieldValueFromResult(specData, "city") || 
+                              getFieldValueFromResult(specData, "location") ||
+                              "";
+            if (!resultCity.includes(city.toLowerCase().trim())) {
+              return false;
+            }
+          }
+
+          // Filter by State
+          if (state && state.trim()) {
+            const resultState = getFieldValueFromResult(specData, "state") ||
+                              getFieldValueFromResult(specData, "location") ||
+                              "";
+            if (!resultState.includes(state.toLowerCase().trim())) {
+              return false;
+            }
+          }
+
+          // Filter by Phone Number
+          if (usernamePhone && usernamePhone.trim()) {
+            const resultPhone = getFieldValueFromResult(specData, "phone") ||
+                               getFieldValueFromResult(specData, "phone_hint") ||
+                               "";
+            if (!resultPhone.includes(usernamePhone.toLowerCase().trim())) {
+              return false;
+            }
+          }
+
+          // Filter by Email
+          if (usernameEmail && usernameEmail.trim()) {
+            const resultEmail = getFieldValueFromResult(specData, "email") ||
+                               getFieldValueFromResult(specData, "email_hint") ||
+                               "";
+            if (!resultEmail.includes(usernameEmail.toLowerCase().trim())) {
+              return false;
+            }
+          }
+
+          // Filter by Keyword (searches in all fields)
+          if (keyword && keyword.trim()) {
+            const keywordLower = keyword.toLowerCase().trim();
+            let found = false;
+            
+            // Check all possible fields
+            const fieldsToCheck = ["name", "username", "email", "phone", "location", "city", "state", "bio", "first_name", "last_name"];
+            for (const fieldKey of fieldsToCheck) {
+              const fieldValue = getFieldValueFromResult(specData, fieldKey);
+              if (fieldValue && fieldValue.includes(keywordLower)) {
+                found = true;
+                break;
+              }
+            }
+            
+            // Also check platform_variables
+            if (!found && Array.isArray(specData.platform_variables)) {
+              for (const pv of specData.platform_variables) {
+                if (pv.value && String(pv.value).toLowerCase().includes(keywordLower)) {
+                  found = true;
+                  break;
+                }
+              }
+            }
+            
+            if (!found) {
+              return false;
+            }
+          }
+
+          // Filter by internal search query
           if (!internalSearchQuery.trim()) return true;
-          
+
           const query = internalSearchQuery.toLowerCase();
-          const { platformName, categoryName, specData } = result;
-          
+          const { platformName, categoryName } = result;
+
           // Search in platform name and category
           if (platformName?.toLowerCase().includes(query)) return true;
           if (categoryName?.toLowerCase().includes(query)) return true;
-          
+
           // Search in spec_format fields
           const checkValue = (val: any): boolean => {
             if (typeof val === 'string') return val.toLowerCase().includes(query);
             if (typeof val === 'number') return val.toString().includes(query);
             return false;
           };
-          
+
           // Check direct fields
           if (specData.name && checkValue(specData.name.value)) return true;
           if (specData.username && checkValue(specData.username.value)) return true;
           if (specData.email && checkValue(specData.email.value)) return true;
           if (specData.phone && checkValue(specData.phone.value)) return true;
           if (specData.location && checkValue(specData.location.value)) return true;
-          
+
           // Check platform_variables
           if (Array.isArray(specData.platform_variables)) {
             for (const pv of specData.platform_variables) {
               if (checkValue(pv.value)) return true;
             }
           }
-          
+
           return false;
         });
-        
+
         const filteredTotal = filteredResults.length;
         const filteredTotalPages = Math.ceil(filteredTotal / itemsPerPage);
         const filteredStartIndex = (currentPage - 1) * itemsPerPage;
@@ -500,311 +616,382 @@ export default function HowItWorks() {
 
         return (
           <>
-          <div className="container mx-auto px-4 py-8">
-            {/* Search Results Header */}
-            <div className="mb-6 flex flex-col sm:flex-row justify-between items-center">
-              <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl w-full">
-                Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
-              </div>
-              
-              {/* Search Filter - Full Width */}
-              <div className="w-full flex flex-row items-center gap-2">
-                <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl w-100">Search Results by</div>
-                <div className="rounded-2xl border border-[#595959] p-4 bg-[#0B0F1A] w-full">
-                  <div className="relative">
-                    <input
-                      id="search-input"
-                      type="text"
-                      value={internalSearchQuery}
+            <div className="container mx-auto px-4 py-8">
+              {/* Search Results Header */}
+              <div className="mb-6 flex flex-col gap-4">
+                <div className="font-sans font-bold text-white text-center md:text-left p-2 sm:p-4 text-sm sm:text-lg md:text-xl lg:text-2xl">
+                  Search Results ({filteredTotal} result{filteredTotal !== 1 ? 's' : ''} found)
+                </div>
+
+                {/* Category Filter and Search Filter */}
+                <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
+                  {/* Category Dropdown */}
+                  <div className="w-full sm:w-auto">
+                    <label className="block text-sm text-white mb-2 font-semibold">Filter by Category</label>
+                    <select
+                      value={selectedCategory}
                       onChange={(e) => {
-                        setInternalSearchQuery(e.target.value);
+                        setSelectedCategory(e.target.value);
                         setCurrentPage(1);
                       }}
-                      placeholder="Name, username, email, phone..."
-                      className="w-full rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#b6c0e0] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
-                    />
-                    {internalSearchQuery && (
-                      <button
-                        onClick={() => {
-                          setInternalSearchQuery("");
+                      className="w-full sm:w-64 rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 text-sm md:text-base text-white focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF] cursor-pointer"
+                    >
+                      <option value="all">All Categories ({allResults.length})</option>
+                      {uniqueCategories.map((category) => {
+                        const count = allResults.filter((r) => r.categoryName === category).length;
+                        return (
+                          <option key={category} value={category}>
+                            {category} ({count})
+                          </option>
+                        );
+                      })}
+                    </select>
+                  </div>
+
+                  {/* Search Filter */}
+                  <div className="flex-1 w-full">
+                    <label className="block text-sm text-white mb-2 font-semibold">Search Results by</label>
+                    <div className="relative">
+                      <input
+                        id="search-input"
+                        type="text"
+                        value={internalSearchQuery}
+                        onChange={(e) => {
+                          setInternalSearchQuery(e.target.value);
                           setCurrentPage(1);
                         }}
-                        className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8299] hover:text-white transition-colors"
-                        aria-label="Clear search"
-                      >
-                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                      </button>
-                    )}
+                        placeholder="Name, username, email, phone..."
+                        className="w-full rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-xs sm:text-sm md:text-base text-white placeholder-[#b6c0e0] focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF]"
+                      />
+                      {internalSearchQuery && (
+                        <button
+                          onClick={() => {
+                            setInternalSearchQuery("");
+                            setCurrentPage(1);
+                          }}
+                          className="absolute right-3 top-1/2 -translate-y-1/2 text-[#7A8299] hover:text-white transition-colors"
+                          aria-label="Clear search"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            
-            <div className="flex flex-col lg:flex-row gap-6">
-              {/* Results Grid */}
-              <div className="flex-1">
-            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
-              {currentResults.map((result, resultIndex) => {
-                const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
-                
-                // Extract all fields from spec_format
-                const getFieldValue = (fieldKey: string) => {
-                  const directField = specData[fieldKey];
-                  if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
-                    return { value: directField.value, type: directField.type };
-                  }
-                  if (Array.isArray(specData.platform_variables)) {
-                    const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
-                    if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
-                      return { value: platformField.value, type: platformField.type };
-                    }
-                  }
-                  return { value: null, type: undefined };
-                };
 
-                const displayFields = desiredFields.map((field) => {
-                  const fieldData = getFieldValue(field.key);
-                  return {
-                    ...field,
-                    value: fieldData.value,
-                    type: fieldData.type,
-                  };
-                });
+              <div className="flex flex-col lg:flex-row gap-6">
+                {/* Results Grid */}
+                <div className="flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                    {currentResults.map((result, resultIndex) => {
+                      const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
+
+                      // Extract all fields from spec_format
+                      const getFieldValue = (fieldKey: string) => {
+                        const directField = specData[fieldKey];
+                        if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
+                          return { value: directField.value, type: directField.type };
+                        }
+                        if (Array.isArray(specData.platform_variables)) {
+                          const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
+                          if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
+                            return { value: platformField.value, type: platformField.type };
+                          }
+                        }
+                        return { value: null, type: undefined };
+                      };
+
+                      // Get all fields with data from desiredFields
+                      const displayFields = desiredFields
+                        .map((field) => {
+                          const fieldData = getFieldValue(field.key);
+                          return {
+                            ...field,
+                            value: fieldData.value,
+                            type: fieldData.type,
+                          };
+                        })
+                        .filter((field) => {
+                          // Only show fields that have actual data
+                          const value = field.value;
+                          if (value === null || value === undefined || value === "") return false;
+                          if (typeof value === "string" && value.trim() === "") return false;
+                          if (Array.isArray(value) && value.length === 0) return false;
+                          return true;
+                        });
+
+                      // Get additional fields from platform_variables that have data
+                      const additionalFields: any[] = [];
+                      if (Array.isArray(specData.platform_variables)) {
+                        specData.platform_variables.forEach((pv: any) => {
+                          // Skip if already in desiredFields
+                          if (desiredFields.some((df) => df.key === pv.key)) return;
+
+                          // Only add if has value
+                          if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
+                            if (typeof pv.value === "string" && pv.value.trim() === "") return;
+                            if (Array.isArray(pv.value) && pv.value.length === 0) return;
+
+                            additionalFields.push({
+                              key: pv.key,
+                              label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+                              value: pv.value,
+                              type: pv.type,
+                            });
+                          }
+                        });
+                      }
+
+                      // Combine displayFields with additionalFields
+                      const allDisplayFields = [...displayFields, ...additionalFields];
+
                 const profileField = getFieldValue("profile_url");
-                const pictureField = getFieldValue("picture_url");
-                const pictureSource =
-                  typeof pictureField.value === "string" && pictureField.value
-                    ? pictureField.value
-                    : null;
-                const profileImageSource =
-                  typeof profileField.value === "string" && isImageUrl(profileField.value)
-                    ? profileField.value
-                    : null;
+                      const pictureField = getFieldValue("picture_url");
+                const idField = getFieldValue("id");
+                      const pictureSource =
+                        typeof pictureField.value === "string" && pictureField.value
+                          ? pictureField.value
+                          : null;
+                      const profileImageSource =
+                        typeof profileField.value === "string" && isImageUrl(profileField.value)
+                          ? profileField.value
+                          : null;
 
-                const cardImage = pictureSource || profileImageSource;
-                const statusBadge = getStatusBadge(status);
-                const specName = specData?.name?.value;
-                const specTitle = specData?.title?.value;
-                const cardTitle = specName || specTitle || platformName;
+                      const cardImage = pictureSource || profileImageSource;
+                      const statusBadge = getStatusBadge(status);
+                      const specName = specData?.name?.value;
+                      const specTitle = specData?.title?.value;
+                      const cardTitle = specName || specTitle || platformName;
                 const profileUrl = typeof profileField.value === "string" ? profileField.value : "";
-                
-                return (
-                  <div 
-                    key={`${result.itemIndex}-${specIndex}-${resultIndex}`} 
-                    className="relative flex h-full flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_25px_80px_rgba(4,7,16,0.7)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_35px_90px_rgba(22,123,255,0.25)]"
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex flex-col">
-                        <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#7D879C]">
-                          {categoryName}
-                        </p>
-                        <h3 className="text-lg sm:text-xl font-semibold text-white">
-                          {cardTitle}
-                          {specFormatArray.length > 1 && ` (${specIndex + 1})`}
-                        </h3>
-                      </div>
-                      <span className={`rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${statusBadge.className}`}>
-                        {statusBadge.label}
-                      </span>
-                    </div>
-                    
-                    <div className="mt-5 flex items-center gap-4 rounded-2xl border border-[#192032] bg-[#0F1524] p-4">
-                      <div 
-                        className="relative h-20 w-20 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
-                        onClick={() => cardImage && setSelectedImage(cardImage)}
-                      >
-                        {cardImage ? (
-                          <img
-                            src={cardImage}
-                            alt={`${cardTitle} profile image`}
-                            className="h-full w-full rounded-full object-cover"
-                            loading="lazy"
-                          />
-                        ) : (
-                          <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
-                            No Photo
-                          </div>
-                        )}
-                        <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
-                      </div>
-                      <div className="flex flex-1 flex-col gap-1 text-sm text-[#B4BCD1]">
-                        <span className="text-[0.65rem] uppercase tracking-[0.35em] text-[#6A7390]">Platform</span>
-                        <span className="text-base font-semibold text-white">{platformName}</span>
-                        {query && (
-                          <span className="text-xs text-[#7D879C] break-all">
-                             {query}
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                    
-                    {/* Display selected fields */}
-                    <div className="mt-5 space-y-3 max-h-96 overflow-y-auto scrollbar-hide pr-1">
-                      {displayFields.map((field) => {
-                        const fieldValue = formatValue(field.value, field.type);
+                const recordId =
+                  idField.value !== null &&
+                  idField.value !== undefined &&
+                  idField.value !== ""
+                    ? idField.value
+                    : null;
 
-                        if (field.key === "profile_url") {
-                          const profileDisplay = profileUrl ? prettifyUrl(profileUrl) : "Not available";
-                          const truncatedDisplay = profileDisplay.length > 40 ? profileDisplay.substring(0, 40) + "..." : profileDisplay;
-                          return (
-                            <div key={field.key} className="flex items-center justify-between gap-3 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-sm">
-                              <div className="flex flex-col flex-1 min-w-0">
-                                <span className="text-gray-400 font-medium">{field.label}</span>
-                                <span
-                                  className="text-xs text-[#7D879C] leading-relaxed truncate"
-                                  title={profileUrl || undefined}
-                                >
-                                  {truncatedDisplay}
-                                </span>
-                              </div>
-                              {profileUrl ? (
-                                <Link
-                                  href={profileUrl}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
-                                >
-                                  Visit
-                                </Link>
+                      return (
+                        <div
+                          key={`${result.itemIndex}-${specIndex}-${resultIndex}`}
+                          className="relative flex h-full flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_25px_80px_rgba(4,7,16,0.7)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_35px_90px_rgba(22,123,255,0.25)]"
+                        >
+                          <div className="flex items-start justify-between gap-4">
+                            <div className="flex flex-col">
+                              <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#7D879C]">
+                                {categoryName}
+                              </p>
+                              <h3 className="text-lg sm:text-xl font-semibold text-white">
+                                {cardTitle}
+                                {specFormatArray.length > 1 && ` (${specIndex + 1})`}
+                              </h3>
+                        {recordId && (
+                          <p className="text-xs text-[#9CA3AF] mt-1 break-all">
+                            ID: {recordId}
+                          </p>
+                        )}
+                            </div>
+                            <span className={`rounded-full px-3 py-1 text-xs font-semibold tracking-wide ${statusBadge.className}`}>
+                              {statusBadge.label}
+                            </span>
+                          </div>
+
+                          <div className="mt-5 flex items-center gap-4 rounded-2xl border border-[#192032] bg-[#0F1524] p-4">
+                            <div
+                              className="relative h-20 w-20 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
+                              onClick={() => cardImage && setSelectedImage(cardImage)}
+                            >
+                              {cardImage ? (
+                                <img
+                                  src={cardImage}
+                                  alt={`${cardTitle} profile image`}
+                                  className="h-full w-full rounded-full object-cover"
+                                  loading="lazy"
+                                />
                               ) : (
-                                <span className="text-xs text-gray-500">N/A</span>
+                                <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
+                                  No Photo
+                                </div>
+                              )}
+                              <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
+                            </div>
+                            <div className="flex flex-1 flex-col gap-1 text-sm text-[#B4BCD1]">
+                              <span className="text-[0.65rem] uppercase tracking-[0.35em] text-[#6A7390]">Platform</span>
+                              <span className="text-base font-semibold text-white">{platformName}</span>
+                              {query && (
+                                <span className="text-xs text-[#7D879C] break-all">
+                                  {query}
+                                </span>
                               )}
                             </div>
-                          );
-                        }
-
-                        return (
-                          <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-sm">
-                            <span className="text-gray-400 font-medium">{field.label}</span>
-                            <p className="mt-1 text-[0.9rem] text-gray-200 leading-relaxed">
-                              {fieldValue}
-                            </p>
                           </div>
-                        );
-                      })}
-                    </div>
-                    
-                    {reliableSource && (
-                      <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-3 text-xs text-[#69B3FF]">
-                        <span className="font-semibold tracking-wide">✓ Reliable Source</span>
-                        <span className="text-[#7D879C]">Verified by OSINT</span>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
 
-            {/* Pagination Controls */}
-            {filteredTotalPages > 1 && (
-              <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
-                <div className="text-sm text-gray-400">
-                  Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
-                </div>
-                
-                <div className="flex items-center gap-2">
-                  {/* Previous Button */}
-                  <button
-                    onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
-                    disabled={currentPage === 1}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      currentPage === 1
-                        ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
-                        : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
-                    }`}
-                  >
-                    Previous
-                  </button>
+                          {/* Display selected fields - only show fields with data */}
+                          {allDisplayFields.length > 0 && (
+                            <div className="mt-5 space-y-3 max-h-96 overflow-y-auto scrollbar-hide pr-1">
+                              {allDisplayFields.map((field) => {
+                                const fieldValue = formatValue(field.value, field.type);
 
-                  {/* Page Numbers */}
-                  <div className="flex items-center gap-1">
-                    {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
-                      // Show first page, last page, current page, and pages around current
-                      if (
-                        page === 1 ||
-                        page === filteredTotalPages ||
-                        (page >= currentPage - 1 && page <= currentPage + 1)
-                      ) {
-                        return (
-                          <button
-                            key={page}
-                            onClick={() => setCurrentPage(page)}
-                            className={`min-w-[40px] px-3 py-2 rounded-lg text-sm font-medium transition-all ${
-                              currentPage === page
-                                ? 'bg-[#167BFF] text-white border border-[#167BFF]'
-                                : 'bg-[#3C414A] text-gray-300 hover:bg-[#515151] border border-[#3C414A]'
-                            }`}
-                          >
-                            {page}
-                          </button>
-                        );
-                      } else if (
-                        page === currentPage - 2 ||
-                        page === currentPage + 2
-                      ) {
-                        return (
-                          <span key={page} className="text-gray-500 px-2">
-                            ...
-                          </span>
-                        );
-                      }
-                      return null;
+                                if (field.key === "profile_url") {
+                                  const profileDisplay = profileUrl ? prettifyUrl(profileUrl) : "Not available";
+                                  const truncatedDisplay = profileDisplay.length > 40 ? profileDisplay.substring(0, 40) + "..." : profileDisplay;
+                                  return (
+                                    <div key={field.key} className="flex items-center justify-between gap-3 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-sm">
+                                      <div className="flex flex-col flex-1 min-w-0">
+                                        <span className="text-gray-400 font-medium">{field.label}</span>
+                                        <span
+                                          className="text-xs text-[#7D879C] leading-relaxed truncate"
+                                          title={profileUrl || undefined}
+                                        >
+                                          {truncatedDisplay}
+                                        </span>
+                                      </div>
+                                      {profileUrl ? (
+                                        <Link
+                                          href={profileUrl}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
+                                        >
+                                          Visit
+                                        </Link>
+                                      ) : (
+                                        <span className="text-xs text-gray-500">N/A</span>
+                                      )}
+                                    </div>
+                                  );
+                                }
+
+                                return (
+                                  <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-sm">
+                                    <span className="text-gray-400 font-medium">{field.label}</span>
+                                    <p className="mt-1 text-[0.9rem] text-gray-200 leading-relaxed">
+                                      {fieldValue}
+                                    </p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          )}
+
+                          {reliableSource && (
+                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-3 text-xs text-[#69B3FF]">
+                              <span className="font-semibold tracking-wide">✓ Reliable Source</span>
+                              <span className="text-[#7D879C]">Verified by Webutation</span>
+                            </div>
+                          )}
+                        </div>
+                      );
                     })}
                   </div>
 
-                  {/* Next Button */}
+                  {/* Pagination Controls */}
+                  {filteredTotalPages > 1 && (
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
+                      <div className="text-sm text-gray-400">
+                        Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {/* Previous Button */}
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                          disabled={currentPage === 1}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === 1
+                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                            }`}
+                        >
+                          Previous
+                        </button>
+
+                        {/* Page Numbers */}
+                        <div className="flex items-center gap-1">
+                          {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
+                            // Show first page, last page, current page, and pages around current
+                            if (
+                              page === 1 ||
+                              page === filteredTotalPages ||
+                              (page >= currentPage - 1 && page <= currentPage + 1)
+                            ) {
+                              return (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`min-w-[40px] px-3 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === page
+                                      ? 'bg-[#167BFF] text-white border border-[#167BFF]'
+                                      : 'bg-[#3C414A] text-gray-300 hover:bg-[#515151] border border-[#3C414A]'
+                                    }`}
+                                >
+                                  {page}
+                                </button>
+                              );
+                            } else if (
+                              page === currentPage - 2 ||
+                              page === currentPage + 2
+                            ) {
+                              return (
+                                <span key={page} className="text-gray-500 px-2">
+                                  ...
+                                </span>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+
+                        {/* Next Button */}
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
+                          disabled={currentPage === filteredTotalPages}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === filteredTotalPages
+                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                            }`}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Image Popup Modal */}
+            {selectedImage && (
+              <div
+                className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2"
+                onClick={() => setSelectedImage(null)}
+                style={{ backdropFilter: 'none' }}
+              >
+                <div className="relative w-full h-full max-w-7xl flex items-center justify-center">
                   <button
-                    onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
-                    disabled={currentPage === filteredTotalPages}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                      currentPage === filteredTotalPages
-                        ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
-                        : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
-                    }`}
+                    onClick={() => setSelectedImage(null)}
+                    className="absolute top-4 right-4 z-10 rounded-full bg-[#1E2535] p-3 text-white hover:bg-[#167BFF] transition-colors shadow-lg"
                   >
-                    Next
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                    </svg>
                   </button>
+                  <img
+                    src={selectedImage}
+                    alt="Profile preview"
+                    className="w-auto h-auto max-w-[95vw] max-h-[95vh] min-w-[400px] min-h-[400px] object-contain rounded-xl shadow-2xl"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{
+                      imageRendering: 'auto',
+                      filter: 'none',
+                      objectFit: 'contain'
+                    }}
+                    loading="eager"
+                  />
                 </div>
               </div>
             )}
-              </div>
-            </div>
-          </div>
-          
-          {/* Image Popup Modal */}
-          {selectedImage && (
-            <div 
-              className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-2"
-              onClick={() => setSelectedImage(null)}
-              style={{ backdropFilter: 'none' }}
-            >
-              <div className="relative w-full h-full max-w-7xl flex items-center justify-center">
-                <button
-                  onClick={() => setSelectedImage(null)}
-                  className="absolute top-4 right-4 z-10 rounded-full bg-[#1E2535] p-3 text-white hover:bg-[#167BFF] transition-colors shadow-lg"
-                >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-                <img
-                  src={selectedImage}
-                  alt="Profile preview"
-                  className="w-auto h-auto max-w-[95vw] max-h-[95vh] min-w-[400px] min-h-[400px] object-contain rounded-xl shadow-2xl"
-                  onClick={(e) => e.stopPropagation()}
-                  style={{ 
-                    imageRendering: 'auto',
-                    filter: 'none',
-                    objectFit: 'contain'
-                  }}
-                  loading="eager"
-                />
-              </div>
-            </div>
-          )}
           </>
         );
       })()}
@@ -827,9 +1014,28 @@ interface UsernameFormProps {
   setCity: (val: string) => void;
   state: string;
   setState: (val: string) => void;
+  usernamePhone: string;
+  setUsernamePhone: (val: string) => void;
+  usernameEmail: string;
+  setUsernameEmail: (val: string) => void;
+  keyword: string;
+  setKeyword: (val: string) => void;
 }
 
-export function UsernameForm({ fullName, setFullName, city, setCity, state, setState }: UsernameFormProps) {
+export function UsernameForm({
+  fullName,
+  setFullName,
+  city,
+  setCity,
+  state,
+  setState,
+  usernamePhone,
+  setUsernamePhone,
+  usernameEmail,
+  setUsernameEmail,
+  keyword,
+  setKeyword
+}: UsernameFormProps) {
   return (
     <div className="w-full  p-4">
       {/* Full Name */}
@@ -870,17 +1076,56 @@ export function UsernameForm({ fullName, setFullName, city, setCity, state, setS
           />
         </div>
       </div>
+
+      {/* Phone Number, Email */}
+      <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
+        {/* Phone Number */}
+        <div className="flex-1 w-full">
+          <label className="block text-sm text-white mb-2 sm:mb-4">Phone Number (optional)</label>
+          <input
+            type="text"
+            value={usernamePhone}
+            onChange={(e) => setUsernamePhone(e.target.value)}
+            placeholder="Enter phone number"
+            className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        {/* Email */}
+        <div className="flex-1 w-full">
+          <label className="block text-sm text-white mb-2 sm:mb-4">Email (optional)</label>
+          <input
+            type="email"
+            value={usernameEmail}
+            onChange={(e) => setUsernameEmail(e.target.value)}
+            placeholder="Enter email address"
+            className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+      </div>
+
+      {/* Keyword */}
+      <div className="mt-4">
+        <label className="block text-sm text-white mb-2 sm:mb-4">Keyword (optional)</label>
+        <input
+          type="text"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="Enter keyword"
+          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
     </div>
   );
 }
 
 interface formInput {
   formType: number;
-  controller:string;
-  setController:(val:string)=>void;
+  controller: string;
+  setController: (val: string) => void;
 }
 
-export function CustomForm({ formType,controller,setController }: formInput) {
+export function CustomForm({ formType, controller, setController }: formInput) {
   return (
     <div className="w-full  p-4">
       {/* Full Name */}
@@ -889,7 +1134,7 @@ export function CustomForm({ formType,controller,setController }: formInput) {
         <div className="flex items-end justify-between gap-4 flex-wrap sm:flex-nowrap">
           <input
             value={controller}
-            onChange={(e)=>setController(e.target.value)}
+            onChange={(e) => setController(e.target.value)}
             type="text"
             placeholder={formType === 1 ? "Enter Phone Number" : "Enter Email address"}
             className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500 py-3 px-4"

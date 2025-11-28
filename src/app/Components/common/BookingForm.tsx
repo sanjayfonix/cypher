@@ -1,9 +1,120 @@
 "use client";
 
 import { Toparrow } from "@/assets/icon";
-import React from "react";
+import React, { useState } from "react";
+import { Loader2 } from "lucide-react";
+
+interface FormData {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  countryCode: string;
+  organizationName: string;
+  professionalRole: string;
+  sessionType: string;
+  preferredDateTime: string;
+  message: string;
+  agreement: boolean;
+}
 
 export default function BookingForm({isForm=false}:{isForm?:boolean}) {
+  const [formData, setFormData] = useState<FormData>({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    countryCode: "+91",
+    organizationName: "",
+    professionalRole: "",
+    sessionType: "CE Credit",
+    preferredDateTime: "",
+    message: "",
+    agreement: false,
+  });
+
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{
+    type: "success" | "error" | null;
+    message: string;
+  }>({ type: null, message: "" });
+
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const target = e.target as HTMLInputElement;
+    const { name, value, type } = target;
+    const checked = (target as HTMLInputElement).checked;
+
+    setFormData({
+      ...formData,
+      [name]: type === "checkbox" ? checked : value,
+    });
+
+    // Clear status message when user starts typing
+    if (submitStatus.type) {
+      setSubmitStatus({ type: null, message: "" });
+    }
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const response = await fetch("/api/send-booking-email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to submit booking request");
+      }
+
+      // Success
+      setSubmitStatus({
+        type: "success",
+        message: data.message || "Booking request submitted successfully! We'll contact you soon.",
+      });
+
+      // Reset form after successful submission
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phoneNumber: "",
+        countryCode: "+91",
+        organizationName: "",
+        professionalRole: "",
+        sessionType: "CE Credit",
+        preferredDateTime: "",
+        message: "",
+        agreement: false,
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitStatus({ type: null, message: "" });
+      }, 5000);
+    } catch (error: any) {
+      console.error("Form submission error:", error);
+      setSubmitStatus({
+        type: "error",
+        message: error.message || "Something went wrong. Please try again later.",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <div style={{
       borderRadius:isForm?'32px':0
@@ -13,7 +124,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
           Book Your CE/CLE Public Speaking Session
         </h1>
 
-        <form className="flex flex-col gap-4 sm:gap-[16px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 sm:gap-[16px]">
           {/* First Name & Last Name */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
@@ -27,8 +138,11 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="text"
                 id="firstName"
                 name="firstName"
+                value={formData.firstName}
+                onChange={handleChange}
                 placeholder="John"
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                minLength={2}
                 required
               />
               <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters</p>
@@ -44,6 +158,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="text"
                 id="lastName"
                 name="lastName"
+                value={formData.lastName}
+                onChange={handleChange}
                 placeholder="Doe"
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
                 minLength={2}
@@ -65,6 +181,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleChange}
               placeholder="John123@example.com"
               className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
               required
@@ -84,6 +202,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               <select
                 id="countryCode"
                 name="countryCode"
+                value={formData.countryCode}
+                onChange={handleChange}
                 className="p-[10px] sm:p-[11px] bg-transparent text-white rounded-l-xl outline-none cursor-pointer text-[14px]"
               >
                 <option value="+91" className="bg-[#2A2A2A]">+91</option>
@@ -94,6 +214,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="tel"
                 id="phoneNumber"
                 name="phoneNumber"
+                value={formData.phoneNumber}
+                onChange={handleChange}
                 placeholder="00 0000 0000"
                 className="flex-1 p-[10px] sm:p-[11px] bg-transparent text-white outline-none text-[14px] rounded-r-xl"
                 required
@@ -114,6 +236,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="text"
                 id="organizationName"
                 name="organizationName"
+                value={formData.organizationName}
+                onChange={handleChange}
                 placeholder="Your company, law firm, or institution"
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               />
@@ -129,6 +253,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="text"
                 id="professionalRole"
                 name="professionalRole"
+                value={formData.professionalRole}
+                onChange={handleChange}
                 placeholder="E.g., Claims Manager, Attorney, Investigator"
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               />
@@ -147,11 +273,13 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               <select
                 id="sessionType"
                 name="sessionType"
+                value={formData.sessionType}
+                onChange={handleChange}
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               >
-                <option className="bg-[#2A2A2A]">CE Credit</option>
-                <option className="bg-[#2A2A2A]">CLE Credit</option>
-                <option className="bg-[#2A2A2A]">General Speaking Engagement</option>
+                <option value="CE Credit" className="bg-[#2A2A2A]">CE Credit</option>
+                <option value="CLE Credit" className="bg-[#2A2A2A]">CLE Credit</option>
+                <option value="General Speaking Engagement" className="bg-[#2A2A2A]">General Speaking Engagement</option>
               </select>
             </div>
             <div>
@@ -165,10 +293,20 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 type="text"
                 id="preferredDateTime"
                 name="preferredDateTime"
+                value={formData.preferredDateTime}
+                onChange={handleChange}
                 placeholder="Choose a date and time"
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
-                onFocus={(e) => (e.target.type = "datetime-local")}
-                onBlur={(e) => e.target.value === "" && (e.target.type = "text")}
+                onFocus={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  target.type = "datetime-local";
+                }}
+                onBlur={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  if (target.value === "") {
+                    target.type = "text";
+                  }
+                }}
               />
             </div>
           </div>
@@ -184,6 +322,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
             <textarea
               id="message"
               name="message"
+              value={formData.message}
+              onChange={handleChange}
               rows={5}
               placeholder="Tell us more about your audience..."
               className="resize-none w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
@@ -199,6 +339,8 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               type="checkbox"
               id="agreement"
               name="agreement"
+              checked={formData.agreement}
+              onChange={handleChange}
               className="appearance-none checked:after:content-['✔'] checked:border-blue-500 checked:after:text-sm
     checked:after:flex checked:after:items-center checked:after:justify-center border border-[#F1F1F1] min-h-[16px] min-w-[16px] bg-[#2A2A2A] text-blue-600 focus:ring-blue-500"
               required
@@ -208,12 +350,37 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
             </label>
           </div>
 
+          {/* Status Message */}
+          {submitStatus.type && (
+            <div
+              className={`p-4 rounded-lg border ${
+                submitStatus.type === "success"
+                  ? "bg-[#0F2A1C] text-[#45F39A] border-[#1F6B47]"
+                  : "bg-[#331616] text-[#FF7A7A] border-[#7A2C2C]"
+              }`}
+            >
+              <p className="text-sm font-medium">{submitStatus.message}</p>
+            </div>
+          )}
+
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full custom-button with-shadow bg-[#1057B5] mt-4"
+            disabled={isSubmitting}
+            className={`w-full custom-button with-shadow bg-[#1057B5] mt-4 flex items-center justify-center gap-2 ${
+              isSubmitting ? "opacity-70 cursor-not-allowed" : ""
+            }`}
           >
-            Submit Booking Request <Toparrow />
+            {isSubmitting ? (
+              <>
+                <Loader2 className="w-5 h-5 animate-spin text-white" />
+                <span>Submitting...</span>
+              </>
+            ) : (
+              <>
+                Submit Booking Request <Toparrow />
+              </>
+            )}
           </button>
         </form>
       </div>

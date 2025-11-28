@@ -75,7 +75,7 @@ export default function ContactSection() {
           <GlassIcon icon={<Email />} size={42} />
           <div>
             <p className="text-gray-100 text-lg sm:text-xl font-bold">Email Id</p>
-            <p className="text-gray-300 text-sm sm:text-base">Loremipsum16@gmail.com</p>
+            <p className="text-gray-300 text-sm sm:text-base">info@webutation.com</p>
           </div>
         </div>
 
@@ -83,7 +83,7 @@ export default function ContactSection() {
           <GlassIcon icon={<Headquators />} size={42} />
           <div>
             <p className="text-gray-100 text-lg sm:text-xl font-bold">Headquarters</p>
-            <p className="text-gray-300 text-sm sm:text-base">New York , NY</p>
+            <p className="text-gray-300 text-sm sm:text-base">Philadelphia</p>
           </div>
         </div>
       </div>
