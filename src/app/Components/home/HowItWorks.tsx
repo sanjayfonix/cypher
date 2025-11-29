@@ -9,6 +9,7 @@ import {
 } from "@/api/apiFunctions";
 import { Toparrow } from "@/assets/icon";
 import ResultDetailsModal, { ResultDetailsData, ResultField } from "./ResultDetailsModal";
+import HibpDetailsModal, { HibpDetailsData } from "./HibpDetailsModal";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
@@ -21,6 +22,7 @@ export default function HowItWorks() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [detailsModalData, setDetailsModalData] = useState<ResultDetailsData | null>(null);
+  const [hibpDetailsData, setHibpDetailsData] = useState<HibpDetailsData | null>(null);
 
   // NEW: internal tab for OSINT vs Breach
   const [breachTab, setBreachTab] = useState<"normal" | "breach">("normal");
@@ -494,6 +496,8 @@ export default function HowItWorks() {
               specData,
               specFormatArray,
               specIndex,
+              frontSchemas: item.front_schemas || [],
+              rawData: item.data || null,
               itemIndex: index,
               reliableSource: item.reliable_source,
               query: item.query,
@@ -1052,9 +1056,367 @@ export default function HowItWorks() {
                 </>
               )}
 
-              {breachTab === "breach" && (
-                <BreachResultsView results={breachResults} />
-              )}
+
+              <div className="flex flex-col lg:flex-row gap-6">
+                {/* Results Grid */}
+                <div className="flex-1">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                    {currentResults.map((result, resultIndex) => {
+                      const {
+                        platformName,
+                        categoryName,
+                        specData,
+                        specFormatArray,
+                        specIndex,
+                        reliableSource,
+                        query,
+                        status,
+                        frontSchemas,
+                        rawData,
+                      } = result;
+
+                      // Extract all fields from spec_format
+                      const getFieldValue = (fieldKey: string) => {
+                        const directField = specData[fieldKey];
+                        if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
+                          return { value: directField.value, type: directField.type };
+                        }
+                        if (Array.isArray(specData.platform_variables)) {
+                          const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
+                          if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
+                            return { value: platformField.value, type: platformField.type };
+                          }
+                        }
+                        return { value: null, type: undefined };
+                      };
+
+                      // Get all fields with data from desiredFields
+                      const displayFields = desiredFields
+                        .map((field) => {
+                          const fieldData = getFieldValue(field.key);
+                          return {
+                            ...field,
+                            value: fieldData.value,
+                            type: fieldData.type,
+                          };
+                        })
+                        .filter((field) => {
+                          // Only show fields that have actual data
+                          const value = field.value;
+                          if (value === null || value === undefined || value === "") return false;
+                          if (typeof value === "string" && value.trim() === "") return false;
+                          if (Array.isArray(value) && value.length === 0) return false;
+                          return true;
+                        });
+
+                      // Get additional fields from platform_variables that have data
+                      const additionalFields: any[] = [];
+                      if (Array.isArray(specData.platform_variables)) {
+                        specData.platform_variables.forEach((pv: any) => {
+                          // Skip if already in desiredFields
+                          if (desiredFields.some((df) => df.key === pv.key)) return;
+
+                          // Only add if has value
+                          if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
+                            if (typeof pv.value === "string" && pv.value.trim() === "") return;
+                            if (Array.isArray(pv.value) && pv.value.length === 0) return;
+
+                            additionalFields.push({
+                              key: pv.key,
+                              label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+                              value: pv.value,
+                              type: pv.type,
+                            });
+                          }
+                        });
+                      }
+
+                      // Combine displayFields with additionalFields
+                      const allDisplayFields = [...displayFields, ...additionalFields];
+
+                      const profileField = getFieldValue("profile_url");
+                      const pictureField = getFieldValue("picture_url");
+                      const idField = getFieldValue("id");
+                      const profileUrl = typeof profileField.value === "string" ? profileField.value : "";
+                      const pictureSource =
+                        typeof pictureField.value === "string" && pictureField.value
+                          ? pictureField.value
+                          : null;
+                      const profileImageSource =
+                        typeof profileField.value === "string" && isImageUrl(profileField.value)
+                          ? profileField.value
+                          : null;
+
+                      const cardImage = pictureSource || profileImageSource;
+                      const statusBadge = getStatusBadge(status);
+                      const specName = specData?.name?.value;
+                      const specTitle = specData?.title?.value;
+                      const cardTitle = specName || specTitle || platformName;
+                      const recordId =
+                        idField.value !== null &&
+                        idField.value !== undefined &&
+                        idField.value !== ""
+                          ? idField.value
+                          : null;
+
+                      const formattedFields: ResultField[] = allDisplayFields.map((field) => ({
+                        key: field.key,
+                        label: field.label,
+                        formattedValue:
+                          field.key === "profile_url"
+                            ? profileUrl
+                              ? prettifyUrl(profileUrl)
+                              : "Not available"
+                            : formatValue(field.value, field.type),
+                      }));
+                      const previewFields = formattedFields.slice(0, 1);
+                      const hasMoreFields = formattedFields.length > previewFields.length;
+
+                      return (
+                        <div
+                          key={`${result.itemIndex}-${specIndex}-${resultIndex}`}
+                          className="relative flex h-full min-h-[24rem] flex-col rounded-2xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 hover:-translate-y-1 hover:border-[#167BFF] hover:shadow-[0_50px_110px_rgba(22,123,255,0.25)]"
+                        >
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="flex flex-col">
+                              <p className="text-[0.6rem] uppercase tracking-[0.3em] text-[#7D879C]">
+                                {categoryName}
+                              </p>
+                              <h3 className="text-base sm:text-lg font-semibold text-white leading-tight">
+                                {cardTitle}
+                                {specFormatArray.length > 1 && ` (${specIndex + 1})`}
+                              </h3>
+                              {recordId && (
+                                <p className="text-[0.65rem] text-[#9CA3AF] mt-1 break-all">
+                                  ID: {recordId}
+                                </p>
+                              )}
+                            </div>
+                            <span className={`rounded-full px-2.5 py-0.5 text-[0.6rem] font-semibold tracking-wide ${statusBadge.className}`}>
+                              {statusBadge.label}
+                            </span>
+                          </div>
+
+                          <div className="mt-4 flex items-center gap-3 rounded-2xl border border-[#192032] bg-[#0F1524] p-3">
+                            <div
+                              className="relative h-14 w-14 shrink-0 rounded-full border border-[#27304A] bg-[#0B0F1A] cursor-pointer transition-transform hover:scale-105"
+                              onClick={() => cardImage && setSelectedImage(cardImage)}
+                            >
+                              {cardImage ? (
+                                <img
+                                  src={cardImage}
+                                  alt={`${cardTitle} profile image`}
+                                  className="h-full w-full rounded-full object-cover"
+                                  loading="lazy"
+                                />
+                              ) : (
+                                <div className="flex h-full w-full items-center justify-center rounded-full text-[0.65rem] text-[#7A8299]">
+                                  No Photo
+                                </div>
+                              )}
+                              <div className="pointer-events-none absolute inset-0 rounded-full border border-[#167BFF33]" />
+                            </div>
+                            <div className="flex flex-1 flex-col gap-1 text-xs text-[#B4BCD1]">
+                              <span className="text-[0.55rem] uppercase tracking-[0.3em] text-[#6A7390]">Platform</span>
+                              <span className="text-sm font-semibold text-white">{platformName}</span>
+                              {query && (
+                                <span className="text-[0.7rem] text-[#7D879C] break-all">
+                                  {query}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Display selected fields - only show fields with data */}
+                          {formattedFields.length > 0 && (
+                            <div className="mt-4 space-y-2.5">
+                              {previewFields.map((field) => {
+                                if (field.key === "profile_url") {
+                                  const truncatedDisplay =
+                                    field.formattedValue.length > 40
+                                      ? `${field.formattedValue.substring(0, 40)}...`
+                                      : field.formattedValue;
+                                  return (
+                                    <div key={field.key} className="flex items-center justify-between gap-2.5 rounded-xl border border-[#1A2134] bg-[#10172A] p-3 text-xs">
+                                      <div className="flex flex-col flex-1 min-w-0">
+                                        <span className="text-gray-400 font-medium">{field.label}</span>
+                                        <span
+                                          className="text-[0.7rem] text-[#7D879C] leading-relaxed truncate"
+                                          title={profileUrl || undefined}
+                                        >
+                                          {truncatedDisplay}
+                                        </span>
+                                      </div>
+                                      {profileUrl ? (
+                                        <Link
+                                          href={profileUrl}
+                                          target="_blank"
+                                          rel="noopener noreferrer"
+                                          className="rounded-full border border-[#167BFF] px-3 py-1 text-xs font-semibold text-white transition-colors hover:bg-[#0C448C]"
+                                        >
+                                          Visit
+                                        </Link>
+                                      ) : (
+                                        <span className="text-xs text-gray-500">N/A</span>
+                                      )}
+                                    </div>
+                                  );
+                                }
+
+                                return (
+                                  <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-xs">
+                                    <span className="text-gray-400 font-medium">{field.label}</span>
+                                    <p className="mt-1 text-[0.8rem] text-gray-200 leading-relaxed">
+                                      {field.formattedValue}
+                                    </p>
+                                  </div>
+                                );
+                              })}
+                              {hasMoreFields && (
+                                <button
+                                  type="button"
+                                  className="w-full rounded-2xl border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
+                                  onClick={() => {
+                                    const isHibp =
+                                      typeof platformName === "string" &&
+                                      platformName.toLowerCase() === "hibp";
+
+                                    if (isHibp) {
+                                      const hibpSchema =
+                                        Array.isArray(frontSchemas) &&
+                                        frontSchemas.length > 0
+                                          ? frontSchemas[specIndex] ||
+                                            frontSchemas[0]
+                                          : null;
+
+                                      const hibpBody = hibpSchema?.body || {};
+                                      const hibpTags = hibpSchema?.tags || [];
+                                      const hibpTimeline =
+                                        hibpSchema?.timeline || null;
+                                      const hibpRecords = rawData?.data || [];
+
+                                      setHibpDetailsData({
+                                        title:
+                                          hibpBody?.Title ||
+                                          cardTitle ||
+                                          "HIBP Breach",
+                                        category: categoryName,
+                                        platform: platformName,
+                                        statusBadge,
+                                        recordId,
+                                        query: query || null,
+                                        fields: formattedFields,
+                                        cardImage,
+                                        frontBody: hibpBody,
+                                        tags: hibpTags,
+                                        timeline: hibpTimeline,
+                                        records: hibpRecords,
+                                      });
+                                      return;
+                                    }
+
+                                    setDetailsModalData({
+                                      title: cardTitle,
+                                      category: categoryName,
+                                      platform: platformName,
+                                      statusBadge,
+                                      recordId,
+                                      query: query || null,
+                                      profileUrl: profileUrl || null,
+                                      reliableSource: Boolean(reliableSource),
+                                      fields: formattedFields,
+                                      cardImage,
+                                    });
+                                  }}
+                                >
+                                  View more details
+                                </button>
+                              )}
+                            </div>
+                          )}
+
+                          {reliableSource && (
+                            <div className="mt-4 flex items-center justify-between rounded-2xl border border-[#10243A] bg-[#0B1624] px-4 py-2.5 text-[0.65rem] text-[#69B3FF]">
+                              <span className="font-semibold tracking-wide">✓ Reliable Source</span>
+                              <span className="text-[#7D879C]">Verified by Webutation</span>
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
+
+                  {/* Pagination Controls */}
+                  {filteredTotalPages > 1 && (
+                    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-8 pt-6 border-t border-[#3C414A]">
+                      <div className="text-sm text-gray-400">
+                        Showing {filteredStartIndex + 1} to {Math.min(filteredEndIndex, filteredTotal)} of {filteredTotal} results
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {/* Previous Button */}
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                          disabled={currentPage === 1}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === 1
+                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                            }`}
+                        >
+                          Previous
+                        </button>
+
+                        {/* Page Numbers */}
+                        <div className="flex items-center gap-1">
+                          {Array.from({ length: filteredTotalPages }, (_, i) => i + 1).map((page) => {
+                            // Show first page, last page, current page, and pages around current
+                            if (
+                              page === 1 ||
+                              page === filteredTotalPages ||
+                              (page >= currentPage - 1 && page <= currentPage + 1)
+                            ) {
+                              return (
+                                <button
+                                  key={page}
+                                  onClick={() => setCurrentPage(page)}
+                                  className={`min-w-[40px] px-3 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === page
+                                      ? 'bg-[#167BFF] text-white border border-[#167BFF]'
+                                      : 'bg-[#3C414A] text-gray-300 hover:bg-[#515151] border border-[#3C414A]'
+                                    }`}
+                                >
+                                  {page}
+                                </button>
+                              );
+                            } else if (
+                              page === currentPage - 2 ||
+                              page === currentPage + 2
+                            ) {
+                              return (
+                                <span key={page} className="text-gray-500 px-2">
+                                  ...
+                                </span>
+                              );
+                            }
+                            return null;
+                          })}
+                        </div>
+
+                        {/* Next Button */}
+                        <button
+                          onClick={() => setCurrentPage(prev => Math.min(filteredTotalPages, prev + 1))}
+                          disabled={currentPage === filteredTotalPages}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${currentPage === filteredTotalPages
+                              ? 'bg-[#3C414A] text-gray-500 cursor-not-allowed'
+                              : 'bg-[#09346B] text-white hover:bg-[#0C448C] border border-[#167BFF]'
+                            }`}
+                        >
+                          Next
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Image Popup Modal */}
@@ -1092,6 +1454,11 @@ export default function HowItWorks() {
               isOpen={Boolean(detailsModalData)}
               onClose={() => setDetailsModalData(null)}
               data={detailsModalData}
+            />
+            <HibpDetailsModal
+              isOpen={Boolean(hibpDetailsData)}
+              onClose={() => setHibpDetailsData(null)}
+              data={hibpDetailsData}
             />
           </>
         );
