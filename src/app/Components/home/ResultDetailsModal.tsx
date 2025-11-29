@@ -54,19 +54,26 @@ export default function ResultDetailsModal({ isOpen, onClose, data }: ResultDeta
       role="dialog"
       aria-modal="true"
       aria-label="Result details"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
     >
-      <div className="relative w-full max-w-4xl rounded-3xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] p-6 shadow-[0_45px_120px_rgba(0,0,0,0.85)]">
+      <div className="relative w-full max-w-4xl max-h-[90vh] rounded-3xl border border-[#1E2535] bg-gradient-to-b from-[#0D111C] via-[#0A0F19] to-[#06070C] shadow-[0_45px_120px_rgba(0,0,0,0.85)] flex flex-col overflow-hidden">
+        {/* Close Button - Fixed at top right with higher z-index */}
         <button
           onClick={onClose}
           aria-label="Close details"
-          className="absolute right-4 top-4 rounded-full border border-[#2D364D] bg-[#0F1524] p-2 text-white transition hover:border-[#167BFF] hover:bg-[#132042]"
+          className="absolute right-6 top-6 z-50 rounded-full border border-[#2D364D] bg-[#0F1524] p-2 text-white transition hover:border-[#167BFF] hover:bg-[#132042] shadow-lg"
         >
           <CloseIcon className="h-5 w-5" />
         </button>
 
-        <div className="flex flex-col gap-6">
-          <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
+        {/* Scrollable Content Area */}
+        <div className="flex flex-col gap-6 p-6 overflow-y-auto scrollbar-hide">
+          <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between pr-12">
+            <div className="flex-1">
               <p className="text-xs uppercase tracking-[0.35em] text-[#7D879C]">{data.category}</p>
               <h2 className="text-2xl font-semibold text-white">{data.title}</h2>
               <p className="text-sm text-[#9CA3AF]">{data.platform}</p>
@@ -109,7 +116,7 @@ export default function ResultDetailsModal({ isOpen, onClose, data }: ResultDeta
             </div>
           )}
 
-          <div className="max-h-[60vh] space-y-4 overflow-y-auto pr-2 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#1E2535]">
+          <div className="space-y-4 pr-2">
             {data.fields.map((field) => (
               <div key={field.key} className="rounded-2xl border border-[#141B2C] bg-[#0C1323] p-4">
                 <p className="text-sm font-medium text-gray-400">{field.label}</p>
