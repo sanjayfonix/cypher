@@ -10,6 +10,7 @@ import {
 } from "@/api/apiFunctions";
 import { Toparrow } from "@/assets/icon";
 import ResultDetailsModal, { ResultDetailsData, ResultField } from "./ResultDetailsModal";
+import HibpDetailsModal, { HibpDetailsData } from "./HibpDetailsModal";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
@@ -22,6 +23,7 @@ export default function HowItWorks() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [detailsModalData, setDetailsModalData] = useState<ResultDetailsData | null>(null);
+  const [hibpDetailsData, setHibpDetailsData] = useState<HibpDetailsData | null>(null);
 
   const fetchResult = async () => {
     try {
@@ -468,6 +470,8 @@ export default function HowItWorks() {
               specData,
               specFormatArray,
               specIndex,
+              frontSchemas: item.front_schemas || [],
+              rawData: item.data || null,
               itemIndex: index,
               reliableSource: item.reliable_source,
               query: item.query,
@@ -690,7 +694,18 @@ export default function HowItWorks() {
                 <div className="flex-1">
                   <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 mb-8">
                     {currentResults.map((result, resultIndex) => {
-                      const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
+                      const {
+                        platformName,
+                        categoryName,
+                        specData,
+                        specFormatArray,
+                        specIndex,
+                        reliableSource,
+                        query,
+                        status,
+                        frontSchemas,
+                        rawData,
+                      } = result;
 
                       // Extract all fields from spec_format
                       const getFieldValue = (fieldKey: string) => {
@@ -893,7 +908,45 @@ export default function HowItWorks() {
                                 <button
                                   type="button"
                                   className="w-full rounded-2xl border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
-                                  onClick={() =>
+                                  onClick={() => {
+                                    const isHibp =
+                                      typeof platformName === "string" &&
+                                      platformName.toLowerCase() === "hibp";
+
+                                    if (isHibp) {
+                                      const hibpSchema =
+                                        Array.isArray(frontSchemas) &&
+                                        frontSchemas.length > 0
+                                          ? frontSchemas[specIndex] ||
+                                            frontSchemas[0]
+                                          : null;
+
+                                      const hibpBody = hibpSchema?.body || {};
+                                      const hibpTags = hibpSchema?.tags || [];
+                                      const hibpTimeline =
+                                        hibpSchema?.timeline || null;
+                                      const hibpRecords = rawData?.data || [];
+
+                                      setHibpDetailsData({
+                                        title:
+                                          hibpBody?.Title ||
+                                          cardTitle ||
+                                          "HIBP Breach",
+                                        category: categoryName,
+                                        platform: platformName,
+                                        statusBadge,
+                                        recordId,
+                                        query: query || null,
+                                        fields: formattedFields,
+                                        cardImage,
+                                        frontBody: hibpBody,
+                                        tags: hibpTags,
+                                        timeline: hibpTimeline,
+                                        records: hibpRecords,
+                                      });
+                                      return;
+                                    }
+
                                     setDetailsModalData({
                                       title: cardTitle,
                                       category: categoryName,
@@ -905,8 +958,8 @@ export default function HowItWorks() {
                                       reliableSource: Boolean(reliableSource),
                                       fields: formattedFields,
                                       cardImage,
-                                    })
-                                  }
+                                    });
+                                  }}
                                 >
                                   View more details
                                 </button>
@@ -1033,6 +1086,11 @@ export default function HowItWorks() {
               isOpen={Boolean(detailsModalData)}
               onClose={() => setDetailsModalData(null)}
               data={detailsModalData}
+            />
+            <HibpDetailsModal
+              isOpen={Boolean(hibpDetailsData)}
+              onClose={() => setHibpDetailsData(null)}
+              data={hibpDetailsData}
             />
           </>
         );
