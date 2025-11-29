@@ -907,7 +907,7 @@ export default function HowItWorks() {
                               {hasMoreFields && (
                                 <button
                                   type="button"
-                                  className="w-full rounded-2xl border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
+                                  className="w-full rounded-2xl cursor-pointer border border-[#167BFF33] px-4 py-2.5 text-xs font-semibold text-white transition hover:border-[#167BFF] hover:bg-[#0C448C]"
                                   onClick={() => {
                                     const isHibp =
                                       typeof platformName === "string" &&
