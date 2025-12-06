@@ -67,46 +67,73 @@ export default function HibpDetailsModal({
 
   return (
     <div
-      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 p-2 sm:p-4 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-label="HIBP breach details"
+      onClick={(e) => {
+        if (e.target === e.currentTarget) {
+          onClose();
+        }
+      }}
     >
-      <div className="relative flex h-full w-full max-w-5xl flex-col rounded-3xl border border-[#1E2535] bg-gradient-to-b from-[#050814] via-[#020309] to-black p-6 shadow-[0_50px_140px_rgba(0,0,0,0.9)] md:h-auto md:max-h-[90vh]">
+      <div className="relative flex h-full w-full max-w-5xl flex-col rounded-2xl sm:rounded-3xl border border-[#1E2535] bg-gradient-to-b from-[#050814] via-[#020309] to-black shadow-[0_50px_140px_rgba(0,0,0,0.9)] md:h-auto md:max-h-[90vh] overflow-hidden">
         <button
           onClick={onClose}
           aria-label="Close details"
-          className="absolute right-4 top-4 rounded-full border border-[#2D364D] bg-[#0F1524] p-2 text-white transition hover:border-[#167BFF] hover:bg-[#132042]"
+          className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-full border border-[#2D364D] bg-[#0F1524] p-1.5 sm:p-2 text-white transition hover:border-[#167BFF] hover:bg-[#132042] z-10"
         >
-          <CloseIcon className="h-5 w-5" />
+          <CloseIcon className="h-4 w-4 sm:h-5 sm:w-5" />
         </button>
 
-        <div className="flex flex-1 flex-col gap-5 overflow-hidden pt-4 md:pt-6">
+        <div
+          className="hibp-modal-scrollbar flex flex-1 flex-col gap-3 sm:gap-4 md:gap-5 overflow-y-auto overflow-x-hidden p-4 sm:p-6 pt-10 sm:pt-12"
+          style={{
+            scrollbarWidth: 'thin',
+            scrollbarColor: '#1E2535 #0A0F19',
+          }}
+        >
+          <style dangerouslySetInnerHTML={{__html: `
+            .hibp-modal-scrollbar::-webkit-scrollbar {
+              width: 8px;
+            }
+            .hibp-modal-scrollbar::-webkit-scrollbar-track {
+              background: #0A0F19;
+              border-radius: 4px;
+            }
+            .hibp-modal-scrollbar::-webkit-scrollbar-thumb {
+              background: #1E2535;
+              border-radius: 4px;
+            }
+            .hibp-modal-scrollbar::-webkit-scrollbar-thumb:hover {
+              background: #2D364D;
+            }
+          `}} />
           {/* Header */}
-          <header className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <div>
-              <p className="text-[0.65rem] uppercase tracking-[0.35em] text-[#7D879C]">
+          <header className="flex flex-col gap-3 sm:gap-4 md:flex-row md:items-center md:justify-between pr-8 sm:pr-0">
+            <div className="flex-1 min-w-0">
+              <p className="text-[0.6rem] sm:text-[0.65rem] uppercase tracking-[0.3em] sm:tracking-[0.35em] text-[#7D879C]">
                 {data.category || "Data Breach"}
               </p>
-              <h2 className="mt-1 text-xl sm:text-2xl font-semibold text-white">
+              <h2 className="mt-1 text-lg sm:text-xl md:text-2xl font-semibold text-white break-words">
                 {data.title}
               </h2>
-              <p className="mt-1 text-xs sm:text-sm text-[#9CA3AF]">
+              <p className="mt-1 text-[0.7rem] sm:text-xs md:text-sm text-[#9CA3AF]">
                 {data.platform}
               </p>
               {data.recordId && (
-                <p className="mt-1 text-[0.7rem] text-[#7D879C]">
+                <p className="mt-1 text-[0.65rem] sm:text-[0.7rem] text-[#7D879C] break-all">
                   ID: {data.recordId}
                 </p>
               )}
               {data.query && (
-                <p className="mt-1 text-[0.7rem] text-[#7D879C] break-all">
+                <p className="mt-1 text-[0.65rem] sm:text-[0.7rem] text-[#7D879C] break-all">
                   Query: {data.query}
                 </p>
               )}
             </div>
             <span
-              className={`self-start rounded-full px-4 py-2 text-[0.7rem] font-semibold tracking-wide ${data.statusBadge.className}`}
+              className={`self-start rounded-full px-3 py-1.5 sm:px-4 sm:py-2 text-[0.65rem] sm:text-[0.7rem] font-semibold tracking-wide ${data.statusBadge.className}`}
             >
               {data.statusBadge.label}
             </span>
@@ -114,28 +141,28 @@ export default function HibpDetailsModal({
 
           {/* Top block: logo + meta */}
           {(data.cardImage || breachMetaItems.length > 0 || tags.length > 0) && (
-            <section className="flex flex-col gap-4 rounded-2xl border border-[#192032] bg-[#050A1A] p-4 sm:flex-row sm:items-center">
+            <section className="flex flex-col gap-3 sm:gap-4 rounded-xl sm:rounded-2xl border border-[#192032] bg-[#050A1A] p-3 sm:p-4">
               {data.cardImage && (
-                <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border border-[#27304A] bg-[#020617]">
+                <div className="relative h-12 w-12 sm:h-16 sm:w-16 shrink-0 overflow-hidden rounded-full border border-[#27304A] bg-[#020617] self-center sm:self-start">
                   <Image
                     src={data.cardImage}
                     alt={`${data.title} logo`}
                     fill
-                    sizes="64px"
+                    sizes="(max-width: 640px) 48px, 64px"
                     className="object-cover"
                     unoptimized
                   />
                 </div>
               )}
-              <div className="flex-1 space-y-3">
+              <div className="flex-1 space-y-2 sm:space-y-3">
                 {breachMetaItems.length > 0 && (
-                  <div className="grid grid-cols-1 gap-2 text-xs text-gray-200 sm:grid-cols-2 md:grid-cols-3">
+                  <div className="grid grid-cols-1 gap-2 text-xs text-gray-200 sm:grid-cols-2 lg:grid-cols-3">
                     {breachMetaItems.map((item) => (
-                      <div key={item.label} className="rounded-xl bg-[#070D1E] p-3">
-                        <p className="text-[0.7rem] font-medium text-gray-400">
+                      <div key={item.label} className="rounded-lg sm:rounded-xl bg-[#070D1E] p-2.5 sm:p-3">
+                        <p className="text-[0.65rem] sm:text-[0.7rem] font-medium text-gray-400">
                           {item.label}
                         </p>
-                        <p className="mt-1 text-[0.8rem]">
+                        <p className="mt-1 text-[0.75rem] sm:text-[0.8rem] break-words">
                           {String(item.value)}
                         </p>
                       </div>
@@ -144,11 +171,11 @@ export default function HibpDetailsModal({
                 )}
 
                 {tags.length > 0 && (
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5 sm:gap-2">
                     {tags.map((tagObj, idx) => (
                       <span
                         key={idx}
-                        className="rounded-full border border-[#2A3A5C] bg-[#050B1C] px-3 py-1 text-[0.7rem] font-medium text-[#C1D0FF]"
+                        className="rounded-full border border-[#2A3A5C] bg-[#050B1C] px-2.5 py-1 sm:px-3 text-[0.65rem] sm:text-[0.7rem] font-medium text-[#C1D0FF]"
                       >
                         {tagObj?.tag}
                       </span>
@@ -160,35 +187,35 @@ export default function HibpDetailsModal({
           )}
 
           {/* Scrollable content */}
-          <main className="flex-1 space-y-4 overflow-y-auto pr-1 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-[#1E2535]">
+          <main className="flex-1 space-y-3 sm:space-y-4">
             {/* Timeline */}
             {Object.keys(timeline).length > 0 && (
-              <section className="rounded-2xl border border-[#10243A] bg-[#050E1C] px-4 py-3 text-[0.75rem] text-[#C0D3FF]">
-                <h3 className="mb-2 text-xs font-semibold uppercase tracking-[0.25em] text-[#64748B]">
+              <section className="rounded-xl sm:rounded-2xl border border-[#10243A] bg-[#050E1C] px-3 py-2.5 sm:px-4 sm:py-3 text-[0.7rem] sm:text-[0.75rem] text-[#C0D3FF]">
+                <h3 className="mb-2 text-[0.65rem] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#64748B]">
                   Timeline
                 </h3>
-                <div className="flex flex-wrap items-center gap-3">
+                <div className="flex flex-col sm:flex-row sm:flex-wrap items-start sm:items-center gap-2 sm:gap-3">
                   {"registered" in timeline && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex h-2 w-2 rounded-full bg-[#22C55E]" />
-                      <span className="font-semibold">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                      <span className="inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#22C55E] shrink-0" />
+                      <span className="font-semibold text-[0.7rem] sm:text-[0.75rem]">
                         {timeline.registered ? "Registered" : "Not Registered"}
                       </span>
                       {timeline.registered_date && (
-                        <span className="ml-1 text-[#9CA3AF]">
+                        <span className="ml-1 text-[0.65rem] sm:text-[0.7rem] text-[#9CA3AF] break-words">
                           ({timeline.registered_date})
                         </span>
                       )}
                     </div>
                   )}
                   {"last_seen" in timeline && (
-                    <div className="flex items-center gap-2">
-                      <span className="inline-flex h-2 w-2 rounded-full bg-[#F97316]" />
-                      <span className="font-semibold">
+                    <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+                      <span className="inline-flex h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full bg-[#F97316] shrink-0" />
+                      <span className="font-semibold text-[0.7rem] sm:text-[0.75rem]">
                         {timeline.last_seen ? "Last seen" : "Last seen (approx.)"}
                       </span>
                       {timeline.last_seen_date && (
-                        <span className="ml-1 text-[#9CA3AF]">
+                        <span className="ml-1 text-[0.65rem] sm:text-[0.7rem] text-[#9CA3AF] break-words">
                           ({timeline.last_seen_date})
                         </span>
                       )}
@@ -200,19 +227,19 @@ export default function HibpDetailsModal({
 
             {/* Generic fields from spec_format (already formatted) */}
             {data.fields.length > 0 && (
-              <section className="space-y-3">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#64748B]">
+              <section className="space-y-2 sm:space-y-3">
+                <h3 className="text-[0.65rem] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#64748B]">
                   Summary
                 </h3>
                 {data.fields.map((field) => (
                   <div
                     key={field.key}
-                    className="rounded-2xl border border-[#141B2C] bg-[#050A18] p-3"
+                    className="rounded-xl sm:rounded-2xl border border-[#141B2C] bg-[#050A18] p-2.5 sm:p-3"
                   >
-                    <p className="text-xs font-medium text-gray-400">
+                    <p className="text-[0.65rem] sm:text-xs font-medium text-gray-400">
                       {field.label}
                     </p>
-                    <p className="mt-1 text-[0.85rem] text-gray-100 whitespace-pre-wrap break-words">
+                    <p className="mt-1 text-[0.8rem] sm:text-[0.85rem] text-gray-100 whitespace-pre-wrap break-words">
                       {field.formattedValue}
                     </p>
                   </div>
@@ -222,23 +249,23 @@ export default function HibpDetailsModal({
 
             {/* Detailed breached records */}
             {records.length > 0 && (
-              <section className="space-y-3">
-                <h3 className="text-xs font-semibold uppercase tracking-[0.25em] text-[#64748B]">
+              <section className="space-y-2 sm:space-y-3">
+                <h3 className="text-[0.65rem] sm:text-xs font-semibold uppercase tracking-[0.2em] sm:tracking-[0.25em] text-[#64748B]">
                   Breach records
                 </h3>
                 {records.map((entry, idx) => (
                   <div
                     key={idx}
-                    className="rounded-2xl border border-[#1E293B] bg-[#020617] p-3 text-[0.8rem] text-gray-200 space-y-1.5"
+                    className="rounded-xl sm:rounded-2xl border border-[#1E293B] bg-[#020617] p-2.5 sm:p-3 text-[0.75rem] sm:text-[0.8rem] text-gray-200 space-y-1 sm:space-y-1.5"
                   >
                     {entry.name?.value && (
-                      <div>
+                      <div className="break-words">
                         <span className="text-gray-400 font-medium">Name: </span>
                         <span>{entry.name.value}</span>
                       </div>
                     )}
                     {entry.website?.value && (
-                      <div>
+                      <div className="break-words">
                         <span className="text-gray-400 font-medium">
                           Website:{" "}
                         </span>
@@ -246,13 +273,13 @@ export default function HibpDetailsModal({
                       </div>
                     )}
                     {entry.bio?.value && (
-                      <div>
+                      <div className="break-words">
                         <span className="text-gray-400 font-medium">Bio: </span>
                         <span>{entry.bio.value}</span>
                       </div>
                     )}
                     {entry.creation_date?.value && (
-                      <div>
+                      <div className="break-words">
                         <span className="text-gray-400 font-medium">
                           Creation Date:{" "}
                         </span>
@@ -265,7 +292,7 @@ export default function HibpDetailsModal({
                         <div className="mt-1 space-y-0.5">
                           {entry.platform_variables.map(
                             (pv: any, pvIdx: number) => (
-                              <div key={pvIdx}>
+                              <div key={pvIdx} className="break-words">
                                 <span className="text-gray-400 font-medium">
                                   {(pv.proper_key || pv.key || "").toString()}
                                   {": "}
@@ -291,8 +318,8 @@ export default function HibpDetailsModal({
 
           {/* Optional footer for external links */}
           {body.Domain && (
-            <footer className="mt-2 flex items-center justify-between gap-3 pt-2 text-[0.75rem]">
-              <p className="text-[#9CA3AF]">
+            <footer className="mt-2 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 sm:gap-3 pt-2 text-[0.7rem] sm:text-[0.75rem]">
+              <p className="text-[#9CA3AF] flex-1">
                 Data sourced from {data.platform}. Treat with caution.
               </p>
               <Link
@@ -303,7 +330,7 @@ export default function HibpDetailsModal({
                 }
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full border border-[#167BFF] bg-[#0C448C] px-4 py-1.5 text-[0.7rem] font-semibold text-white transition hover:bg-[#167BFF]"
+                className="inline-flex items-center justify-center rounded-full border border-[#167BFF] bg-[#0C448C] px-3 py-1.5 sm:px-4 text-[0.65rem] sm:text-[0.7rem] font-semibold text-white transition hover:bg-[#167BFF] w-full sm:w-auto"
               >
                 Visit breach site
               </Link>
