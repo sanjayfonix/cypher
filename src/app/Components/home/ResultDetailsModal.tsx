@@ -117,12 +117,27 @@ export default function ResultDetailsModal({ isOpen, onClose, data }: ResultDeta
           )}
 
           <div className="space-y-4 pr-2">
-            {data.fields.map((field) => (
-              <div key={field.key} className="rounded-2xl border border-[#141B2C] bg-[#0C1323] p-4">
-                <p className="text-sm font-medium text-gray-400">{field.label}</p>
-                <p className="mt-1 text-base text-gray-100 whitespace-pre-wrap break-words">{field.formattedValue}</p>
-              </div>
-            ))}
+            {data.fields.map((field) => {
+              // Check if the value is a complex structure (contains newlines or brackets)
+              const isComplexValue = field.formattedValue.includes('\n') || 
+                                     field.formattedValue.includes('{') || 
+                                     field.formattedValue.includes('[');
+              
+              return (
+                <div key={field.key} className="rounded-2xl border border-[#141B2C] bg-[#0C1323] p-4">
+                  <p className="text-sm font-medium text-gray-400">{field.label}</p>
+                  {isComplexValue ? (
+                    <pre className="mt-1 text-sm text-gray-100 whitespace-pre-wrap break-words overflow-x-auto max-h-64 overflow-y-auto font-mono bg-[#0A0F19] p-3 rounded border border-[#1A2134]">
+                      {field.formattedValue}
+                    </pre>
+                  ) : (
+                    <p className="mt-1 text-base text-gray-100 whitespace-pre-wrap break-words">
+                      {field.formattedValue}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
           </div>
 
           {data.reliableSource && (

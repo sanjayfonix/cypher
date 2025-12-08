@@ -168,21 +168,200 @@ export default function HowItWorks() {
     []
   );
 
+  // Helper function to expand complex values into individual fields
+  const expandComplexValueToFields = (value: any, parentKey: string, index?: number): any[] => {
+    const fields: any[] = [];
+    
+    if (value === null || value === undefined) {
+      return fields;
+    }
+    
+    // Handle array of objects
+    if (Array.isArray(value)) {
+      if (value.length === 0) return fields;
+      
+      // Check if array contains objects
+      const hasObjects = value.some(item => typeof item === "object" && item !== null && !Array.isArray(item));
+      
+      if (hasObjects) {
+        // Expand each object in array as separate fields
+        value.forEach((item, idx) => {
+          if (typeof item === "object" && item !== null && !Array.isArray(item)) {
+            // Expand object properties as fields
+            Object.keys(item).forEach(key => {
+              const fieldKey = `${parentKey}_${idx}_${key}`;
+              const fieldValue = item[key];
+              
+              // Recursively expand nested structures
+              if (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue)) {
+                fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
+              } else if (Array.isArray(fieldValue)) {
+                fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
+              } else {
+                const parentLabel = parentKey.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase());
+                const keyLabel = key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase());
+                fields.push({
+                  key: fieldKey,
+                  label: `${parentLabel} #${idx + 1} - ${keyLabel}`,
+                  value: fieldValue,
+                  type: typeof fieldValue
+                });
+              }
+            });
+          } else {
+            // Simple array item
+            fields.push({
+              key: `${parentKey}_${idx}`,
+              label: `${parentKey.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase())} #${idx + 1}`,
+              value: item,
+              type: typeof item
+            });
+          }
+        });
+      } else {
+        // Simple array - join as single value
+        fields.push({
+          key: parentKey,
+          label: parentKey.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+          value: value.join(", "),
+          type: "string"
+        });
+      }
+    } 
+    // Handle object/dictionary
+    else if (typeof value === "object") {
+      Object.keys(value).forEach(key => {
+        const fieldKey = `${parentKey}_${key}`;
+        const fieldValue = value[key];
+        
+        // Recursively expand nested structures
+        if (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue)) {
+          fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
+        } else if (Array.isArray(fieldValue)) {
+          fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
+        } else {
+          fields.push({
+            key: fieldKey,
+            label: key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+            value: fieldValue,
+            type: typeof fieldValue
+          });
+        }
+      });
+    }
+    
+    return fields;
+  };
+
+  // Helper function to format complex nested structures (for fallback display)
+  const formatComplexValue = (obj: any, indent: number = 0): string => {
+    const indentStr = "  ".repeat(indent);
+    const nextIndent = indent + 1;
+    
+    if (obj === null || obj === undefined) {
+      return "null";
+    }
+    
+    if (Array.isArray(obj)) {
+      if (obj.length === 0) return "[]";
+      
+      // Check if array contains objects
+      const hasObjects = obj.some(item => typeof item === "object" && item !== null && !Array.isArray(item));
+      
+      if (hasObjects) {
+        // Format array of objects - without "Item 1", "Item 2" labels
+        const items = obj.map((item, index) => {
+          if (typeof item === "object" && item !== null && !Array.isArray(item)) {
+            const formatted = formatComplexValue(item, nextIndent);
+            return `${indentStr}  ${formatted}`;
+          } else {
+            return `${indentStr}  ${String(item)}`;
+          }
+        });
+        return `[\n${items.join("\n")}\n${indentStr}]`;
+      } else {
+        // Simple array
+        return `[${obj.map(item => String(item)).join(", ")}]`;
+      }
+    }
+    
+    if (typeof obj === "object") {
+      const keys = Object.keys(obj);
+      if (keys.length === 0) return "{}";
+      
+      const items = keys.map(key => {
+        const val = obj[key];
+        let formattedVal: string;
+        
+        if (typeof val === "object" && val !== null && !Array.isArray(val)) {
+          // Nested object
+          formattedVal = formatComplexValue(val, nextIndent);
+        } else if (Array.isArray(val)) {
+          // Array value
+          formattedVal = formatComplexValue(val, nextIndent);
+        } else if (typeof val === "string") {
+          // String value - no quotes for better readability
+          formattedVal = val;
+        } else if (typeof val === "boolean") {
+          formattedVal = val ? "true" : "false";
+        } else {
+          formattedVal = String(val);
+        }
+        
+        return `${indentStr}  ${key}: ${formattedVal}`;
+      });
+      
+      return `{\n${items.join("\n")}\n${indentStr}}`;
+    }
+    
+    return String(obj);
+  };
+
   const formatValue = (value: any, type: string | undefined) => {
     if (value === null || value === undefined || value === "") {
       return "Not available";
     }
-    if (type === "bool") return value ? "Yes" : "No";
-    if (type === "datetime") {
+    
+    if (type === "bool" || type === "boolean") return value ? "Yes" : "No";
+    
+    if (type === "datetime" || type === "date") {
       try {
         return new Date(value).toLocaleDateString();
       } catch {
         return value.toString();
       }
     }
-    if (Array.isArray(value)) {
-      return value.length ? value.join(", ") : "Not available";
+    
+    // Handle list type (array of objects or simple array)
+    // Note: Complex arrays/objects are now expanded into individual fields,
+    // so this is mainly for simple arrays or fallback cases
+    if (type === "list" || Array.isArray(value)) {
+      if (value.length === 0) return "Empty list";
+      
+      // Check if it's an array of objects
+      const hasObjects = value.some((item: any) => 
+        typeof item === "object" && item !== null && !Array.isArray(item)
+      );
+      
+      if (hasObjects) {
+        // For arrays of objects, show count (they should be expanded into fields)
+        return `${value.length} item${value.length !== 1 ? 's' : ''} (see details)`;
+      } else {
+        // Simple array - join with commas
+        return value.map((item: any) => String(item)).join(", ");
+      }
     }
+    
+    // Handle dict/object type
+    // Note: Complex objects are now expanded into individual fields,
+    // so this is mainly for fallback cases
+    if (type === "dict" || type === "object" || (typeof value === "object" && value !== null && !Array.isArray(value))) {
+      const keys = Object.keys(value);
+      if (keys.length === 0) return "Empty object";
+      return `${keys.length} field${keys.length !== 1 ? 's' : ''} (see details)`;
+    }
+    
+    // For primitive types, return as string
     return value.toString();
   };
 
@@ -833,17 +1012,35 @@ export default function HowItWorks() {
                           const additionalFields: any[] = [];
                           if (Array.isArray(specData.platform_variables)) {
                             specData.platform_variables.forEach((pv: any) => {
+                              // Filter out "surveys" field
+                              if (pv.key === "surveys" || pv.key?.toLowerCase() === "surveys") return;
+                              
                               if (desiredFields.some((df) => df.key === pv.key)) return;
                               if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
                                 if (typeof pv.value === "string" && pv.value.trim() === "") return;
                                 if (Array.isArray(pv.value) && pv.value.length === 0) return;
 
-                                additionalFields.push({
-                                  key: pv.key,
-                                  label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
-                                  value: pv.value,
-                                  type: pv.type,
-                                });
+                                // Check if value is complex (array of objects or nested object)
+                                const isComplex = (Array.isArray(pv.value) && pv.value.some((item: any) => 
+                                  typeof item === "object" && item !== null && !Array.isArray(item)
+                                )) || (typeof pv.value === "object" && pv.value !== null && !Array.isArray(pv.value) && Object.keys(pv.value).length > 0);
+
+                                if (isComplex) {
+                                  // Expand complex values into individual fields
+                                  const expandedFields = expandComplexValueToFields(pv.value, pv.key);
+                                  expandedFields.forEach(field => {
+                                    // Field key already includes parent key from expandComplexValueToFields
+                                    additionalFields.push(field);
+                                  });
+                                } else {
+                                  // Simple value - add as is
+                                  additionalFields.push({
+                                    key: pv.key,
+                                    label: pv.key.replace(/_/g, " ").replace(/\b\w/g, (l: string) => l.toUpperCase()),
+                                    value: pv.value,
+                                    type: pv.type,
+                                  });
+                                }
                               }
                             });
                           }
@@ -952,12 +1149,23 @@ export default function HowItWorks() {
                                         </div>
                                       );
                                     }
+                                    // Check if the value is a complex structure (contains newlines or brackets)
+                                    const isComplexValue = field.formattedValue.includes('\n') || 
+                                                           field.formattedValue.includes('{') || 
+                                                           field.formattedValue.includes('[');
+                                    
                                     return (
                                       <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-xs">
                                         <span className="text-gray-400 font-medium">{field.label}</span>
-                                        <p className="mt-1 text-[0.8rem] text-gray-200 leading-relaxed">
-                                          {field.formattedValue}
-                                        </p>
+                                        {isComplexValue ? (
+                                          <pre className="mt-1 text-[0.7rem] text-gray-200 leading-relaxed whitespace-pre-wrap break-words overflow-x-auto max-h-48 overflow-y-auto font-mono bg-[#0A0F19] p-2 rounded border border-[#1A2134]">
+                                            {field.formattedValue}
+                                          </pre>
+                                        ) : (
+                                          <p className="mt-1 text-[0.8rem] text-gray-200 leading-relaxed break-words">
+                                            {field.formattedValue}
+                                          </p>
+                                        )}
                                       </div>
                                     );
                                   })}
