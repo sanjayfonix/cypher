@@ -31,11 +31,47 @@ export default function HowItWorks() {
   const [type, setType] = useState(0);
   const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
-  const [city, setCity] = useState('');
-  const [state, setState] = useState('');
-  const [usernamePhone, setUsernamePhone] = useState('');
-  const [usernameEmail, setUsernameEmail] = useState('');
-  const [keyword, setKeyword] = useState('');
+  
+  // Separate filter states for each search type
+  const [usernameFilters, setUsernameFilters] = useState({
+    city: '',
+    state: '',
+    usernamePhone: '',
+    usernameEmail: '',
+    keyword: ''
+  });
+  
+  const [phoneFilters, setPhoneFilters] = useState({
+    // Can add phone-specific filters here in future
+  });
+  
+  const [emailFilters, setEmailFilters] = useState({
+    // Can add email-specific filters here in future
+  });
+  
+  // Legacy state variables for backward compatibility with UsernameForm component
+  const city = usernameFilters.city;
+  const state = usernameFilters.state;
+  const usernamePhone = usernameFilters.usernamePhone;
+  const usernameEmail = usernameFilters.usernameEmail;
+  const keyword = usernameFilters.keyword;
+  
+  // Setters that update the username filter state
+  const setCity = (val: string) => {
+    setUsernameFilters(prev => ({ ...prev, city: val }));
+  };
+  const setState = (val: string) => {
+    setUsernameFilters(prev => ({ ...prev, state: val }));
+  };
+  const setUsernamePhone = (val: string) => {
+    setUsernameFilters(prev => ({ ...prev, usernamePhone: val }));
+  };
+  const setUsernameEmail = (val: string) => {
+    setUsernameFilters(prev => ({ ...prev, usernameEmail: val }));
+  };
+  const setKeyword = (val: string) => {
+    setUsernameFilters(prev => ({ ...prev, keyword: val }));
+  };
 
   const fetchResult = async () => {
     try {
@@ -432,42 +468,110 @@ export default function HowItWorks() {
           const categoryName = item.category?.name || 'Unknown Category';
           const specFormatArray = item.spec_format || [];
 
-          specFormatArray.forEach((specData: any, specIndex: number) => {
-            allResults.push({
-              platformName,
-              categoryName,
-              specData,
-              specFormatArray,
-              specIndex,
-              frontSchemas: item.front_schemas || [],
-              rawData: item.data || null,
-              itemIndex: index,
-              reliableSource: item.reliable_source,
-              query: item.query,
-              status: item.status,
+          // Handle case where spec_format is empty or doesn't exist
+          // This can happen with username search results
+          if (specFormatArray.length > 0) {
+            specFormatArray.forEach((specData: any, specIndex: number) => {
+              allResults.push({
+                platformName,
+                categoryName,
+                specData,
+                specFormatArray,
+                specIndex,
+                frontSchemas: item.front_schemas || [],
+                rawData: item.data || null,
+                itemIndex: index,
+                reliableSource: item.reliable_source,
+                query: item.query,
+                status: item.status,
+              });
             });
-          });
+          } else {
+            // Fallback: If spec_format is empty, try to use item.data or create a result from item itself
+            // This handles cases where username search returns different structure
+            // Check if item has any data that can be displayed
+            const hasData = item.data && typeof item.data === 'object' && Object.keys(item.data).length > 0;
+            const hasSpecData = item.spec_data && typeof item.spec_data === 'object' && Object.keys(item.spec_data).length > 0;
+            
+            if (hasData || hasSpecData) {
+              // Use item.data or item.spec_data as fallback specData
+              const fallbackSpecData = item.data || item.spec_data || {};
+              
+              allResults.push({
+                platformName,
+                categoryName,
+                specData: fallbackSpecData,
+                specFormatArray: [fallbackSpecData],
+                specIndex: 0,
+                frontSchemas: item.front_schemas || [],
+                rawData: item.data || null,
+                itemIndex: index,
+                reliableSource: item.reliable_source,
+                query: item.query,
+                status: item.status,
+              });
+            } else {
+              // Even if no structured data, still add the item so it shows up
+              // This ensures results are visible even if structure is unexpected
+              allResults.push({
+                platformName,
+                categoryName,
+                specData: item,
+                specFormatArray: [item],
+                specIndex: 0,
+                frontSchemas: item.front_schemas || [],
+                rawData: item.data || item,
+                itemIndex: index,
+                reliableSource: item.reliable_source,
+                query: item.query,
+                status: item.status,
+              });
+            }
+          }
+        });
+        
+        // Debug logging to help identify issues
+        console.log('Processed results:', {
+          totalItems: phoneResult.length,
+          allResultsCount: allResults.length,
+          type: type === 0 ? 'username' : type === 1 ? 'phone' : 'email'
         });
 
         // Get unique categories
         const uniqueCategories = Array.from(new Set(allResults.map((r) => r.categoryName))).sort();
 
         // Helper function to get field value from result
+        // Handles both normal spec_format structure and fallback data structures
         const getFieldValueFromResult = (resultSpecData: any, fieldKey: string): string | null => {
+          if (!resultSpecData) return null;
+          
+          // Try direct field access (normal spec_format structure: { fieldKey: { value: ... } })
           const directField = resultSpecData[fieldKey];
           if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
             return String(directField.value).toLowerCase().trim();
           }
+          
+          // Try direct value access (fallback structure: { fieldKey: "value" })
+          if (resultSpecData[fieldKey] !== undefined && resultSpecData[fieldKey] !== null && resultSpecData[fieldKey] !== "") {
+            const directValue = resultSpecData[fieldKey];
+            if (typeof directValue === 'string' || typeof directValue === 'number') {
+              return String(directValue).toLowerCase().trim();
+            }
+          }
+          
+          // Try platform_variables array
           if (Array.isArray(resultSpecData.platform_variables)) {
             const platformField = resultSpecData.platform_variables.find((pv: any) => pv.key === fieldKey);
             if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
               return String(platformField.value).toLowerCase().trim();
             }
           }
+          
           return null;
         };
 
         // Filter results based on category, internal search query, and optional filter fields
+        // Only apply username-specific filters when type === 0 (username search)
         const filteredResults = allResults.filter((result) => {
           // Filter by category
           if (selectedCategory !== "all" && result.categoryName !== selectedCategory) {
@@ -476,51 +580,58 @@ export default function HowItWorks() {
 
           const { specData } = result;
 
-          if (city && city.trim()) {
-            const resultCity = getFieldValueFromResult(specData, "city") ||
-              getFieldValueFromResult(specData, "location") || "";
-            if (!resultCity.includes(city.toLowerCase().trim())) return false;
-          }
-
-          if (state && state.trim()) {
-            const resultState = getFieldValueFromResult(specData, "state") ||
-              getFieldValueFromResult(specData, "location") || "";
-            if (!resultState.includes(state.toLowerCase().trim())) return false;
-          }
-
-          if (usernamePhone && usernamePhone.trim()) {
-            const resultPhone = getFieldValueFromResult(specData, "phone") ||
-              getFieldValueFromResult(specData, "phone_hint") || "";
-            if (!resultPhone.includes(usernamePhone.toLowerCase().trim())) return false;
-          }
-
-          if (usernameEmail && usernameEmail.trim()) {
-            const resultEmail = getFieldValueFromResult(specData, "email") ||
-              getFieldValueFromResult(specData, "email_hint") || "";
-            if (!resultEmail.includes(usernameEmail.toLowerCase().trim())) return false;
-          }
-
-          if (keyword && keyword.trim()) {
-            const keywordLower = keyword.toLowerCase().trim();
-            let found = false;
-            const fieldsToCheck = ["name", "username", "email", "phone", "location", "city", "state", "bio", "first_name", "last_name"];
-            for (const fieldKey of fieldsToCheck) {
-              const fieldValue = getFieldValueFromResult(specData, fieldKey);
-              if (fieldValue && fieldValue.includes(keywordLower)) {
-                found = true;
-                break;
-              }
+          // ✅ Apply username filters ONLY when type === 0 (username search)
+          if (type === 0) {
+            if (usernameFilters.city && usernameFilters.city.trim()) {
+              const resultCity = getFieldValueFromResult(specData, "city") ||
+                getFieldValueFromResult(specData, "location") || "";
+              if (!resultCity.includes(usernameFilters.city.toLowerCase().trim())) return false;
             }
-            if (!found && Array.isArray(specData.platform_variables)) {
-              for (const pv of specData.platform_variables) {
-                if (pv.value && String(pv.value).toLowerCase().includes(keywordLower)) {
+
+            if (usernameFilters.state && usernameFilters.state.trim()) {
+              const resultState = getFieldValueFromResult(specData, "state") ||
+                getFieldValueFromResult(specData, "location") || "";
+              if (!resultState.includes(usernameFilters.state.toLowerCase().trim())) return false;
+            }
+
+            if (usernameFilters.usernamePhone && usernameFilters.usernamePhone.trim()) {
+              const resultPhone = getFieldValueFromResult(specData, "phone") ||
+                getFieldValueFromResult(specData, "phone_hint") || "";
+              if (!resultPhone.includes(usernameFilters.usernamePhone.toLowerCase().trim())) return false;
+            }
+
+            if (usernameFilters.usernameEmail && usernameFilters.usernameEmail.trim()) {
+              const resultEmail = getFieldValueFromResult(specData, "email") ||
+                getFieldValueFromResult(specData, "email_hint") || "";
+              if (!resultEmail.includes(usernameFilters.usernameEmail.toLowerCase().trim())) return false;
+            }
+
+            if (usernameFilters.keyword && usernameFilters.keyword.trim()) {
+              const keywordLower = usernameFilters.keyword.toLowerCase().trim();
+              let found = false;
+              const fieldsToCheck = ["name", "username", "email", "phone", "location", "city", "state", "bio", "first_name", "last_name"];
+              for (const fieldKey of fieldsToCheck) {
+                const fieldValue = getFieldValueFromResult(specData, fieldKey);
+                if (fieldValue && fieldValue.includes(keywordLower)) {
                   found = true;
                   break;
                 }
               }
+              if (!found && Array.isArray(specData.platform_variables)) {
+                for (const pv of specData.platform_variables) {
+                  if (pv.value && String(pv.value).toLowerCase().includes(keywordLower)) {
+                    found = true;
+                    break;
+                  }
+                }
+              }
+              if (!found) return false;
             }
-            if (!found) return false;
           }
+          
+          // Phone/Email search filters can be added here in future if needed
+          // if (type === 1) { ... phoneFilters ... }
+          // if (type === 2) { ... emailFilters ... }
 
           if (!internalSearchQuery.trim()) return true;
 
@@ -536,11 +647,25 @@ export default function HowItWorks() {
             return false;
           };
 
-          if (specData.name && checkValue(specData.name.value)) return true;
-          if (specData.username && checkValue(specData.username.value)) return true;
-          if (specData.email && checkValue(specData.email.value)) return true;
-          if (specData.phone && checkValue(specData.phone.value)) return true;
-          if (specData.location && checkValue(specData.location.value)) return true;
+          // Handle both normal structure (specData.field.value) and fallback structure (specData.field)
+          const checkField = (fieldName: string): boolean => {
+            const field = specData[fieldName];
+            if (!field) return false;
+            
+            // Normal structure: { field: { value: ... } }
+            if (field.value !== undefined) {
+              return checkValue(field.value);
+            }
+            
+            // Fallback structure: { field: "value" }
+            return checkValue(field);
+          };
+
+          if (checkField('name')) return true;
+          if (checkField('username')) return true;
+          if (checkField('email')) return true;
+          if (checkField('phone')) return true;
+          if (checkField('location')) return true;
 
           if (Array.isArray(specData.platform_variables)) {
             for (const pv of specData.platform_variables) {
@@ -661,16 +786,30 @@ export default function HowItWorks() {
                           const { platformName, categoryName, specData, specFormatArray, specIndex, reliableSource, query, status } = result;
 
                           const getFieldValue = (fieldKey: string) => {
+                            if (!specData) return { value: null, type: undefined };
+                            
+                            // Try direct field access (normal spec_format structure: { fieldKey: { value: ... } })
                             const directField = specData[fieldKey];
                             if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
                               return { value: directField.value, type: directField.type };
                             }
+                            
+                            // Try direct value access (fallback structure: { fieldKey: "value" })
+                            if (specData[fieldKey] !== undefined && specData[fieldKey] !== null && specData[fieldKey] !== "") {
+                              const directValue = specData[fieldKey];
+                              if (typeof directValue === 'string' || typeof directValue === 'number' || typeof directValue === 'boolean') {
+                                return { value: directValue, type: typeof directValue };
+                              }
+                            }
+                            
+                            // Try platform_variables array
                             if (Array.isArray(specData.platform_variables)) {
                               const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
                               if (platformField && platformField.value !== undefined && platformField.value !== null && platformField.value !== "") {
                                 return { value: platformField.value, type: platformField.type };
                               }
                             }
+                            
                             return { value: null, type: undefined };
                           };
 
