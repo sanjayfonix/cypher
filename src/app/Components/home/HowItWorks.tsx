@@ -716,9 +716,6 @@ export default function HowItWorks() {
           type: type === 0 ? 'username' : type === 1 ? 'phone' : 'email'
         });
 
-        // Get unique categories
-        const uniqueCategories = Array.from(new Set(allResults.map((r) => r.categoryName))).sort();
-
         // Helper function to get field value from result
         // Handles both normal spec_format structure and fallback data structures
         const getFieldValueFromResult = (resultSpecData: any, fieldKey: string): string | null => {
@@ -861,6 +858,9 @@ export default function HowItWorks() {
         const filteredEndIndex = filteredStartIndex + itemsPerPage;
         const currentResults = filteredResults.slice(filteredStartIndex, filteredEndIndex);
 
+        // Get unique categories from filtered results (not allResults)
+        const filteredUniqueCategories = Array.from(new Set(filteredResults.map((r) => r.categoryName))).sort();
+
         return (
           <>
             <div className="container mx-auto px-4 py-8 overflow-visible">
@@ -910,9 +910,9 @@ export default function HowItWorks() {
                             className="w-full sm:w-64  rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-sm md:text-base text-white focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF] cursor-pointer"
                           >
                       
-                            <option value="all">All Categories ({allResults.length})</option>
-                            {uniqueCategories.map((category) => {
-                              const count = allResults.filter((r) => r.categoryName === category).length;
+                            <option value="all">All Categories ({filteredTotal})</option>
+                            {filteredUniqueCategories.map((category) => {
+                              const count = filteredResults.filter((r) => r.categoryName === category).length;
                               return (
                                 <option key={category} value={category}>
                                   {category} ({count})
