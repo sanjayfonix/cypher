@@ -31,38 +31,28 @@ export default function HowItWorks() {
   const [type, setType] = useState(0);
   const [phone, setPhone] = useState('');
   const [fullName, setFullName] = useState('');
-  
+
   // Separate filter states for each search type
+  // For the Name tab we support username (keyword), phone and email filters
   const [usernameFilters, setUsernameFilters] = useState({
-    city: '',
-    state: '',
     usernamePhone: '',
     usernameEmail: '',
     keyword: ''
   });
-  
+
   const [phoneFilters, setPhoneFilters] = useState({
     // Can add phone-specific filters here in future
   });
-  
+
   const [emailFilters, setEmailFilters] = useState({
     // Can add email-specific filters here in future
   });
-  
-  // Legacy state variables for backward compatibility with UsernameForm component
-  const city = usernameFilters.city;
-  const state = usernameFilters.state;
+
   const usernamePhone = usernameFilters.usernamePhone;
   const usernameEmail = usernameFilters.usernameEmail;
   const keyword = usernameFilters.keyword;
-  
+
   // Setters that update the username filter state
-  const setCity = (val: string) => {
-    setUsernameFilters(prev => ({ ...prev, city: val }));
-  };
-  const setState = (val: string) => {
-    setUsernameFilters(prev => ({ ...prev, state: val }));
-  };
   const setUsernamePhone = (val: string) => {
     setUsernameFilters(prev => ({ ...prev, usernamePhone: val }));
   };
@@ -171,18 +161,18 @@ export default function HowItWorks() {
   // Helper function to expand complex values into individual fields
   const expandComplexValueToFields = (value: any, parentKey: string, index?: number): any[] => {
     const fields: any[] = [];
-    
+
     if (value === null || value === undefined) {
       return fields;
     }
-    
+
     // Handle array of objects
     if (Array.isArray(value)) {
       if (value.length === 0) return fields;
-      
+
       // Check if array contains objects
       const hasObjects = value.some(item => typeof item === "object" && item !== null && !Array.isArray(item));
-      
+
       if (hasObjects) {
         // Expand each object in array as separate fields
         value.forEach((item, idx) => {
@@ -191,7 +181,7 @@ export default function HowItWorks() {
             Object.keys(item).forEach(key => {
               const fieldKey = `${parentKey}_${idx}_${key}`;
               const fieldValue = item[key];
-              
+
               // Recursively expand nested structures
               if (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue)) {
                 fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
@@ -227,13 +217,13 @@ export default function HowItWorks() {
           type: "string"
         });
       }
-    } 
+    }
     // Handle object/dictionary
     else if (typeof value === "object") {
       Object.keys(value).forEach(key => {
         const fieldKey = `${parentKey}_${key}`;
         const fieldValue = value[key];
-        
+
         // Recursively expand nested structures
         if (typeof fieldValue === "object" && fieldValue !== null && !Array.isArray(fieldValue)) {
           fields.push(...expandComplexValueToFields(fieldValue, fieldKey));
@@ -249,7 +239,7 @@ export default function HowItWorks() {
         }
       });
     }
-    
+
     return fields;
   };
 
@@ -257,17 +247,17 @@ export default function HowItWorks() {
   const formatComplexValue = (obj: any, indent: number = 0): string => {
     const indentStr = "  ".repeat(indent);
     const nextIndent = indent + 1;
-    
+
     if (obj === null || obj === undefined) {
       return "null";
     }
-    
+
     if (Array.isArray(obj)) {
       if (obj.length === 0) return "[]";
-      
+
       // Check if array contains objects
       const hasObjects = obj.some(item => typeof item === "object" && item !== null && !Array.isArray(item));
-      
+
       if (hasObjects) {
         // Format array of objects - without "Item 1", "Item 2" labels
         const items = obj.map((item, index) => {
@@ -284,15 +274,15 @@ export default function HowItWorks() {
         return `[${obj.map(item => String(item)).join(", ")}]`;
       }
     }
-    
+
     if (typeof obj === "object") {
       const keys = Object.keys(obj);
       if (keys.length === 0) return "{}";
-      
+
       const items = keys.map(key => {
         const val = obj[key];
         let formattedVal: string;
-        
+
         if (typeof val === "object" && val !== null && !Array.isArray(val)) {
           // Nested object
           formattedVal = formatComplexValue(val, nextIndent);
@@ -307,13 +297,13 @@ export default function HowItWorks() {
         } else {
           formattedVal = String(val);
         }
-        
+
         return `${indentStr}  ${key}: ${formattedVal}`;
       });
-      
+
       return `{\n${items.join("\n")}\n${indentStr}}`;
     }
-    
+
     return String(obj);
   };
 
@@ -321,9 +311,9 @@ export default function HowItWorks() {
     if (value === null || value === undefined || value === "") {
       return "Not available";
     }
-    
+
     if (type === "bool" || type === "boolean") return value ? "Yes" : "No";
-    
+
     if (type === "datetime" || type === "date") {
       try {
         return new Date(value).toLocaleDateString();
@@ -331,18 +321,18 @@ export default function HowItWorks() {
         return value.toString();
       }
     }
-    
+
     // Handle list type (array of objects or simple array)
     // Note: Complex arrays/objects are now expanded into individual fields,
     // so this is mainly for simple arrays or fallback cases
     if (type === "list" || Array.isArray(value)) {
       if (value.length === 0) return "Empty list";
-      
+
       // Check if it's an array of objects
-      const hasObjects = value.some((item: any) => 
+      const hasObjects = value.some((item: any) =>
         typeof item === "object" && item !== null && !Array.isArray(item)
       );
-      
+
       if (hasObjects) {
         // For arrays of objects, show count (they should be expanded into fields)
         return `${value.length} item${value.length !== 1 ? 's' : ''} (see details)`;
@@ -351,7 +341,7 @@ export default function HowItWorks() {
         return value.map((item: any) => String(item)).join(", ");
       }
     }
-    
+
     // Handle dict/object type
     // Note: Complex objects are now expanded into individual fields,
     // so this is mainly for fallback cases
@@ -360,7 +350,7 @@ export default function HowItWorks() {
       if (keys.length === 0) return "Empty object";
       return `${keys.length} field${keys.length !== 1 ? 's' : ''} (see details)`;
     }
-    
+
     // For primitive types, return as string
     return value.toString();
   };
@@ -418,12 +408,12 @@ export default function HowItWorks() {
     // Check for "hibp" module name (case-insensitive)
     const exactMatch = moduleName.trim().toLowerCase() === "hibp";
     const nameMatch = exactMatch || name === "hibp" || name.includes("hibp");
-    
+
     // Also check if item has breach-specific structure
     if (item && (item.body || item.timeline)) {
       return true;
     }
-    
+
     return nameMatch;
   };
 
@@ -491,69 +481,86 @@ export default function HowItWorks() {
 
             {/* Bottom Content */}
             <div className="flex flex-col gap-6 sm:gap-4 p-4 sm:p-6 md:p-8 rounded-b-[12px] bg-black shadow-[inset_0_0_30px_0_#157AFF80]">
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-100">
-                {/* Username */}
-                <button style={{
-                  transition: 'linear 1s',
-                  backgroundColor: type === 0 ? '#E8F2FF' : '#515151',
-                  border: type === 0 ? '1.2px solid #157AFF' : 'none'
-                }} onClick={() => setType(0)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer ">
-                  <span
+              {/* Sub tabs (Name / Phone / Email) are hidden when 'All in One' is selected */}
+              {mode !== 0 && (
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4 opacity-100">
+                  {/* Name */}
+                  <button
                     style={{
-                      color: type === 0 ? '#1E1E1E' : 'black',
-                      fontWeight: mode === 0 ? 'medium' : 'normal'
+                      transition: 'linear 1s',
+                      backgroundColor: type === 0 ? '#E8F2FF' : '#515151',
+                      border: type === 0 ? '1.2px solid #157AFF' : 'none',
                     }}
-                    className="font-sans text-base sm:text-lg md:text-xl">
-                    Username
-                  </span>
-                </button>
+                    onClick={() => setType(0)}
+                    className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer "
+                  >
+                    <span
+                      style={{
+                        color: type === 0 ? '#1E1E1E' : 'black',
+                        fontWeight: mode === 0 ? 'medium' : 'normal',
+                      }}
+                      className="font-sans text-base sm:text-lg md:text-xl"
+                    >
+                      Name
+                    </span>
+                  </button>
 
-                {/* Phone Number */}
-                <button style={{
-                  transition: 'linear 1s',
-                  backgroundColor: type === 1 ? '#E8F2FF' : '#515151',
-                  border: type === 1 ? '1.2px solid #157AFF' : 'none'
-                }} onClick={() => setType(1)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer ">
-                  <span
+                  {/* Phone Number */}
+                  <button
                     style={{
-                      color: type === 1 ? '#1E1E1E' : 'black',
-                      fontWeight: mode === 1 ? 'medium' : 'normal'
+                      transition: 'linear 1s',
+                      backgroundColor: type === 1 ? '#E8F2FF' : '#515151',
+                      border: type === 1 ? '1.2px solid #157AFF' : 'none',
                     }}
-                    className="font-sans min-w-[150px] text-base sm:text-lg md:text-xl">
-                    Phone Number
-                  </span>
-                </button>
+                    onClick={() => setType(1)}
+                    className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer "
+                  >
+                    <span
+                      style={{
+                        color: type === 1 ? '#1E1E1E' : 'black',
+                        fontWeight: mode === 1 ? 'medium' : 'normal',
+                      }}
+                      className="font-sans min-w-[150px] text-base sm:text-lg md:text-xl"
+                    >
+                      Phone Number
+                    </span>
+                  </button>
 
-                {/* Email */}
-                <button style={{
-                  transition: 'linear 1s',
-                  backgroundColor: type === 2 ? '#E8F2FF' : '#515151',
-                  border: type === 2 ? '1.2px solid #157AFF' : 'none'
-                }} onClick={() => setType(2)} className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer ">
-                  <span
+                  {/* Email */}
+                  <button
                     style={{
-                      color: type === 2 ? '#1E1E1E' : 'black',
-                      fontWeight: mode === 2 ? 'medium' : 'normal'
+                      transition: 'linear 1s',
+                      backgroundColor: type === 2 ? '#E8F2FF' : '#515151',
+                      border: type === 2 ? '1.2px solid #157AFF' : 'none',
                     }}
-                    className="font-sans text-base sm:text-lg md:text-xl">
-                    Email
-                  </span>
-                </button>
-              </div>
-              {type === 0 && <UsernameForm
-                fullName={fullName}
-                setFullName={setFullName}
-                city={city}
-                setCity={setCity}
-                state={state}
-                setState={setState}
-                usernamePhone={usernamePhone}
-                setUsernamePhone={setUsernamePhone}
-                usernameEmail={usernameEmail}
-                setUsernameEmail={setUsernameEmail}
-                keyword={keyword}
-                setKeyword={setKeyword}
-              />}
+                    onClick={() => setType(2)}
+                    className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer "
+                  >
+                    <span
+                      style={{
+                        color: type === 2 ? '#1E1E1E' : 'black',
+                        fontWeight: mode === 2 ? 'medium' : 'normal',
+                      }}
+                      className="font-sans text-base sm:text-lg md:text-xl"
+                    >
+                      Email
+                    </span>
+                  </button>
+                </div>
+              )}
+
+              {type === 0 && (
+                <UsernameForm
+                  fullName={fullName}
+                  setFullName={setFullName}
+                  usernamePhone={usernamePhone}
+                  setUsernamePhone={setUsernamePhone}
+                  usernameEmail={usernameEmail}
+                  setUsernameEmail={setUsernameEmail}
+                  keyword={keyword}
+                  setKeyword={setKeyword}
+                />
+              )}
               {type === 1 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
               {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
               {/* Search Button */}
@@ -582,13 +589,13 @@ export default function HowItWorks() {
                   )}
                 </button>
               </div>
-
+              <p className="font-inter font-normal text-white text-xs sm:text-sm text-center">
+                Search by username, phone number, or email to confidentially look up information.
+              </p>
             </div>
           </div>
 
-          <p className="font-inter font-normal text-white text-xs sm:text-sm text-center">
-            Search by username, phone number, or email to confidentially look up information.
-          </p>
+
         </div>
       </div>
 
@@ -600,11 +607,11 @@ export default function HowItWorks() {
         phoneResult.forEach((item: any) => {
           const moduleName = item?.module || "";
           const isBreachItem = isBreach(moduleName, item);
-          
+
           if (isBreachItem) {
             // ✅ FIX: Check for front_schemas array (this is where breach data is)
             const frontSchemas = item.front_schemas || [];
-            
+
             if (frontSchemas.length > 0) {
               // Each item in front_schemas is a separate breach
               frontSchemas.forEach((frontSchema: any, schemaIndex: number) => {
@@ -619,15 +626,15 @@ export default function HowItWorks() {
               // Direct breach item (no front_schemas, use item-level data)
               breachResults.push(item);
             }
-            
-            console.log("Found breach item:", { 
-              module: moduleName, 
-              hasFrontSchemas: frontSchemas.length > 0, 
-              frontSchemasLength: frontSchemas.length 
+
+            console.log("Found breach item:", {
+              module: moduleName,
+              hasFrontSchemas: frontSchemas.length > 0,
+              frontSchemasLength: frontSchemas.length
             });
           }
         });
-        
+
         // Debug: Log total breach results and all modules
         console.log("Total breach results:", breachResults.length, "out of", phoneResult.length);
         console.log("All modules in results:", phoneResult.map((item: any) => item?.module));
@@ -635,7 +642,7 @@ export default function HowItWorks() {
         // ✅ 2. Separate OSINT Results (Exclude HIBP)
         const allResults: any[] = [];
         phoneResult.forEach((item: any, index: number) => {
-          
+
           // SKIP if it's a breach item
           if (isBreach(item.module, item)) {
             return;
@@ -671,11 +678,11 @@ export default function HowItWorks() {
             // Check if item has any data that can be displayed
             const hasData = item.data && typeof item.data === 'object' && Object.keys(item.data).length > 0;
             const hasSpecData = item.spec_data && typeof item.spec_data === 'object' && Object.keys(item.spec_data).length > 0;
-            
+
             if (hasData || hasSpecData) {
               // Use item.data or item.spec_data as fallback specData
               const fallbackSpecData = item.data || item.spec_data || {};
-              
+
               allResults.push({
                 platformName,
                 categoryName,
@@ -708,7 +715,7 @@ export default function HowItWorks() {
             }
           }
         });
-        
+
         // Debug logging to help identify issues
         console.log('Processed results:', {
           totalItems: phoneResult.length,
@@ -720,13 +727,13 @@ export default function HowItWorks() {
         // Handles both normal spec_format structure and fallback data structures
         const getFieldValueFromResult = (resultSpecData: any, fieldKey: string): string | null => {
           if (!resultSpecData) return null;
-          
+
           // Try direct field access (normal spec_format structure: { fieldKey: { value: ... } })
           const directField = resultSpecData[fieldKey];
           if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
             return String(directField.value).toLowerCase().trim();
           }
-          
+
           // Try direct value access (fallback structure: { fieldKey: "value" })
           if (resultSpecData[fieldKey] !== undefined && resultSpecData[fieldKey] !== null && resultSpecData[fieldKey] !== "") {
             const directValue = resultSpecData[fieldKey];
@@ -734,7 +741,7 @@ export default function HowItWorks() {
               return String(directValue).toLowerCase().trim();
             }
           }
-          
+
           // Try platform_variables array
           if (Array.isArray(resultSpecData.platform_variables)) {
             const platformField = resultSpecData.platform_variables.find((pv: any) => pv.key === fieldKey);
@@ -742,7 +749,7 @@ export default function HowItWorks() {
               return String(platformField.value).toLowerCase().trim();
             }
           }
-          
+
           return null;
         };
 
@@ -756,20 +763,8 @@ export default function HowItWorks() {
 
           const { specData } = result;
 
-          // ✅ Apply username filters ONLY when type === 0 (username search)
+          // ✅ Apply Name-tab filters ONLY when type === 0 (Name search)
           if (type === 0) {
-            if (usernameFilters.city && usernameFilters.city.trim()) {
-              const resultCity = getFieldValueFromResult(specData, "city") ||
-                getFieldValueFromResult(specData, "location") || "";
-              if (!resultCity.includes(usernameFilters.city.toLowerCase().trim())) return false;
-            }
-
-            if (usernameFilters.state && usernameFilters.state.trim()) {
-              const resultState = getFieldValueFromResult(specData, "state") ||
-                getFieldValueFromResult(specData, "location") || "";
-              if (!resultState.includes(usernameFilters.state.toLowerCase().trim())) return false;
-            }
-
             if (usernameFilters.usernamePhone && usernameFilters.usernamePhone.trim()) {
               const resultPhone = getFieldValueFromResult(specData, "phone") ||
                 getFieldValueFromResult(specData, "phone_hint") || "";
@@ -785,7 +780,8 @@ export default function HowItWorks() {
             if (usernameFilters.keyword && usernameFilters.keyword.trim()) {
               const keywordLower = usernameFilters.keyword.toLowerCase().trim();
               let found = false;
-              const fieldsToCheck = ["name", "username", "email", "phone", "location", "city", "state", "bio", "first_name", "last_name"];
+              // Treat keyword as a "username" style filter: focus on identity fields
+              const fieldsToCheck = ["username", "name", "first_name", "last_name"];
               for (const fieldKey of fieldsToCheck) {
                 const fieldValue = getFieldValueFromResult(specData, fieldKey);
                 if (fieldValue && fieldValue.includes(keywordLower)) {
@@ -804,7 +800,7 @@ export default function HowItWorks() {
               if (!found) return false;
             }
           }
-          
+
           // Phone/Email search filters can be added here in future if needed
           // if (type === 1) { ... phoneFilters ... }
           // if (type === 2) { ... emailFilters ... }
@@ -827,12 +823,12 @@ export default function HowItWorks() {
           const checkField = (fieldName: string): boolean => {
             const field = specData[fieldName];
             if (!field) return false;
-            
+
             // Normal structure: { field: { value: ... } }
             if (field.value !== undefined) {
               return checkValue(field.value);
             }
-            
+
             // Fallback structure: { field: "value" }
             return checkValue(field);
           };
@@ -870,8 +866,8 @@ export default function HowItWorks() {
                   type="button"
                   onClick={() => setBreachTab("normal")}
                   className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "normal"
-                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
-                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                    ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                    : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
                     }`}
                 >
                   OSINT Results ({filteredTotal})
@@ -880,8 +876,8 @@ export default function HowItWorks() {
                   type="button"
                   onClick={() => setBreachTab("breach")}
                   className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "breach"
-                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
-                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                    ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                    : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
                     }`}
                 >
                   Breach ({breachResults.length})
@@ -909,7 +905,7 @@ export default function HowItWorks() {
                             }}
                             className="w-full sm:w-64  rounded-lg border border-[#4c4c4c] bg-[#0B0F1A] px-4 py-2.5 pr-10 text-sm md:text-base text-white focus:border-[#167BFF] focus:outline-none focus:ring-1 focus:ring-[#167BFF] cursor-pointer"
                           >
-                      
+
                             <option value="all">All Categories ({filteredTotal})</option>
                             {filteredUniqueCategories.map((category) => {
                               const count = filteredResults.filter((r) => r.categoryName === category).length;
@@ -918,10 +914,10 @@ export default function HowItWorks() {
                                   {category} ({count})
                                 </option>
                               );
-                            })} 
+                            })}
                           </select>
                           {/* Custom Dropdown Arrow */}
-                         
+
                         </div>
                       </div>
 
@@ -966,13 +962,13 @@ export default function HowItWorks() {
 
                           const getFieldValue = (fieldKey: string) => {
                             if (!specData) return { value: null, type: undefined };
-                            
+
                             // Try direct field access (normal spec_format structure: { fieldKey: { value: ... } })
                             const directField = specData[fieldKey];
                             if (directField && directField.value !== undefined && directField.value !== null && directField.value !== "") {
                               return { value: directField.value, type: directField.type };
                             }
-                            
+
                             // Try direct value access (fallback structure: { fieldKey: "value" })
                             if (specData[fieldKey] !== undefined && specData[fieldKey] !== null && specData[fieldKey] !== "") {
                               const directValue = specData[fieldKey];
@@ -980,7 +976,7 @@ export default function HowItWorks() {
                                 return { value: directValue, type: typeof directValue };
                               }
                             }
-                            
+
                             // Try platform_variables array
                             if (Array.isArray(specData.platform_variables)) {
                               const platformField = specData.platform_variables.find((pv: any) => pv.key === fieldKey);
@@ -988,7 +984,7 @@ export default function HowItWorks() {
                                 return { value: platformField.value, type: platformField.type };
                               }
                             }
-                            
+
                             return { value: null, type: undefined };
                           };
 
@@ -1014,14 +1010,14 @@ export default function HowItWorks() {
                             specData.platform_variables.forEach((pv: any) => {
                               // Filter out "surveys" field
                               if (pv.key === "surveys" || pv.key?.toLowerCase() === "surveys") return;
-                              
+
                               if (desiredFields.some((df) => df.key === pv.key)) return;
                               if (pv.value !== undefined && pv.value !== null && pv.value !== "") {
                                 if (typeof pv.value === "string" && pv.value.trim() === "") return;
                                 if (Array.isArray(pv.value) && pv.value.length === 0) return;
 
                                 // Check if value is complex (array of objects or nested object)
-                                const isComplex = (Array.isArray(pv.value) && pv.value.some((item: any) => 
+                                const isComplex = (Array.isArray(pv.value) && pv.value.some((item: any) =>
                                   typeof item === "object" && item !== null && !Array.isArray(item)
                                 )) || (typeof pv.value === "object" && pv.value !== null && !Array.isArray(pv.value) && Object.keys(pv.value).length > 0);
 
@@ -1150,10 +1146,10 @@ export default function HowItWorks() {
                                       );
                                     }
                                     // Check if the value is a complex structure (contains newlines or brackets)
-                                    const isComplexValue = field.formattedValue.includes('\n') || 
-                                                           field.formattedValue.includes('{') || 
-                                                           field.formattedValue.includes('[');
-                                    
+                                    const isComplexValue = field.formattedValue.includes('\n') ||
+                                      field.formattedValue.includes('{') ||
+                                      field.formattedValue.includes('[');
+
                                     return (
                                       <div key={field.key} className="rounded-xl border border-[#141B2C] bg-[#0C1323] p-3 text-xs">
                                         <span className="text-gray-400 font-medium">{field.label}</span>
@@ -1314,11 +1310,11 @@ function BreachResultsView({ results }: { results: any[] }) {
   const formatDate = (dateValue: any): string => {
     // Convert to string if not already
     const dateString = dateValue?.toString() || "";
-    
+
     if (!dateString || dateString === "N/A" || dateString.trim() === "" || dateString === "null" || dateString === "undefined") {
       return "N/A";
     }
-    
+
     try {
       // Check if already in correct format YYYY-MM-DDTHH:mm:ss or YYYY-MM-DDTHH:mm:ssZ
       const isoRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}/;
@@ -1330,10 +1326,10 @@ function BreachResultsView({ results }: { results: any[] }) {
         }
         return dateString;
       }
-      
+
       // Try to parse the date
       let date: Date;
-      
+
       // Handle different date formats
       if (dateString.includes('T')) {
         // ISO format with time
@@ -1345,13 +1341,13 @@ function BreachResultsView({ results }: { results: any[] }) {
         // Try parsing as is
         date = new Date(dateString);
       }
-      
+
       if (isNaN(date.getTime())) {
         // If not a valid date, return as is
         console.warn("Invalid date format:", dateString);
         return dateString;
       }
-      
+
       // Format as YYYY-MM-DDTHH:mm:ss (same format as shown in image)
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, '0');
@@ -1359,7 +1355,7 @@ function BreachResultsView({ results }: { results: any[] }) {
       const hours = String(date.getHours()).padStart(2, '0');
       const minutes = String(date.getMinutes()).padStart(2, '0');
       const seconds = String(date.getSeconds()).padStart(2, '0');
-      
+
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     } catch (error) {
       console.error("Date formatting error:", error, dateString);
@@ -1452,16 +1448,16 @@ function BreachResultsView({ results }: { results: any[] }) {
     const tags = Array.isArray(frontSchema?.tags) ? frontSchema.tags : (Array.isArray(item.tags) ? item.tags : []);
     const timeline = frontSchema?.timeline || item.timeline || {};
     const hibpTimeline = timeline.group_items?.hibp || [];
-    
+
     // Get the earliest year from timeline for grouping
     const years = hibpTimeline.map((t: any) => Number(t.year)).filter((y: number) => !isNaN(y));
     const earliestYear = years.length > 0 ? Math.min(...years) : null;
-    
+
     const title = body.Title || body.title || frontSchema?.module || item.module || "Breach";
     const domain = body.Domain || body.domain || "Unknown domain";
     const breachDate = body["Breach Date"] || body.breachDate || body.breach_date || "N/A";
     const image = frontSchema?.image || item.image || null;
-    
+
     return {
       ...item,
       title,
@@ -1500,10 +1496,10 @@ function BreachResultsView({ results }: { results: any[] }) {
       {/* Timeline Container with Scrolling - Hidden Scrollbar */}
       <div className="relative">
         {/* Fixed Timeline Line on Left - Outside scroll container */}
-        <div 
+        <div
           ref={timelineContainerRef}
           className="absolute left-4 sm:left-8 top-0 w-0.5 bg-[#3C414A] z-10"
-          style={{ 
+          style={{
             height: '800px',
           }}
         >
@@ -1525,7 +1521,7 @@ function BreachResultsView({ results }: { results: any[] }) {
           />
         </div>
 
-        <div 
+        <div
           ref={scrollContainerRef}
           className="relative max-h-[800px] overflow-y-auto pr-2 sm:pr-4 scrollbar-hide"
           style={{
@@ -1534,149 +1530,145 @@ function BreachResultsView({ results }: { results: any[] }) {
           }}
         >
           <div className="relative space-y-6 sm:space-y-8 pl-12 sm:pl-16 md:pl-20">
-          {sortedYears.map((year, yearIndex) => {
-            const yearBreaches = breachesByYear[year];
-            const isYearActive = activeYear === year;
-            
-            return (
-              <div key={year} className="relative">
-                {/* Year Label and Marker - Aligned with Timeline */}
-                <div 
-                  ref={(el) => { yearRefs.current[year] = el; }}
-                  className={`flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 transition-all duration-300 ${
-                    isYearActive ? 'scale-105' : ''
-                  }`}
-                >
-                  <div className="relative z-10 w-16 sm:w-20 md:w-24">
-                    <div className={`text-right text-xs sm:text-sm font-semibold transition-colors duration-300 whitespace-nowrap ${
-                      isYearActive ? 'text-[#167BFF] text-sm sm:text-base' : 'text-[#7D879C]'
-                    }`}>
-                      {year}
+            {sortedYears.map((year, yearIndex) => {
+              const yearBreaches = breachesByYear[year];
+              const isYearActive = activeYear === year;
+
+              return (
+                <div key={year} className="relative">
+                  {/* Year Label and Marker - Aligned with Timeline */}
+                  <div
+                    ref={(el) => { yearRefs.current[year] = el; }}
+                    className={`flex items-center gap-2 sm:gap-3 mb-3 sm:mb-4 transition-all duration-300 ${isYearActive ? 'scale-105' : ''
+                      }`}
+                  >
+                    <div className="relative z-10 w-16 sm:w-20 md:w-24">
+                      <div className={`text-right text-xs sm:text-sm font-semibold transition-colors duration-300 whitespace-nowrap ${isYearActive ? 'text-[#167BFF] text-sm sm:text-base' : 'text-[#7D879C]'
+                        }`}>
+                        {year}
+                      </div>
+                    </div>
+                    <div className="relative z-10">
+                      <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-[#0B0F1A] transition-all duration-300 ${isYearActive
+                          ? 'bg-[#167BFF] w-4 h-4 sm:w-5 sm:h-5 shadow-[0_0_10px_rgba(22,123,255,0.5)]'
+                          : 'bg-[#167BFF] opacity-50'
+                        }`}></div>
                     </div>
                   </div>
-                  <div className="relative z-10">
-                    <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-[#0B0F1A] transition-all duration-300 ${
-                      isYearActive 
-                        ? 'bg-[#167BFF] w-4 h-4 sm:w-5 sm:h-5 shadow-[0_0_10px_rgba(22,123,255,0.5)]' 
-                        : 'bg-[#167BFF] opacity-50'
-                    }`}></div>
-                  </div>
-                </div>
 
-                {/* Breaches for this year */}
-                <div className="ml-4 sm:ml-6 md:ml-8 space-y-3 sm:space-y-4">
-                  {yearBreaches.map((breach: any, breachIndex: number) => {
-                    const sortedTimeline = [...(breach.timeline || [])].sort(
-                      (a: any, b: any) => Number(a.year) - Number(b.year)
-                    );
-                    
-                    // Make domain clickable
-                    const domainUrl = breach.domain && breach.domain !== "Unknown domain" 
-                      ? (breach.domain.startsWith('http') ? breach.domain : `https://${breach.domain}`)
-                      : null;
+                  {/* Breaches for this year */}
+                  <div className="ml-4 sm:ml-6 md:ml-8 space-y-3 sm:space-y-4">
+                    {yearBreaches.map((breach: any, breachIndex: number) => {
+                      const sortedTimeline = [...(breach.timeline || [])].sort(
+                        (a: any, b: any) => Number(a.year) - Number(b.year)
+                      );
 
-                    const breachId = `${breach.module}-${breach.schemaIndex || 0}-${breachIndex}`;
-                    const isBreachActive = activeBreachId === breachId;
+                      // Make domain clickable
+                      const domainUrl = breach.domain && breach.domain !== "Unknown domain"
+                        ? (breach.domain.startsWith('http') ? breach.domain : `https://${breach.domain}`)
+                        : null;
 
-                    return (
-                      <div
-                        ref={(el) => { breachRefs.current[breachId] = el; }}
-                        key={breachId}
-                        className={`relative rounded-xl sm:rounded-2xl border p-3 sm:p-4 md:p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 ${
-                          isBreachActive
-                            ? 'border-[#167BFF] bg-gradient-to-b from-[#0F1F3A] via-[#0A1528] to-[#050A14] shadow-[0_35px_80px_rgba(22,123,255,0.3)] scale-[1.02]'
-                            : 'border-[#1E2535] bg-gradient-to-b from-[#101320] via-[#080B14] to-[#05060A]'
-                        }`}
-                      >
-                        {/* Header with Image and Title */}
-                        <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
-                          {breach.image && (
-                            <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#0B0F1A] border border-[#27304A] overflow-hidden flex-shrink-0">
-                              <img
-                                src={breach.image}
-                                alt={breach.title}
-                                className="h-full w-full object-cover"
-                                loading="lazy"
-                              />
+                      const breachId = `${breach.module}-${breach.schemaIndex || 0}-${breachIndex}`;
+                      const isBreachActive = activeBreachId === breachId;
+
+                      return (
+                        <div
+                          ref={(el) => { breachRefs.current[breachId] = el; }}
+                          key={breachId}
+                          className={`relative rounded-xl sm:rounded-2xl border p-3 sm:p-4 md:p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 ${isBreachActive
+                              ? 'border-[#167BFF] bg-gradient-to-b from-[#0F1F3A] via-[#0A1528] to-[#050A14] shadow-[0_35px_80px_rgba(22,123,255,0.3)] scale-[1.02]'
+                              : 'border-[#1E2535] bg-gradient-to-b from-[#101320] via-[#080B14] to-[#05060A]'
+                            }`}
+                        >
+                          {/* Header with Image and Title */}
+                          <div className="flex items-start gap-2 sm:gap-3 md:gap-4 mb-3 sm:mb-4">
+                            {breach.image && (
+                              <div className="h-10 w-10 sm:h-12 sm:w-12 rounded-lg bg-[#0B0F1A] border border-[#27304A] overflow-hidden flex-shrink-0">
+                                <img
+                                  src={breach.image}
+                                  alt={breach.title}
+                                  className="h-full w-full object-cover"
+                                  loading="lazy"
+                                />
+                              </div>
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white leading-tight mb-1">
+                                {breach.title}
+                              </h3>
+                              {domainUrl ? (
+                                <Link
+                                  href={domainUrl}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="text-[#69B3FF] hover:text-[#167BFF] text-xs sm:text-sm underline break-all"
+                                >
+                                  {breach.domain}
+                                </Link>
+                              ) : (
+                                <p className="text-[0.7rem] sm:text-[0.75rem] text-[#9CA3AF]">
+                                  {breach.domain}
+                                </p>
+                              )}
+                              {breach.breachDate && breach.breachDate !== "N/A" && (
+                                <p className="text-[0.65rem] sm:text-[0.7rem] text-[#7D879C] mt-1">
+                                  Breach Date: {breach.breachDate}
+                                </p>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Fields that were breached (Tags) */}
+                          {breach.tags && breach.tags.length > 0 && (
+                            <div className="mt-3 sm:mt-4">
+                              <p className="text-[0.65rem] sm:text-[0.7rem] text-gray-400 mb-2 font-medium">
+                                Fields that were breached
+                              </p>
+                              <div className="flex flex-wrap gap-1.5 sm:gap-2">
+                                {breach.tags.map((t: any, i: number) => (
+                                  <span
+                                    key={i}
+                                    className="px-2 sm:px-3 py-0.5 sm:py-1 text-[0.65rem] sm:text-[0.7rem] rounded-full bg-[#162033] text-[#69B3FF] border border-[#1F3B63]"
+                                  >
+                                    {t.tag}
+                                  </span>
+                                ))}
+                              </div>
                             </div>
                           )}
-                          <div className="flex-1 min-w-0">
-                            <h3 className="text-sm sm:text-base md:text-lg font-semibold text-white leading-tight mb-1">
-                              {breach.title}
-                            </h3>
-                            {domainUrl ? (
-                              <Link
-                                href={domainUrl}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-[#69B3FF] hover:text-[#167BFF] text-xs sm:text-sm underline break-all"
-                              >
-                                {breach.domain}
-                              </Link>
-                            ) : (
-                              <p className="text-[0.7rem] sm:text-[0.75rem] text-[#9CA3AF]">
-                                {breach.domain}
-                              </p>
-                            )}
-                            {breach.breachDate && breach.breachDate !== "N/A" && (
-                              <p className="text-[0.65rem] sm:text-[0.7rem] text-[#7D879C] mt-1">
-                                Breach Date: {breach.breachDate}
-                              </p>
-                            )}
-                          </div>
+
+                          {/* Timeline Details */}
+                          {sortedTimeline.length > 0 && (
+                            <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#27304A]">
+                              <div className="space-y-2">
+                                {sortedTimeline.map((t: any, i: number) => (
+                                  <div
+                                    key={i}
+                                    className="rounded-lg bg-[#0F1524] border border-[#27304A] p-2 sm:p-3 text-[0.65rem] sm:text-[0.7rem]"
+                                  >
+                                    {t.end && (
+                                      <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 mb-1">
+                                        <span className="text-gray-400">End</span>
+                                        <span className="text-gray-100 break-all">{formatDate(t.end)}</span>
+                                      </div>
+                                    )}
+                                    {t.content && (
+                                      <p className="mt-2 text-gray-300 leading-relaxed">
+                                        {t.content}
+                                      </p>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
                         </div>
-
-                        {/* Fields that were breached (Tags) */}
-                        {breach.tags && breach.tags.length > 0 && (
-                          <div className="mt-3 sm:mt-4">
-                            <p className="text-[0.65rem] sm:text-[0.7rem] text-gray-400 mb-2 font-medium">
-                              Fields that were breached
-                            </p>
-                            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                              {breach.tags.map((t: any, i: number) => (
-                                <span
-                                  key={i}
-                                  className="px-2 sm:px-3 py-0.5 sm:py-1 text-[0.65rem] sm:text-[0.7rem] rounded-full bg-[#162033] text-[#69B3FF] border border-[#1F3B63]"
-                                >
-                                  {t.tag}
-                                </span>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-
-                        {/* Timeline Details */}
-                        {sortedTimeline.length > 0 && (
-                          <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[#27304A]">
-                            <div className="space-y-2">
-                              {sortedTimeline.map((t: any, i: number) => (
-                                <div
-                                  key={i}
-                                  className="rounded-lg bg-[#0F1524] border border-[#27304A] p-2 sm:p-3 text-[0.65rem] sm:text-[0.7rem]"
-                                >
-                                  {t.end && (
-                                    <div className="flex flex-col sm:flex-row sm:justify-between gap-1 sm:gap-0 mb-1">
-                                      <span className="text-gray-400">End</span>
-                                      <span className="text-gray-100 break-all">{formatDate(t.end)}</span>
-                                    </div>
-                                  )}
-                                  {t.content && (
-                                    <p className="mt-2 text-gray-300 leading-relaxed">
-                                      {t.content}
-                                    </p>
-                                  )}
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                      );
+                    })}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
           </div>
         </div>
       </div>
@@ -1688,10 +1680,6 @@ function BreachResultsView({ results }: { results: any[] }) {
 interface UsernameFormProps {
   fullName: string;
   setFullName: (val: string) => void;
-  city: string;
-  setCity: (val: string) => void;
-  state: string;
-  setState: (val: string) => void;
   usernamePhone: string;
   setUsernamePhone: (val: string) => void;
   usernameEmail: string;
@@ -1703,10 +1691,6 @@ interface UsernameFormProps {
 export function UsernameForm({
   fullName,
   setFullName,
-  city,
-  setCity,
-  state,
-  setState,
   usernamePhone,
   setUsernamePhone,
   usernameEmail,
@@ -1717,40 +1701,30 @@ export function UsernameForm({
   return (
     <div className="w-full  p-4">
       <div className="mb-3">
-        <label className="block text-sm text-white mb-4">Full name</label>
+        <label className="block text-sm text-white mb-4">Name</label>
         <input
           type="text"
           value={fullName}
           onChange={(e) => setFullName(e.target.value)}
-          placeholder="Enter full name"
+          placeholder="Enter name"
           className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 py-3 px-4 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </div>
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
         <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">City (optional)</label>
+          <label className="block text-sm text-white mb-2 sm:mb-4">Username (optional)</label>
           <input
             type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder="City"
-            className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
-        </div>
-        <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">State (optional)</label>
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            placeholder="State"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Enter username"
             className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
       </div>
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
         <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">Phone Number (optional)</label>
+          <label className="block text-sm text-white mb-2 sm:mb-4">Phone (optional)</label>
           <input
             type="text"
             value={usernamePhone}
@@ -1769,16 +1743,6 @@ export function UsernameForm({
             className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-      </div>
-      <div className="mt-4">
-        <label className="block text-sm text-white mb-2 sm:mb-4">Keyword (optional)</label>
-        <input
-          type="text"
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-          placeholder="Enter keyword"
-          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
       </div>
     </div>
   );

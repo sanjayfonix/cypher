@@ -39,7 +39,18 @@ export async function GET(request: NextRequest): Promise<Response> {
     }
 
     // Build the target URL with query parameters
-    const targetUrl = `${OSINT_API_BASE_URL}?type=${encodeURIComponent(type)}&query=${encodeURIComponent(query)}`;
+    // Forward all additional query params (e.g. exact_match) to the OSINT API
+    const extraParams = new URLSearchParams();
+    searchParams.forEach((value, key) => {
+      if (key !== "type" && key !== "query") {
+        extraParams.append(key, value);
+      }
+    });
+    const extraQuery = extraParams.toString();
+
+    const targetUrl = `${OSINT_API_BASE_URL}?type=${encodeURIComponent(
+      type
+    )}&query=${encodeURIComponent(query)}${extraQuery ? `&${extraQuery}` : ""}`;
 
     // Make request to OSINT API
     const config: AxiosRequestConfig = {

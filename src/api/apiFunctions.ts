@@ -72,7 +72,10 @@ export const fetchEmailSearchResult = async (params: SearchParams) => {
 export const fetchNameSearchResult = async (params: SearchParams) => {
   try {
     // Use Next.js API proxy route instead of direct API call
-    const proxyUrl = `/api/proxy?type=name&query=${encodeURIComponent(params.query)}`;
+    // For name searches we always request exact matches from the OSINT API
+    const proxyUrl = `/api/proxy?type=name&query=${encodeURIComponent(
+      params.query
+    )}&exact_match=true`;
     
     console.log('Calling proxy route:', proxyUrl);
     
