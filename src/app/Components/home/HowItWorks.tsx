@@ -549,7 +549,7 @@ export default function HowItWorks() {
                 </div>
               )}
 
-              {type === 0 && (
+              {type === 0 || mode==0 ?(
                 <UsernameForm
                   fullName={fullName}
                   setFullName={setFullName}
@@ -560,9 +560,9 @@ export default function HowItWorks() {
                   keyword={keyword}
                   setKeyword={setKeyword}
                 />
-              )}
-              {type === 1 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
-              {type === 2 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
+              ):''}
+              {type === 1 && mode!==0 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
+              {type === 2 && mode!==0 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
               {/* Search Button */}
               <div className="p-4">
                 <button
