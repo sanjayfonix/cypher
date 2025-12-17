@@ -854,8 +854,8 @@ export default function HowItWorks() {
         const filteredEndIndex = filteredStartIndex + itemsPerPage;
         const currentResults = filteredResults.slice(filteredStartIndex, filteredEndIndex);
 
-        // Get unique categories from filtered results (not allResults)
-        const filteredUniqueCategories = Array.from(new Set(filteredResults.map((r) => r.categoryName))).sort();
+        // Get unique categories from ALL OSINT results so dropdown always shows every category
+        const allUniqueCategories = Array.from(new Set(allResults.map((r) => r.categoryName))).sort();
 
         return (
           <>
@@ -907,8 +907,8 @@ export default function HowItWorks() {
                           >
 
                             <option value="all">All Categories ({filteredTotal})</option>
-                            {filteredUniqueCategories.map((category) => {
-                              const count = filteredResults.filter((r) => r.categoryName === category).length;
+                            {allUniqueCategories.map((category) => {
+                              const count = allResults.filter((r) => r.categoryName === category).length;
                               return (
                                 <option key={category} value={category}>
                                   {category} ({count})
