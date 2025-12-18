@@ -65,15 +65,69 @@ export default function HowItWorks() {
 
   const fetchResult = async () => {
     try {
-      // Username search (type = 0, mode = 1)
-      if (type === 0 && mode === 1) {
+      // All in One mode (mode = 0) - check which field is filled and call appropriate API
+      if (mode === 0) {
+        setSearchLoading(true);
+        let result = null;
+
+        // Check each field in priority order
+        if (fullName && fullName.trim() !== "") {
+          // Name field filled → call name search
+          result = await fetchNameSearchResult({ query: fullName.trim(), OstIndAKey: "" });
+        } else if (keyword && keyword.trim() !== "") {
+          // Username field filled → call name search
+          result = await fetchNameSearchResult({ query: keyword.trim(), OstIndAKey: "" });
+        } else if (usernamePhone && usernamePhone.trim() !== "") {
+          // Phone field filled → call phone search
+          result = await fetchPhoneSearchResult({ query: usernamePhone.trim(), OstIndAKey: "" });
+        } else if (usernameEmail && usernameEmail.trim() !== "") {
+          // Email field filled → call email search
+          result = await fetchEmailSearchResult({ query: usernameEmail.trim(), OstIndAKey: "" });
+        } else {
+          // No field filled
+          setSearchLoading(false);
+          return;
+        }
+
+        if (Array.isArray(result) && result.length > 0) {
+          setPhoneResult(result);
+          setSearchResults(true);
+        } else {
+          setPhoneResult(null);
+          setSearchResults(false);
+        }
+
+        setCurrentPage(1);
+        setSelectedCategory("all");
+        setBreachTab("normal");
+      }
+      // For OSINT Name tab (type = 0, mode = 1) - only Name field search
+      else if (type === 0 && mode === 1) {
         if (!fullName || fullName.trim() === "") return;
 
         setSearchLoading(true);
-        const query = fullName.trim();
-        const result = await fetchNameSearchResult({ query: query, OstIndAKey: "" });
+        const result = await fetchNameSearchResult({ query: fullName.trim(), OstIndAKey: "" });
 
-        // ✅ FIXED: Removed the .filter() that was deleting HIBP data
+        if (Array.isArray(result) && result.length > 0) {
+          setPhoneResult(result);
+          setSearchResults(true);
+        } else {
+          setPhoneResult(null);
+          setSearchResults(false);
+        }
+
+        setCurrentPage(1);
+        setSelectedCategory("all");
+        setBreachTab("normal");
+      }
+
+      // For OSINT Username tab (type = 3, mode = 1) - only Username field search
+      else if (type === 3 && mode === 1) {
+        if (!keyword || keyword.trim() === "") return;
+
+        setSearchLoading(true);
+        const result = await fetchNameSearchResult({ query: keyword.trim(), OstIndAKey: "" });
+
         if (Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
@@ -94,7 +148,6 @@ export default function HowItWorks() {
         setSearchLoading(true);
         const result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
 
-        // ✅ FIXED: Removed the .filter() that was deleting HIBP data
         if (Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
@@ -115,7 +168,6 @@ export default function HowItWorks() {
         setSearchLoading(true);
         const result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
 
-        // ✅ FIXED: Removed the .filter() that was deleting HIBP data
         if (Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
           setSearchResults(true);
@@ -505,6 +557,27 @@ export default function HowItWorks() {
                     </span>
                   </button>
 
+                  {/* Username */}
+                  <button
+                    style={{
+                      transition: 'linear 1s',
+                      backgroundColor: type === 3 ? '#E8F2FF' : '#515151',
+                      border: type === 3 ? '1.2px solid #157AFF' : 'none',
+                    }}
+                    onClick={() => setType(3)}
+                    className="flex items-center justify-center gap-2.5 rounded-[3rem]  px-4 py-2 sm:py-3 cursor-pointer "
+                  >
+                    <span
+                      style={{
+                        color: type === 3 ? '#1E1E1E' : 'black',
+                        fontWeight: mode === 3 ? 'medium' : 'normal',
+                      }}
+                      className="font-sans text-base sm:text-lg md:text-xl"
+                    >
+                      Username
+                    </span>
+                  </button>
+
                   {/* Phone Number */}
                   <button
                     style={{
@@ -549,7 +622,7 @@ export default function HowItWorks() {
                 </div>
               )}
 
-              {type === 0 || mode==0 ?(
+              {mode === 0 && (
                 <UsernameForm
                   fullName={fullName}
                   setFullName={setFullName}
@@ -560,9 +633,21 @@ export default function HowItWorks() {
                   keyword={keyword}
                   setKeyword={setKeyword}
                 />
-              ):''}
-              {type === 1 && mode!==0 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
-              {type === 2 && mode!==0 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
+              )}
+              {type === 0 && mode === 1 && (
+                <NameOnlyForm
+                  fullName={fullName}
+                  setFullName={setFullName}
+                />
+              )}
+              {type === 3 && mode === 1 && (
+                <UsernameOnlyForm
+                  keyword={keyword}
+                  setKeyword={setKeyword}
+                />
+              )}
+              {type === 1 && mode === 1 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
+              {type === 2 && mode === 1 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
               {/* Search Button */}
               <div className="p-4">
                 <button
@@ -753,8 +838,7 @@ export default function HowItWorks() {
           return null;
         };
 
-        // Filter results based on category, internal search query, and optional filter fields
-        // Only apply username-specific filters when type === 0 (username search)
+        // Filter results based on category and internal search query
         const filteredResults = allResults.filter((result) => {
           // Filter by category
           if (selectedCategory !== "all" && result.categoryName !== selectedCategory) {
@@ -762,48 +846,6 @@ export default function HowItWorks() {
           }
 
           const { specData } = result;
-
-          // ✅ Apply Name-tab filters ONLY when type === 0 (Name search)
-          if (type === 0) {
-            if (usernameFilters.usernamePhone && usernameFilters.usernamePhone.trim()) {
-              const resultPhone = getFieldValueFromResult(specData, "phone") ||
-                getFieldValueFromResult(specData, "phone_hint") || "";
-              if (!resultPhone.includes(usernameFilters.usernamePhone.toLowerCase().trim())) return false;
-            }
-
-            if (usernameFilters.usernameEmail && usernameFilters.usernameEmail.trim()) {
-              const resultEmail = getFieldValueFromResult(specData, "email") ||
-                getFieldValueFromResult(specData, "email_hint") || "";
-              if (!resultEmail.includes(usernameFilters.usernameEmail.toLowerCase().trim())) return false;
-            }
-
-            if (usernameFilters.keyword && usernameFilters.keyword.trim()) {
-              const keywordLower = usernameFilters.keyword.toLowerCase().trim();
-              let found = false;
-              // Treat keyword as a "username" style filter: focus on identity fields
-              const fieldsToCheck = ["username", "name", "first_name", "last_name"];
-              for (const fieldKey of fieldsToCheck) {
-                const fieldValue = getFieldValueFromResult(specData, fieldKey);
-                if (fieldValue && fieldValue.includes(keywordLower)) {
-                  found = true;
-                  break;
-                }
-              }
-              if (!found && Array.isArray(specData.platform_variables)) {
-                for (const pv of specData.platform_variables) {
-                  if (pv.value && String(pv.value).toLowerCase().includes(keywordLower)) {
-                    found = true;
-                    break;
-                  }
-                }
-              }
-              if (!found) return false;
-            }
-          }
-
-          // Phone/Email search filters can be added here in future if needed
-          // if (type === 1) { ... phoneFilters ... }
-          // if (type === 2) { ... emailFilters ... }
 
           if (!internalSearchQuery.trim()) return true;
 
@@ -1712,7 +1754,7 @@ export function UsernameForm({
       </div>
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
         <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">Username (optional)</label>
+          <label className="block text-sm text-white mb-2 sm:mb-4">Username</label>
           <input
             type="text"
             value={keyword}
@@ -1724,7 +1766,7 @@ export function UsernameForm({
       </div>
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
         <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">Phone (optional)</label>
+          <label className="block text-sm text-white mb-2 sm:mb-4">Phone</label>
           <input
             type="text"
             value={usernamePhone}
@@ -1734,7 +1776,7 @@ export function UsernameForm({
           />
         </div>
         <div className="flex-1 w-full">
-          <label className="block text-sm text-white mb-2 sm:mb-4">Email (optional)</label>
+          <label className="block text-sm text-white mb-2 sm:mb-4">Email</label>
           <input
             type="email"
             value={usernameEmail}
@@ -1743,6 +1785,50 @@ export function UsernameForm({
             className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
+      </div>
+    </div>
+  );
+}
+
+interface NameOnlyFormProps {
+  fullName: string;
+  setFullName: (val: string) => void;
+}
+
+export function NameOnlyForm({ fullName, setFullName }: NameOnlyFormProps) {
+  return (
+    <div className="w-full p-4">
+      <div className="mb-3">
+        <label className="block text-sm text-white mb-4">Name</label>
+        <input
+          type="text"
+          value={fullName}
+          onChange={(e) => setFullName(e.target.value)}
+          placeholder="Enter name"
+          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 py-3 px-4 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+    </div>
+  );
+}
+
+interface UsernameOnlyFormProps {
+  keyword: string;
+  setKeyword: (val: string) => void;
+}
+
+export function UsernameOnlyForm({ keyword, setKeyword }: UsernameOnlyFormProps) {
+  return (
+    <div className="w-full p-4">
+      <div className="mb-3">
+        <label className="block text-sm text-white mb-4">Username</label>
+        <input
+          type="text"
+          value={keyword}
+          onChange={(e) => setKeyword(e.target.value)}
+          placeholder="Enter username"
+          className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 py-3 px-4 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
       </div>
     </div>
   );
