@@ -648,6 +648,20 @@ export default function HowItWorks() {
               )}
               {type === 1 && mode === 1 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
               {type === 2 && mode === 1 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
+              {type === 0 && mode === 2 && (
+                <NameOnlyForm
+                  fullName={fullName}
+                  setFullName={setFullName}
+                />
+              )}
+              {type === 3 && mode === 2 && (
+                <UsernameOnlyForm
+                  keyword={keyword}
+                  setKeyword={setKeyword}
+                />
+              )}
+              {type === 1 && mode === 2 && <CustomForm formType={1} controller={phone} setController={setPhone} />}
+              {type === 2 && mode === 2 && <CustomForm formType={2} controller={phone} setController={setPhone} />}
               {/* Search Button */}
               <div className="p-4">
                 <button
