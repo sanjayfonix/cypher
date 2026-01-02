@@ -1,13 +1,16 @@
-// components/BlurCard.tsx
+'use client'
 import React from "react";
 import Button from "../common/Button";
 import Link from "next/link";
 import { TopBanner } from "../discoveredu/Header";
 import { Toparrow } from "@/assets/icon";
 import { PointerGrid } from "./GridAnimation";
+import { usePathname, useRouter } from "next/navigation";
 
 
 const BlurCard = () => {
+  const pathname = usePathname()
+  const router = useRouter()
   return (
     <div className="overflow-hidden  container relative py-10 sm:py-16 lg:py-20 px-6 sm:px-20 lg:px-28">
 
@@ -82,7 +85,7 @@ const BlurCard = () => {
           transform: "translateX(-50%)", // half outside screen, half visible
         }}
       >
-        
+
         <div className="relative flex items-center justify-center">
           {/* Glow behind */}
           <div
@@ -104,7 +107,7 @@ const BlurCard = () => {
         </div>
       </div>
 
-       <div
+      <div
         className="absolute z-30  items-center justify-center"
         style={{
           top: "0%",
@@ -195,11 +198,24 @@ const BlurCard = () => {
 
           {/* Second Div */}
           <div className="flex justify-center">
-            <Link href={'/pages/contactus'}><button className="custom-button with-shadow bg-[#1057B5]"
+            <button onClick={() => {
+              const element = document.getElementById('contact-us');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              } else {
+                router.push('/#contact-us');
+                setTimeout(() => {
+                  const element = document.getElementById('contact-us');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }, 500);
+              }
+            }} className="custom-button with-shadow bg-[#1057B5]"
 
 
 
-            > Get in Touch <Toparrow /></button></Link>
+            > Get in Touch <Toparrow /></button>
           </div>
         </div>
       </div>

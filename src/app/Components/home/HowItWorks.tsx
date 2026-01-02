@@ -470,7 +470,7 @@ export default function HowItWorks() {
   };
 
   return (
-    <div id="how-it-works" className="">
+    <div id="how-it-works" className="scroll-mt-20">
       <div className="flex  flex-col lg:flex-row mt-20 justify-center items-center p-6 sm:p-12 lg:p-10 gap-8 lg:gap-12 bg-black bg-[url('/grid.png')]   bg-repeat">
         {/* Left Column */}
         <div className="h-full flex flex-col gap-4 justify-start items-start text-center lg:text-left max-w-xl">
@@ -1606,8 +1606,8 @@ function BreachResultsView({ results }: { results: any[] }) {
                     </div>
                     <div className="relative z-10">
                       <div className={`w-3 h-3 sm:w-4 sm:h-4 rounded-full border-2 border-[#0B0F1A] transition-all duration-300 ${isYearActive
-                          ? 'bg-[#167BFF] w-4 h-4 sm:w-5 sm:h-5 shadow-[0_0_10px_rgba(22,123,255,0.5)]'
-                          : 'bg-[#167BFF] opacity-50'
+                        ? 'bg-[#167BFF] w-4 h-4 sm:w-5 sm:h-5 shadow-[0_0_10px_rgba(22,123,255,0.5)]'
+                        : 'bg-[#167BFF] opacity-50'
                         }`}></div>
                     </div>
                   </div>
@@ -1632,8 +1632,8 @@ function BreachResultsView({ results }: { results: any[] }) {
                           ref={(el) => { breachRefs.current[breachId] = el; }}
                           key={breachId}
                           className={`relative rounded-xl sm:rounded-2xl border p-3 sm:p-4 md:p-5 shadow-[0_35px_80px_rgba(4,7,16,0.55)] transition-all duration-300 ${isBreachActive
-                              ? 'border-[#167BFF] bg-gradient-to-b from-[#0F1F3A] via-[#0A1528] to-[#050A14] shadow-[0_35px_80px_rgba(22,123,255,0.3)] scale-[1.02]'
-                              : 'border-[#1E2535] bg-gradient-to-b from-[#101320] via-[#080B14] to-[#05060A]'
+                            ? 'border-[#167BFF] bg-gradient-to-b from-[#0F1F3A] via-[#0A1528] to-[#050A14] shadow-[0_35px_80px_rgba(22,123,255,0.3)] scale-[1.02]'
+                            : 'border-[#1E2535] bg-gradient-to-b from-[#101320] via-[#080B14] to-[#05060A]'
                             }`}
                         >
                           {/* Header with Image and Title */}
