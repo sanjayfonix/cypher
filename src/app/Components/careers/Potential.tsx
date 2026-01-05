@@ -1,9 +1,13 @@
 // components/BlurCard.tsx
 "use client";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+
 import React from "react";
 
 const PotentialTeam = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="relative w-full max-w-[1000px] mt-64 mx-auto px-4 sm:px-6 lg:px-8 mb-6 flex flex-col items-center justify-center overflow-visible">
       {/* ===== Main Card ===== */}
@@ -66,11 +70,25 @@ const PotentialTeam = () => {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 mb-2">
-            <Link href={'/pages/search'}><button
+            <button
+              onClick={() => {
+                const element = document.getElementById('how-it-works');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                  router.push('/#how-it-works');
+                  setTimeout(() => {
+                    const element = document.getElementById('how-it-works');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 500);
+                }
+              }}
               className="custom-button bg-[#1057B5] with-shadow w-full sm:w-auto"
             >
               Start Investigating
-            </button></Link>
+            </button>
             {/* <button className="custom-button with-border bg-transparent w-full sm:w-auto">
               Request a Custom Program <Toparrow />
             </button> */}

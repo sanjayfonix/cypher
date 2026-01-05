@@ -1,10 +1,14 @@
+"use client";
 // components/BlurCard.tsx
 import React from "react";
 import Button from "../common/Button";
 import { Grid, Toparrow } from "@/assets/icon";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 const IndustriesBlurCard = () => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="relative flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
 
@@ -68,11 +72,29 @@ const IndustriesBlurCard = () => {
 
           {/* Buttons Section */}
           <div className="flex w-full flex-col sm:flex-row justify-center items-center gap-4 mb-2">
-            <Link href={"/pages/search"}>
-              <button className="custom-button with-shadow bg-[#1057B5]"   >Start Investigating</button>
 
-            </Link>
-             <Link href={"/pages/services/consulting"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
+            <button
+              onClick={() => {
+                const element = document.getElementById('how-it-works');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } else {
+                  router.push('/#how-it-works');
+                  setTimeout(() => {
+                    const element = document.getElementById('how-it-works');
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                  }, 500);
+                }
+              }}
+              className="custom-button with-shadow bg-[#1057B5]"
+            >
+              Start Investigating
+            </button>
+
+
+            <Link href={"/pages/services/consulting"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
 
 
 

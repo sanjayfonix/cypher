@@ -16,11 +16,11 @@ import WhereInvestigation from "@/app/Components/home/WhereInvestigation";
 
 
 export default async function HomePage() {
-//  const seachResult = await fetchSearchResult('',{
-//   type:'email',
-//   query:'hatk808@gmail.com',
-//   OstIndAKey:process.env.apiKey!
-//  })
+  //  const seachResult = await fetchSearchResult('',{
+  //   type:'email',
+  //   query:'hatk808@gmail.com',
+  //   OstIndAKey:process.env.apiKey!
+  //  })
   return (
     <div className=" bg-[var(--primary)] ">
       <HomeBanner />

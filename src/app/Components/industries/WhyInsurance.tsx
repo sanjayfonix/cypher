@@ -1,4 +1,4 @@
-
+'use client'
 import { ArrowDownRightIcon } from "lucide-react";
 import React from "react";
 import { Button } from "./IndustryButton";
@@ -6,8 +6,10 @@ import { Card, CardContent, CardTitle, CardDescription } from "./Card";
 import { FindIcon, GuassMeterIcon, ProtectIcon, Toparrow, WeighScaleIcon } from "@/assets/icon";
 import { GlassIcon } from "../home/GlassIcon";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export const WhyIndustriesCarrier = () => {
+  const router = useRouter();
   return (
     <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6 ">
 
@@ -23,20 +25,33 @@ export const WhyIndustriesCarrier = () => {
               Problem
             </h2>
             <p className="text-gray-pure1 font-UI-b1-reg text-[length:var(--UI-b1-reg-font-size)] tracking-[var(--UI-b1-reg-letter-spacing)] leading-[var(--UI-b1-reg-line-height)] [font-style:var(--UI-b1-reg-font-style)] max-w-3xl">
-              Managing risks and detecting fraud can be complex and time-sensitive. 
-              With inconsistent claimant statements and rising fraudulent activity, 
-              insurance carriers face challenges in making accurate assessments while 
+              Managing risks and detecting fraud can be complex and time-sensitive.
+              With inconsistent claimant statements and rising fraudulent activity,
+              insurance carriers face challenges in making accurate assessments while
               protecting their bottom line.
             </p>
           </div>
         </header>
 
         <div>
-          <Link href={'/pages/contactus'}>
-            <button className="custom-button with-border bg-transparent">
-              Contact our expert <Toparrow/>
-            </button>
-          </Link>
+
+          <button onClick={() => {
+            const element = document.getElementById('industry-contact-us') || document.getElementById('contact-us');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              router.push('/#contact-us');
+              setTimeout(() => {
+                const element = document.getElementById('contact-us');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 500);
+            }
+          }} className="custom-button with-border bg-transparent">
+            Contact our expert <Toparrow />
+          </button>
+
         </div>
       </div>
 
@@ -50,7 +65,7 @@ export const WhyIndustriesCarrier = () => {
             {/* Card 1 */}
             <Card className="self-start flex flex-col lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
               <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon/>} size={60}/></div>
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon />} size={60} /></div>
                 <div className="flex flex-col gap-4 ">
                   <CardTitle>Detect Fraud Early</CardTitle>
                   <CardDescription>
@@ -65,7 +80,7 @@ export const WhyIndustriesCarrier = () => {
             {/* Card 2 */}
             <Card className="self-start flex flex-1 items-start mb-4 gap-6 bg-transparent border-none shadow-none">
               <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon/>} size={60}/></div>
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon />} size={60} /></div>
                 <div className="flex flex-col gap-4">
                   <CardTitle>Build Better Risk Profiles</CardTitle>
                   <CardDescription>
@@ -84,7 +99,7 @@ export const WhyIndustriesCarrier = () => {
             {/* Card 3 */}
             <Card className="self-start flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
               <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon/>} size={60}/></div>
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon />} size={60} /></div>
                 <div className="flex flex-col gap-4">
                   <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
                   <CardDescription>
@@ -99,7 +114,7 @@ export const WhyIndustriesCarrier = () => {
             {/* Card 4 */}
             <Card className="self-start flex mb-4 flex-1 items-start gap-6 bg-transparent border-none shadow-none">
               <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon/>} size={60}/></div>
+                <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon />} size={60} /></div>
                 <div className="flex flex-col gap-4">
                   <CardTitle>Ensure Legal Compliance</CardTitle>
                   <CardDescription>

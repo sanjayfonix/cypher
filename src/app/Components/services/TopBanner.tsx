@@ -2,35 +2,38 @@
 
 import { Toparrow } from "@/assets/icon";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 
 interface ButtonProps {
   onClickConsult: () => void;
 }
 
 interface TopBannerProps {
-  content:{
-heading: {
-    id: number;
-    text: string;
-  },
-  description: {
-    id: number;
-    list: string[];
-  },
-  primaryButton: {
-    id: number;
-    text: string;
-  },
-  secondaryButton: {
-    id: number;
-    text: string;
-  },
+  content: {
+    heading: {
+      id: number;
+      text: string;
+    },
+    description: {
+      id: number;
+      list: string[];
+    },
+    primaryButton: {
+      id: number;
+      text: string;
+    },
+    secondaryButton: {
+      id: number;
+      text: string;
+    },
   };
 }
 
 
 
-export const TopBanner = ({ content}: TopBannerProps) => {
+export const TopBanner = ({ content }: TopBannerProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="relative w-full bg-[url('/grid.png')] bg-no-repeat bg-top bg-cover p-8 sm:p-16 lg:p-20 overflow-hidden flex flex-col items-center justify-start">
       {/* Quarter Blur - Top Left */}
@@ -68,17 +71,30 @@ export const TopBanner = ({ content}: TopBannerProps) => {
 
         <ul className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-1/2   list-disc list-inside space-y-1">
           {content.description.list.map((item, index) => (
-            <p  key={index}>{item}</p>
+            <p key={index}>{item}</p>
             // <li key={index}>{item}</li>
           ))}
         </ul>
 
-        <div className="flex flex-col sm:flex-row gap-8 sm:gap-5 mt-4 justify-start sm:justify-center">
-          <Link href={"/pages/search"}>
-            <button className="custom-button with-shadow bg-[#1057B5] w-full">
-              {content.primaryButton.text}
-            </button>
-          </Link>
+        <div className="flex flex-col w-full sm:flex-row gap-8 sm:gap-5 mt-4 justify-start sm:justify-center">
+
+          <button onClick={() => {
+            const element = document.getElementById('how-it-works');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              router.push('/#how-it-works');
+              setTimeout(() => {
+                const element = document.getElementById('how-it-works');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 500);
+            }
+          }} className="custom-button with-shadow h-fit bg-[#1057B5] sm:w-fit">
+            {content.primaryButton.text}
+          </button>
+
 
           <button
             onClick={() => {
@@ -87,7 +103,7 @@ export const TopBanner = ({ content}: TopBannerProps) => {
                 navToSection.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="custom-button with-border bg-transparent"
+            className="custom-button with-border sm:w-fit h-fit bg-transparent"
           >
             {content.secondaryButton.text} <Toparrow />
           </button>

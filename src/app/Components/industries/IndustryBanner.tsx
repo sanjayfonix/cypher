@@ -1,32 +1,35 @@
 'use client'
-import { Shield, Toparrow,IndustryIcon1, Peoples, QuestionIcon  } from "@/assets/icon";
+import { Shield, Toparrow, IndustryIcon1, Peoples, QuestionIcon } from "@/assets/icon";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import { AnimatedPath } from "../home/AnimatePath";
 import { GlassIcon } from "../home/GlassIcon";
 
 interface IndustryBannerProps {
-  content:{
-heading: {
-    id: number;
-    text: string;
-  },
-  description: {
-    id: number;
-    list: string[];
-  },
-  primaryButton: {
-    id: number;
-    text: string;
-  },
-  secondaryButton: {
-    id: number;
-    text: string;
-  },
+  content: {
+    heading: {
+      id: number;
+      text: string;
+    },
+    description: {
+      id: number;
+      list: string[];
+    },
+    primaryButton: {
+      id: number;
+      text: string;
+    },
+    secondaryButton: {
+      id: number;
+      text: string;
+    },
   };
 }
 
 
-export const IndustryBanner = ({content}:IndustryBannerProps) => {
+export const IndustryBanner = ({ content }: IndustryBannerProps) => {
+  const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="relative w-full bg-[url(/grid.png)] bg-no-repeat flex flex-col gap-8 px-4 lg:px-20 md:px-12 py-5 overflow-hidden">
       {/* Quarter Blur - Top Left */}
@@ -50,22 +53,51 @@ export const IndustryBanner = ({content}:IndustryBannerProps) => {
         </h1>
 
         <p className="font-inter font-normal max-w-[93vw] md:max-w-[800px] text-sm sm:text-base md:text-lg text-[#F1F1F1]">
-           {content.description.list.map((item, index) => (
-            <p  key={index}>{item}</p>
+          {content.description.list.map((item, index) => (
+            <p key={index}>{item}</p>
             // <li key={index}>{item}</li>
           ))}
         </p>
 
         {/* Buttons */}
         <div className="relative flex flex-col sm:flex-row gap-4 mt-6 bg-black sm:w-fit w-full z-20 rounded-2xl">
-          <Link href={"/pages/search"}>
-            <button className="custom-button with-shadow w-full sm:w-fit bg-[#1057B5]">
-              Start Investigating
-            </button>
-          </Link>
-          <Link href={'/pages/contactus'}><button className="w-full sm:w-fit with-border custom-button bg-transparent">
+
+          <button
+            onClick={() => {
+              const element = document.getElementById('how-it-works');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              } else {
+                router.push('/#how-it-works');
+                setTimeout(() => {
+                  const element = document.getElementById('how-it-works');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                  }
+                }, 500);
+              }
+            }}
+            className="custom-button with-shadow w-full sm:w-fit bg-[#1057B5]"
+          >
+            Start Investigating
+          </button>
+
+          <button onClick={() => {
+            const element = document.getElementById('industry-contact-us') || document.getElementById('contact-us');
+            if (element) {
+              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              router.push('/#contact-us');
+              setTimeout(() => {
+                const element = document.getElementById('contact-us');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+              }, 500);
+            }
+          }} className="w-full sm:w-fit with-border custom-button bg-transparent">
             Talk to an Expert <Toparrow />
-          </button></Link>
+          </button>
         </div>
       </div>
     </div>

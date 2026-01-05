@@ -103,7 +103,7 @@ export default function TeamSection() {
                 alt={member.title}
                 width={294}
                 height={290}
-                className="object-top w-full h-full"
+                className="object-cover object-top w-full h-full"
               />}
             </motion.div>
           ))}
