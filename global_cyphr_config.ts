@@ -4,6 +4,11 @@ export const emailId = 'info@webutation.com';
 
 export const phoneNumber = '+11234567890';
 
+// Social Media Links
+export const twitterLink = 'https://x.com';
+export const linkedinLink = 'https://linkedin.com';
+export const githubLink = 'https://github.com';
+
 export const typeOfCaseArray = [
     {
         "Name": "Social Media Intelligence (OSINT)",

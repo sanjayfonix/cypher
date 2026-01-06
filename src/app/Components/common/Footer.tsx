@@ -2,6 +2,7 @@ import { Fotterico1, Fotterico2, Fotterico3 } from "@/assets/icon";
 import { Github, Linkedin, Twitter } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { twitterLink, linkedinLink, githubLink } from "../../../../global_cyphr_config";
 
 // components/Footer.js
 export default function Footer() {
@@ -83,7 +84,7 @@ export default function Footer() {
               </h3>
               <ul className="ml-4  space-y-4 sm:space-y-6">
                 <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">About</Link></li>
-                <li><Link href="/pages/aboutus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Why Cyphr</Link></li>
+                <li><Link href="/pages/aboutus#whycyphr" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Why Cyphr</Link></li>
                 <li><Link href="/pages/contactus" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Contact</Link></li>
                 <li><Link href="/pages/careers" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Career</Link></li>
               </ul>
@@ -93,10 +94,10 @@ export default function Footer() {
                 Legal
               </h3>
               <ul className="space-y-4 sm:space-y-6">
-                <li><Link href="/pages/legal" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Privacy Policy</Link></li>
-                <li><Link href="/pages/legal" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Terms of Service</Link></li>
-                <li><Link href="/pages/legal" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Data Processing</Link></li>
-                <li><Link href="/pages/legal" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Security</Link></li>
+                <li><Link href="/pages/legal#privacy" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Privacy Policy</Link></li>
+                <li><Link href="/pages/legal#terms" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Terms of Service</Link></li>
+                <li><Link href="/pages/legal#data" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Data Processing</Link></li>
+                <li><Link href="/pages/legal#security" className="text-gray-200 hover:text-white transition-colors text-[16px] block">Security</Link></li>
               </ul>
             </div>
           </div>
@@ -112,21 +113,21 @@ export default function Footer() {
             <div className="flex flex-col w-1/2 sm:flex-row items-center  justify-between gap-6 order-1 md:order-2">
               {/* Legal Links - Stack on mobile, row on larger screens */}
               <div className="flex flex-wrap justify-center gap-4 sm:gap-4 md:gap-6">
-                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Privacy Policy</Link>
-                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Terms of Service</Link>
-                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Data Processing</Link>
-                <Link href="/pages/legal" className="text-gray-300 hover:text-white text-[16px] transition-colors">Security</Link>
+                <Link href="/pages/legal#privacy" className="text-gray-300 hover:text-white text-[16px] transition-colors">Privacy Policy</Link>
+                <Link href="/pages/legal#terms" className="text-gray-300 hover:text-white text-[16px] transition-colors">Terms of Service</Link>
+                <Link href="/pages/legal#data" className="text-gray-300 hover:text-white text-[16px] transition-colors">Data Processing</Link>
+                <Link href="/pages/legal#security" className="text-gray-300 hover:text-white text-[16px] transition-colors">Security</Link>
               </div>
 
               {/* Social Icons */}
               <div className="flex gap-[18px] justify-center">
-                <Link href="https://x.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
+                <Link href={twitterLink} target="_blank" className="text-gray-500 hover:text-white transition-colors">
                   <Fotterico1/>
                 </Link>
-                <Link href="https://linkedin.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
+                <Link href={linkedinLink} target="_blank" className="text-gray-500 hover:text-white transition-colors">
                   <Fotterico2/>
                 </Link>
-                <Link href="https://github.com" target="_blank" className="text-gray-500 hover:text-white transition-colors">
+                <Link href={githubLink} target="_blank" className="text-gray-500 hover:text-white transition-colors">
                   <Fotterico3/>
                 </Link>
               </div>

@@ -41,7 +41,7 @@ export default function Whycyphr() {
     const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
     return (
-        <section className="bg-black flex flex-col text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-12 gap-8 max-w-full overflow-x-hidden">
+        <section id="whycyphr" className="bg-black flex flex-col text-white py-12 sm:py-16 px-4 sm:px-6 lg:px-12 gap-8 max-w-full overflow-x-hidden scroll-mt-20">
             <div className="text-center mb-12">
                 <h2 className="text-[32px] sm:text-[40px] md:text-[48px] font-bold">Why Cyphr?</h2>
                 <p className="text-gray-400 text-[14px] sm:text-[16px] mt-2">

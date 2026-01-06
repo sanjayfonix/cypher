@@ -119,7 +119,7 @@ const SearchableSelect = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute mt-1 max-h-48 w-full overflow-auto rounded-md bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border border-[#3C414A] scrollbar-thin scrollbar-thumb-gray-600 scrollbar-track-transparent">
+            <Combobox.Options className="absolute mt-1 max-h-48 w-full overflow-auto rounded-md bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {filteredOptions.length === 0 && query !== '' ? (
                 <div className="relative cursor-default select-none py-2 px-4 text-gray-400">
                   Nothing found.
@@ -160,7 +160,7 @@ const SearchableSelect = ({
 
 // --- Step Components ---
 const CaseTypeStep = ({ formData, updateFormData }: Omit<StepProps, 'errors' | 'setErrors'>) => {
-  const caseTypes = typeOfCaseArray.map(item => item.Name);
+  const [hoveredCase, setHoveredCase] = useState<string | null>(null);
 
   const handleCheckboxChange = (item: string) => {
     const currentTypes = formData.caseTypes;
@@ -176,23 +176,34 @@ const CaseTypeStep = ({ formData, updateFormData }: Omit<StepProps, 'errors' | '
         Select case types:
       </h3>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        {caseTypes.map((item, index) => (
+        {typeOfCaseArray.map((caseItem, index) => (
           <label
             key={index}
-            className={`flex items-center gap-3 border-[0.5px] rounded-lg px-3 py-2 w-full cursor-pointer transition ${formData.caseTypes.includes(item)
+            onMouseEnter={() => setHoveredCase(caseItem.Name)}
+            onMouseLeave={() => setHoveredCase(null)}
+            className={`relative flex items-center gap-3 border-[0.5px] rounded-lg px-3 py-2 w-full cursor-pointer transition ${formData.caseTypes.includes(caseItem.Name)
               ? "bg-blue-500/20 border-blue-500"
               : "bg-[#FFFFFF1A] border-[#3C414A] hover:border-blue-500"
               }`}
           >
             <input
               type="checkbox"
-              checked={formData.caseTypes.includes(item)}
-              onChange={() => handleCheckboxChange(item)}
+              checked={formData.caseTypes.includes(caseItem.Name)}
+              onChange={() => handleCheckboxChange(caseItem.Name)}
               className="appearance-none h-3 w-3 border border-[#FFFFFFCC] rounded-xs checked:bg-blue-500 checked:border-blue-500 transition-all cursor-pointer"
             />
             <span className="text-[#FFFFFFCC] text-sm font-normal font-inter">
-              {item}
+              {caseItem.Name}
             </span>
+            
+            {/* Tooltip */}
+            {hoveredCase === caseItem.Name && (
+              <div className="absolute left-0 top-full mt-2 w-full sm:w-96 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 text-xs text-gray-300">
+                {/* <p className="font-semibold text-white mb-1">{caseItem.Name}</p> */}
+                <p className="leading-relaxed">{caseItem.Description}</p>
+                <div className="absolute bottom-full left-4 border-8 border-transparent border-b-gray-900" />
+              </div>
+            )}
           </label>
         ))}
       </div>
@@ -203,6 +214,16 @@ const CaseTypeStep = ({ formData, updateFormData }: Omit<StepProps, 'errors' | '
 const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }: StepProps) => {
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    // If phone is empty or just has country code prefix, it's valid (optional field)
+    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
+      return true;
+    }
+    // Phone must be at least 10 digits (excluding country code symbols like +, spaces, etc.)
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 10;
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -309,10 +330,31 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             <PhoneInput
               defaultCountry="us"
               value={formData.referrer.phone}
-              onChange={(phone) => updateFormData("referrer", "phone", phone)}
+              onChange={(phone) => {
+                updateFormData("referrer", "phone", phone);
+                
+                // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
+                let error = "";
+                const digitsOnly = phone.replace(/\D/g, '');
+                // Only show error if digits exist beyond typical country codes (1-3 digits) and less than 10 total
+                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                  error = "Phone number must be at least 10 digits";
+                }
+                
+                setErrors(prev => {
+                  const newErrors = { ...prev };
+                  if (error) {
+                    newErrors.phone = error;
+                  } else {
+                    delete newErrors.phone;
+                  }
+                  return newErrors;
+                });
+              }}
               className="phone-input-selector"
             />
           </div>
+          {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
           <p className="font-normal font-inter text-xs text-[#A0A4AE]">Valid phone number with country code</p>
         </div>
 
@@ -338,6 +380,10 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
 };
 
 const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }: StepProps) => {
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const getWordCount = (text: string) => {
     return text.trim() ? text.trim().split(/\s+/).length : 0;
   };
@@ -518,25 +564,65 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
         {/* Row 5 */}
         <div className="flex flex-col gap-2">
           <label htmlFor="claimantPhone" className="text-white text-base font-inter font-medium">Phone Number</label>
-          <input
-            type="text"
-            id="claimantPhone"
-            value={formData.claimant.phone}
-            onChange={(e) => updateFormData("claimant", "phone", e.target.value)}
-            placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-          />
+          <div className={`phone-input-container w-full bg-[#1E1E1E] border-[0.5px] ${errors.claimantPhone ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg transition-all`}>
+            <PhoneInput
+              defaultCountry="us"
+              value={formData.claimant.phone}
+              onChange={(phone) => {
+                updateFormData("claimant", "phone", phone);
+                
+                // Real-time phone validation
+                let error = "";
+                const digitsOnly = phone.replace(/\D/g, '');
+                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                  error = "Phone number must be at least 10 digits";
+                }
+                
+                setErrors(prev => {
+                  const newErrors = { ...prev };
+                  if (error) {
+                    newErrors.claimantPhone = error;
+                  } else {
+                    delete newErrors.claimantPhone;
+                  }
+                  return newErrors;
+                });
+              }}
+              className="phone-input-selector"
+            />
+          </div>
+          {errors.claimantPhone && <p className="text-xs text-red-500 mt-1">{errors.claimantPhone}</p>}
         </div>
         <div className="flex flex-col gap-2">
           <label htmlFor="claimantEmail" className="text-white text-base font-inter font-medium">Email</label>
           <input
-            type="text"
+            type="email"
             id="claimantEmail"
             value={formData.claimant.email}
-            onChange={(e) => updateFormData("claimant", "email", e.target.value)}
+            onChange={(e) => {
+              const value = e.target.value;
+              updateFormData("claimant", "email", value);
+              
+              // Real-time email validation
+              let error = "";
+              if (value.trim() !== "" && !validateEmail(value)) {
+                error = "Invalid email format";
+              }
+              
+              setErrors(prev => {
+                const newErrors = { ...prev };
+                if (error) {
+                  newErrors.claimantEmail = error;
+                } else {
+                  delete newErrors.claimantEmail;
+                }
+                return newErrors;
+              });
+            }}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className={`py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.claimantEmail ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
+          {errors.claimantEmail && <p className="text-xs text-red-500 mt-1">{errors.claimantEmail}</p>}
         </div>
 
         {/* Row 6 */}
@@ -865,6 +951,14 @@ const CaseDetails = () => {
 
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
+  const validatePhone = (phone: string) => {
+    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
+      return true;
+    }
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 10;
+  };
+
   const isStepValid = useMemo(() => {
     if (currentStep === 0) return formData.caseTypes.length > 0;
     if (currentStep === 1) {
@@ -874,6 +968,7 @@ const CaseDetails = () => {
         r.lastName.trim().length >= 2 &&
         r.companyName.trim().length >= 2 &&
         validateEmail(r.email) &&
+        (!r.phone || validatePhone(r.phone)) &&
         Object.keys(errors).length === 0
       );
     }
@@ -886,6 +981,8 @@ const CaseDetails = () => {
         c.subject.trim().length >= 2 &&
         validateDate(c.dol) &&
         (c.dob === "" || validateDate(c.dob)) &&
+        (!c.phone || validatePhone(c.phone)) &&
+        (c.email === "" || validateEmail(c.email)) &&
         Object.keys(errors).length === 0
       );
     }

@@ -1,11 +1,14 @@
 // components/BlurCard.tsx
 'use client'
 import React from "react";
+import { useRouter } from "next/navigation";
 
 import { Grid, Toparrow } from "@/assets/icon";
 
 
 const EmpowerTeam = () => {
+  const router = useRouter();
+  
   return (
     <div className="relative container mb-4 flex flex-col items-center justify-center  overflow-visible px-4">
       
@@ -71,15 +74,8 @@ const EmpowerTeam = () => {
           {/* Buttons Section */}
           <div className="flex  flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
             <button onClick={() => {
-              const navToSection = document.getElementById('contact-us')
-              if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' })
-              }
+              router.push('/#contact-us');
             }} className="custom-button bg-[#1057B5] with-shadow w-full sm:w-fit"
-
-
-
-
             >Book a Consultation</button>
             <button className="text-ellipsis whitespace-nowrap  custom-button with-border bg-transparent w-full sm:w-fit"
 

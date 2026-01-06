@@ -3,6 +3,8 @@
 import { Toparrow } from "@/assets/icon";
 import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { PhoneInput } from "react-international-phone";
+import 'react-international-phone/style.css';
 
 interface FormData {
   firstName: string;
@@ -38,6 +40,21 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
     type: "success" | "error" | null;
     message: string;
   }>({ type: null, message: "" });
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const validateEmail = (email: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    // If phone is empty or just has country code prefix, it's valid (optional field)
+    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
+      return true;
+    }
+    // Phone must be at least 10 digits (excluding country code symbols like +, spaces, etc.)
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 10;
+  };
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -53,6 +70,23 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
       [name]: type === "checkbox" ? checked : value,
     });
 
+    // Real-time validation
+    let error = "";
+    if (name === "email") {
+      if (!value.trim()) error = "Email is required";
+      else if (!validateEmail(value)) error = "Invalid email format";
+    }
+
+    setErrors((prev) => {
+      const newErrors = { ...prev };
+      if (error) {
+        newErrors[name] = error;
+      } else {
+        delete newErrors[name];
+      }
+      return newErrors;
+    });
+
     // Clear status message when user starts typing
     if (submitStatus.type) {
       setSubmitStatus({ type: null, message: "" });
@@ -63,6 +97,28 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
+
+    // Validate form before submission
+    const newErrors: Record<string, string> = {};
+    
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!validateEmail(formData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (formData.phoneNumber && !validatePhone(formData.phoneNumber)) {
+      newErrors.phoneNumber = "Invalid phone number (min 10 digits)";
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setSubmitStatus({
+        type: "error",
+        message: "Please fix the errors in the form.",
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/send-booking-email", {
@@ -184,9 +240,10 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               value={formData.email}
               onChange={handleChange}
               placeholder="John123@example.com"
-              className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+              className={`w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border ${errors.email ? 'border-red-500' : 'border-[#3C414A]'} focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]`}
               required
             />
+            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
             <p className="mt-1 text-[12px] text-[#A0A4AE]">Must be a valid email address</p>
           </div>
 
@@ -198,29 +255,36 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
             >
               Phone Number
             </label>
-            <div className="flex bg-[#2A2A2A] rounded-xl border border-[#3C414A] focus-within:border-blue-500 focus-within:ring-1 focus-within:ring-blue-500 transition-all duration-200">
-              <select
-                id="countryCode"
-                name="countryCode"
-                value={formData.countryCode}
-                onChange={handleChange}
-                className="p-[10px] sm:p-[11px] bg-transparent text-white rounded-l-xl outline-none cursor-pointer text-[14px]"
-              >
-                <option value="+91" className="bg-[#2A2A2A]">+91</option>
-                <option value="+1" className="bg-[#2A2A2A]">+1</option>
-                <option value="+44" className="bg-[#2A2A2A]">+44</option>
-              </select>
-              <input
-                type="tel"
-                id="phoneNumber"
-                name="phoneNumber"
+            <div className={`phone-input-container w-full bg-gradient-to-b from-[#0E1014] to-[#3c414a]/30 border ${errors.phoneNumber ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg`}>
+              <PhoneInput
+                defaultCountry="us"
                 value={formData.phoneNumber}
-                onChange={handleChange}
-                placeholder="00 0000 0000"
-                className="flex-1 p-[10px] sm:p-[11px] bg-transparent text-white outline-none text-[14px] rounded-r-xl"
-                required
+                onChange={(phone) => {
+                  setFormData(prev => ({ ...prev, phoneNumber: phone }));
+                  
+                  // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
+                  let error = "";
+                  const digitsOnly = phone.replace(/\D/g, '');
+                  // Only show error if digits exist beyond typical country codes (1-3 digits) and less than 10 total
+                  if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                    error = "Phone number must be at least 10 digits";
+                  }
+                  
+                  setErrors(prev => {
+                    const newErrors = { ...prev };
+                    if (error) {
+                      newErrors.phoneNumber = error;
+                    } else {
+                      delete newErrors.phoneNumber;
+                    }
+                    return newErrors;
+                  });
+                }}
+                className="phone-input-selector"
               />
             </div>
+            {errors.phoneNumber && <p className="text-xs text-red-500 mt-1">{errors.phoneNumber}</p>}
+            <p className="mt-1 text-[12px] text-[#A0A4AE]">Valid phone number with country code</p>
           </div>
 
           {/* Organization & Role */}

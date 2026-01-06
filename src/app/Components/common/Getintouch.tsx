@@ -9,7 +9,7 @@ import { Phone } from "lucide-react";
 import { PhoneInput } from "react-international-phone";
 import 'react-international-phone/style.css';
 import Button from "./Button";
-import { emailId, headquarters, phoneNumber } from "../../../../global_cyphr_config";
+import { emailId, headquarters, phoneNumber, typesOfAssignmentsArray } from "../../../../global_cyphr_config";
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -17,7 +17,7 @@ export default function ContactSection() {
     lastName: "",
     email: "",
     phone: "",
-    service: "Consulting & Advisory",
+    service: typesOfAssignmentsArray[0].Name,
     message: "",
     terms: false,
   });
@@ -39,6 +39,16 @@ export default function ContactSection() {
 
   const validateEmail = (email: string) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    // If phone is empty or just has country code prefix, it's valid (optional field)
+    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
+      return true;
+    }
+    // Phone must be at least 10 digits (excluding country code symbols like +, spaces, etc.)
+    const digitsOnly = phone.replace(/\D/g, '');
+    return digitsOnly.length >= 10;
   };
 
 
@@ -110,29 +120,50 @@ export default function ContactSection() {
 
     const newErrors: Record<string, string> = {};
 
-    if (!form.firstName.trim()) newErrors.firstName = "First name is required";
-    if (!form.lastName.trim()) newErrors.lastName = "Last name is required";
+    // Validate first name
+    if (!form.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    } else if (form.firstName.trim().length < 2) {
+      newErrors.firstName = "Minimum 2 characters";
+    }
+
+    // Validate last name
+    if (!form.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    } else if (form.lastName.trim().length < 2) {
+      newErrors.lastName = "Minimum 2 characters";
+    }
+
+    // Validate email
     if (!form.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!validateEmail(form.email)) {
       newErrors.email = "Invalid email format";
     }
 
+    // Validate phone (optional but must be valid if provided)
+    if (form.phone) {
+      const digitsOnly = form.phone.replace(/\D/g, '');
+      // Only validate if user entered digits beyond country code (more than 3 digits)
+      if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+        newErrors.phone = "Phone number must be at least 10 digits";
+      }
+    }
+
+    // Validate message word count
     if (getWordCount(form.message) > 500) {
       newErrors.message = "Message exceeds 500 words";
     }
 
+    // Validate terms acceptance
+    if (!form.terms) {
+      newErrors.terms = "Please accept the terms and conditions";
+    }
+
+    // If there are any errors, show them and prevent submission
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       setStatus({ type: "error", message: "Please fix the errors in the form." });
-      return;
-    }
-
-    if (!form.terms) {
-      setStatus({
-        type: "error",
-        message: "Please accept the terms and conditions.",
-      });
       return;
     }
 
@@ -160,7 +191,7 @@ export default function ContactSection() {
         lastName: "",
         email: "",
         phone: "",
-        service: "Consulting & Advisory",
+        service: typesOfAssignmentsArray[0].Name,
         message: "",
         terms: false,
       });
@@ -179,6 +210,7 @@ export default function ContactSection() {
     form.firstName.trim().length >= 2 &&
     form.lastName.trim().length >= 2 &&
     validateEmail(form.email) &&
+    (!form.phone || validatePhone(form.phone)) &&
     form.terms &&
     getWordCount(form.message) <= 500 &&
     Object.keys(errors).length === 0;
@@ -187,6 +219,7 @@ export default function ContactSection() {
     if (!form.firstName.trim() || form.firstName.length < 2) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!form.lastName.trim() || form.lastName.length < 2) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!validateEmail(form.email)) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
+    if (form.phone && !validatePhone(form.phone)) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!form.terms) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (getWordCount(form.message) > 500) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
@@ -359,13 +392,24 @@ export default function ContactSection() {
               value={form.phone}
               onChange={(phone) => {
                 setForm(prev => ({ ...prev, phone }));
-                if (errors.phone) {
-                  setErrors(prev => {
-                    const newErrors = { ...prev };
-                    delete newErrors.phone;
-                    return newErrors;
-                  });
+                
+                // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
+                let error = "";
+                const digitsOnly = phone.replace(/\D/g, '');
+                // Only show error if digits exist beyond typical country codes (1-3 digits) and less than 10 total
+                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                  error = "Phone number must be at least 10 digits";
                 }
+                
+                setErrors(prev => {
+                  const newErrors = { ...prev };
+                  if (error) {
+                    newErrors.phone = error;
+                  } else {
+                    delete newErrors.phone;
+                  }
+                  return newErrors;
+                });
               }}
               className="phone-input-selector"
             />
@@ -389,24 +433,11 @@ export default function ContactSection() {
             onChange={handleChange}
             className="w-full bg-[#0E1014] border border-gray-700 rounded-xl px-4 py-3 text-gray-200 text-sm shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-500"
           >
-            <option className="bg-[#0E1014] text-gray-200">
-              Consulting & Advisory
-            </option>
-            <option className="bg-[#0E1014] text-gray-200">
-              Brand Defence
-            </option>
-            <option className="bg-[#0E1014] text-gray-200">
-              Social Media Intelligence
-            </option>
-            <option className="bg-[#0E1014] text-gray-200">
-              Insurance Carriers
-            </option>
-            <option className="bg-[#0E1014] text-gray-200">Employers</option>
-            <option className="bg-[#0E1014] text-gray-200">Law Firms</option>
-            <option className="bg-[#0E1014] text-gray-200">
-              General Enquiry
-            </option>
-            <option className="bg-[#0E1014] text-gray-200">Academia</option>
+            {typesOfAssignmentsArray.map((item, index) => (
+              <option key={index} value={item.Name} className="bg-[#0E1014] text-gray-200">
+                {item.Name}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -444,14 +475,16 @@ export default function ContactSection() {
             onChange={handleChange}
             className="mt-1 accent-blue-500"
           />
-          <p className="text-sm text-gray-300">
-            I accept the terms and conditions of Webutation’s DPA (
-            <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
-              Data Processing Agreement
-            </span></Link>
-            ) and authorize the company to contact me for relevant purposes. <span className="text-blue-500">*</span>
-          </p>
-
+          <div className="flex-1">
+            <p className="text-sm text-gray-300">
+              I accept the terms and conditions of Webutation's DPA (
+              <Link href={'/pages/legal'}><span className="text-blue-400 underline cursor-pointer">
+                Data Processing Agreement
+              </span></Link>
+              ) and authorize the company to contact me for relevant purposes. <span className="text-blue-500">*</span>
+            </p>
+            {errors.terms && <p className="text-xs text-red-500 mt-1">{errors.terms}</p>}
+          </div>
         </div>
 
         {/* Status Messages */}

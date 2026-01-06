@@ -1,12 +1,31 @@
 "use client";
 import { Toparrow } from "@/assets/icon";
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 
 export default function LegalPage() {
   const privacyRef = useRef<HTMLDivElement>(null);
   const termsRef = useRef<HTMLDivElement>(null);
   const dataRef = useRef<HTMLDivElement>(null);
   const securityRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Handle hash navigation on page load
+    const hash = window.location.hash.substring(1);
+    if (hash) {
+      setTimeout(() => {
+        const refs: { [key: string]: React.RefObject<HTMLDivElement | null> } = {
+          privacy: privacyRef,
+          terms: termsRef,
+          data: dataRef,
+          security: securityRef,
+        };
+        
+        if (refs[hash]) {
+          scrollToSection(refs[hash]);
+        }
+      }, 100);
+    }
+  }, []);
 
   const scrollToSection = (ref: React.RefObject<HTMLDivElement | null>) => {
     if (ref.current) {
@@ -63,7 +82,7 @@ export default function LegalPage() {
       {/* Content */}
       <main className="flex-1 p-10 space-y-16 overflow-y-auto">
         {/* Privacy Policy */}
-        <section ref={privacyRef} className="scroll-mt-20">
+        <section id="privacy" ref={privacyRef} className="scroll-mt-20">
           <h1 className="text-[40px] font-bold text-[#157aff] mb-4">Privacy Policy</h1>
           <p className="mb-6 text-[16px]">
             At Cyphr, we are committed to protecting your personal data. This Privacy Policy explains how we
@@ -121,7 +140,7 @@ export default function LegalPage() {
         </section>
 
         {/* Data Processing */}
-        <section ref={dataRef} className="scroll-mt-20">
+        <section id="data" ref={dataRef} className="scroll-mt-20">
           <h1 className="text-[40px] font-bold text-[#157aff] mb-4">Data Processing</h1>
           <p className="mb-4">
             Cyphr processes your data to provide advanced investigative intelligence and forensic solutions.
@@ -145,7 +164,7 @@ export default function LegalPage() {
         </section>
 
         {/* Terms of Service */}
-        <section ref={termsRef} className="scroll-mt-20">
+        <section id="terms" ref={termsRef} className="scroll-mt-20">
           <h1 className="text-[40px] font-bold text-[#157aff] mb-4">Terms of Service</h1>
           <p className="mb-4">
             These Terms of Service govern your use of the Cyphr platform. By accessing or using our services,
@@ -167,7 +186,7 @@ export default function LegalPage() {
         </section>
 
         {/* Security */}
-        <section ref={securityRef} className="scroll-mt-20">
+        <section id="security" ref={securityRef} className="scroll-mt-20">
           <h1 className="text-[40px] font-bold text-[#157aff] mb-4">Security</h1>
           <p className="mb-4">
             At Cyphr, we take the security of your data very seriously. We implement industry-standard
