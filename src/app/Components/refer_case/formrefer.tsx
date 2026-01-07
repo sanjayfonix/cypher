@@ -80,30 +80,47 @@ const SearchableSelect = ({
   label: string;
   value: string;
   onChange: (val: string) => void;
-  options: string[];
+  options: { Name: string; Description?: string }[] | string[];
   placeholder: string;
   required?: boolean;
   error?: boolean;
   errorMessage?: string;
 }) => {
   const [query, setQuery] = useState('');
+  const [hoveredDescription, setHoveredDescription] = useState<{ text: string, index: number } | null>(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const containerRef = React.useRef<HTMLDivElement>(null);
+
+  const normalizedOptions = useMemo(() => {
+    return options.map(opt => typeof opt === 'string' ? { Name: opt } : opt);
+  }, [options]);
 
   const filteredOptions = query === ''
-    ? options
-    : options.filter((option) =>
-      option.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
+    ? normalizedOptions
+    : normalizedOptions.filter((option) =>
+      option.Name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
     );
 
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+
+    setTooltipPos({
+      x: rect.left + rect.width / 2,
+      y: e.clientY - rect.top
+    });
+  };
+
   return (
-    <div className="flex flex-col gap-2 w-full">
+    <div className="flex flex-col gap-2 w-full" ref={containerRef}>
       <label className="text-white font-inter font-medium text-base">
         {label} {required && <span className="text-blue-500">*</span>}
       </label>
-      <div className="relative">
+      <div className="relative group/select">
         <Combobox value={value} onChange={(val: string | null) => onChange(val || '')}>
-          <div className={`relative w-full cursor-default overflow-hidden rounded-lg bg-[#1E1E1E] text-left border-[0.5px] ${error ? 'border-red-500' : 'border-[#3C414A]'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
+          <div className={`relative w-full  cursor-default overflow-hidden rounded-lg bg-[#1E1E1E] text-left border-[0.5px] ${error ? 'border-red-500' : 'border-[#3C414A]'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
             <Combobox.Input
-              className="w-full border-none py-3 pl-3 pr-10 text-sm leading-5 text-white bg-transparent focus:outline-none focus:ring-0"
+              className="w-full border-none py-3 pl-[11px] pr-10 text-white bg-[#1E1E1E] focus:outline-none focus:ring-0"
               placeholder={placeholder}
               displayValue={(val: string) => val}
               onChange={(event) => setQuery(event.target.value)}
@@ -119,39 +136,51 @@ const SearchableSelect = ({
             leaveTo="opacity-0"
             afterLeave={() => setQuery('')}
           >
-            <Combobox.Options className="absolute mt-1 max-h-48 w-full overflow-auto rounded-md bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-              {filteredOptions.length === 0 && query !== '' ? (
-                <div className="relative cursor-default select-none py-2 px-4 text-gray-400">
-                  Nothing found.
-                </div>
-              ) : (
-                filteredOptions.map((option) => (
-                  <Combobox.Option
-                    key={option}
-                    className={({ active }) =>
-                      `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-blue-600 text-white' : 'text-gray-300'
-                      }`
-                    }
-                    value={option}
-                  >
-                    {({ selected, active }) => (
-                      <>
-                        <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
-                          {option}
-                        </span>
-                        {selected ? (
-                          <span className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-blue-500'}`}>
-                            <Check className="h-4 w-4" aria-hidden="true" />
+            <div className="relative">
+              <Combobox.Options className="absolute mt-1 max-h-64 w-full overflow-y-auto  bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border-2 border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {filteredOptions.length === 0 && query !== '' ? (
+                  <div className="relative cursor-default select-none py-2 px-4 text-gray-400">
+                    Nothing found.
+                  </div>
+                ) : (
+                  filteredOptions.map((option, index) => (
+                    <Combobox.Option
+                      key={option.Name}
+                      onMouseEnter={() => setHoveredDescription(option.Description ? { text: option.Description, index } : null)}
+                      onMouseLeave={() => setHoveredDescription(null)}
+                      onMouseMove={handleMouseMove}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                        }`
+                      }
+                      value={option.Name}
+                    >
+                      {({ selected, active }) => (
+                        <div className="flex items-center">
+                          <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                            {option.Name}
                           </span>
-                        ) : null}
-                      </>
-                    )}
-                  </Combobox.Option>
-                ))
-              )}
-            </Combobox.Options>
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  ))
+                )}
+              </Combobox.Options>
+            </div>
           </Transition>
         </Combobox>
+
+        {hoveredDescription && (
+          <div
+            className="absolute pointer-events-none z-[100] w-64 sm:w-80 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl text-xs text-gray-300 left-1/2 transform -translate-x-1/2 -translate-y-full -mt-10"
+            style={{
+              top: `${tooltipPos.y}px`,
+            }}
+          >
+            <p className="leading-relaxed">{hoveredDescription.text}</p>
+            <div className="absolute left-1/2 -translate-x-1/2 border-8 border-transparent top-full border-t-gray-900" />
+          </div>
+        )}
       </div>
       {error && errorMessage && <p className="text-xs text-red-500">{errorMessage}</p>}
     </div>
@@ -195,13 +224,14 @@ const CaseTypeStep = ({ formData, updateFormData }: Omit<StepProps, 'errors' | '
             <span className="text-[#FFFFFFCC] text-sm font-normal font-inter">
               {caseItem.Name}
             </span>
-            
+
             {/* Tooltip */}
             {hoveredCase === caseItem.Name && (
-              <div className="absolute left-0 top-full mt-2 w-full sm:w-96 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 text-xs text-gray-300">
-                {/* <p className="font-semibold text-white mb-1">{caseItem.Name}</p> */}
+              <div className={`absolute ${index < 8 ? 'top-full mt-2' : 'bottom-full mb-2'} w-full sm:w-80 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl z-50 text-xs text-gray-300 pointer-events-none transition-opacity duration-200 ${index % 2 === 0 ? "left-0" : "sm:right-0 sm:left-auto left-0"
+                }`}>
                 <p className="leading-relaxed">{caseItem.Description}</p>
-                <div className="absolute bottom-full left-4 border-8 border-transparent border-b-gray-900" />
+                <div className={`absolute ${index < 8 ? 'bottom-full border-b-gray-900' : 'top-full border-t-gray-900'} border-8 border-transparent ${index % 2 === 0 ? "left-4" : "sm:right-4 sm:left-auto left-4"
+                  }`} />
               </div>
             )}
           </label>
@@ -217,13 +247,9 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
   };
 
   const validatePhone = (phone: string) => {
-    // If phone is empty or just has country code prefix, it's valid (optional field)
-    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
-      return true;
-    }
-    // Phone must be at least 10 digits (excluding country code symbols like +, spaces, etc.)
+    if (!phone || phone.trim() === '' || phone.trim() === '+') return true;
     const digitsOnly = phone.replace(/\D/g, '');
-    return digitsOnly.length >= 10;
+    return digitsOnly.length === 0 || digitsOnly.length >= 10;
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -330,17 +356,19 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             <PhoneInput
               defaultCountry="us"
               value={formData.referrer.phone}
-              onChange={(phone) => {
+              onChange={(phone, meta) => {
                 updateFormData("referrer", "phone", phone);
-                
-                // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
+
+                // Real-time phone validation using country metadata
                 let error = "";
                 const digitsOnly = phone.replace(/\D/g, '');
-                // Only show error if digits exist beyond typical country codes (1-3 digits) and less than 10 total
-                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                const dialCode = meta.country.dialCode;
+
+                // If digits length is greater than dial code, it means user started typing local digits
+                if (digitsOnly.length > dialCode.length && digitsOnly.length < 10) {
                   error = "Phone number must be at least 10 digits";
                 }
-                
+
                 setErrors(prev => {
                   const newErrors = { ...prev };
                   if (error) {
@@ -445,7 +473,7 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
           label="Type of assignment"
           value={formData.claimant.typeOfAssignment}
           onChange={(val) => handleInputChange("typeOfAssignment", val)}
-          options={typesOfAssignmentsArray.map(item => item.Name)}
+          options={typesOfAssignmentsArray}
           placeholder="Search or select type of assignment..."
           required={true}
           error={!!errors.typeOfAssignment}
@@ -568,16 +596,18 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
             <PhoneInput
               defaultCountry="us"
               value={formData.claimant.phone}
-              onChange={(phone) => {
+              onChange={(phone, meta) => {
                 updateFormData("claimant", "phone", phone);
-                
-                // Real-time phone validation
+
+                // Real-time phone validation using country metadata
                 let error = "";
                 const digitsOnly = phone.replace(/\D/g, '');
-                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                const dialCode = meta.country.dialCode;
+
+                if (digitsOnly.length > dialCode.length && digitsOnly.length < 10) {
                   error = "Phone number must be at least 10 digits";
                 }
-                
+
                 setErrors(prev => {
                   const newErrors = { ...prev };
                   if (error) {
@@ -602,13 +632,13 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
             onChange={(e) => {
               const value = e.target.value;
               updateFormData("claimant", "email", value);
-              
+
               // Real-time email validation
               let error = "";
               if (value.trim() !== "" && !validateEmail(value)) {
                 error = "Invalid email format";
               }
-              
+
               setErrors(prev => {
                 const newErrors = { ...prev };
                 if (error) {
@@ -677,7 +707,7 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
         <div className="flex flex-col gap-2 md:col-span-2">
           <label htmlFor="specialCharacteristics" className="text-white text-base font-inter font-medium">Special Physical Characteristics</label>
           <textarea
-          maxLength={500}
+            maxLength={500}
             id="specialCharacteristics"
             value={formData.claimant.specialCharacteristics}
             onChange={(e) => handleTextareaChange(e.target.value)}
@@ -862,7 +892,7 @@ const UploadDocumentsStep = ({ formData, updateFormData, errors, setErrors }: St
       <div className="flex flex-col gap-2 mt-8">
         <label htmlFor="notes" className="text-white text-base font-inter font-medium">Notes</label>
         <textarea
-        maxLength={1000}
+          maxLength={1000}
           id="notes"
           value={formData.notes}
           onChange={(e) => handleNotesChange(e.target.value)}
@@ -952,42 +982,47 @@ const CaseDetails = () => {
   const validateEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
   const validatePhone = (phone: string) => {
-    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
-      return true;
-    }
+    if (!phone || phone.trim() === '' || phone.trim() === '+') return true;
     const digitsOnly = phone.replace(/\D/g, '');
-    return digitsOnly.length >= 10;
+    return digitsOnly.length === 0 || digitsOnly.length >= 10;
   };
 
   const isStepValid = useMemo(() => {
     if (currentStep === 0) return formData.caseTypes.length > 0;
+
     if (currentStep === 1) {
       const r = formData.referrer;
+      const step1Fields = ["firstName", "lastName", "companyName", "email", "phone"];
+      const hasStep1Errors = Object.keys(errors).some(key => step1Fields.includes(key));
+
       return (
         r.firstName.trim().length >= 2 &&
         r.lastName.trim().length >= 2 &&
         r.companyName.trim().length >= 2 &&
         validateEmail(r.email) &&
-        (!r.phone || validatePhone(r.phone)) &&
-        Object.keys(errors).length === 0
+        !hasStep1Errors
       );
     }
+
     if (currentStep === 2) {
       const c = formData.claimant;
+      const step2Fields = ["claimFile", "typeOfAssignment", "subject", "dol", "dob", "claimantPhone", "claimantEmail"];
+      const hasStep2Errors = Object.keys(errors).some(key => step2Fields.includes(key));
       const validateDate = (date: string) => /^(0[1-9]|1[0-2])\/(0[1-9]|[12][0-9]|3[01])\/\d{4}$/.test(date);
+
       return (
         c.claimFile.trim().length >= 2 &&
         c.typeOfAssignment.trim().length >= 2 &&
         c.subject.trim().length >= 2 &&
         validateDate(c.dol) &&
         (c.dob === "" || validateDate(c.dob)) &&
-        (!c.phone || validatePhone(c.phone)) &&
         (c.email === "" || validateEmail(c.email)) &&
-        Object.keys(errors).length === 0
+        !hasStep2Errors
       );
     }
+
     if (currentStep === 3) {
-      return formData.files.length > 0 && Object.keys(errors).length === 0;
+      return formData.files.length > 0 && !errors.upload;
     }
     return true;
   }, [currentStep, formData, errors]);
@@ -1156,8 +1191,8 @@ const CaseDetails = () => {
                 {currentStep === 0
                   ? "Need to select at least one case type."
                   : currentStep === 3
-                  ? "Please select at least one file to submit the case."
-                  : "All * marked fields are required and must be filled correctly."}
+                    ? "Please select at least one file to submit the case."
+                    : "All * marked fields are required and must be filled correctly."}
                 <div className="absolute top-full left-1/2 -translate-x-1/2 border-8 border-transparent border-t-gray-900" />
               </div>
             )}

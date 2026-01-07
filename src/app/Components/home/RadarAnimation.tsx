@@ -124,7 +124,7 @@ function installNavigationGuardOnce() {
             markNav();
           }
         }
-      } catch {}
+      } catch { }
     },
     { capture: true, passive: true }
   );
@@ -225,8 +225,8 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
             text === "Risk Assessment"
               ? -30
               : text === "Data Analysis"
-              ? -15
-              : 12
+                ? -15
+                : 12
           }
           fontSize={14}
           fill="#d9f0ff"
@@ -262,7 +262,7 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
         {/* Background grid + circles */}
         <g>
           <circle cx={CX} cy={CY} r={RADIUS + 18} stroke="#10324a"
-    strokeWidth={1.2} opacity={0.8} fill="url(#bgGrad)" />
+            strokeWidth={1.2} opacity={0.8} fill="url(#bgGrad)" />
           {[80, 150, 220, 280].map((r, i) => (
             <circle
               key={i}
@@ -401,19 +401,19 @@ export default function RadarAccurate({ size = 420 }: { size?: number }) {
                     p.id === "investigation" ||
                     p.id === "digital" ||
                     p.id === "fraud") && (
-                    <motion.circle
-                      cx={p.x}
-                      cy={p.y}
-                      r={12}
-                      fill="none"
-                      stroke="#4fc3f7"
-                      strokeWidth={1.5}
-                      initial={{ scale: 1, opacity: 0.9 }}
-                      animate={{ scale: 1.6, opacity: 0 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.8, ease: "easeOut" }}
-                    />
-                  )}
+                      <motion.circle
+                        cx={p.x}
+                        cy={p.y}
+                        r={12}
+                        fill="none"
+                        stroke="#4fc3f7"
+                        strokeWidth={1.5}
+                        initial={{ scale: 1, opacity: 0.9 }}
+                        animate={{ scale: 1.6, opacity: 0 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.8, ease: "easeOut" }}
+                      />
+                    )}
                 </>
               )}
             </AnimatePresence>

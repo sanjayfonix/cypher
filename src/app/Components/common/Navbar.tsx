@@ -79,7 +79,7 @@ export default function Navbar() {
       <nav className="flex justify-center px-6 lg:px-16 py-4 bg-black">
         <div className="w-full container bg-black flex items-center justify-between">
           {/* Mobile menu button */}
-          <button className="md:hidden text-white mr-4" onClick={toggleSidebar}>
+          <button className="lg:hidden text-white mr-4" onClick={toggleSidebar}>
             {isSidebarOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
 
@@ -90,12 +90,12 @@ export default function Navbar() {
               alt="Logo"
               width={203}
               height={28}
-              className="h-auto w-auto"
+              className="h-auto w-auto "
             />
           </Link>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex flex-nowrap whitespace-nowrap bg-[#3c414a] items-center gap-4 border border-white/20 rounded-full px-4 py-2 ">
+          <div className="hidden lg:flex flex-nowrap whitespace-nowrap bg-[#3c414a] items-center gap-4 border border-white/20 rounded-full px-4 py-2 ">
             {/* Home */}
             <Link
 
@@ -202,21 +202,10 @@ export default function Navbar() {
           </div>
 
           {/* Desktop Right Buttons */}
-          <div className="hidden md:flex items-center gap-4 md:gap-2">
+          <div className="hidden lg:flex items-center gap-4 md:gap-2">
             <button
               onClick={() => {
-                const element = document.getElementById('contact-us');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                } else {
-                  router.push('/#contact-us');
-                  setTimeout(() => {
-                    const element = document.getElementById('contact-us');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
-                  }, 500);
-                }
+                router.push('/pages/contactus')
               }}
               className="hidden lg:block min-w-[130px] custom-button with-border bg-transparent"
             >
@@ -251,7 +240,7 @@ export default function Navbar() {
           </div>
 
           {/* Placeholder for mobile */}
-          <div className="md:hidden invisible">
+          <div className="lg:hidden invisible">
             <Menu size={24} />
           </div>
 
@@ -261,7 +250,7 @@ export default function Navbar() {
       {/* ✅ Mobile Sidebar (fixed patch for dropdown navigation) */}
       <div
         className={`fixed top-0 left-0 h-full w-80 bg-black z-50 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-          } md:hidden`}
+          } lg:hidden`}
         // stopPropagation so clicks inside the sidebar don't accidentally hit the overlay
         onClick={(e) => e.stopPropagation()}
       >
@@ -460,7 +449,7 @@ export default function Navbar() {
       {/* Overlay */}
       {isSidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
           onClick={toggleSidebar}
         ></div>
       )}

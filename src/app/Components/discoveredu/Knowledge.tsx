@@ -8,11 +8,11 @@ import { Grid, Toparrow } from "@/assets/icon";
 
 const EmpowerTeam = () => {
   const router = useRouter();
-  
+
   return (
     <div className="relative container mb-4 flex flex-col items-center justify-center  overflow-visible px-4">
-      
-      
+
+
 
       {/* ===== Main Card ===== */}
       <div
@@ -64,7 +64,7 @@ const EmpowerTeam = () => {
           {/* Text Section */}
           <div className="flex flex-col gap-4 text-center">
             <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[48px] text-white leading-snug">
-              Empower Your Team with Practical Intelligence <br/> Knowledge
+              Empower Your Team with Practical Intelligence <br /> Knowledge
             </h1>
             <p className="font-inter font-normal text-xs sm:text-base  text-[#A0A4AE] mx-auto text-center max-w-[95%] sm:max-w-[80%] lg:max-w-[72%]">
               Our accredited CE and CLE programs help your organization stay ahead of fraud, legal challenges, and digital threats.

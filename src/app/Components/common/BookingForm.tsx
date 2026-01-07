@@ -20,7 +20,7 @@ interface FormData {
   agreement: boolean;
 }
 
-export default function BookingForm({isForm=false}:{isForm?:boolean}) {
+export default function BookingForm({ isForm = false }: { isForm?: boolean }) {
   const [formData, setFormData] = useState<FormData>({
     firstName: "",
     lastName: "",
@@ -46,6 +46,10 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  const validateName = (name: string) => {
+    return /^[A-Za-z]+$/.test(name);
+  };
+
   const validatePhone = (phone: string) => {
     // If phone is empty or just has country code prefix, it's valid (optional field)
     if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
@@ -55,6 +59,14 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
     const digitsOnly = phone.replace(/\D/g, '');
     return digitsOnly.length >= 10;
   };
+
+  const isFormValid =
+    formData.firstName.trim().length >= 2 && validateName(formData.firstName) &&
+    formData.lastName.trim().length >= 2 && validateName(formData.lastName) &&
+    validateEmail(formData.email) &&
+    formData.agreement &&
+    formData.message.trim().length >= 20 &&
+    Object.keys(errors).length === 0;
 
   const handleChange = (
     e: React.ChangeEvent<
@@ -75,6 +87,10 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
     if (name === "email") {
       if (!value.trim()) error = "Email is required";
       else if (!validateEmail(value)) error = "Invalid email format";
+    } else if (name === "firstName" || name === "lastName") {
+      if (!value.trim()) error = `${name === "firstName" ? "First" : "Last"} Name is required`;
+      else if (!validateName(value)) error = "Only letters are allowed";
+      else if (value.length < 2) error = "Minimum 2 characters required";
     }
 
     setErrors((prev) => {
@@ -95,20 +111,35 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isFormValid) return;
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
     // Validate form before submission
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
     } else if (!validateEmail(formData.email)) {
       newErrors.email = "Invalid email format";
     }
-    if (formData.phoneNumber && !validatePhone(formData.phoneNumber)) {
-      newErrors.phoneNumber = "Invalid phone number (min 10 digits)";
+
+    if (!formData.firstName.trim()) {
+      newErrors.firstName = "First name is required";
+    } else if (!validateName(formData.firstName)) {
+      newErrors.firstName = "Only letters are allowed in first name";
     }
+
+    if (!formData.lastName.trim()) {
+      newErrors.lastName = "Last name is required";
+    } else if (!validateName(formData.lastName)) {
+      newErrors.lastName = "Only letters are allowed in last name";
+    }
+
+    // if (formData.phoneNumber && !validatePhone(formData.phoneNumber)) {
+    //   newErrors.phoneNumber = "Invalid phone number (min 10 digits)";
+    // }
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -173,7 +204,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
 
   return (
     <div style={{
-      borderRadius:isForm?'32px':0
+      borderRadius: isForm ? '32px' : 0
     }} className="container px-4 sm:px-6 lg:px-[48px] py-8 sm:py-12">
       <div className="w-full border border-[#5B5B5B] rounded-[24px] sm:rounded-[32px] p-4 sm:p-8 lg:p-[48px]">
         <h1 className="text-white text-2xl sm:text-3xl md:text-[32px] font-bold mb-6 sm:mb-8 text-center sm:text-left leading-snug">
@@ -188,7 +219,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 htmlFor="firstName"
                 className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
-                First Name
+                First Name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -197,18 +228,22 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 value={formData.firstName}
                 onChange={handleChange}
                 placeholder="John"
-                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                className={`w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border ${errors.firstName ? 'border-red-500' : 'border-[#3C414A]'} focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]`}
                 minLength={2}
                 required
               />
-              <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters</p>
+              {errors.firstName ? (
+                <p className="mt-1 text-[12px] text-red-500">{errors.firstName}</p>
+              ) : (
+                <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters (letters only)</p>
+              )}
             </div>
             <div>
               <label
                 htmlFor="lastName"
                 className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
-                Last Name
+                Last Name <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -217,11 +252,15 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 value={formData.lastName}
                 onChange={handleChange}
                 placeholder="Doe"
-                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]"
+                className={`w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white shadow-none rounded-lg font-normal font-inter border ${errors.lastName ? 'border-red-500' : 'border-[#3C414A]'} focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]`}
                 minLength={2}
                 required
               />
-              <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters</p>
+              {errors.lastName ? (
+                <p className="mt-1 text-[12px] text-red-500">{errors.lastName}</p>
+              ) : (
+                <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 2 characters (letters only)</p>
+              )}
             </div>
           </div>
 
@@ -231,7 +270,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               htmlFor="email"
               className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
             >
-              Email
+              Email <span className="text-red-500">*</span>
             </label>
             <input
               type="email"
@@ -243,8 +282,11 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               className={`w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border ${errors.email ? 'border-red-500' : 'border-[#3C414A]'} focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none transition-all duration-200 text-[14px]`}
               required
             />
-            {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
-            <p className="mt-1 text-[12px] text-[#A0A4AE]">Must be a valid email address</p>
+            {errors.email ? (
+              <p className="text-xs text-red-500 mt-1">{errors.email}</p>
+            ) : (
+              <p className="mt-1 text-[12px] text-[#A0A4AE]">Must be a valid email address</p>
+            )}
           </div>
 
           {/* Phone Number */}
@@ -261,7 +303,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 value={formData.phoneNumber}
                 onChange={(phone) => {
                   setFormData(prev => ({ ...prev, phoneNumber: phone }));
-                  
+
                   // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
                   let error = "";
                   const digitsOnly = phone.replace(/\D/g, '');
@@ -269,7 +311,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                   if (digitsOnly.length > 3 && digitsOnly.length < 10) {
                     error = "Phone number must be at least 10 digits";
                   }
-                  
+
                   setErrors(prev => {
                     const newErrors = { ...prev };
                     if (error) {
@@ -332,7 +374,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 htmlFor="sessionType"
                 className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
-                Session Type
+                Session Type <span className="text-red-500">*</span>
               </label>
               <select
                 id="sessionType"
@@ -351,27 +393,19 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
                 htmlFor="preferredDateTime"
                 className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
               >
-                Preferred Date & Time
+                Preferred Date & Time <span className="text-red-500">*</span>
               </label>
-              <input
-                type="text"
-                id="preferredDateTime"
-                name="preferredDateTime"
-                value={formData.preferredDateTime}
-                onChange={handleChange}
-                placeholder="Choose a date and time"
-                className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
-                onFocus={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  target.type = "datetime-local";
-                }}
-                onBlur={(e) => {
-                  const target = e.target as HTMLInputElement;
-                  if (target.value === "") {
-                    target.type = "text";
-                  }
-                }}
-              />
+              <div className="relative group">
+                <input
+                  type="datetime-local"
+                  id="preferredDateTime"
+                  name="preferredDateTime"
+                  value={formData.preferredDateTime}
+                  onChange={handleChange}
+                  className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px] [color-scheme:dark]"
+                  required
+                />
+              </div>
             </div>
           </div>
 
@@ -381,7 +415,7 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               htmlFor="message"
               className="block text-white text-[14px] sm:text-[16px] font-medium mb-2"
             >
-              Message
+              Message <span className="text-red-500">*</span>
             </label>
             <textarea
               id="message"
@@ -390,11 +424,14 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               onChange={handleChange}
               rows={5}
               placeholder="Tell us more about your audience..."
-              className="resize-none w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
+              className={`resize-none w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg ${formData.message.length < 20 && formData.message.trim() !== '' ? 'border-2 border-red-500' : 'border-[#3C414A]'} border  focus:ring-1 focus:ring-blue-500 outline-none text-[14px]`}
+              maxLength={250}
               minLength={20}
-              required
             ></textarea>
-            <p className="mt-1 text-[12px] text-[#A0A4AE]">Minimum 20 characters</p>
+            <div className="flex justify-between flex-wrap">
+              <p className={`mt-1 ${formData.message.length < 20 && formData.message.trim() !== '' ? 'text-red-500 text-[14px]' : 'text-[12px] text-[#A0A4AE]'} `}>Minimum 20 characters</p>
+              <p className="text-[12px] text-[#A0A4AE] mt-1">{formData.message.length}/250</p>
+            </div>
           </div>
 
           {/* Agreement */}
@@ -410,43 +447,49 @@ export default function BookingForm({isForm=false}:{isForm?:boolean}) {
               required
             />
             <label htmlFor="agreement" className="text-[#E3E3E3] text-[14px]">
-              I agree to the terms and conditions and authorize Cyphr to contact me regarding this booking.
+              I agree to the terms and conditions and authorize Cyphr to contact me regarding this booking. <span className="text-red-500">*</span>
             </label>
           </div>
 
           {/* Status Message */}
           {submitStatus.type && (
             <div
-              className={`p-4 rounded-lg border ${
-                submitStatus.type === "success"
-                  ? "bg-[#0F2A1C] text-[#45F39A] border-[#1F6B47]"
-                  : "bg-[#331616] text-[#FF7A7A] border-[#7A2C2C]"
-              }`}
+              className={`p-4 rounded-lg border ${submitStatus.type === "success"
+                ? "bg-[#0F2A1C] text-[#45F39A] border-[#1F6B47]"
+                : "bg-[#331616] text-[#FF7A7A] border-[#7A2C2C]"
+                }`}
             >
               <p className="text-sm font-medium">{submitStatus.message}</p>
             </div>
           )}
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={`w-full custom-button with-shadow bg-[#1057B5] mt-4 flex items-center justify-center gap-2 ${
-              isSubmitting ? "opacity-70 cursor-not-allowed" : ""
-            }`}
-          >
-            {isSubmitting ? (
-              <>
-                <Loader2 className="w-5 h-5 animate-spin text-white" />
-                <span>Submitting...</span>
-              </>
-            ) : (
-              <>
-                Submit Booking Request <Toparrow />
-              </>
+          <div className="relative group" title={!isFormValid ? "Please fill all required details to submit the form" : ""}>
+            <button
+              type="submit"
+              disabled={isSubmitting || !isFormValid}
+              className={`w-full custom-button with-shadow bg-[#1057B5] mt-4 flex items-center justify-center gap-2 transition-all duration-200 ${(isSubmitting || !isFormValid) ? "opacity-50 cursor-not-allowed grayscale-[0.5]" : "hover:bg-[#0e4da1]"
+                }`}
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="w-5 h-5 animate-spin text-white" />
+                  <span>Submitting...</span>
+                </>
+              ) : (
+                <>
+                  Submit Booking Request <Toparrow />
+                </>
+              )}
+            </button>
+            {!isFormValid && !isSubmitting && (
+              <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-gray-800 text-white text-xs py-1 px-2 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-10 shadow-lg border border-gray-700">
+                Please fill all required details to submit
+              </div>
             )}
-          </button>
+          </div>
         </form>
+
       </div>
     </div>
   );

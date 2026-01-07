@@ -48,7 +48,7 @@ export default function RootLayout({
 
         {/* Main content takes all remaining height */}
         <main className="flex-1">{children}
-          
+
         </main>
 
         {/* Footer sticks to bottom */}

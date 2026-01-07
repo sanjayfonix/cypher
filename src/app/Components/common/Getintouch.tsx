@@ -1,15 +1,138 @@
 "use client";
-import { useState } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { Email, Headquators, Toparrow } from "@/assets/icon";
 import { GlassIcon } from "../home/GlassIcon";
 import { PointerGrid } from "../home/GridAnimation";
 import Link from "next/link";
 import { ContactFormData, submitContactForm } from "@/api/contact";
-import { Phone } from "lucide-react";
+import { Phone, Check, ChevronDown } from "lucide-react";
 import { PhoneInput } from "react-international-phone";
 import 'react-international-phone/style.css';
+import { Combobox, Transition } from '@headlessui/react';
 import Button from "./Button";
 import { emailId, headquarters, phoneNumber, typesOfAssignmentsArray } from "../../../../global_cyphr_config";
+
+// --- Reusable Components ---
+const SearchableSelect = ({
+  label,
+  value,
+  onChange,
+  options,
+  placeholder,
+  required = false,
+  error = false,
+  errorMessage = ""
+}: {
+  label: string;
+  value: string;
+  onChange: (val: string) => void;
+  options: { Name: string; Description?: string }[] | string[];
+  placeholder: string;
+  required?: boolean;
+  error?: boolean;
+  errorMessage?: string;
+}) => {
+  const [query, setQuery] = useState('');
+  const [hoveredDescription, setHoveredDescription] = useState<{ text: string, index: number } | null>(null);
+  const [tooltipPos, setTooltipPos] = useState({ x: 0, y: 0 });
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  const normalizedOptions = useMemo(() => {
+    return options.map(opt => typeof opt === 'string' ? { Name: opt } : opt);
+  }, [options]);
+
+  const filteredOptions = query === ''
+    ? normalizedOptions
+    : normalizedOptions.filter((option) =>
+      option.Name.toLowerCase().replace(/\s+/g, '').includes(query.toLowerCase().replace(/\s+/g, ''))
+    );
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+
+    setTooltipPos({
+      x: rect.left + rect.width / 2,
+      y: e.clientY - rect.top
+    });
+  };
+
+  return (
+    <div className="flex flex-col gap-2 w-full" ref={containerRef}>
+      <label className="text-white font-inter font-medium text-base">
+        {label} {required && <span className="text-blue-500">*</span>}
+      </label>
+      <div className="relative group/select" ref={containerRef}>
+        <Combobox value={value} onChange={(val: string | null) => onChange(val || '')}>
+          <div className={`relative w-full cursor-default overflow-hidden rounded-lg bg-[#0E1014] text-left border ${error ? 'border-red-500' : 'border-gray-700'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
+            <Combobox.Input
+              className="w-full border-none py-3 pl-[11px] pr-10 text-white bg-transparent focus:outline-none focus:ring-0"
+              placeholder={placeholder}
+              displayValue={(val: string) => val}
+              onChange={(event) => setQuery(event.target.value)}
+            />
+            <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
+              <ChevronDown className="h-4 w-4 text-gray-400" aria-hidden="true" />
+            </Combobox.Button>
+          </div>
+          <Transition
+            as={React.Fragment}
+            leave="transition ease-in duration-100"
+            leaveFrom="opacity-100"
+            leaveTo="opacity-0"
+            afterLeave={() => setQuery('')}
+          >
+            <div className="relative">
+              <Combobox.Options className="absolute mt-1 max-h-64 w-full overflow-y-auto rounded-md bg-[#0E1014] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border border-gray-700 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                {filteredOptions.length === 0 && query !== '' ? (
+                  <div className="relative cursor-default select-none py-2 px-4 text-gray-400">
+                    Nothing found.
+                  </div>
+                ) : (
+                  filteredOptions.map((option, index) => (
+                    <Combobox.Option
+                      key={option.Name}
+                      onMouseEnter={() => setHoveredDescription(option.Description ? { text: option.Description, index } : null)}
+                      onMouseLeave={() => setHoveredDescription(null)}
+                      onMouseMove={handleMouseMove}
+                      className={({ active }) =>
+                        `relative cursor-default select-none py-2 pl-10 pr-4 ${active ? 'bg-blue-600 text-white' : 'text-gray-300'
+                        }`
+                      }
+                      value={option.Name}
+                    >
+                      {({ selected, active }) => (
+                        <div className="flex items-center">
+                          <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                            {option.Name}
+                          </span>
+                        </div>
+                      )}
+                    </Combobox.Option>
+                  ))
+                )}
+              </Combobox.Options>
+            </div>
+          </Transition>
+        </Combobox>
+
+        {/* Absolute tooltip relative to group/select container */}
+        {hoveredDescription && (
+          <div
+            className="absolute pointer-events-none z-[100] w-64 sm:w-80 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl text-xs text-gray-300 left-1/2 transform -translate-x-1/2 -translate-y-full -mt-10"
+            style={{
+              top: `${tooltipPos.y}px`,
+            }}
+          >
+            <p className="leading-relaxed">{hoveredDescription.text}</p>
+            <div className="absolute left-1/2 -translate-x-1/2 border-8 border-transparent top-full border-t-gray-900" />
+          </div>
+        )}
+      </div>
+      {error && errorMessage && <p className="text-xs text-red-500">{errorMessage}</p>}
+    </div>
+  );
+};
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -42,13 +165,11 @@ export default function ContactSection() {
   };
 
   const validatePhone = (phone: string) => {
-    // If phone is empty or just has country code prefix, it's valid (optional field)
-    if (!phone || phone.trim() === '' || phone.replace(/\D/g, '').length === 0) {
-      return true;
-    }
-    // Phone must be at least 10 digits (excluding country code symbols like +, spaces, etc.)
+    if (!phone || phone.trim() === '' || phone.trim() === '+') return true;
     const digitsOnly = phone.replace(/\D/g, '');
-    return digitsOnly.length >= 10;
+    // If it's just a country code (e.g. "1" for US), we treat it as empty/valid
+    // We'll handle refined validation in the onChange handler where we have country context
+    return digitsOnly.length === 0 || digitsOnly.length >= 10;
   };
 
 
@@ -142,13 +263,7 @@ export default function ContactSection() {
     }
 
     // Validate phone (optional but must be valid if provided)
-    if (form.phone) {
-      const digitsOnly = form.phone.replace(/\D/g, '');
-      // Only validate if user entered digits beyond country code (more than 3 digits)
-      if (digitsOnly.length > 3 && digitsOnly.length < 10) {
-        newErrors.phone = "Phone number must be at least 10 digits";
-      }
-    }
+
 
     // Validate message word count
     if (getWordCount(form.message) > 500) {
@@ -210,16 +325,15 @@ export default function ContactSection() {
     form.firstName.trim().length >= 2 &&
     form.lastName.trim().length >= 2 &&
     validateEmail(form.email) &&
-    (!form.phone || validatePhone(form.phone)) &&
+    Object.keys(errors).length === 0 && // Relies on real-time validation for phone
     form.terms &&
-    getWordCount(form.message) <= 500 &&
-    Object.keys(errors).length === 0;
+    getWordCount(form.message) <= 500;
 
   const getDisabledReason = () => {
     if (!form.firstName.trim() || form.firstName.length < 2) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!form.lastName.trim() || form.lastName.length < 2) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!validateEmail(form.email)) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
-    if (form.phone && !validatePhone(form.phone)) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
+    if (errors.phone) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (!form.terms) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     if (getWordCount(form.message) > 500) return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
     return "All * marked fields are required and must be filled and valid and terms and conditions must be accepted";
@@ -253,7 +367,7 @@ export default function ContactSection() {
       </div>
 
       {/* Background Glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_30%)] pointer-events-none" />
+      <div className="absolute rounded-3xl inset-0 bg-[radial-gradient(circle_at_5%_100%,rgba(00,99,235,0.25),transparent_30%)] pointer-events-none" />
 
       <div className="md:w-1/2 relative z-10 mb-10 md:mb-0">
         <h2 className="text-[32px] md:text-[48px] font-bold mb-4">
@@ -390,17 +504,19 @@ export default function ContactSection() {
             <PhoneInput
               defaultCountry="us"
               value={form.phone}
-              onChange={(phone) => {
+              onChange={(phone, meta) => {
                 setForm(prev => ({ ...prev, phone }));
-                
-                // Real-time phone validation - only validate if user has entered meaningful digits beyond country code
+
+                // Real-time phone validation using country metadata
                 let error = "";
                 const digitsOnly = phone.replace(/\D/g, '');
-                // Only show error if digits exist beyond typical country codes (1-3 digits) and less than 10 total
-                if (digitsOnly.length > 3 && digitsOnly.length < 10) {
+                const dialCode = meta.country.dialCode;
+
+                // If digits length is greater than dial code, it means user started typing local digits
+                if (digitsOnly.length > dialCode.length && digitsOnly.length < 10) {
                   error = "Phone number must be at least 10 digits";
                 }
-                
+
                 setErrors(prev => {
                   const newErrors = { ...prev };
                   if (error) {
@@ -422,24 +538,16 @@ export default function ContactSection() {
 
 
         {/* Select Dropdown */}
-        <div>
-          <label className="block text-sm font-medium text-gray-100 mb-2">
-            Services / Industry of Interest <span className="text-blue-500">*</span>
-          </label>
-
-          <select
-            name="service"
-            value={form.service}
-            onChange={handleChange}
-            className="w-full bg-[#0E1014] border border-gray-700 rounded-xl px-4 py-3 text-gray-200 text-sm shadow-[0_0_10px_rgba(0,0,0,0.5)] transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 hover:border-gray-500"
-          >
-            {typesOfAssignmentsArray.map((item, index) => (
-              <option key={index} value={item.Name} className="bg-[#0E1014] text-gray-200">
-                {item.Name}
-              </option>
-            ))}
-          </select>
-        </div>
+        <SearchableSelect
+          label="Services / Industry of Interest"
+          value={form.service}
+          onChange={(val) => setForm(prev => ({ ...prev, service: val }))}
+          options={typesOfAssignmentsArray}
+          placeholder="Search or select service..."
+          required={true}
+          error={!!errors.service}
+          errorMessage={errors.service}
+        />
 
         {/* Message */}
         <div>

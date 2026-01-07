@@ -17,25 +17,25 @@ export const AboutHeader = () => {
                 <div
                     className=" lg:right-[10%] lg:top-52 top-1/2 right-[20%] absolute pointer-events-none z-0 h-[200px] sm:h-[320px] w-[180px] sm:w-[200px] blur-[50px]"
                     style={{
-                        
-                        
+
+
                         transform: "translateX(40%)",
                         opacity: 0.4,
                         borderRadius: "50%",
                         backgroundColor: "#167BFF",
                     }}
                 />
-              <div
-        className="absolute z-0 translate-x-[-40%] pointer-events-none  animate-glow2 h-[250px] sm:h-[320px] w-[220px] sm:w-[280px]"
-        style={{
-          top: "-100px",
-          left: "0px",
-          background: "#167BFF",
-          opacity: 0.5,
-          filter: "blur(50px)",
-          borderRadius: "50%",
-        }}
-      />
+                <div
+                    className="absolute z-0 translate-x-[-40%] pointer-events-none  animate-glow2 h-[250px] sm:h-[320px] w-[220px] sm:w-[280px]"
+                    style={{
+                        top: "-100px",
+                        left: "0px",
+                        background: "#167BFF",
+                        opacity: 0.5,
+                        filter: "blur(50px)",
+                        borderRadius: "50%",
+                    }}
+                />
 
                 {/* LEFT CONTENT */}
                 <div className="flex flex-col items-start justify-center gap-6 z-10 w-full lg:w-1/2 text-left">
@@ -53,12 +53,12 @@ export const AboutHeader = () => {
                     </p>
 
 
-                    <button onClick={()=>{
-            const navToSection=document.getElementById('contact-us')
-            if(navToSection){
-              navToSection.scrollIntoView({behavior:'smooth'})
-            }
-          }} className="custom-button with-shadow bg-[#1057B5]"> Book a Consultation <Toparrow/></button>
+                    <button onClick={() => {
+                        const navToSection = document.getElementById('contact-us')
+                        if (navToSection) {
+                            navToSection.scrollIntoView({ behavior: 'smooth' })
+                        }
+                    }} className="custom-button with-shadow bg-[#1057B5]"> Book a Consultation <Toparrow /></button>
                 </div>
 
                 {/* RIGHT TIMELINE */}

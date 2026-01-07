@@ -1,7 +1,9 @@
+export const runtime = "nodejs";
 import { NextRequest, NextResponse } from "next/server";
+import nodemailer from 'nodemailer'
+import { recepientEmailForBookingSession } from "../../../../global_cyphr_config";
 
-const RECIPIENT_EMAIL = "info@webutation.com";
-
+const RECIPIENT_EMAIL = recepientEmailForBookingSession;
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
@@ -19,23 +21,24 @@ export async function POST(request: NextRequest) {
     } = body;
 
     // Validate required fields
-    if (!firstName || !lastName || !email || !phoneNumber || !message) {
+    if (!firstName || !lastName || !email || !message) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
 
-    // Format the email content
+    // Email subject
     const emailSubject = `New CE/CLE Booking Request from ${firstName} ${lastName}`;
-    
+
+    // Email body
     const emailBody = `
 New Booking Request Received
 
 Personal Information:
 - Name: ${firstName} ${lastName}
 - Email: ${email}
-- Phone: ${countryCode || ""} ${phoneNumber}
+- Phone: ${phoneNumber || "Not provided"}
 
 Professional Information:
 - Organization: ${organizationName || "Not provided"}
@@ -50,71 +53,46 @@ ${message}
 
 ---
 This email was sent from the Cyphr booking form.
-    `.trim();
+`.trim();
 
-    // Try to send email using Resend API (if configured)
-    if (process.env.RESEND_API_KEY) {
-      try {
-        const emailServiceResponse = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${process.env.RESEND_API_KEY}`,
-          },
-          body: JSON.stringify({
-            from: process.env.FROM_EMAIL || "noreply@cyphr.com",
-            to: RECIPIENT_EMAIL,
-            subject: emailSubject,
-            text: emailBody,
-            reply_to: email,
-          }),
-        });
+    // SMTP transporter
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.SMTP_EMAIL,
+        pass: process.env.SMTP_EMAIL_PASSWORD,
+      },
+    });
 
-        if (emailServiceResponse.ok) {
-          const emailData = await emailServiceResponse.json();
-          return NextResponse.json(
-            { 
-              success: true, 
-              message: "Booking request submitted successfully!",
-              emailId: emailData.id 
-            },
-            { status: 200 }
-          );
-        }
-      } catch (resendError) {
-        console.error("Resend API error:", resendError);
-        // Fall through to alternative method
-      }
-    }
+    // Send email
+    await transporter.sendMail({
+      from: `"Cyphr Booking" <${process.env.SMTP_EMAIL}>`,
+      to: RECIPIENT_EMAIL,
+      replyTo: email,
+      subject: emailSubject,
+      text: emailBody,
+      html: `<pre style="font-family: Arial, sans-serif">${emailBody}</pre>`,
+    });
 
-    // Alternative: Use a webhook service or SMTP
-    // For now, log the email details (in production, configure an email service)
-    console.log("=".repeat(50));
-    console.log("BOOKING REQUEST EMAIL");
-    console.log("=".repeat(50));
-    console.log("To:", RECIPIENT_EMAIL);
-    console.log("Subject:", emailSubject);
-    console.log("Body:", emailBody);
-    console.log("=".repeat(50));
-
-    // In development, return success with a note
-    // In production, you should configure an email service (Resend, SendGrid, Nodemailer, etc.)
     return NextResponse.json(
-      { 
-        success: true, 
+      {
+        success: true,
         message: "Booking request submitted successfully! We'll contact you soon.",
-        note: process.env.NODE_ENV === "development" 
-          ? "Email details logged to console. Configure RESEND_API_KEY for production." 
-          : undefined
+        sendTo: RECIPIENT_EMAIL,
       },
       { status: 200 }
     );
+
   } catch (error: any) {
-    console.error("Error sending booking email:", error);
+    console.error("SMTP Email Error:", error);
+
     return NextResponse.json(
-      { 
+      {
         error: "Failed to submit booking request. Please try again later.",
-        details: process.env.NODE_ENV === "development" ? error.message : undefined
+        details:
+          process.env.NODE_ENV === "development"
+            ? error.message
+            : undefined,
       },
       { status: 500 }
     );

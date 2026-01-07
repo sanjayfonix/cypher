@@ -46,7 +46,7 @@ export default function GlobalThreatIntelligence() {
     { title: "Data Analysis", description: "Pattern recognition across massive datasets" },
   ];
 
-  
+
 
 
   return (
@@ -56,43 +56,41 @@ export default function GlobalThreatIntelligence() {
       </h1>
 
       {/* Tabs */}
- <div className="relative flex w-full mb-8 sm:mb-12 border border-gray-800 rounded-full bg-[#1F1F1FD6] overflow-hidden">
-  {/* Sliding Active Indicator */}
-  <div
-    className={`absolute top-0 h-full w-1/2 rounded-full bg-[#1057B5] shadow-[inset_0_0_10px_#89BFFF,0_0_4px_#268AFF] transition-transform duration-500 ease-in-out`}
-    style={{ transform: `translateX(${tabIndex * 100}%)` }}
-  ></div>
+      <div className="relative flex w-full mb-8 sm:mb-12 border border-gray-800 rounded-full bg-[#1F1F1FD6] overflow-hidden">
+        {/* Sliding Active Indicator */}
+        <div
+          className={`absolute top-0 h-full w-1/2 rounded-full bg-[#1057B5] shadow-[inset_0_0_10px_#89BFFF,0_0_4px_#268AFF] transition-transform duration-500 ease-in-out`}
+          style={{ transform: `translateX(${tabIndex * 100}%)` }}
+        ></div>
 
-  {/* Tab 1 */}
-  <button
-    onClick={() => setTabIndex(0)}
-    className="flex-1 cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
-  >
-    <img src={"/shield-flash-line.svg"} className="w-3 h-3 sm:w-6 sm:h-6" />
-    <span
-      className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${
-        tabIndex === 0 ? "text-white font-semibold" : "text-gray-300"
-      }`}
-    >
-      Threat Radar
-    </span>
-  </button>
+        {/* Tab 1 */}
+        <button
+          onClick={() => setTabIndex(0)}
+          className="flex-1 cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+        >
+          <img src={"/shield-flash-line.svg"} className="w-3 h-3 sm:w-6 sm:h-6" />
+          <span
+            className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${tabIndex === 0 ? "text-white font-semibold" : "text-gray-300"
+              }`}
+          >
+            Threat Radar
+          </span>
+        </button>
 
-  {/* Tab 2 */}
-  <button
-    onClick={() => setTabIndex(1)}
-    className="flex-1  cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
-  >
-    <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
-    <span
-      className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${
-        tabIndex === 1 ? "text-white font-semibold" : "text-gray-300"
-      }`}
-    >
-      Cellular Intelligence
-    </span>
-  </button>
-</div>
+        {/* Tab 2 */}
+        <button
+          onClick={() => setTabIndex(1)}
+          className="flex-1  cursor-pointer relative z-10 text-white py-3 px-4 flex items-center justify-center gap-2"
+        >
+          <img src={"/Location.svg"} className="w-3 sm:w-6 h-3 sm:h-6" />
+          <span
+            className={`text-xs sm:text-lg md:text-xl font-medium font-sans transition-colors duration-300 ${tabIndex === 1 ? "text-white font-semibold" : "text-gray-300"
+              }`}
+          >
+            Cellular Intelligence
+          </span>
+        </button>
+      </div>
 
 
 
@@ -109,10 +107,10 @@ export default function GlobalThreatIntelligence() {
       )}
 
       {tabIndex === 0 && (
-    
+
         <div className="bg-black text-white font-sans flex flex-col change-flex items-center justify-center gap-8 lg:gap-12">
-      <Radar/>
-      <SecurityFeatures /> 
+          <div className="w-full lg:w-1/2"><Radar /></div>
+          <SecurityFeatures />
         </div>
 
       )}
@@ -207,11 +205,10 @@ function SecurityFeatures() {
                 >
                   <div
                     ref={lineRef}
-                    className={`isHidden absolute top-[125px] left-1/7 transform -translate-x-1/2 ${
-                      realInd === 1 || realInd === 3
-                        ? "h-[calc(100%)]"
-                        : " h-[calc(250%)]"
-                    } w-0 border border-[#696969]`}
+                    className={`isHidden absolute top-[125px] left-1/7 transform -translate-x-1/2 ${realInd === 1 || realInd === 3
+                      ? "h-[calc(100%)]"
+                      : " h-[calc(250%)]"
+                      } w-0 border border-[#696969]`}
                   >
                     {/* ✅ Extracted Animation */}
                     <WaterDropAnimation
@@ -261,10 +258,10 @@ function SecurityFeatures() {
 
                   {/* Text */}
                   <div className="flex flex-col gap-2">
-                    <h3 className="font-bold text-lg max-w-[100%] responsive-max">
+                    <h3 className="font-bold text-lg max-w-[60%]">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-400 max-w-[100%] responsive-max">
+                    <p className="text-gray-400 max-w-[60%] ">
                       {feature.desc}
                     </p>
                   </div>
