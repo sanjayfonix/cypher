@@ -947,6 +947,144 @@ const CaseDetails = () => {
     notes: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+
+  const fileToBase64 = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result as string);
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const handleSubmit = async () => {
+    setIsSubmitting(true);
+    setSubmitMessage(null);
+
+    try {
+      // Map case types to values - Always an array
+      const typeOfCase = formData.caseTypes.map(name =>
+        typeOfCaseArray.find(c => c.Name === name)?.Value
+      ).filter(Boolean) as number[];
+
+      // Map type of assignment to value - Always an integer
+      const assignmentValue = typesOfAssignmentsArray.find(a => a.Name === formData.claimant.typeOfAssignment)?.Value;
+      const typeOfAssignment = assignmentValue;
+
+      // Convert files to Base64
+      const uploadedFiles = await Promise.all(
+        formData.files.map(async (file) => {
+          const base64Content = await fileToBase64(file);
+          // Split to get only the base64 string part (removing data:application/pdf;base64, etc.)
+          const actualContent = base64Content.split(",")[1];
+          return {
+            fileName: file.name,
+            fileContent: actualContent,
+          };
+        })
+      );
+
+      const requestBody = {
+        typeOfCase: typeOfCase,
+        referrerInformation: {
+          firstName: formData.referrer.firstName,
+          lastName: formData.referrer.lastName,
+          companyName: formData.referrer.companyName,
+          city: formData.referrer.city,
+          state: formData.referrer.state,
+          phoneNumber: formData.referrer.phone,
+          email: formData.referrer.email
+        },
+        claimantInformation: {
+          claim: formData.claimant.claimFile,
+          typeOfAssignment: typeOfAssignment,
+          subject: formData.claimant.subject,
+          address: formData.claimant.address,
+          lastFourOfSSN: formData.claimant.ssn,
+          dateOfBirth: formData.claimant.dob,
+          dateOfLoss: formData.claimant.dol,
+          allegedInjury: formData.claimant.allegedInjury,
+          maritalStatus: formData.claimant.maritalStatus,
+          gender: formData.claimant.gender,
+          phoneNumber: formData.claimant.phone,
+          email: formData.claimant.email,
+          employerOrInsured: formData.claimant.employer,
+          tpa: formData.claimant.tpa,
+          subjectRepresentedBy: formData.claimant.representedBy,
+          hobbies: formData.claimant.hobbies,
+          specialPhysicalCharacteristics: formData.claimant.specialCharacteristics
+        },
+        documents: {
+          uploadedFiles: uploadedFiles,
+          notes: formData.notes
+        }
+      };
+
+      const firstUrl = "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9d92c539ada14bc6b85a39e32b8a2d14/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vorj6ao8FHhbFAfTWZs5T_TaLsjD2oEPJs4OzZjiff8";
+      const apiKey = "75d4ebc7-a6cf-f011-bbd3-000d3a35068f";
+
+      const firstResponse = await fetch(firstUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey
+        },
+        body: JSON.stringify(requestBody)
+      });
+
+      if (!firstResponse.ok) {
+        throw new Error("Failed to submit the case. Please try again.");
+      }
+
+      const responseText = await firstResponse.text();
+      let workorderid = "";
+
+      try {
+        // Try parsing as JSON first
+        const result = JSON.parse(responseText);
+        workorderid = result.workorderid;
+      } catch (e) {
+        // If not JSON, extract GUID from the text string
+        const guidRegex = /([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/i;
+        const match = responseText.match(guidRegex);
+        if (match) {
+          workorderid = match[0];
+        }
+      }
+
+      if (!workorderid) {
+        throw new Error("Case submitted but no Work Order ID could be retrieved from the response.");
+      }
+
+      // Second API Call
+      const secondUrl = "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/fa15cee7c118490d98b2b3697cc038df/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FJXEOOnLEZLZUscQv-7kvSt_C5WuBRWyz-3Y0MNy1YM";
+
+      await fetch(secondUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-api-key": apiKey
+        },
+        body: JSON.stringify({ workorderid })
+      });
+
+      setSubmitMessage({
+        type: 'success',
+        text: `Case submitted successfully! Your Work Order ID is ${workorderid}`
+      });
+
+    } catch (err: any) {
+      setSubmitMessage({
+        type: 'error',
+        text: err.message || "An unexpected error occurred. Please try again later."
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   const updateFormData = (
     section: keyof FormData,
     field: string,
@@ -1181,7 +1319,14 @@ const CaseDetails = () => {
           />
 
           {/* Scrollable Content */}
-          <div className="flex-1 overflow-y-auto">{renderStep()}</div>
+          <div className="flex-1 overflow-y-auto">
+            {submitMessage && (
+              <div className={`mx-8 mt-4 p-4 rounded-lg border ${submitMessage.type === 'success' ? 'bg-green-500/10 border-green-500 text-green-400' : 'bg-red-500/10 border-red-500 text-red-400'} font-medium text-center`}>
+                {submitMessage.text}
+              </div>
+            )}
+            {renderStep()}
+          </div>
 
           {/* Fixed Buttons */}
           <div className="mt-4 flex items-center sm:items-start flex-col sm:flex-row justify-center gap-4 relative group/btn">
@@ -1215,10 +1360,11 @@ const CaseDetails = () => {
               </button>
             ) : (
               <button
-                disabled={!isStepValid}
-                className={`custom-button with-shadow relative bottom-4 bg-[#1057B5] mx-auto sm:mx-2 w-[80%] sm:w-[300px] md:w-[500px] transition-all ${!isStepValid ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={handleSubmit}
+                disabled={!isStepValid || isSubmitting}
+                className={`custom-button with-shadow relative bottom-4 bg-[#1057B5] mx-auto sm:mx-2 w-[80%] sm:w-[300px] md:w-[500px] transition-all ${(!isStepValid || isSubmitting) ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
-                Submit Case <Toparrow />
+                {isSubmitting ? "Submitting..." : "Submit Case"} <Toparrow />
               </button>
             )}
           </div>
