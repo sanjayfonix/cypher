@@ -117,13 +117,19 @@ const SearchableSelect = ({
         {label} {required && <span className="text-blue-500">*</span>}
       </label>
       <div className="relative group/select">
-        <Combobox value={value} onChange={(val: string | null) => onChange(val || '')}>
+        <Combobox value={value} onChange={(val: string | null) => {
+          onChange(val || '');
+          setHoveredDescription(null);
+        }}>
           <div className={`relative w-full  cursor-default overflow-hidden rounded-lg bg-[#1E1E1E] text-left border-[0.5px] ${error ? 'border-red-500' : 'border-[#3C414A]'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
             <Combobox.Input
               className="w-full border-none py-3 pl-[11px] pr-10 text-white bg-[#1E1E1E] focus:outline-none focus:ring-0"
               placeholder={placeholder}
               displayValue={(val: string) => val}
-              onChange={(event) => setQuery(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value)
+                setHoveredDescription(null);
+              }}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">
               <ChevronDown className="h-4 w-4 text-gray-400" aria-hidden="true" />
@@ -134,7 +140,10 @@ const SearchableSelect = ({
             leave="transition ease-in duration-100"
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
-            afterLeave={() => setQuery('')}
+            afterLeave={() => {
+              setQuery('');
+              setHoveredDescription(null);
+            }}
           >
             <div className="relative">
               <Combobox.Options className="absolute mt-1 max-h-64 w-full overflow-y-auto  bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border-2 border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
@@ -170,7 +179,7 @@ const SearchableSelect = ({
           </Transition>
         </Combobox>
 
-        {hoveredDescription && (
+        {hoveredDescription && query === '' && (
           <div
             className="absolute pointer-events-none z-[100] w-64 sm:w-80 p-3 bg-gray-900 border border-gray-700 rounded-lg shadow-2xl text-xs text-gray-300 left-1/2 transform -translate-x-1/2 -translate-y-full -mt-10"
             style={{
