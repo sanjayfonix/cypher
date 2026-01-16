@@ -1050,9 +1050,14 @@ const CaseDetails = () => {
       try {
         // Try parsing as JSON first
         const result = JSON.parse(responseText);
-        workorderid = result.workorderid;
+        // Look for both workorderid and workerid
+        workorderid = result.workorderid || result.workerid || result.id || "";
       } catch (e) {
-        // If not JSON, extract GUID from the text string
+        // If not JSON, we'll try regex below
+      }
+
+      // Fallback to regex if ID not found in JSON or if not JSON
+      if (!workorderid) {
         const guidRegex = /([a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12})/i;
         const match = responseText.match(guidRegex);
         if (match) {
@@ -1065,18 +1070,25 @@ const CaseDetails = () => {
       }
 
       // Second API Call
-      await fetch(API_ENDPOINTS.REFER_CASE_STEP2, {
+      const secondResponse = await fetch(API_ENDPOINTS.REFER_CASE_STEP2, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "x-api-key": API_KEYS.REFER_CASE
         },
-        body: JSON.stringify({ workorderid })
+        body: JSON.stringify({
+          workorderid,
+          workerid: workorderid // Include both names just in case
+        })
       });
+
+      if (!secondResponse.ok) {
+        console.error("Second API call failed:", await secondResponse.text());
+      }
 
       setSubmitMessage({
         type: 'success',
-        text: `Case submitted successfully! Your Work Order ID is ${workorderid}`
+        text: "Case submitted successfully!"
       });
 
     } catch (err: any) {

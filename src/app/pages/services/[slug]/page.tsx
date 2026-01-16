@@ -6,7 +6,9 @@ import { WhyConsulting } from "@/app/Components/services/WhyConsulting";
 import { Metadata } from "next";
 
 type Props = {
-  params: { slug: string };
+  params: {
+    slug: string;
+  };
 };
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -17,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
       description:
-        "Empower decisions with expert intelligence strategy. Cyphr’s Consulting & Advisory services strengthen cyber resilience, compliance, and operational security at scale.",
+        "Strategic intelligence consulting for cyber resilience, compliance, and risk. Partner with Cyphr's experts to strengthen your defense posture.",
       openGraph: {
         title:
           "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
@@ -43,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-consulting.jpg"],
       },
       alternates: {
-        canonical: "https://cypher.txogavideo.in/consulting",
+        canonical: "https://cyphr.io/consulting-advisory",
       },
       robots: {
         index: true,
@@ -55,7 +57,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Social Media Intelligence | OSINT & Digital Threat Detection | Cyphr",
       description:
-        "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
+        "Turn digital noise into actionable intelligence. Cyphr's Social Media Intelligence monitors social platforms to detect cyber, fraud, and influence threats early.",
       openGraph: {
         title:
           "Social Media Intelligence | OSINT & Digital Threat Detection | Cyphr",
@@ -81,7 +83,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-social-intel.jpg"],
       },
       alternates: {
-        canonical: "https://cypher.txogavideo.in/social-intel",
+        canonical: "https://cyphr.io/social-media-intelligence",
       },
       robots: {
         index: true,
@@ -93,7 +95,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Geospatial & Cellular Forensics | Location-Based Intelligence | Cyphr",
       description:
-        "Cyphr fuses geospatial, telecom, and satellite data to reconstruct movements, uncover fraud, and deliver legally defensible intelligence in complex investigations.",
+        "Map movements, reconstruct timelines, and uncover truth with Cyphr's geospatial and cellular forensics — proven intelligence with legal integrity.",
       openGraph: {
         title:
           "Geospatial & Cellular Forensics | Location-Based Intelligence | Cyphr",
@@ -119,7 +121,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-geospatial.jpg"],
       },
       alternates: {
-        canonical: "https://cypher.txogavideo.in/geospatial",
+        canonical: "https://cyphr.io/geospatial-cellular-forensics",
       },
       robots: {
         index: true,
@@ -131,7 +133,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Brand Defense & Reputation Intelligence | OSINT & Threat Monitoring | Cyphr",
       description:
-        "Protect your brand from digital attacks. Cyphr’s Brand Defense identifies disinformation, impersonation, and fraud threats fast—before trust and assets are lost.",
+        "Defend your brand before it's under attack. Cyphr monitors and neutralizes disinformation, impersonation, and digital sabotage across global networks.",
       openGraph: {
         title:
           "Brand Defense & Reputation Intelligence | OSINT & Threat Monitoring | Cyphr",
@@ -157,7 +159,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-brand-defense.jpg"],
       },
       alternates: {
-        canonical: "https://cypher.txogavideo.in/brand-defense",
+        canonical: "https://cyphr.io/brand-defense",
       },
       robots: {
         index: true,
@@ -172,7 +174,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-/* ---------------- PAGE CONTENT ---------------- */
+
 
 const serviceData = {
   consult: {
@@ -185,6 +187,10 @@ const serviceData = {
         id: 2,
         list: [
           "Navigate digital risks and uncover hidden opportunities to protect yourself, your company, and your employees",
+          // "Leverage advanced intelligence techniques and unique data sources to enhance security, prevent fraud, and inform critical decisions", 
+          // "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
+          // "Unlock actionable insights and secure your future" 
+
         ],
       },
       primaryButton: {
@@ -195,19 +201,24 @@ const serviceData = {
         id: 4,
         text: "Book a Consultation",
       },
-    },
+    }
   },
-
   socialIntelligence: {
     topBanner: {
       heading: {
         id: 1,
-        text: "Take a decisive advantage",
+        text: "Take a decisive advantage ",
       },
       description: {
         id: 2,
         list: [
           "Turn social media intelligence into a powerful tool for investigations, risk assessment, and litigation support",
+
+          // Transform the chaotic world of online data into actionable and legally defensible intelligence 
+
+          // Present comprehensive, courtroom-ready reports 
+
+          // Provide clear and compelling narratives 
         ],
       },
       primaryButton: {
@@ -220,7 +231,6 @@ const serviceData = {
       },
     },
   },
-
   geospatial: {
     topBanner: {
       heading: {
@@ -230,30 +240,13 @@ const serviceData = {
       description: {
         id: 2,
         list: [
-          "Leverage ethically sourced cellular device data to offer a new competitive advantage to your digital investigative needs",
-        ],
-      },
-      primaryButton: {
-        id: 3,
-        text: "Start Investigating",
-      },
-      secondaryButton: {
-        id: 4,
-        text: "Book a Consultation",
-      },
-    },
-  },
+          "Leverage ethically sourced cellular device data to offer a new competitive advantage to your digital investigative needs"
 
-  brandDefense: {
-    topBanner: {
-      heading: {
-        id: 1,
-        text: "Defend Your Brand Before It's Under Attack",
-      },
-      description: {
-        id: 2,
-        list: [
-          "Monitor and neutralize disinformation, impersonation, and digital sabotage across global networks",
+          // Provide unparalleled insights into location-based intelligence & forensics 
+
+          // Utilize advanced techniques to extract and analyze location data points, movement patterns, and network connections from mobile devices globally 
+
+          // Deliver actionable geospatial intelligence, transforming raw data into a clear and legally defensible understanding of individual or group movements for your company 
         ],
       },
       primaryButton: {
@@ -265,33 +258,33 @@ const serviceData = {
         text: "Book a Consultation",
       },
     },
-  },
+  }
 };
 
 export default async function ServicesPage({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const { slug } = params;
+  const { slug } = await params;
 
   const switchContent = () => {
     switch (slug) {
-      case "consult":
+      case 'consult':
         return serviceData.consult.topBanner;
-      case "geospatial":
+
+      case 'geospatial':
         return serviceData.geospatial.topBanner;
-      case "social-intel":
+
+      case 'social-intel':
         return serviceData.socialIntelligence.topBanner;
-      case "brand-defense":
-        return serviceData.brandDefense.topBanner;
       default:
         return serviceData.consult.topBanner;
     }
-  };
-
+  }
   return (
     <div className="font-sans overflow-hidden relative">
+      {/* <p>{params!=null && slug}</p> */}
       <TopBanner content={switchContent()} />
       <WhyConsulting />
       <div className="container">
@@ -299,6 +292,7 @@ export default async function ServicesPage({
       </div>
       <ServiceBlurCard />
       <ContactSection />
+
     </div>
   );
 }
