@@ -203,7 +203,7 @@ export const API_ENDPOINTS = {
 // API Keys
 export const API_KEYS = {
     BOOKING_SESSION: process.env.NEXT_PUBLIC_BOOKING_SESSION_API_KEY || "",
-    CONTACT_FORM: "02ee146e-63e6-f011-8544-6045bd04aa30",
-    REFER_CASE: "75d4ebc7-a6cf-f011-bbd3-000d3a35068f",
-    OSINT_API: process.env.OSINT_API_KEY || "42cdda464cbcf354980afe5ee4fb8bc7"
+    CONTACT_FORM: process.env.NEXT_PUBLIC_CONTACT_FORM || "",
+    REFER_CASE: process.env.NEXT_PUBLIC_REFER_CASE || "",
+    OSINT_API: process.env.NEXT_PUBLIC_OSINT_API_KEY || ""
 };
