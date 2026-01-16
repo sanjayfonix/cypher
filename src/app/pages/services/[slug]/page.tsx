@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
       description:
-        "Strategic intelligence consulting for cyber resilience, compliance, and risk. Partner with Cyphr's experts to strengthen your defense posture.",
+        "Empower decisions with expert intelligence strategy. Cyphr’s Consulting & Advisory services strengthen cyber resilience, compliance, and operational security at scale.",
       openGraph: {
         title:
           "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
@@ -43,7 +43,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-consulting.jpg"],
       },
       alternates: {
-        canonical: "https://cyphr.io/consulting-advisory",
+        canonical: "https://cypher.txogavideo.in/consulting",
       },
       robots: {
         index: true,
@@ -55,7 +55,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Social Media Intelligence | OSINT & Digital Threat Detection | Cyphr",
       description:
-        "Turn digital noise into actionable intelligence. Cyphr's Social Media Intelligence monitors social platforms to detect cyber, fraud, and influence threats early.",
+        "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
       openGraph: {
         title:
           "Social Media Intelligence | OSINT & Digital Threat Detection | Cyphr",
@@ -81,7 +81,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-social-intel.jpg"],
       },
       alternates: {
-        canonical: "https://cyphr.io/social-media-intelligence",
+        canonical: "https://cypher.txogavideo.in/social-intel",
       },
       robots: {
         index: true,
@@ -93,7 +93,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Geospatial & Cellular Forensics | Location-Based Intelligence | Cyphr",
       description:
-        "Map movements, reconstruct timelines, and uncover truth with Cyphr's geospatial and cellular forensics — proven intelligence with legal integrity.",
+        "Cyphr fuses geospatial, telecom, and satellite data to reconstruct movements, uncover fraud, and deliver legally defensible intelligence in complex investigations.",
       openGraph: {
         title:
           "Geospatial & Cellular Forensics | Location-Based Intelligence | Cyphr",
@@ -119,7 +119,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-geospatial.jpg"],
       },
       alternates: {
-        canonical: "https://cyphr.io/geospatial-cellular-forensics",
+        canonical: "https://cypher.txogavideo.in/geospatial",
       },
       robots: {
         index: true,
@@ -131,7 +131,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title:
         "Brand Defense & Reputation Intelligence | OSINT & Threat Monitoring | Cyphr",
       description:
-        "Defend your brand before it's under attack. Cyphr monitors and neutralizes disinformation, impersonation, and digital sabotage across global networks.",
+        "Protect your brand from digital attacks. Cyphr’s Brand Defense identifies disinformation, impersonation, and fraud threats fast—before trust and assets are lost.",
       openGraph: {
         title:
           "Brand Defense & Reputation Intelligence | OSINT & Threat Monitoring | Cyphr",
@@ -157,7 +157,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: ["https://cyphr.io/assets/og-brand-defense.jpg"],
       },
       alternates: {
-        canonical: "https://cyphr.io/brand-defense",
+        canonical: "https://cypher.txogavideo.in/brand-defense",
       },
       robots: {
         index: true,
