@@ -4,7 +4,6 @@ import { History } from "@/app/Components/about_us/history";
 import MissionSection from "@/app/Components/about_us/mission";
 import TeamSection from "@/app/Components/about_us/teams";
 import Whycyphr from "@/app/Components/about_us/whycyphr";
-import BookingForm from "@/app/Components/common/BookingForm";
 import ContactSection from "@/app/Components/common/Getintouch";
 import { useEffect } from "react";
 
@@ -30,11 +29,11 @@ export default function AboutPage() {
   return (
 
     <div >
-       <AboutHeader/>  
-       <History/>
-       <Whycyphr/> 
-  <TeamSection/> 
-      <MissionSection/>
+      <AboutHeader />
+      <History />
+      <Whycyphr />
+      <TeamSection />
+      <MissionSection />
       <div className="px-4 "><ContactSection /></div>
     </div>
   );

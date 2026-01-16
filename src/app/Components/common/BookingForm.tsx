@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { PhoneInput } from "react-international-phone";
 import 'react-international-phone/style.css';
+import { API_ENDPOINTS, API_KEYS, sessionTypeArray } from "../../../../global_cyphr_config";
 
 interface FormData {
   firstName: string;
@@ -152,24 +153,40 @@ export default function BookingForm({ isForm = false }: { isForm?: boolean }) {
     }
 
     try {
-      const response = await fetch("/api/send-booking-email", {
+      // Find the integer value for the session type
+      const sessionTypeObj = sessionTypeArray.find(s => s.Name === formData.sessionType);
+      const sessionTypeValue = sessionTypeObj ? sessionTypeObj.Value : 1;
+
+      const apiPayload = {
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        organizationName: formData.organizationName,
+        professionalRole: formData.professionalRole,
+        sessionType: sessionTypeValue,
+        preferredDateTime: formData.preferredDateTime,
+        message: formData.message,
+        servicesTypeOfCase: formData.sessionType,
+      };
+
+      const response = await fetch(API_ENDPOINTS.BOOKING_FORM, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "x-api-key": API_KEYS.BOOKING_SESSION
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(apiPayload),
       });
 
-      const data = await response.json();
-
       if (!response.ok) {
-        throw new Error(data.error || "Failed to submit booking request");
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       // Success
       setSubmitStatus({
         type: "success",
-        message: data.message || "Booking request submitted successfully! We'll contact you soon.",
+        message: "Booking request submitted successfully! We'll contact you soon.",
       });
 
       // Reset form after successful submission
@@ -184,18 +201,19 @@ export default function BookingForm({ isForm = false }: { isForm?: boolean }) {
         sessionType: "CE Credit",
         preferredDateTime: "",
         message: "",
+
         agreement: false,
       });
 
-      // Clear success message after 5 seconds
+      // Clear success message after 10 seconds
       setTimeout(() => {
         setSubmitStatus({ type: null, message: "" });
-      }, 5000);
+      }, 10000);
     } catch (error: any) {
       console.error("Form submission error:", error);
       setSubmitStatus({
         type: "error",
-        message: error.message || "Something went wrong. Please try again later.",
+        message: "Failed to submit booking request. Please try again later or contact us directly.",
       });
     } finally {
       setIsSubmitting(false);
@@ -322,7 +340,7 @@ export default function BookingForm({ isForm = false }: { isForm?: boolean }) {
                     return newErrors;
                   });
                 }}
-                className="phone-input-selector"
+                className="phone-input-selector bg-[#2A2A2A]"
               />
             </div>
             {errors.phoneNumber && <p className="text-xs text-red-500 mt-1">{errors.phoneNumber}</p>}
@@ -383,9 +401,11 @@ export default function BookingForm({ isForm = false }: { isForm?: boolean }) {
                 onChange={handleChange}
                 className="w-full p-[10px] sm:p-[11px] bg-[#2A2A2A] text-white rounded-lg border border-[#3C414A] focus:border-blue-500 focus:ring-1 focus:ring-blue-500 outline-none text-[14px]"
               >
-                <option value="CE Credit" className="bg-[#2A2A2A]">CE Credit</option>
-                <option value="CLE Credit" className="bg-[#2A2A2A]">CLE Credit</option>
-                <option value="General Speaking Engagement" className="bg-[#2A2A2A]">General Speaking Engagement</option>
+                {sessionTypeArray.map((session) => (
+                  <option key={session.Value} value={session.Name} className="bg-[#2A2A2A]">
+                    {session.Name}
+                  </option>
+                ))}
               </select>
             </div>
             <div>

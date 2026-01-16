@@ -5,7 +5,7 @@ import { PhoneInput } from 'react-international-phone';
 import 'react-international-phone/style.css';
 import { Combobox, Transition } from '@headlessui/react';
 import { ChevronDown, Check, Search } from 'lucide-react';
-import { typeOfCaseArray, typesOfAssignmentsArray } from '../../../../global_cyphr_config';
+import { API_ENDPOINTS, API_KEYS, typeOfCaseArray, typesOfAssignmentsArray } from '../../../../global_cyphr_config';
 
 // --- Types ---
 interface FormData {
@@ -1031,14 +1031,11 @@ const CaseDetails = () => {
         }
       };
 
-      const firstUrl = "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9d92c539ada14bc6b85a39e32b8a2d14/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vorj6ao8FHhbFAfTWZs5T_TaLsjD2oEPJs4OzZjiff8";
-      const apiKey = "75d4ebc7-a6cf-f011-bbd3-000d3a35068f";
-
-      const firstResponse = await fetch(firstUrl, {
+      const firstResponse = await fetch(API_ENDPOINTS.REFER_CASE_STEP1, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": apiKey
+          "x-api-key": API_KEYS.REFER_CASE
         },
         body: JSON.stringify(requestBody)
       });
@@ -1068,13 +1065,11 @@ const CaseDetails = () => {
       }
 
       // Second API Call
-      const secondUrl = "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/fa15cee7c118490d98b2b3697cc038df/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FJXEOOnLEZLZUscQv-7kvSt_C5WuBRWyz-3Y0MNy1YM";
-
-      await fetch(secondUrl, {
+      await fetch(API_ENDPOINTS.REFER_CASE_STEP2, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "x-api-key": apiKey
+          "x-api-key": API_KEYS.REFER_CASE
         },
         body: JSON.stringify({ workorderid })
       });

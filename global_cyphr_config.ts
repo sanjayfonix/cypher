@@ -175,3 +175,35 @@ export const typesOfAssignmentsArray = [
         "Value": 212
     }
 ]
+
+export const sessionTypeArray = [
+    {
+        "Name": "CE Credit",
+        "Value": 0
+    },
+    {
+        "Name": "CLE Credit",
+        "Value": 1
+    },
+    {
+        "Name": "General Speaking Engagement",
+        "Value": 2
+    }
+]
+
+// API Endpoints
+export const API_ENDPOINTS = {
+    BOOKING_FORM: "https://753b6b0e9116e25d8e785d3a19ef41.09.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/a0e302adf34b45b68d173f10ab9d6708/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Jtsb-anpVdVkg9GBfnInzKNJu5uIkAQvPpGaK4n6F74",
+    CONTACT_FORM: "https://753b6b0e9116e25d8e785d3a19ef41.09.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f1e28b17d4894bb795086de95a0a524d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DFelXMiZ-QGp0XLkt5i3Ia9phvxA3pF1-Nmec56MjJk",
+    REFER_CASE_STEP1: "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/9d92c539ada14bc6b85a39e32b8a2d14/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Vorj6ao8FHhbFAfTWZs5T_TaLsjD2oEPJs4OzZjiff8",
+    REFER_CASE_STEP2: "https://41ae7b753004e478ae9fccc9566122.19.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/fa15cee7c118490d98b2b3697cc038df/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=FJXEOOnLEZLZUscQv-7kvSt_C5WuBRWyz-3Y0MNy1YM",
+    OSINT_API_BASE: "https://api.osint.industries/v2/request"
+};
+
+// API Keys
+export const API_KEYS = {
+    BOOKING_SESSION: process.env.NEXT_PUBLIC_BOOKING_SESSION_API_KEY || "",
+    CONTACT_FORM: "02ee146e-63e6-f011-8544-6045bd04aa30",
+    REFER_CASE: "75d4ebc7-a6cf-f011-bbd3-000d3a35068f",
+    OSINT_API: process.env.OSINT_API_KEY || "42cdda464cbcf354980afe5ee4fb8bc7"
+};

@@ -1,8 +1,9 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { NextRequest } from "next/server";
+import { API_ENDPOINTS, API_KEYS } from "../../../../global_cyphr_config";
 
-const OSINT_API_BASE_URL = "https://api.osint.industries/v2/request";
-const OSINT_API_KEY = process.env.OSINT_API_KEY || "42cdda464cbcf354980afe5ee4fb8bc7";
+const OSINT_API_BASE_URL = API_ENDPOINTS.OSINT_API_BASE;
+const OSINT_API_KEY = API_KEYS.OSINT_API;
 
 // Handle CORS preflight requests
 export async function OPTIONS(request: Request): Promise<Response> {

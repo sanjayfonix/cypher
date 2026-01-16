@@ -1,3 +1,5 @@
+import { API_ENDPOINTS, API_KEYS } from "../../global_cyphr_config";
+
 export interface ContactFormData {
     firstName: string;
     lastName: string;
@@ -8,14 +10,12 @@ export interface ContactFormData {
 }
 
 export const submitContactForm = async (data: ContactFormData) => {
-    const url = "https://753b6b0e9116e25d8e785d3a19ef41.09.environment.api.powerplatform.com:443/powerautomate/automations/direct/workflows/f1e28b17d4894bb795086de95a0a524d/triggers/manual/paths/invoke?api-version=1&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=DFelXMiZ-QGp0XLkt5i3Ia9phvxA3pF1-Nmec56MjJk";
-
     try {
-        const response = await fetch(url, {
+        const response = await fetch(API_ENDPOINTS.CONTACT_FORM, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "x-api-key": "02ee146e-63e6-f011-8544-6045bd04aa30", // Use env variable or placeholder
+                "x-api-key": API_KEYS.CONTACT_FORM,
             },
             body: JSON.stringify(data),
         });
