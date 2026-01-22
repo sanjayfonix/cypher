@@ -3,6 +3,7 @@ import CorePrincipals from "@/app/Components/services/CorePrincipals";
 import ServiceBlurCard from "@/app/Components/services/SeviceBlurCard";
 import { TopBanner } from "@/app/Components/services/TopBanner";
 import { WhyConsulting } from "@/app/Components/services/WhyConsulting";
+import { VideoSection } from "@/app/Components/services/VideoSection";
 import { Metadata } from "next";
 
 type PageProps = {
@@ -163,6 +164,7 @@ export default async function ServicesPage({
       <div className="container">
         <CorePrincipals />
       </div>
+      <VideoSection videoName="Socialmedia" />
       <ServiceBlurCard />
       <ContactSection />
 
