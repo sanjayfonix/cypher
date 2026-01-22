@@ -69,7 +69,7 @@ export const TopBanner = ({ content }: TopBannerProps) => {
           {content.heading.text}
         </p>
 
-        <ul className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-1/2   list-disc list-inside space-y-1">
+        <ul className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-full lg:max-w-1/2   list-disc list-inside space-y-1">
           {content.description.list.map((item, index) => (
             <p key={index}>{item}</p>
             // <li key={index}>{item}</li>

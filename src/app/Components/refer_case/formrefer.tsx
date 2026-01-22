@@ -228,7 +228,7 @@ const CaseTypeStep = ({ formData, updateFormData }: Omit<StepProps, 'errors' | '
               type="checkbox"
               checked={formData.caseTypes.includes(caseItem.Name)}
               onChange={() => handleCheckboxChange(caseItem.Name)}
-              className="appearance-none h-3 w-3 border border-[#FFFFFFCC] rounded-xs checked:bg-blue-500 checked:border-blue-500 transition-all cursor-pointer"
+              className="appearance-none flex-shrink-0 h-3 w-3 border border-[#FFFFFFCC] rounded-xs checked:bg-blue-500 checked:border-blue-500 transition-all cursor-pointer"
             />
             <span className="text-[#FFFFFFCC] text-sm font-normal font-inter">
               {caseItem.Name}

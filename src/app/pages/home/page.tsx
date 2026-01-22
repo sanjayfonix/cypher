@@ -29,10 +29,12 @@ export default async function HomePage() {
       <HowItWorks />
       <IntegrityAtCore />
       <BlurCard />
-      <div className="p-4 lg:p-0 mb-16">
+      <div className="container p-4 lg:p-12 mb-16">
         <ContactSection />
       </div>
-      <CESessions />
+      <div className="mt-8 sm:p-4 lg:p-12 mb-16">
+        <CESessions />
+      </div>
     </div>
   );
 }

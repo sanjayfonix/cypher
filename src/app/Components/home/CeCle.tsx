@@ -15,7 +15,7 @@ const CESessions = () => {
       <div className="flex justify-center container items-center mt-6 px-4 sm:px-0">
         <div className="w-full  border border-[#6D6D6D]/50 p-6 sm:p-10 md:p-12 bg-gradient-to-b from-black via-[#030A14] to-[#167BFF]/70 rounded-3xl shadow-2xl overflow-hidden">
           <div className="flex flex-col lg:flex-row items-center lg:items-start justify-between gap-10">
-            
+
             {/* Left Section */}
             <div className="flex-1 text-white text-center lg:text-left">
               <h1 className="text-2xl sm:text-3xl md:text-[32px] font-bold mb-4">
@@ -26,7 +26,7 @@ const CESessions = () => {
                 Empower your team with expert insights into OSINT, fraud prevention,
                 <br className="hidden sm:block" />
                 and digital investigations.
-                <br className="hidden sm:block" /> 
+                <br className="hidden sm:block" />
                 Earn CE/CLE credits while staying ahead of emerging risks.
               </p>
 
@@ -44,9 +44,9 @@ const CESessions = () => {
                     Discover Our Educational Programs <Toparrow />
                   </button>
                 </Link>
-                                <Link href={"/pages/discoveredu"} className="hidden max-xs:block w-full sm:w-auto">
+                <Link href={"/pages/discoveredu"} className="hidden max-xs:block w-full sm:w-auto">
                   <button className="text-sm custom-button with-border bg-transparent  sm:text-base px-4 py-3 sm:px-6 sm:py-3 rounded-xl w-full">
-                   Educational Programs <Toparrow />
+                    Educational Programs <Toparrow />
                   </button>
                 </Link>
               </div>
@@ -82,7 +82,7 @@ const CESessions = () => {
       )} 
       */}
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-50 overflow-y-auto" onClose={()=>setIsOpen(false)}>
+        <Dialog as="div" className="relative z-50 overflow-y-auto" onClose={() => setIsOpen(false)}>
           {/* Background overlay */}
           <Transition.Child
             as={Fragment}
@@ -93,7 +93,7 @@ const CESessions = () => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-          <div className="fixed inset-0 backdrop-blur-sm bg-white/20" />
+            <div className="fixed inset-0 backdrop-blur-sm bg-white/20" />
           </Transition.Child>
           <div className="fixed inset-0 flex items-center justify-center p-4">
             <Transition.Child
@@ -106,16 +106,16 @@ const CESessions = () => {
               leaveTo="opacity-0 scale-90"
             >
               <Dialog.Panel
-  className="w-full max-w-7xl no-scrollbar transform overflow-hidden rounded-2xl p-6  transition-all relative
+                className="w-full max-w-7xl no-scrollbar transform overflow-hidden rounded-2xl p-6  transition-all relative
              max-h-[80vh] overflow-y-auto"
->
+              >
                 {/* Insert your form here */}
-                <BookingForm isForm={true}/>
+                <BookingForm isForm={true} />
 
                 {/* Close Button */}
                 <button
-                  onClick={()=>setIsOpen(false)}
-                  className="absolute text-white top-12 right-14  hover:text-blue-500"
+                  onClick={() => setIsOpen(false)}
+                  className="fixed text-white top-12 right-14  hover:text-blue-500"
                 >
                   ✕
                 </button>

@@ -651,7 +651,12 @@ nextjs-portal {
   border: none !important;
   border-right: 1px solid #374151 !important;
   height: 50px !important;
-  border-radius: 8px 0 0 8px !important;
+  border-radius: 9999px 0 0 9999px !important;
+  min-width: 50px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10 !important;
 }
 
 .phone-input-selector .react-international-phone-input {
@@ -660,6 +665,8 @@ nextjs-portal {
   color: white !important;
   height: 50px !important;
   font-size: 16px !important;
+  width: 100% !important;
+  padding-left: 12px !important;
 }
 
 .phone-input-container {
@@ -674,10 +681,29 @@ nextjs-portal {
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5) !important;
   scrollbar-width: thin !important;
   scrollbar-color: #374151 transparent !important;
-  width: 300px !important;
-  max-height: 450px !important;
+  width: 250px !important;
+  max-width: calc(100vw - 40px) !important;
+  max-height: 400px !important;
   border-radius: 8px !important;
   z-index: 9999 !important;
+}
+
+@media (max-width: 480px) {
+  .phone-input-selector .react-international-phone-country-selector-button {
+    min-width: 40px !important;
+    width: 40px !important;
+    padding: 0 !important;
+  }
+
+  .phone-input-selector .react-international-phone-input {
+    font-size: 14px !important;
+    padding-left: 8px !important;
+  }
+
+  .react-international-phone-country-selector-dropdown {
+    width: 200px !important;
+    max-width: calc(100vw - 40px) !important;
+  }
 }
 
 .react-international-phone-country-selector-dropdown::-webkit-scrollbar {
@@ -722,4 +748,30 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 input[type="date"] {
   position: relative;
+}
+
+/* Hide scrollbar for the entire website and all components */
+html,
+body,
+* {
+  scrollbar-width: none !important;
+  /* Firefox */
+  -ms-overflow-style: none !important;
+  /* IE and Edge */
+  -webkit-scrollbar: none !important;
+}
+
+*::-webkit-scrollbar {
+  display: none !important;
+  /* Chrome, Safari, and Opera */
+}
+
+/* Specific utility classes for hiding scrollbars */
+.hide-scrollbar {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none !important;
 }

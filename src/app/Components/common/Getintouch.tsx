@@ -63,7 +63,10 @@ const SearchableSelect = ({
         {label} {required && <span className="text-blue-500">*</span>}
       </label>
       <div className="relative group/select" ref={containerRef}>
-        <Combobox value={value} onChange={(val: string | null) => onChange(val || '')}>
+        <Combobox value={value} onChange={(val: string | null) => {
+          onChange(val || '');
+          setHoveredDescription(null);
+        }}>
           <div className={`relative w-full cursor-default overflow-hidden rounded-lg bg-[#0E1014] text-left border ${error ? 'border-red-500' : 'border-gray-700'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
             <Combobox.Input
               className="w-full border-none py-3 pl-[11px] pr-10 text-white bg-transparent focus:outline-none focus:ring-0"
@@ -352,7 +355,7 @@ export default function ContactSection() {
         items-start justify-between 
         p-6 sm:p-10 md:p-12  
         my-10 gap-8 md:gap-10 
-        overflow-visible
+        overflow-hidden lg:overflow-visible
         scroll-mt-32
       "
     >

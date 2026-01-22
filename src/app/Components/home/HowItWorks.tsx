@@ -10,6 +10,8 @@ import {
 import { Toparrow } from "@/assets/icon";
 import ResultDetailsModal, { ResultDetailsData, ResultField } from "./ResultDetailsModal";
 import HibpDetailsModal, { HibpDetailsData } from "./HibpDetailsModal";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 export default function HowItWorks() {
   const [searchresults, setSearchResults] = useState(false);
@@ -101,12 +103,30 @@ export default function HowItWorks() {
         setSelectedCategory("all");
         setBreachTab("normal");
       }
-      // For OSINT Name tab (type = 0, mode = 1) - only Name field search
-      else if (type === 0 && mode === 1) {
-        if (!fullName || fullName.trim() === "") return;
+      // For OSINT and Data Breach modes (mode = 1 or mode = 2)
+      else if (mode === 1 || mode === 2) {
+        let result = null;
 
-        setSearchLoading(true);
-        const result = await fetchNameSearchResult({ query: fullName.trim(), OstIndAKey: "" });
+        if (type === 0) { // Name search
+          if (!fullName || fullName.trim() === "") return;
+          setSearchLoading(true);
+          result = await fetchNameSearchResult({ query: fullName.trim(), OstIndAKey: "" });
+        }
+        else if (type === 3) { // Username search
+          if (!keyword || keyword.trim() === "") return;
+          setSearchLoading(true);
+          result = await fetchNameSearchResult({ query: keyword.trim(), OstIndAKey: "" });
+        }
+        else if (type === 1) { // Phone search
+          if (!phone || phone.trim() === "") return;
+          setSearchLoading(true);
+          result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
+        }
+        else if (type === 2) { // Email search
+          if (!phone || phone.trim() === "") return;
+          setSearchLoading(true);
+          result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
+        }
 
         if (Array.isArray(result) && result.length > 0) {
           setPhoneResult(result);
@@ -118,67 +138,8 @@ export default function HowItWorks() {
 
         setCurrentPage(1);
         setSelectedCategory("all");
-        setBreachTab("normal");
-      }
-
-      // For OSINT Username tab (type = 3, mode = 1) - only Username field search
-      else if (type === 3 && mode === 1) {
-        if (!keyword || keyword.trim() === "") return;
-
-        setSearchLoading(true);
-        const result = await fetchNameSearchResult({ query: keyword.trim(), OstIndAKey: "" });
-
-        if (Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
-          setSearchResults(true);
-        } else {
-          setPhoneResult(null);
-          setSearchResults(false);
-        }
-
-        setCurrentPage(1);
-        setSelectedCategory("all");
-        setBreachTab("normal");
-      }
-
-      // Phone search (type = 1, mode = 1)
-      else if (type === 1 && mode === 1) {
-        if (!phone || phone.trim() === "") return;
-
-        setSearchLoading(true);
-        const result = await fetchPhoneSearchResult({ query: phone, OstIndAKey: "" });
-
-        if (Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
-          setSearchResults(true);
-        } else {
-          setPhoneResult(null);
-          setSearchResults(false);
-        }
-
-        setCurrentPage(1);
-        setSelectedCategory("all");
-        setBreachTab("normal");
-      }
-
-      // Email search (type = 2, mode = 1)
-      else if (type === 2 && mode === 1) {
-        if (!phone || phone.trim() === "") return;
-
-        setSearchLoading(true);
-        const result = await fetchEmailSearchResult({ query: phone, OstIndAKey: "" });
-
-        if (Array.isArray(result) && result.length > 0) {
-          setPhoneResult(result);
-          setSearchResults(true);
-        } else {
-          setPhoneResult(null);
-          setSearchResults(false);
-        }
-
-        setCurrentPage(1);
-        setSelectedCategory("all");
-        setBreachTab("normal");
+        // If searching in Data Breach mode, default to the Breach tab in results
+        setBreachTab(mode === 2 ? "breach" : "normal");
       }
     }
     catch (e: any) {
@@ -916,31 +877,33 @@ export default function HowItWorks() {
         return (
           <>
             <div className="container mx-auto px-4 py-8 overflow-visible">
-              {/* Internal Result Tabs: OSINT vs Breach */}
-              <div className="mb-4 flex flex-wrap gap-3">
-                <button
-                  type="button"
-                  onClick={() => setBreachTab("normal")}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "normal"
-                    ? "bg-[#167BFF] text-white border border-[#167BFF]"
-                    : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
-                    }`}
-                >
-                  OSINT Results ({filteredTotal})
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setBreachTab("breach")}
-                  className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "breach"
-                    ? "bg-[#167BFF] text-white border border-[#167BFF]"
-                    : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
-                    }`}
-                >
-                  Breach ({breachResults.length})
-                </button>
-              </div>
+              {/* Internal Result Tabs: OSINT vs Breach - Hidden in Data Breach mode */}
+              {mode !== 2 && (
+                <div className="mb-4 flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={() => setBreachTab("normal")}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "normal"
+                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                      }`}
+                  >
+                    OSINT Results ({filteredTotal})
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setBreachTab("breach")}
+                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${breachTab === "breach"
+                      ? "bg-[#167BFF] text-white border border-[#167BFF]"
+                      : "bg-[#1A1F2E] text-gray-300 border border-[#3C414A] hover:bg-[#222839]"
+                      }`}
+                  >
+                    Breach ({breachResults.length})
+                  </button>
+                </div>
+              )}
 
-              {breachTab === "normal" && (
+              {mode !== 2 && breachTab === "normal" && (
                 <>
                   {/* Search Results Header */}
                   <div className="mb-6 flex flex-col gap-4 overflow-visible">
@@ -1303,8 +1266,8 @@ export default function HowItWorks() {
                 </>
               )}
 
-              {/* ✅ SHOW BREACH VIEW WHEN TAB IS ACTIVE */}
-              {breachTab === "breach" && (
+              {/* ✅ SHOW BREACH VIEW WHEN TAB IS ACTIVE OR IN DATA BREACH MODE */}
+              {(mode === 2 || breachTab === "breach") && (
                 <BreachResultsView results={breachResults} />
               )}
 
@@ -1781,13 +1744,14 @@ export function UsernameForm({
       <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-end justify-between mt-4">
         <div className="flex-1 w-full">
           <label className="block text-sm text-white mb-2 sm:mb-4">Phone</label>
-          <input
-            type="text"
-            value={usernamePhone}
-            onChange={(e) => setUsernamePhone(e.target.value)}
-            placeholder="Enter phone number"
-            className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 px-4 py-3 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div className="phone-input-container px-2 w-full bg-neutral-900 border border-[#515151] rounded-full">
+            <PhoneInput
+              defaultCountry="us"
+              value={usernamePhone}
+              onChange={(phone) => setUsernamePhone(phone)}
+              className="phone-input-selector"
+            />
+          </div>
         </div>
         <div className="flex-1 w-full">
           <label className="block text-sm text-white mb-2 sm:mb-4">Email</label>
@@ -1860,13 +1824,24 @@ export function CustomForm({ formType, controller, setController }: formInput) {
       <div>
         <label className="block text-sm text-white font-inter mb-4">{formType === 1 ? 'Phone Number' : 'Email'}</label>
         <div className="flex items-end justify-between gap-4 flex-wrap sm:flex-nowrap">
-          <input
-            value={controller}
-            onChange={(e) => setController(e.target.value)}
-            type="text"
-            placeholder={formType === 1 ? "Enter Phone Number" : "Enter Email address"}
-            className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500 py-3 px-4"
-          />
+          {formType === 1 ? (
+            <div className="phone-input-container w-full bg-neutral-900 border border-[#515151] rounded-full">
+              <PhoneInput
+                defaultCountry="us"
+                value={controller}
+                onChange={(phone) => setController(phone)}
+                className="phone-input-selector"
+              />
+            </div>
+          ) : (
+            <input
+              value={controller}
+              onChange={(e) => setController(e.target.value)}
+              type="email"
+              placeholder="Enter email address"
+              className="w-full rounded-full bg-neutral-900 text-white placeholder-gray-500 border border-[#515151] focus:outline-none focus:ring-2 focus:ring-blue-500 py-3 px-4"
+            />
+          )}
         </div>
       </div>
     </div>

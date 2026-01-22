@@ -9,15 +9,15 @@ interface TravelingBorderProps {
   pointerWidth?: number; // default 66
   pointerHeight?: number; // default 10
   animationDuration?: number; // default 6s
-  speed?:number;
+  speed?: number;
 }
 
 
 export default function CorePrincipals() {
   const [tabIndex, setTabIndex] = useState(-1);
- const imageUrl = "/fingerprint.png";
+  const imageUrl = "/fingerprint.png";
 
- const containerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
   const [path, setPath] = useState("");
 
   useEffect(() => {
@@ -56,7 +56,7 @@ export default function CorePrincipals() {
 
       {/* Custom Seminars */}
       <div className="relative border border-[#515151] rounded-[32px] p-4 sm:p-6 lg:p-8 flex flex-col lg:flex-row gap-6 sm:gap-8 ">
-        <TravelingBorder  speed={100}/>
+        <TravelingBorder speed={100} />
 
         {/* Left Column */}
         <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 flex-1">
@@ -69,54 +69,54 @@ export default function CorePrincipals() {
             </div>
           </div>
           <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px]">
-            <li className="flex items-center gap-2"><Tick/> Fraud case studies and prevention strategies</li>
-            <li className="flex items-center gap-2"><Tick/> Practical checklists and roadmaps</li>
-            <li className="flex items-center gap-2"><Tick/> Insights into evolving intelligence threats</li>
-            <li className="flex items-center gap-2"><Tick/> Sector-specific fraud use cases</li>
+            <li className="flex items-center gap-2"><Tick /> Fraud case studies and prevention strategies</li>
+            <li className="flex items-center gap-2"><Tick /> Practical checklists and roadmaps</li>
+            <li className="flex items-center gap-2"><Tick /> Insights into evolving intelligence threats</li>
+            <li className="flex items-center gap-2"><Tick /> Sector-specific fraud use cases</li>
           </ul>
         </div>
 
         {/* Right Column: Dashed Semi-Circles */}
         <div className="flex flex-1  justify-center items-center relative max-w-full mt-8 lg:mt-0">
-          <SemicircularArcs viewWidth={570} viewHeight={300}/>
+          <SemicircularArcs viewWidth={570} viewHeight={300} />
         </div>
-        
+
       </div>
-      
+
 
       {/* Second Row */}
-      <div className={`flex flex-col sm:flex-row ${tabIndex!==-1?'items-start':'items-stretch'} gap-6 sm:gap-8`}>
+      <div className={`flex flex-col sm:flex-row ${tabIndex !== -1 ? 'items-start' : 'items-stretch'} gap-6 sm:gap-8`}>
         {/* Investigative Services Support */}
-        <div  className="relative border border-[#515151] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+        <div className="relative border border-[#515151] rounded-[32px]  p-8 flex-1 flex flex-col gap-4 sm:gap-6">
           <TravelingBorder />
 
           <div className="relative flex justify-center">
-      {/* Background glow */}
-      <div
-        className="blur-[40px] md:blur-[60px] absolute animate-glow2 h-[100px]  w-[110%]  md:w-full"
-        style={{
-          width:'100%',
-          background: "#157AFF",
-          borderRadius:'50%',
-          opacity:1.5,
-          top: "33%",
-          
-          zIndex: 0,
-        }}
-      />
+            {/* Background glow */}
+            <div
+              className="blur-[40px] md:blur-[60px] absolute animate-glow2 h-[100px]  w-[110%]  md:w-full"
+              style={{
+                width: '100%',
+                background: "#157AFF",
+                borderRadius: '50%',
+                opacity: 1.5,
+                top: "33%",
 
-      {/* Main Image */}
-      <div className="h-[291px] w-full flex items-center justify-center my-4">
-      <FingerPrint/>
-      </div>
+                zIndex: 0,
+              }}
+            />
 
-      {/* Magnifier */}
-      <div className="absolute top-1/3  left-[40%] z-20  h-[150px]">
-        
-     
-        <MagIcon />
-      </div>
-    </div>
+            {/* Main Image */}
+            <div className="h-[291px] w-full flex items-center justify-center my-4">
+              <FingerPrint />
+            </div>
+
+            {/* Magnifier */}
+            <div className="absolute top-1/3  left-[40%] z-20  h-[150px]">
+
+
+              <MagIcon />
+            </div>
+          </div>
 
           <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3]">
             Investigative Services Support
@@ -128,9 +128,9 @@ export default function CorePrincipals() {
             </p>
             <button
               style={{
-                cursor:'pointer'
+                cursor: 'pointer'
               }}
-              onMouseEnter={()=>setTabIndex(0)} onMouseLeave={()=>setTabIndex(-1)}
+              onMouseEnter={() => setTabIndex(0)} onMouseLeave={() => setTabIndex(-1)}
               onClick={() => setTabIndex(tabIndex === 0 ? -1 : 0)}
               className="flex z-20 relative top-5 left-2 justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100"
             >
@@ -138,51 +138,51 @@ export default function CorePrincipals() {
             </button>
           </div>
 
-          
+
 
           {tabIndex === 0 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
-              <li className="flex items-center gap-2"><Tick/> Uncover hidden connections and threats</li>
-              <li className="flex items-center gap-2"><Tick/> Validate evidence with digital forensics</li>
-              <li className="flex items-center gap-2"><Tick/> Deliver courtroom-ready reports</li>
-              <li className="flex items-center gap-2"><Tick/> Support or augment your existing investigations</li>
+              <li className="flex items-center gap-2"><Tick /> Uncover hidden connections and threats</li>
+              <li className="flex items-center gap-2"><Tick /> Validate evidence with digital forensics</li>
+              <li className="flex items-center gap-2"><Tick /> Deliver courtroom-ready reports</li>
+              <li className="flex items-center gap-2"><Tick /> Support or augment your existing investigations</li>
             </ul>
           )}
         </div>
 
         {/* Continuing Education */}
-        <div  ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
-         <TravelingBorder/>
-        
-           <div className="relative sm:my-16 lg:my-4 w-1/2  mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
-               
-         <div
-        className="blur-[40px] md:blur-[60px]  absolute animate-glow2 h-[70px] md:h-[90px]  w-[150%] -left-1/4 sm:-left-1/24 md:-left-0 sm:w-[110%] md:w-full"
-        style={{
-          background: "#157AFF",
-          borderRadius:'50%',
-          opacity:1.5,
-          top: "35%",
-          zIndex: 0,
-        }}
-      />
-         <div className="absolute rounded-[32px] overflow-hidden inset-0  ">
-        
+        <div ref={containerRef} className="relative  overflow-visible border border-[#515151] rounded-[32px] p-6 lg:p-8 flex-1 flex flex-col gap-4 sm:gap-6">
+          <TravelingBorder />
+
+          <div className="relative sm:my-16 lg:my-4 w-1/2  mx-auto md:mx-0 sm:w-full flex my-4 h-fit  ">
+
+            <div
+              className="blur-[40px] md:blur-[60px]  absolute animate-glow2 h-[70px] md:h-[90px]  w-[150%] -left-1/4 sm:-left-1/24 md:-left-0 sm:w-[110%] md:w-full"
+              style={{
+                background: "#157AFF",
+                borderRadius: '50%',
+                opacity: 1.5,
+                top: "35%",
+                zIndex: 0,
+              }}
+            />
+            <div className="absolute rounded-[32px] overflow-hidden inset-0  ">
+
+            </div>
+            <div className=" w-[200px] mx-auto md:w-[270px] lg:w-[297px] relative z-10 flex animate-ripple  justify-center items-center aspect-square rounded-full border border-[#0C438C]">
+
+              <div className="flex animate-ripple delay-150 justify-center items-center w-[85%] h-[85%] rounded-full border border-[#0C438C]">
+                <div className="relative  w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
+
+              </div>
+
+            </div>
+            <img
+              src="/book.png"
+              className="absolute inset-0 m-auto w-[100%] h-[100%] object-contain animate-none"
+            />
           </div>
-  <div className=" w-[200px] mx-auto md:w-[270px] lg:w-[297px] relative z-10 flex animate-ripple  justify-center items-center aspect-square rounded-full border border-[#0C438C]">
-   
-    <div className="flex animate-ripple delay-150 justify-center items-center w-[85%] h-[85%] rounded-full border border-[#0C438C]">
-      <div className="relative  w-[80%] h-[80%] rounded-full animate-ripple delay-300 border border-[#0C438C]" />
-    
-    </div>
-    
-  </div>
-  <img
-      src="/book.png"
-      className="absolute inset-0 m-auto w-[100%] h-[100%] object-contain animate-none"
-    />
-</div>
- 
+
 
           <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3]">
             Continuing Education
@@ -191,31 +191,31 @@ export default function CorePrincipals() {
           <div className="flex flex-row justify-between items-end">
             <p className=" text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
               We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.
-            </p>   
-            <button 
-            onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)}
-            onClick={()=>{
-              if(tabIndex===1){
-                setTabIndex(-1)
-              }
-              else{
-                setTabIndex(1)
-              }
-            }} 
-            className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+            </p>
+            <button
+              onMouseEnter={() => setTabIndex(1)} onMouseLeave={() => setTabIndex(-1)}
+              onClick={() => {
+                if (tabIndex === 1) {
+                  setTabIndex(-1)
+                }
+                else {
+                  setTabIndex(1)
+                }
+              }}
+              className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
-            {tabIndex === 1 ? <DropDown /> : <DropUp />}
-            </button>           
+              {tabIndex === 1 ? <DropDown /> : <DropUp />}
+            </button>
           </div>
-          
-        {tabIndex === 1 && (
+
+          {tabIndex === 1 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
-              <li className="flex items-center gap-2"><Tick/> Stay ahead of evolving cyber and fraud tactics</li>
-              <li className="flex items-center gap-2"><Tick/> Enhance professional skills and credentials</li>
-              <li className="flex items-center gap-2"><Tick/> Learn through real-world case studies</li>
-              <li className="flex items-center gap-2"><Tick/> Meet compliance and accreditation requirements</li>
+              <li className="flex items-center gap-2"><Tick /> Stay ahead of evolving cyber and fraud tactics</li>
+              <li className="flex items-center gap-2"><Tick /> Enhance professional skills and credentials</li>
+              <li className="flex items-center gap-2"><Tick /> Learn through real-world case studies</li>
+              <li className="flex items-center gap-2"><Tick /> Meet compliance and accreditation requirements</li>
             </ul>)}
-          
+
         </div>
       </div>
     </div>
@@ -242,7 +242,7 @@ export function TravelingBorder({
   maxThickness?: number;
   inset?: number;
   anticlockwise?: boolean;
-  styles?:{};
+  styles?: {};
 }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const pathRef = useRef<SVGPathElement | null>(null);
@@ -333,7 +333,7 @@ Z`;
       );
       const after = path.getPointAtLength(
         (dist + (anticlockwise ? -wedgeLength - 8 : wedgeLength + 8) + length) %
-          length
+        length
       );
       const dxF = after.x - last.x;
       const dyF = after.y - last.y;

@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { ChevronDown, ArrowUpRight, Menu, X, Search } from "lucide-react";
+import { ChevronDown, ArrowUpRight, Menu, X, Search, Play } from "lucide-react";
 import Button from "./Button";
 import { Toparrow } from "@/assets/icon";
 
@@ -13,6 +13,7 @@ export default function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [showDropDown, setShowDropDown] = useState(-1);
   const [showServicesDown, setShowServicesDown] = useState(false);
+  const [isVideoDialogOpen, setIsVideoDialogOpen] = useState(false);
   const router = useRouter();
 
   // Refs for desktop dropdowns
@@ -134,28 +135,55 @@ export default function Navbar() {
                 />
               </button>
               {openMenu === "services" && (
-                <div className="absolute mt-3 backdrop-blur-md text-white rounded-xl shadow-lg w-64 p-2 z-10">
-                  {services.map((item, index) => (
-                    <Link
+                <div className="absolute mt-5 backdrop-blur-xl border border-white/10 text-white rounded-2xl shadow-2xl w-[500px] p-6 z-50 flex gap-8">
+                  {/* Left Section: Services List */}
+                  <div className="flex-1 flex flex-col gap-1">
+                    <p className="text-[10px] font-bold text-white ml-2 mb-3 uppercase tracking-widest px-2">Key Services</p>
+                    {services.map((item, index) => (
+                      <Link
+                        key={index}
+                        href={item.href}
+                        className={`flex justify-between items-center px-4 py-2.5 rounded-xl w-full text-left transition-all ${pathname === item.href
+                          ? "bg-white/10"
+                          : "hover:bg-white/5"
+                          }`}
+                        onClick={handleLinkClick}
+                      >
+                        <span className="text-sm font-medium">{item.label}</span>
+                        <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                      </Link>
+                    ))}
+                  </div>
 
-                      key={index}
-                      href={item.href}
-                      className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href
-                        ? "bg-white/10"
-                        : "hover:bg-[#8A8A8A]"
-                        }`}
-                      onClick={handleLinkClick}
+                  {/* Right Section: Video Preview */}
+                  <div className="w-[200px] flex flex-col gap-4">
+                    <p className="text-[10px] font-bold text-white uppercase tracking-widest">Social Media Monitoring</p>
+                    <div
+                      onClick={() => setIsVideoDialogOpen(true)}
+                      className="relative group cursor-pointer aspect-[4/3] bg-white/5 rounded-xl border border-white/10 overflow-hidden flex items-center justify-center transition-all hover:border-blue-500/50 hover:scale-[1.02]"
                     >
-                      {item.label}
-                      <ArrowUpRight size={16} />
-                    </Link>
-                  ))}
+                      <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                      {/* Placeholder for Video Thumbnail */}
+                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity" />
+
+                      <div className="z-10 bg-white/10 p-3 rounded-full backdrop-blur-md group-hover:scale-110 transition-transform border border-white/20">
+                        <Play size={20} className="fill-white text-white translate-x-0.5" />
+                      </div>
+
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                      <div className="absolute bottom-3 left-3 flex flex-col items-start">
+                        <span className="text-[10px] text-blue-400 font-bold uppercase tracking-tighter mb-0.5">Preview</span>
+                        <p className="text-xs text-white font-semibold">Watch Demo</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               )}
             </div>
 
             {/* Industries Dropdown */}
-            <div ref={industriesRef} className="relative">
+            <div ref={industriesRef} className="relative ">
               <button
                 onClick={() => toggleMenu("industries")}
                 className="flex text-sm items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
@@ -249,7 +277,7 @@ export default function Navbar() {
 
       {/* ✅ Mobile Sidebar (fixed patch for dropdown navigation) */}
       <div
-        className={`fixed top-0 left-0 h-full w-80 bg-black z-50 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+        className={`fixed overflow-y-auto top-0 left-0 h-full w-80 bg-black z-50 transform transition-transform duration-300 ease-in-out ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
           } lg:hidden`}
         // stopPropagation so clicks inside the sidebar don't accidentally hit the overlay
         onClick={(e) => e.stopPropagation()}
@@ -316,20 +344,44 @@ export default function Navbar() {
               </button>
 
 
-              <div className={`${showDropDown === 1 ? 'block' : 'hidden'} mt-2 ml-6 bg-[#1A1A1A] text-white rounded-xl p-2`}>
-                {services.map((item, index) => (
-                  <Link href={item.href} onClick={handleLinkClick}><button
-                    key={index}
-                    type="button"
+              <div className={`${showDropDown === 1 ? 'block' : 'hidden'} mt-2 ml-4 bg-[#111111] text-white rounded-2xl p-2 border border-white/5`}>
+                <div className="p-2">
+                  <p className="text-[10px] font-bold text-gray-500 mb-2 uppercase tracking-widest px-2">Key Services</p>
+                  {services.map((item, index) => (
+                    <Link key={index} href={item.href} onClick={handleLinkClick}>
+                      <button
+                        type="button"
+                        className={`flex justify-between items-center px-4 py-3 rounded-xl w-full text-left transition-all ${pathname === item.href ? "bg-white/10" : "hover:bg-white/5"
+                          }`}
+                      >
+                        <span className="text-sm">{item.label}</span>
+                        <ArrowUpRight size={16} className="opacity-50" />
+                      </button>
+                    </Link>
+                  ))}
+                </div>
 
-
-                    className={`flex justify-between items-center px-4 py-2 rounded-lg w-full text-left ${pathname === item.href ? "bg-white/10" : "hover:bg-white/10"
-                      }`}
+                {/* Mobile Social Media Monitoring Section */}
+                <div className="mt-2 p-4 border-t border-white/5">
+                  <p className="text-[10px] font-bold text-gray-500 mb-4 uppercase tracking-widest px-1">Social Media Monitoring</p>
+                  <div
+                    onClick={() => {
+                      setIsVideoDialogOpen(true);
+                      setIsSidebarOpen(false);
+                    }}
+                    className="relative aspect-video bg-white/5 rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center transition-active active:scale-[0.98]"
                   >
-                    {item.label}
-                    <ArrowUpRight size={16} />
-                  </button></Link>
-                ))}
+                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
+                    <div className="z-10 bg-white/10 p-4 rounded-full backdrop-blur-md border border-white/20">
+                      <Play size={24} className="fill-white text-white translate-x-0.5" />
+                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                    <div className="absolute bottom-4 left-4">
+                      <p className="text-sm text-white font-semibold">Watch Demo Video</p>
+                      <p className="text-[10px] text-gray-400">Social Media Monitoring in Action</p>
+                    </div>
+                  </div>
+                </div>
               </div>
 
             </div>
@@ -445,6 +497,33 @@ export default function Navbar() {
         </div>
       </div>
 
+
+      {/* Video Dialog */}
+      {isVideoDialogOpen && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 p-4 md:p-10 backdrop-blur-sm transition-all duration-300">
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-3xl overflow-hidden shadow-[0_0_100px_rgba(0,0,0,1)] border border-white/10 transform transition-transform animate-in zoom-in-95">
+            <button
+              onClick={() => setIsVideoDialogOpen(false)}
+              className="absolute top-6 right-6 z-20 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-all text-white hover:rotate-90 group"
+            >
+              <X size={24} className="group-hover:scale-110 transition-transform" />
+            </button>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <video
+                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                className="w-full h-full object-contain"
+                controls
+                autoPlay
+              />
+            </div>
+          </div>
+          {/* Backdrop Blur Click to Close */}
+          <div
+            className="absolute inset-0 -z-10"
+            onClick={() => setIsVideoDialogOpen(false)}
+          />
+        </div>
+      )}
 
       {/* Overlay */}
       {isSidebarOpen && (

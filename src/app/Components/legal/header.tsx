@@ -34,12 +34,12 @@ export const LegalHeader = () => {
                     backgroundColor: "#167BFF",
                 }}
             />
-             <div
+            <div
                 className="absolute pointer-events-none z-0 blur-[26.2px] animate-blink"
                 style={{
                     width: '50%',
                     height: 250,
-                    top: 53,
+                    top: 3,
                     right: "1%",
                     transform: "translateX(80%)",
                     opacity: 0.2,
@@ -79,15 +79,15 @@ export const LegalHeader = () => {
                 {/* Headline */}
                 <p className="text-5xl sm:text-6xl lg:text-6xl font-bold text-white leading-tight font-sans">
                     Cyphr Legal Information
-                    
+
                 </p>
 
                 {/* Subtitle */}
                 <p className={`text-xs sm:text-base sm:text-sm md:text-[1rem] text-[#F1F1F1] ${inter.className}`}>
-                   Review our privacy practices, terms of service, data processing, and security measures <br/> to understand how we protect your information.
+                    Review our privacy practices, terms of service, data processing, and security measures <br /> to understand how we protect your information.
                 </p>
 
-                
+
             </div>
         </div>
     );
