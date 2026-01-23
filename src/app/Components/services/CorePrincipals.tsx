@@ -12,13 +12,71 @@ interface TravelingBorderProps {
   speed?: number;
 }
 
+interface CorePrincipalsProps {
+  data?: {
+    title: string;
+    customSeminars: {
+      title: string;
+      description: string;
+      benefits: string[];
+    };
+    investigativeServices: {
+      title: string;
+      description: string;
+      benefits: string[];
+    };
+    continuingEducation: {
+      title: string;
+      description: string;
+      benefits: string[];
+    };
+  };
+}
 
-export default function CorePrincipals() {
+
+export default function CorePrincipals({ data }: CorePrincipalsProps) {
   const [tabIndex, setTabIndex] = useState(-1);
   const imageUrl = "/fingerprint.png";
 
   const containerRef = useRef<HTMLDivElement | null>(null);
   const [path, setPath] = useState("");
+
+  // Default data if not provided
+  const defaultData = {
+    title: "Core Pillars of Consulting & Advisory",
+    customSeminars: {
+      title: "Custom Seminars",
+      description: "Tailored seminars to equip your team with the skills to detect and mitigate intelligence threats. We offer practical tools and roadmaps to help you stay ahead.",
+      benefits: [
+        "Fraud case studies and prevention strategies",
+        "Practical checklists and roadmaps",
+        "Insights into evolving intelligence threats",
+        "Sector-specific fraud use cases",
+      ],
+    },
+    investigativeServices: {
+      title: "Investigative Services Support",
+      description: "Our team extends your investigative capabilities with investigator-led support. We provide comprehensive intelligence services to:",
+      benefits: [
+        "Uncover hidden connections and threats",
+        "Validate evidence with digital forensics",
+        "Deliver courtroom-ready reports",
+        "Support or augment your existing investigations",
+      ],
+    },
+    continuingEducation: {
+      title: "Continuing Education",
+      description: "We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.",
+      benefits: [
+        "Stay ahead of evolving cyber and fraud tactics",
+        "Enhance professional skills and credentials",
+        "Learn through real-world case studies",
+        "Meet compliance and accreditation requirements",
+      ],
+    },
+  };
+
+  const content = data || defaultData;
 
   useEffect(() => {
     function updatePath() {
@@ -51,7 +109,7 @@ export default function CorePrincipals() {
     <div className="flex flex-col gap-6 sm:gap-8 lg:gap-12 p-4 sm:p-10 lg:p-20 bg-black text-white">
       {/* Heading */}
       <h1 className="font-sans font-bold text-[20px] sm:text-[36px] lg:text-[48px] text-center leading-tight">
-        Core Pillars of Consulting & Advisory
+        {content.title}
       </h1>
 
       {/* Custom Seminars */}
@@ -62,10 +120,10 @@ export default function CorePrincipals() {
         <div className="flex flex-col gap-8 sm:gap-10 lg:gap-12 flex-1">
           <div className="flex flex-col gap-3 sm:gap-4">
             <h2 className="font-sans text-white font-bold mt-6 lg:mt-0 text-[22px] sm:text-[28px] lg:text-[40px] leading-[1.3]">
-              Custom Seminars
+              {content.customSeminars.title}
             </h2>
             <div className="text-[#E3E3E3] text-[0.9rem] sm:text-[1rem] font-inter font-normal max-w-[95%]">
-              Tailored seminars to equip your team with the skills to detect and mitigate intelligence threats. We offer practical tools and roadmaps to help you stay ahead.
+              {content.customSeminars.description}
             </div>
           </div>
           <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px]">
@@ -119,12 +177,12 @@ export default function CorePrincipals() {
           </div>
 
           <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3]">
-            Investigative Services Support
+            {content.investigativeServices.title}
           </h2>
 
           <div className="flex flex-row justify-between items-end">
             <p className="text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[80%]">
-              Our team extends your investigative capabilities with investigator-led support. We provide comprehensive intelligence services to:
+              {content.investigativeServices.description}
             </p>
             <button
               style={{
@@ -185,24 +243,24 @@ export default function CorePrincipals() {
 
 
           <h2 className="font-sans font-bold text-[22px] sm:text-[28px] lg:text-[32px] leading-[1.3]">
-            Continuing Education
+            {content.continuingEducation.title}
           </h2>
 
           <div className="flex flex-row justify-between items-end">
             <p className=" text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
-              We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.
-            </p>
-            <button
-              onMouseEnter={() => setTabIndex(1)} onMouseLeave={() => setTabIndex(-1)}
-              onClick={() => {
-                if (tabIndex === 1) {
-                  setTabIndex(-1)
-                }
-                else {
-                  setTabIndex(1)
-                }
-              }}
-              className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+              {content.continuingEducation.description}
+            </p>   
+            <button 
+            onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)}
+            onClick={()=>{
+              if(tabIndex===1){
+                setTabIndex(-1)
+              }
+              else{
+                setTabIndex(1)
+              }
+            }} 
+            className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
               {tabIndex === 1 ? <DropDown /> : <DropUp />}
             </button>
@@ -210,10 +268,9 @@ export default function CorePrincipals() {
 
           {tabIndex === 1 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
-              <li className="flex items-center gap-2"><Tick /> Stay ahead of evolving cyber and fraud tactics</li>
-              <li className="flex items-center gap-2"><Tick /> Enhance professional skills and credentials</li>
-              <li className="flex items-center gap-2"><Tick /> Learn through real-world case studies</li>
-              <li className="flex items-center gap-2"><Tick /> Meet compliance and accreditation requirements</li>
+              {content.continuingEducation.benefits.map((benefit, index) => (
+                <li key={index} className="flex items-center gap-2"><Tick/> {benefit}</li>
+              ))}
             </ul>)}
 
         </div>

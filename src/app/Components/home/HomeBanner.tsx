@@ -190,7 +190,7 @@ export default function HomeBanner() {
           >
             Book a Consultation
           </button>
-          <Link href={"/pages/services/consulting"} className="w-full sm:w-auto">
+          <Link href={"/pages/services/consult"} className="w-full sm:w-auto">
             <button className="custom-button with-border bg-transparent w-full sm:w-auto">
               Explore Services <Toparrow />
             </button>

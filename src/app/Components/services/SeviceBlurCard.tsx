@@ -5,9 +5,23 @@ import React from "react";
 import { Grid, Toparrow } from "@/assets/icon";
 import { PointerGrid } from "../home/GridAnimation";
 
+interface ServiceBlurCardProps {
+  data?: {
+    title: string;
+    description: string;
+    buttonText: string;
+  };
+}
 
+const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
+  // Default data if not provided
+  const defaultData = {
+    title: "Take Command of Your Future.",
+    description: "With Cyphr's Consulting & Advisory services, you'll gain the knowledge, tools, and strategies to act decisively in an unpredictable world.",
+    buttonText: "Book a Consultation",
+  };
 
-const ServiceBlurCard = () => {
+  const content = data || defaultData;
   return (
     <div className="relative mb-4 flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
 {/* PointerGrid at top-right edge of screen with glow */}
@@ -124,12 +138,10 @@ const ServiceBlurCard = () => {
           {/* Text Section */}
           <div className="flex flex-col gap-3 sm:gap-6 lg:gap-[28px] text-center">
             <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[48px] text-white leading-snug">
-              Take Command of Your Future.
+              {content.title}
             </h1>
             <p className="font-inter font-normal text-xs sm:text-base lg:text-[16px] text-[#F1F1F1] mx-auto text-center max-w-[95%] sm:max-w-[80%] lg:max-w-[72%]">
-              With Cyphr’s Consulting & Advisory services, you’ll gain the
-              knowledge, tools, and strategies to act decisively in an
-              unpredictable world.
+              {content.description}
             </p>
           </div>
 
@@ -145,7 +157,7 @@ const ServiceBlurCard = () => {
 
 
 
-            >Book a Consultation</button>
+            >{content.buttonText}</button>
             
           </div>
         </div>
