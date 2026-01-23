@@ -10,7 +10,7 @@ interface VideoSectionProps {
 
 export const VideoSection = ({ 
   videoName = "Socialmedia",
-  title = "See Cyphr in Action",
+  title = "Social Media Monitoring ",
   description = "Discover how our platform transforms intelligence gathering and analysis"
 }: VideoSectionProps) => {
   const videoPath = `/videos/${videoName}`;

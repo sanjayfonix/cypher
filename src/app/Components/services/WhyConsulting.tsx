@@ -3,10 +3,42 @@ import { useEffect, useRef, useState } from "react";
 import { ServicesIcon } from "@/assets/icon"; // adjust import
 import Button from "../common/Button";
 
-export const WhyConsulting = () => {
+interface WhyConsultingProps {
+  data?: {
+    title: string;
+    items: {
+      text: string;
+      img: string;
+    }[];
+  };
+}
+
+export const WhyConsulting = ({ data }: WhyConsultingProps) => {
   const sectionsRef = useRef<HTMLDivElement[]>([]);
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
   const [progress, setProgress] = useState<number>(0);
+
+  // Default data if not provided
+  const defaultData = {
+    title: "Why Consulting & Advisory?",
+    items: [
+      {
+        text: "Leverage advanced intelligence techniques and unique data sources to enhance security, prevent fraud, and inform critical decisions",
+        img: "/services1.png",
+      },
+      {
+        text: "Unlock actionable insights and secure your future",
+        img: "/services3.png",
+      },
+      {
+        text: "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
+        img: "/services2.png",
+      },
+    ],
+  };
+
+  const rows = data?.items || defaultData.items;
+  const title = data?.title || defaultData.title;
 
   useEffect(() => {
     const handleScroll = () => {
@@ -50,30 +82,13 @@ export const WhyConsulting = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const rows = [
-    {
-      text: "Leverage advanced intelligence techniques and unique data sources to enhance security, prevent fraud, and inform critical decisions",
-      img: "/services1.png",
-      maxW: "md:max-w-[32%]",
-    },
-    
-    {
-      text: "Unlock actionable insights and secure your future",
-      img: "/services3.png",
-      maxW: "md:max-w-[32%]",
-    },
-    {
-      text: "Take command of your own destiny – build robust risk management frameworks, optimize investigative processes, and achieve a decisive competitive edge in today's dynamic landscape",
-      img: "/services2.png",
-      maxW: "md:max-w-[35%]",
-    },
-  ];
+  const maxW = ["md:max-w-[32%]", "md:max-w-[32%]", "md:max-w-[35%]"];
 
   return (
     <div className="py-4 px-2 sm:px-4 md:px-8 flex flex-col">
       {/* Title */}
       <h2 className="text-white text-xl sm:text-2xl md:text-4xl font-bold font-sans text-center mt-20">
-        Why Consulting & Advisory?
+        {title}
       </h2>
 
       <div className="flex flex-col gap-0 container relative">
@@ -112,7 +127,7 @@ export const WhyConsulting = () => {
               {/* Left text (for rows 1 & 3) */}
               {i !== 1 && (
                 <div
-                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${maxW[i]}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",
@@ -152,7 +167,7 @@ export const WhyConsulting = () => {
               {/* Right text (middle row) */}
               {i === 1 && (
                 <div
-                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${row.maxW}`}
+                  className={`flex gap-1 max-w-[43%] text-xs sm:text-sm md:text-base lg:text-2xl font-normal ${maxW[i]}`}
                   style={{
                     color: isActive ? "#FFFFFF" : "rgba(255,255,255,0.3)",
                     transition: "color 0.3s ease",

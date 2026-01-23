@@ -38,9 +38,9 @@ export default function Navbar() {
 
   const services = [
     { label: "Social Media Intelligence", href: "/pages/services/social-intel" },
-    { label: "Consulting and Advisory", href: "/pages/services/consulting" },
+    { label: "Consulting and Advisory", href: "/pages/services/consult" },
     { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
-    { label: "Brand Defense", href: "/pages/services/brand-defence" },
+    { label: "Brand Defense", href: "/pages/services/brand-defense" },
   ];
 
   const industries = [

@@ -85,7 +85,7 @@ const [tapped, setTapped] = useState(false);
                 Leverage intelligence techniques to make informed decisions, enhance security, and mitigate risks.
               </p>
             </div>
-            <Link href={'/pages/services/consulting'}><button className="mt-12 custom-button with-border bg-transparent">
+            <Link href={'/pages/services/consult'}><button className="mt-12 custom-button with-border bg-transparent">
               See How It works{" "}
               <span>
                 <Toparrow />
@@ -310,7 +310,7 @@ const [tapped, setTapped] = useState(false);
                 Detect counterfeit operations, cyber threats, and reputation damage early to take proactive action.
               </p>
             </div>
-            <Link href={'/pages/services/brand-defence'}><button className="custom-button with-border bg-transparent mt-12">
+            <Link href={'/pages/services/brand-defense'}><button className="custom-button with-border bg-transparent mt-12">
               See How It works{" "}
               <span>
                 <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />

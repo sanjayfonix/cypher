@@ -94,7 +94,7 @@ const IndustriesBlurCard = () => {
             </button>
 
 
-            <Link href={"/pages/services/consulting"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
+            <Link href={"/pages/services/consult"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
 
 
 
