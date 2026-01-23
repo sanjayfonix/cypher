@@ -445,11 +445,12 @@ export default async function ServicesPage({
     <div className="font-sans overflow-hidden relative">
       <TopBanner content={currentData.topBanner} />
       <WhyConsulting data={currentData.whySection} />
-      {slug === 'social-intel' && <VideoSection videoName="Socialmedia" />}
-
+      {/* {slug === 'social-intel' && <VideoSection videoName="Socialmedia" />} */}
       <div className="container">
         <CorePrincipals data={currentData.corePrincipals} />
       </div>
+      <VideoSection videoName="Socialmedia" />
+
       <ServiceBlurCard data={currentData.blurCard} />
       <ContactSection />
     </div>
