@@ -8,12 +8,14 @@ const contentData = [
   { id: 1, icon: "/images/mission1.png", title: "Mission: What We Do...", description: "Unite digital intelligence with forensic investigative strategies to uncover credible, actionable insights that deliver client outcomes.", highlight: "Forensic. Value. Delivered." },
   { id: 2, icon: "/images/mission2.png", title: "Purpose: Why we do it...", description: "To optimize the collective power of foundational open-source intelligence methods, a tenured forensic investigative team and a modern scalable real-world data infrastructure to answer complex questions at scale to change the way companies compete and protect themselves, their employees and their bottom line", highlight: "Inquisitive. Focused. Creative" },
   { id: 3, icon: "/images/mission3.png", title: "Vision: What we aspire to be...", description: "The leading provider of digital intelligence and investigative outcomes services – delivering on the promise of modern, and comprehensive insights that inform, educate and mitigate risk", highlight: "Collect. Connect. Inform. " },
-  { id: 4, icon: "/images/mission4.png", title: "Our Ethical Commitment", description: `Cyphr holds ourselves to the highest ethical standards in everything we do. Our commitment extends across four key areas: 
+  {
+    id: 4, icon: "/images/mission4.png", title: "Our Ethical Commitment", description: `Cyphr holds ourselves to the highest ethical standards in everything we do. Our commitment extends across four key areas: 
     Integrity in Business 
     Conduct, Ethical Data Collection, 
     Use Respect & Responsibility Toward People, 
     Responsible Investigative Practices, 
-    Through these principles, Cyphr aims to set a new standard for trust, responsibility, and impact in digital intelligence and forensic investigations.`, highlight: "Integrity. Responsibility. Ethical Practice." },
+    Through these principles, Cyphr aims to set a new standard for trust, responsibility, and impact in digital intelligence and forensic investigations.`, highlight: "Integrity. Responsibility. Ethical Practice."
+  },
 ];
 
 export default function MissionSection() {
@@ -73,32 +75,32 @@ export default function MissionSection() {
       className="overflow-hidden relative container bg-black mx-auto lg:mx-0 flex flex-col lg:flex-row items-center justify-between px-4 sm:px-8 md:px-20 py-12 gap-10 sm:gap-12 md:gap-16 lg:gap-20 h-auto min-h-[700px] mb-5"
     >
       <div
-              className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
-              
-            >
-              <div className="relative flex items-center justify-center">
-                {/* Glow behind */}
-                <div
-                  className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
-                  style={{
-                    
-                    borderRadius: "50%",
-                    background:
-                      "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
-                    zIndex: -1,
-                  }}
-                />
-                <div className="relative -left-8">
-                  <PointerGrid
-      
-                    width={150}
-                    height={150}
-                  />
-                </div>
-              </div>
-            </div>
+        className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
 
-     
+      >
+        <div className="relative flex items-center justify-center">
+          {/* Glow behind */}
+          <div
+            className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
+            style={{
+
+              borderRadius: "50%",
+              background:
+                "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
+              zIndex: -1,
+            }}
+          />
+          <div className="relative -left-8">
+            <PointerGrid
+
+              width={150}
+              height={150}
+            />
+          </div>
+        </div>
+      </div>
+
+
       {/* LEFT SIDE: RADAR */}
       <div className="sticky left-0 md:left-[30%] lg:left-0 lg:top-24 self-start w-[220px] h-[220px] sm:w-[280px] sm:h-[280px] md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] flex items-center justify-center mx-auto md:mx-0">
         <div className="relative w-full h-full rounded-full border border-blue-500/60 flex items-center justify-center">
@@ -135,11 +137,10 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(0)}
           >
             <div
-              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
-                activeIndex === 0
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${activeIndex === 0
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
-              } transition-all duration-500`}
+                } transition-all duration-500`}
             >
               <Image src="/images/mission1.png" alt="Mission1" width={28} height={28} />
             </div>
@@ -150,11 +151,10 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(1)}
           >
             <div
-              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
-                activeIndex === 1
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${activeIndex === 1
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
-              } transition-all duration-500`}
+                } transition-all duration-500`}
             >
               <Image src="/images/mission2.png" alt="Mission2" width={28} height={28} />
             </div>
@@ -165,11 +165,10 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(2)}
           >
             <div
-              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
-                activeIndex === 2
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${activeIndex === 2
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
-              } transition-all duration-500`}
+                } transition-all duration-500`}
             >
               <Image src="/images/mission3.png" alt="Mission3" width={28} height={28} />
             </div>
@@ -180,11 +179,10 @@ export default function MissionSection() {
             onClick={() => setActiveIndex(3)}
           >
             <div
-              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${
-                activeIndex === 3
+              className={`cursor-pointer p-2 sm:p-3 rounded-full bg-black border ${activeIndex === 3
                   ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.9)]"
                   : "border-gray-600"
-              } transition-all duration-500`}
+                } transition-all duration-500`}
             >
               <Image src="/images/mission4.png" alt="Mission4" width={28} height={28} />
             </div>
@@ -193,7 +191,7 @@ export default function MissionSection() {
       </div>
 
       {/* RIGHT SIDE: Active Content */}
-      <div className="flex-1 relative lg:top-0 w-full max-w-xl flex flex-col justify-center">
+      <div className="flex-1 relative lg:top-0 w-full max-w-xl flex flex-col justify-center min-h-[400px] sm:min-h-[450px]">
         <motion.div
           key={currentItem.id}
           className="text-center md:text-left"
@@ -202,11 +200,10 @@ export default function MissionSection() {
           transition={{ duration: 0.45 }}
         >
           <div
-            className={`p-3 rounded-full bg-black border inline-block mb-6 ${
-              activeIndex === currentItem.id - 1
+            className={`p-3 rounded-full bg-black border inline-block mb-6 ${activeIndex === currentItem.id - 1
                 ? "border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.7)]"
                 : "border-gray-600"
-            }`}
+              }`}
           >
             <Image src={currentItem.icon} alt={currentItem.title} width={32} height={32} />
           </div>
