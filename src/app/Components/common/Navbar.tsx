@@ -38,10 +38,26 @@ export default function Navbar() {
 
 
   const services = [
-    { label: "Social Media Intelligence", href: "/pages/services/social-intel" },
-    { label: "Consulting and Advisory", href: "/pages/services/consult" },
-    { label: "Geospatial Cellular Forensics", href: "/pages/services/geospatial" },
-    { label: "Brand Defense", href: "/pages/services/brand-defense" },
+    {
+      label: "Social Media Intelligence",
+      href: "/pages/services/social-intel",
+      description: "We don’t just scrape data — we decode human behavior at scale. Our analysts and proprietary workflows extract threats, fraud patterns, influence operations, and high-value signals hiding inside millions of digital conversations. Whether you’re protecting a brand, an election, or a national interest, our Social Media Intelligence solutions deliver legally-defensible, context-rich insight drawn from open and restricted sources with precision tradecraft."
+    },
+    {
+      label: "Consulting and Advisory",
+      href: "/pages/services/consulting",
+      description: "Cyphr’s advisory practice empowers leaders to act with confidence in a world where data, misinformation, and digital risk converge. Our team of veteran investigators, intelligence officers, and OSINT innovators consult directly with C-suites, legal counsel, and national security agencies to design intelligence programs that work in the field — not just on paper. We deliver strategic calibration: assessing your current posture, building resilience in your workflows, and integrating trusted intelligence frameworks built to uncover, interpret, and neutralize risk."
+    },
+    {
+      label: "Geospatial Cellular Forensics",
+      href: "/pages/services/geospatial",
+      description: "Where digital meets physical, Cyphr delivers truth. Our geospatial and cellular forensics capabilities reconstruct movement, communication, and intent from complex data ecosystems — turning raw signals into actionable intelligence that stands up to legal and technical scrutiny. From mapping threat networks and locating suspected fraud operations to validating alibis or tracing logistics breaches, our fusion of geolocation analytics and mobile forensics produces precision-level situational awareness you can trust."
+    },
+    {
+      label: "Brand Defense",
+      href: "/pages/services/brand-defence",
+      description: "Cyphr’s Brand Defense solutions combine OSINT, threat intelligence, and sentiment analysis to detect, dismantle, and deter digital threats before they escalate into financial, reputational, or legal crises. Whether the threat stems from disinformation, counterfeit products, executive impersonation, or coordinated smear campaigns, our analysts build real-time visibility and mitigation plans that shield your brand where it’s most vulnerable — online."
+    },
   ];
 
   const industries = [
@@ -143,7 +159,7 @@ export default function Navbar() {
                       <Link
                         key={index}
                         href={item.href}
-                        className={`flex justify-between items-center px-4 py-2.5 rounded-xl w-full text-left transition-all ${pathname === item.href
+                        className={`group relative flex justify-between items-center px-4 py-2.5 rounded-xl w-full text-left transition-all ${pathname === item.href
                           ? "bg-white/10"
                           : "hover:bg-white/5"
                           }`}
@@ -151,6 +167,15 @@ export default function Navbar() {
                       >
                         <span className="text-sm font-medium">{item.label}</span>
                         <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+
+                        {/* Tooltip */}
+                        <div className="absolute left-0 top-full mt-2 w-80 p-4 bg-[#0E1014] border border-white/10 rounded-xl shadow-2xl z-[60] opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none translate-y-2 group-hover:translate-y-0 whitespace-normal">
+                          <p className="text-xs text-gray-300 leading-relaxed font-normal">
+                            {item.description}
+                          </p>
+                          {/* Arrow (optional, visual flair) */}
+                          <div className="absolute -top-1 left-8 w-2 h-2 bg-[#0E1014] border-t border-l border-white/10 rotate-45" />
+                        </div>
                       </Link>
                     ))}
                   </div>
@@ -183,7 +208,7 @@ export default function Navbar() {
             </div>
 
             {/* Industries Dropdown */}
-            <div ref={industriesRef} className="relative ">
+            <div ref={industriesRef} className="relative">
               <button
                 onClick={() => toggleMenu("industries")}
                 className="flex text-sm items-center gap-1 text-gray-100 cursor-pointer hover:text-gray-300"
@@ -510,7 +535,7 @@ export default function Navbar() {
             </button>
             <div className="absolute inset-0 flex items-center justify-center">
               <video
-                src="https://www.w3schools.com/html/mov_bbb.mp4"
+                src="/videos/Socialmedia.mp4"
                 className="w-full h-full object-contain"
                 controls
                 autoPlay

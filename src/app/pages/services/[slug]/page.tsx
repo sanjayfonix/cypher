@@ -22,7 +22,7 @@ export async function generateMetadata(
       title:
         "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
       description:
-        "Strategic intelligence consulting for cyber resilience, compliance, and risk. Partner with Cyphr's experts to strengthen your defense posture.",
+        "Empower decisions with expert intelligence strategy. Cyphr’s Consulting & Advisory services strengthen cyber resilience, compliance, and operational security at scale.",
       openGraph: {
         title:
           "Cyber Intelligence Consulting & Advisory | Strategic OSINT Experts | Cyphr",
@@ -30,32 +30,32 @@ export async function generateMetadata(
           "Strategic intelligence consulting for cyber resilience, compliance, and risk.",
         images: [
           {
-            url: "https://cyphr.io/assets/og-consulting.jpg",
+            url: `/services1.png`,
             width: 1200,
             height: 630,
             alt: "Cyphr Consulting & Advisory",
           },
         ],
-        url: "https://cyphr.io/consulting-advisory",
+        url: "https://cypher.txogavideo.in/consulting-advisory",
         type: "website",
         siteName: "Cyphr",
       },
     },
     "social-intel": {
       title: "Social Media Intelligence | OSINT & Digital Investigation | Cyphr",
-      description: "Turn social chaos into strategic clarity with Cyphr's social media intelligence solutions for threat detection and risk assessment.",
+      description: "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
       openGraph: {
         title: "Social Media Intelligence | OSINT & Digital Investigation | Cyphr",
-        description: "Advanced social media intelligence for threat detection and brand protection.",
+        description: "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
         images: [
           {
-            url: "https://cyphr.io/assets/og-social-intel.jpg",
+            url: `/services2.png`,
             width: 1200,
             height: 630,
             alt: "Cyphr Social Media Intelligence",
           },
         ],
-        url: "https://cyphr.io/social-intelligence",
+        url: "https://cypher.txogavideo.in/social-intelligence",
         type: "website",
         siteName: "Cyphr",
       },
@@ -65,35 +65,35 @@ export async function generateMetadata(
       description: "Precision geospatial intelligence and cellular forensics for investigations, fraud detection, and threat network mapping.",
       openGraph: {
         title: "Geospatial & Cellular Forensics | Location Intelligence | Cyphr",
-        description: "Advanced geospatial and cellular forensics for precise location intelligence.",
+        description: "Cyphr fuses geospatial, telecom, and satellite data to reconstruct movements, uncover fraud, and deliver legally defensible intelligence in complex investigations.",
         images: [
           {
-            url: "https://cyphr.io/assets/og-geospatial.jpg",
+            url: "/services3.png",
             width: 1200,
             height: 630,
             alt: "Cyphr Geospatial Intelligence",
           },
         ],
-        url: "https://cyphr.io/geospatial-forensics",
+        url: "https://cypher.txogavideo.in/geospatial-forensics",
         type: "website",
         siteName: "Cyphr",
       },
     },
-    "brand-defense": {
+    "brand-defence": {
       title: "Brand Defense & Reputation Protection | Digital Threat Intelligence | Cyphr",
       description: "Protect your brand with real-time threat intelligence, counter-disinformation operations, and comprehensive digital reputation management.",
       openGraph: {
         title: "Brand Defense & Reputation Protection | Digital Threat Intelligence | Cyphr",
-        description: "Shield your brand from digital threats with proactive defense and real-time intelligence.",
+        description: "Protect your brand from digital attacks. Cyphr’s Brand Defense identifies disinformation, impersonation, and fraud threats fast—before trust and assets are lost.",
         images: [
           {
-            url: "https://cyphr.io/assets/og-brand-defense.jpg",
+            url: "/services1.png",
             width: 1200,
             height: 630,
             alt: "Cyphr Brand Defense",
           },
         ],
-        url: "https://cyphr.io/brand-defense",
+        url: "https://cypher.txogavideo.in/brand-defence",
         type: "website",
         siteName: "Cyphr",
       },
