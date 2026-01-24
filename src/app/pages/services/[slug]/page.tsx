@@ -432,7 +432,7 @@ export default async function ServicesPage({
         return serviceData.geospatial;
       case 'social-intel':
         return serviceData.socialIntelligence;
-      case 'brand-defense':
+      case 'brand-defence':
         return serviceData.brandDefense;
       default:
         return serviceData.consult;

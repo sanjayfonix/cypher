@@ -266,7 +266,7 @@ export default function Navbar() {
             </button>
             <button
               onClick={() => router.push("/pages/refer_case")}
-              className="min-w-[160px] text-sm custom-button with-shadow bg-[#1057B5]"
+              className="min-w-[160px] cursor-pointer whitespace-nowrap text-sm custom-button with-shadow bg-[#1057B5]"
             >
               Refer a Case
               <Toparrow />
