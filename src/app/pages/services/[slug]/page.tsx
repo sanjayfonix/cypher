@@ -169,7 +169,7 @@ const serviceData = {
       },
       continuingEducation: {
         title: "Continuing Education",
-        description: "We offer accredited CE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.",
+        description: "We offer accredited CE, CLE courses to ensure professionals are always prepared for emerging fraud schemes and digital investigations.",
         benefits: [
           "Stay ahead of evolving cyber and fraud tactics",
           "Enhance professional skills and credentials",

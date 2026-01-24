@@ -183,6 +183,7 @@ export default function Navbar() {
                   {/* Right Section: Video Preview */}
                   <div className="w-[200px] flex flex-col gap-4">
                     <p className="text-[10px] font-bold text-white uppercase tracking-widest">Social Media Monitoring</p>
+                    {/* <p className="text-[13px] text-white font-normal tracking-tighter mb-0.5 max-w-full whitespace-normal">This video is a demonstration of OneWatch, an upcoming social media monitoring product currently under development</p> */}
                     <div
                       onClick={() => setIsVideoDialogOpen(true)}
                       className="relative group cursor-pointer aspect-[4/3] bg-white/5 rounded-xl border border-white/10 overflow-hidden flex items-center justify-center transition-all hover:border-blue-500/50 hover:scale-[1.02]"
@@ -190,7 +191,7 @@ export default function Navbar() {
                       <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-purple-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
 
                       {/* Placeholder for Video Thumbnail */}
-                      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity" />
+                      <div className="absolute inset-0 bg-[url('/services2.png')] bg-cover bg-center opacity-40 group-hover:opacity-60 transition-opacity" />
 
                       <div className="z-10 bg-white/10 p-3 rounded-full backdrop-blur-md group-hover:scale-110 transition-transform border border-white/20">
                         <Play size={20} className="fill-white text-white translate-x-0.5" />
@@ -201,10 +202,13 @@ export default function Navbar() {
                         <span className="text-[10px] text-blue-400 font-bold uppercase tracking-tighter mb-0.5">Preview</span>
                         <p className="text-xs text-white font-semibold">Watch Demo</p>
                       </div>
+
                     </div>
                   </div>
+
                 </div>
               )}
+
             </div>
 
             {/* Industries Dropdown */}
@@ -396,7 +400,7 @@ export default function Navbar() {
                     }}
                     className="relative aspect-video bg-white/5 rounded-2xl border border-white/10 overflow-hidden flex items-center justify-center transition-active active:scale-[0.98]"
                   >
-                    <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-40" />
+                    <div className="absolute inset-0 bg-[url('/services2.png')] bg-cover bg-center opacity-40" />
                     <div className="z-10 bg-white/10 p-4 rounded-full backdrop-blur-md border border-white/20">
                       <Play size={24} className="fill-white text-white translate-x-0.5" />
                     </div>
