@@ -8,8 +8,22 @@ import { GlassIcon } from "../home/GlassIcon";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-export const WhyIndustriesCarrier = () => {
+interface WhyIndustriesCarrierProps {
+  data: {
+    title: string;
+    problemTitle: string;
+    problemDescription: string;
+    benefits: Array<{
+      title: string;
+      description: string;
+    }>;
+  };
+}
+
+export const WhyIndustriesCarrier = ({ data }: WhyIndustriesCarrierProps) => {
   const router = useRouter();
+  const icons = [FindIcon, ProtectIcon, GuassMeterIcon, WeighScaleIcon];
+
   return (
     <section className="relative bg-black w-full p-6 md:p-12 lg:p-20 flex flex-col lg:flex-row items-start justify-center gap-6 ">
 
@@ -17,18 +31,15 @@ export const WhyIndustriesCarrier = () => {
       <div className="flex flex-col gap-8 relative animate-fade-in opacity-0">
         <header className="flex flex-col gap-4">
           <h1 className="text-white font-UI-h3-bold text-3xl md:text-[length:var(--UI-h3-bold-font-size)] lg:tracking-[var(--UI-h3-bold-letter-spacing)] lg:leading-[var(--UI-h3-bold-line-height)] [font-style:var(--UI-h3-bold-font-style)]">
-            Why Insurance Carriers Choose Cyphr
+            {data.title}
           </h1>
 
           <div className="flex flex-col gap-2 mt-2">
             <h2 className="text-[#157aff] font-UI-h5-bold text-[length:var(--UI-h5-bold-font-size)] tracking-[var(--UI-h5-bold-letter-spacing)] leading-[var(--UI-h5-bold-line-height)] [font-style:var(--UI-h5-bold-font-style)]">
-              Problem
+              {data.problemTitle}
             </h2>
             <p className="text-gray-pure1 font-UI-b1-reg text-[length:var(--UI-b1-reg-font-size)] tracking-[var(--UI-b1-reg-letter-spacing)] leading-[var(--UI-b1-reg-line-height)] [font-style:var(--UI-b1-reg-font-style)] max-w-3xl">
-              Managing risks and detecting fraud can be complex and time-sensitive.
-              With inconsistent claimant statements and rising fraudulent activity,
-              insurance carriers face challenges in making accurate assessments while
-              protecting their bottom line.
+              {data.problemDescription}
             </p>
           </div>
         </header>
@@ -62,33 +73,26 @@ export const WhyIndustriesCarrier = () => {
 
           {/* Left Cards Column */}
           <div className="flex flex-col gap-14 mt-0 md:mt-20">
-            {/* Card 1 */}
-            <Card className="self-start flex flex-col lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
-              <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<FindIcon />} size={60} /></div>
-                <div className="flex flex-col gap-4 ">
-                  <CardTitle>Detect Fraud Early</CardTitle>
-                  <CardDescription>
-                    Identify fraudulent claims quickly by analyzing digital footprints and claimant data, reducing risk before it impacts your business.
-                  </CardDescription>
-                </div>
-              </CardContent>
-            </Card>
+            {data.benefits.slice(0, 2).map((benefit, index) => {
+              const IconComponent = icons[index];
+              return (
+                <React.Fragment key={index}>
+                  <Card className="self-start flex flex-col lg:flex-row items-start gap-6 bg-transparent border-none shadow-none ">
+                    <CardContent className="flex flex-col md:flex-row items-start gap-6 p-0 max-w-2xl">
+                      <div className="h-24 w-24 object-cover"><GlassIcon icon={<IconComponent />} size={60} /></div>
+                      <div className="flex flex-col gap-4 ">
+                        <CardTitle>{benefit.title}</CardTitle>
+                        <CardDescription>
+                          {benefit.description}
+                        </CardDescription>
+                      </div>
+                    </CardContent>
+                  </Card>
 
-            <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />
-
-            {/* Card 2 */}
-            <Card className="self-start flex flex-1 items-start mb-4 gap-6 bg-transparent border-none shadow-none">
-              <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 ">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<ProtectIcon />} size={60} /></div>
-                <div className="flex flex-col gap-4">
-                  <CardTitle>Build Better Risk Profiles</CardTitle>
-                  <CardDescription>
-                    Create accurate risk profiles and assess client risks to make better underwriting decisions and improve risk management.
-                  </CardDescription>
-                </div>
-              </CardContent>
-            </Card>
+                  {index === 0 && <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />}
+                </React.Fragment>
+              );
+            })}
           </div>
 
           {/* vertical divider only on md+ */}
@@ -96,33 +100,26 @@ export const WhyIndustriesCarrier = () => {
 
           {/* Right Cards Column */}
           <div className="flex flex-col gap-14 mt-0">
-            {/* Card 3 */}
-            <Card className="self-start flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
-              <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<GuassMeterIcon />} size={60} /></div>
-                <div className="flex flex-col gap-4">
-                  <CardTitle>Reduce Costs and Improve Efficiency</CardTitle>
-                  <CardDescription>
-                    Minimize payouts and improve operational efficiency by detecting fraud and streamlining the claims process.
-                  </CardDescription>
-                </div>
-              </CardContent>
-            </Card>
+            {data.benefits.slice(2, 4).map((benefit, index) => {
+              const IconComponent = icons[index + 2];
+              return (
+                <React.Fragment key={index + 2}>
+                  <Card className="self-start flex flex-1 items-start gap-6 bg-transparent border-none shadow-none">
+                    <CardContent className="flex items-start gap-6 p-0 flex-col md:flex-row w-full">
+                      <div className="h-24 w-24 object-cover"><GlassIcon icon={<IconComponent />} size={60} /></div>
+                      <div className="flex flex-col gap-4">
+                        <CardTitle>{benefit.title}</CardTitle>
+                        <CardDescription>
+                          {benefit.description}
+                        </CardDescription>
+                      </div>
+                    </CardContent>
+                  </Card>
 
-            <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />
-
-            {/* Card 4 */}
-            <Card className="self-start flex mb-4 flex-1 items-start gap-6 bg-transparent border-none shadow-none">
-              <CardContent className="flex md:flex-row flex-col items-start gap-6 p-0 w-full ">
-                <div className="h-24 w-24 object-cover"><GlassIcon icon={<WeighScaleIcon />} size={60} /></div>
-                <div className="flex flex-col gap-4">
-                  <CardTitle>Ensure Legal Compliance</CardTitle>
-                  <CardDescription>
-                    Ensure fraud detection and investigations are legally defensible, providing courtroom-ready reports and compliance.
-                  </CardDescription>
-                </div>
-              </CardContent>
-            </Card>
+                  {index === 0 && <div className="hidden w-full h-0 border-[#5B5B5B] border md:block" />}
+                </React.Fragment>
+              );
+            })}
           </div>
 
         </div>

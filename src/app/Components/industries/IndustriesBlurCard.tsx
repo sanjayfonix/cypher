@@ -6,7 +6,16 @@ import { Grid, Toparrow } from "@/assets/icon";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
-const IndustriesBlurCard = () => {
+interface IndustriesBlurCardProps {
+  data: {
+    title: string;
+    description: string;
+    primaryButtonText: string;
+    secondaryButtonText: string;
+  };
+}
+
+const IndustriesBlurCard = ({ data }: IndustriesBlurCardProps) => {
   const pathname = usePathname();
   const router = useRouter();
   return (
@@ -62,11 +71,10 @@ const IndustriesBlurCard = () => {
           {/* Text Section */}
           <div className="flex flex-col gap-3 sm:gap-6 lg:gap-[28px] text-center">
             <h1 className="font-sans font-bold text-lg sm:text-3xl lg:text-[48px] text-white leading-snug">
-              Strengthen Your Defenses.<br />
-              Protect Your Bottom Line.
+              {data.title}
             </h1>
             <p className="font-inter font-normal font-inter text-xs sm:text-base  text-[#F1F1F1] mx-auto text-center max-w-xs sm:max-w-[60%]">
-              Cyphr gives insurance carriers the tools to stay ahead of fraud, reduce costs, and secure long-term profitability.
+              {data.description}
             </p>
           </div>
 
@@ -90,11 +98,11 @@ const IndustriesBlurCard = () => {
               }}
               className="custom-button with-shadow bg-[#1057B5]"
             >
-              Start Investigating
+              {data.primaryButtonText}
             </button>
 
 
-            <Link href={"/pages/services/consult"}><button className="custom-button with-border bg-transparent">Explore Our Services <Toparrow /></button></Link>
+            <Link href={"/pages/services/consult"}><button className="custom-button with-border bg-transparent">{data.secondaryButtonText} <Toparrow /></button></Link>
 
 
 

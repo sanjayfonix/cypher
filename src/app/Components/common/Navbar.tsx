@@ -61,7 +61,7 @@ export default function Navbar() {
   ];
 
   const industries = [
-    { label: "Insurance Career", href: "/pages/industries/insurance" },
+    { label: "Insurance Carrier", href: "/pages/industries/insurance" },
     { label: "Employer", href: "/pages/industries/employer" },
     { label: "Law Firm", href: "/pages/industries/law" },
     { label: "Academia", href: "/pages/industries/academia" },
@@ -165,7 +165,7 @@ export default function Navbar() {
                           }`}
                         onClick={handleLinkClick}
                       >
-                        <span className="text-sm font-medium">{item.label}</span>
+                        {item.label}
                         <ArrowUpRight size={14} className="opacity-0 group-hover:opacity-100 transition-opacity" />
 
                         {/* Tooltip */}
@@ -375,7 +375,7 @@ export default function Navbar() {
 
               <div className={`${showDropDown === 1 ? 'block' : 'hidden'} mt-2 ml-4 bg-[#111111] text-white rounded-2xl p-2 border border-white/5`}>
                 <div className="p-2">
-                  <p className="text-[10px] font-bold text-gray-500 mb-2 uppercase tracking-widest px-2">Key Services</p>
+                  <p className="text-[10px] font-bold text-white mb-2 uppercase tracking-widest px-2">Key Services</p>
                   {services.map((item, index) => (
                     <Link key={index} href={item.href} onClick={handleLinkClick}>
                       <button
@@ -392,7 +392,7 @@ export default function Navbar() {
 
                 {/* Mobile Social Media Monitoring Section */}
                 <div className="mt-2 p-4 border-t border-white/5">
-                  <p className="text-[10px] font-bold text-gray-500 mb-4 uppercase tracking-widest px-1">Social Media Monitoring</p>
+                  <p className="text-[10px] font-bold text-white mb-4 uppercase tracking-widest px-1">Social Media Monitoring</p>
                   <div
                     onClick={() => {
                       setIsVideoDialogOpen(true);

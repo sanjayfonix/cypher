@@ -11,12 +11,46 @@ export default function CurrentOpportunities() {
   const [isSticky, setIsSticky] = useState(false);
 
   const opportunities = [
-    { id: 1, slug: "data-intelligence-analyst", icon: <Laptop className="w-12 h-12 text-[#167BFF]" />, title: "Data Intelligence Analyst", description: "Data Intelligence involves analyzing large datasets using machine learning, AI, and data mining to extract actionable insights, identify trends, and inform decisions." },
-    { id: 2, slug: "forensic-data-engineer", icon: <Fingerprint className="w-12 h-12 text-[#167BFF]" />, title: "Forensic Data Engineer", description: "A Forensic Data Engineer retrieves, analyzes, and preserves digital evidence from systems and networks to support legal investigations and cybercrime cases." },
-    { id: 3, slug: "client-engagement-manager", icon: <Users className="w-12 h-12 text-[#167BFF]" />, title: "Client Engagement Manager", description: "A Client Engagement Manager oversees client relationships, ensuring satisfaction, addressing needs, and driving business growth through tailored solutions and communication." },
-    { id: 4, slug: "osint-investigator", icon: <Users className="w-12 h-12 text-[#167BFF]" />, title: "OSINT Investigator", description: "An OSINT Investigator collects and analyzes publicly available information from online sources to support investigations, uncover threats, and gather intelligence." },
-    { id: 5, slug: "security-intelligence-analyst", icon: <Users className="w-12 h-12 text-[#167BFF]" />, title: "Security Intelligence Analyst", description: "Corporate security teams use OSINT to detect threats to people, assets, and reputation. Your work helps safeguard the business, mitigate risks, and ensure operational continuity." },
-    { id: 6, slug: "private-investigator", icon: <Users className="w-12 h-12 text-[#167BFF]" />, title: "Private Investigator", description: "Private investigators increasingly rely on OSINT to locate individuals, uncover hidden assets, and verify facts. Using public records and social media, you enhance investigations and help clients solve complex cases." },
+    { 
+      id: 1, 
+      slug: "osint-knowledge-base-intern", 
+      icon: <Laptop className="w-12 h-12 text-[#167BFF]" />, 
+      title: "OSINT Knowledge Base Intern (Unpaid)", 
+      type: "Internship",
+      location: "Remote",
+      email: "careers@cyphr.llc",
+      description: "Gain hands-on experience with cutting-edge OSINT tools. Test and evaluate diverse tools, work in Linux environments, and build skills in virtual machine setups and Python scripting for intelligence gathering." 
+    },
+    { 
+      id: 2, 
+      slug: "junior-developer-intern", 
+      icon: <Laptop className="w-12 h-12 text-[#167BFF]" />, 
+      title: "Junior Developer Intern (Unpaid)", 
+      type: "Internship",
+      location: "Remote",
+      email: "careers@cyphr.llc",
+      description: "Gain production-level experience building features for distributed monitoring tools, AI integrations, and scalable data solutions used in fraud detection and threat intelligence." 
+    },
+    { 
+      id: 3, 
+      slug: "content-product-development-intern", 
+      icon: <Users className="w-12 h-12 text-[#167BFF]" />, 
+      title: "Content & Product Development Intern (Unpaid)", 
+      type: "Internship",
+      location: "Remote",
+      email: "marketing@cyphr.llc",
+      description: "Craft compelling narratives for elite audiences in government, policy, and professional sectors. Write engaging articles, develop product descriptions, and support content strategy." 
+    },
+    { 
+      id: 4, 
+      slug: "data-privacy-solutions-architect", 
+      icon: <Fingerprint className="w-12 h-12 text-[#167BFF]" />, 
+      title: "Data Privacy Solutions Architect", 
+      type: "Contractor",
+      location: "Remote (U.S. Citizens Only)",
+      email: "devops@cyphr.llc",
+      description: "Help clients minimize data exposure to big tech and cyber risks. Configure secure hardware ecosystems for local processing, encryption, and anonymization to enhance client protection." 
+    },
   ];
 
   useEffect(() => {
@@ -55,20 +89,38 @@ export default function CurrentOpportunities() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.6, delay: idx * 0.2 }}
-              className="rounded-[32px] border border-[#6D6D6D99] p-11 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col items-center text-center hover:scale-[1.02] transition-transform"
+              className="rounded-[32px] border border-[#6D6D6D99] p-8 bg-gradient-to-b from-[#030A14] to-[#167BFF]/40 flex flex-col hover:scale-[1.02] transition-transform"
             >
-              <div className="mb-8">{item.icon}</div>
-              <h3 className="text-[24px] font-medium font-sans text-white mb-[14px] max-w-[80%]">
+              <div className="mb-6">{item.icon}</div>
+              
+              <h3 className="text-[22px] font-semibold font-sans text-white mb-3 leading-tight">
                 {item.title}
               </h3>
-              <p className="text-[#A0A4AE] text-base font-normal font-inter tracking-normal max-w-[95%] mb-8">
+              
+              {/* Job metadata */}
+              <div className="flex flex-col gap-2 mb-4 text-sm">
+                <div className="flex items-center gap-2 text-[#167BFF]">
+                  <span className="font-medium">{item.type}</span>
+                  <span className="text-[#6D6D6D]">•</span>
+                  <span className="text-[#A0A4AE]">{item.location}</span>
+                </div>
+                <a 
+                  href={`mailto:${item.email}`}
+                  className="text-[#167BFF] hover:text-[#1e8fff] transition-colors underline decoration-dotted"
+                >
+                  {item.email}
+                </a>
+              </div>
+              
+              <p className="text-[#A0A4AE] text-[15px] font-normal font-inter leading-relaxed mb-6 flex-grow">
                 {item.description}
               </p>
+              
               <button
                 onClick={() =>
                   router.push(`/pages/careers/jobdisc/${item.id}?slug=${item.slug}`)
                 }
-                className="text-ellipsis whitespace-nowrap min-w-[130px] md:w-fit w-[100%] mt-4 custom-button with-border bg-transparent"
+                className="text-ellipsis whitespace-nowrap min-w-[130px] md:w-fit w-[100%] mt-auto custom-button with-border bg-transparent"
               >
                 Read full job description
                 <Toparrow />

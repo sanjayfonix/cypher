@@ -46,7 +46,7 @@ export async function generateMetadata(
       description: "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
       openGraph: {
         title: "Social Media Intelligence | OSINT & Digital Investigation | Cyphr",
-        description: "Transform real‑time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
+        description: "Transform real-time digital chatter into actionable intelligence. Cyphr’s Social Media Intelligence detects fraud, influence ops, and cyber threats before they escalate.",
         images: [
           {
             url: `/services2.png`,
