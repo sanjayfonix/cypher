@@ -236,6 +236,7 @@ export default function CorePrincipals({ data }: CorePrincipalsProps) {
 
             </div>
             <img
+              alt="image of book"
               src="/book.png"
               className="absolute inset-0 m-auto w-[100%] h-[100%] object-contain animate-none"
             />
@@ -249,18 +250,18 @@ export default function CorePrincipals({ data }: CorePrincipalsProps) {
           <div className="flex flex-row justify-between items-end">
             <p className=" text-sm sm:text-base font-normal text-[#F1F1F1] font-inter max-w-[75%]">
               {content.continuingEducation.description}
-            </p>   
-            <button 
-            onMouseEnter={()=>setTabIndex(1)} onMouseLeave={()=>setTabIndex(-1)}
-            onClick={()=>{
-              if(tabIndex===1){
-                setTabIndex(-1)
-              }
-              else{
-                setTabIndex(1)
-              }
-            }} 
-            className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
+            </p>
+            <button
+              onMouseEnter={() => setTabIndex(1)} onMouseLeave={() => setTabIndex(-1)}
+              onClick={() => {
+                if (tabIndex === 1) {
+                  setTabIndex(-1)
+                }
+                else {
+                  setTabIndex(1)
+                }
+              }}
+              className="cursor-pointer relative top-3 left-2 flex justify-center items-center rounded-full flex-col gap-2.5 p-[9px_7px] w-8 h-8 border border-white opacity-100">
 
               {tabIndex === 1 ? <DropDown /> : <DropUp />}
             </button>
@@ -269,7 +270,7 @@ export default function CorePrincipals({ data }: CorePrincipalsProps) {
           {tabIndex === 1 && (
             <ul className="flex flex-col gap-2 sm:gap-3 font-['Inter'] text-[#E3E3E3] text-[13px] sm:text-[15px] lg:text-[16px] mt-4 lg:mt-0">
               {content.continuingEducation.benefits.map((benefit, index) => (
-                <li key={index} className="flex items-center gap-2"><Tick/> {benefit}</li>
+                <li key={index} className="flex items-center gap-2"><Tick /> {benefit}</li>
               ))}
             </ul>)}
 

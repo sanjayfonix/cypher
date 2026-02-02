@@ -104,7 +104,7 @@ export default function Navbar() {
           <Link href="/" className="flex gap-2">
             <Image
               src="/images/SmallLogo.png"
-              alt="Logo"
+              alt="Cyphr Logo"
               width={203}
               height={28}
               className="h-auto w-auto "

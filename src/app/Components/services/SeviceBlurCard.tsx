@@ -4,6 +4,7 @@ import React from "react";
 
 import { Grid, Toparrow } from "@/assets/icon";
 import { PointerGrid } from "../home/GridAnimation";
+import Link from "next/link";
 
 interface ServiceBlurCardProps {
   data?: {
@@ -24,17 +25,17 @@ const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
   const content = data || defaultData;
   return (
     <div className="relative mb-4 flex flex-col items-center justify-center px-4 sm:px-8 lg:px-10 py-8 sm:py-16 lg:py-20 overflow-visible">
-{/* PointerGrid at top-right edge of screen with glow */}
- <div
+      {/* PointerGrid at top-right edge of screen with glow */}
+      <div
         className="absolute translate-x-[50%] sm:flex  top-12 right-0 hidden lg:top-[-2%]  z-30   items-center justify-center"
-        
+
       >
         <div className="relative flex items-center justify-center">
           {/* Glow behind */}
           <div
             className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:h-[170px] md:w-[170px]"
             style={{
-              
+
               borderRadius: "50%",
               background:
                 "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
@@ -57,8 +58,8 @@ const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
       <div
         className="relative lg:left-0 left-[-43%] hidden sm:flex  lg:absolute lg:bottom-0 z-30  items-center justify-center"
         style={{
-         
-          
+
+
           transform: "translateX(-50%)", // half outside screen, half visible
         }}
       >
@@ -67,7 +68,7 @@ const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
           <div
             className="absolute blur-[10px] animate-glow2 h-[220px] w-[220px] md:w-[170px] md:h-[170px]"
             style={{
-              
+
               borderRadius: "50%",
               background:
                 "radial-gradient(circle, rgba(21,122,255,0.7) 0%, rgba(21,122,255,0) 70%)",
@@ -82,11 +83,11 @@ const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
         </div>
       </div>
 
-   
-        
-        
-            
-  
+
+
+
+
+
 
       {/* ===== Main Card ===== */}
       <div
@@ -147,22 +148,19 @@ const ServiceBlurCard = ({ data }: ServiceBlurCardProps) => {
 
           {/* Buttons Section */}
           <div className="flex flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
-            <button onClick={() => {
-              const navToSection = document.getElementById('contact-us')
-              if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' })
-              }
+            <Link href={'/pages/contactus'}><button onClick={() => {
+
             }} className="custom-button bg-[#1057B5] with-shadow"
 
 
 
 
-            >{content.buttonText}</button>
-            
+            >{content.buttonText}</button></Link>
+
           </div>
         </div>
       </div>
-      
+
     </div>
   );
 };

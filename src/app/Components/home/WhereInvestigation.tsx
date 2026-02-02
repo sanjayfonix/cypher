@@ -245,7 +245,7 @@ export default function WhereInvestigation() {
             <Link href={'/pages/services/geospatial'}><button className="custom-button with-border bg-transparent ml-5">
               See How It works{" "}
               <span>
-                <img src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
+                <img alt="diagonal arrow icon" src={"/arrow-down-right.svg"} className="w-5 h-5 sm:w-6 sm:h-6 object-cover" />
               </span>
             </button>
             </Link>

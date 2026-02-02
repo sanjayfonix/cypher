@@ -35,7 +35,7 @@ export default function KeySegments({ data }: KeySegmentsProps) {
 
         {data.segments.map((segment, index) => {
           const isImageLeft = segment.imagePosition === "left";
-          
+
           return (
             <div key={index} className="w-full flex flex-col lg:flex-row gap-8 items-center overflow-x-hidden">
               {/* Image */}
@@ -44,9 +44,8 @@ export default function KeySegments({ data }: KeySegmentsProps) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.65, ease: "easeOut" }}
-                className={`flex-1 min-w-0 flex justify-center ${
-                  isImageLeft ? "order-1 lg:order-1" : "order-1 lg:order-2"
-                }`}
+                className={`flex-1 min-w-0 flex justify-center ${isImageLeft ? "order-1 lg:order-1" : "order-1 lg:order-2"
+                  }`}
               >
                 <div className="w-full max-w-[500px]">
                   <Image
@@ -66,9 +65,8 @@ export default function KeySegments({ data }: KeySegmentsProps) {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.65, ease: "easeOut" }}
-                className={`flex-1 min-w-0 flex flex-col gap-6 ${
-                  isImageLeft ? "order-2 lg:order-2" : "order-2 lg:order-1"
-                }`}
+                className={`flex-1 min-w-0 flex flex-col gap-6 ${isImageLeft ? "order-2 lg:order-2" : "order-2 lg:order-1"
+                  }`}
               >
                 <h3 className="text-2xl lg:text-[2.25rem] font-bold font-sans">
                   {segment.title}
@@ -90,20 +88,7 @@ export default function KeySegments({ data }: KeySegmentsProps) {
                 </div>
 
                 <div className="sm:w-3/4 lg:w-1/2 mt-2">
-                  <button onClick={() => {
-                    const element = document.getElementById('industry-contact-us') || document.getElementById('contact-us');
-                    if (element) {
-                      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    } else {
-                      router.push('/#contact-us');
-                      setTimeout(() => {
-                        const element = document.getElementById('contact-us');
-                        if (element) {
-                          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                      }, 500);
-                    }
-                  }} className='custom-button with-border bg-transparent'>{segment.buttonText} <Toparrow /></button>
+                  <Link href={'/pages/contactus'}><button className='custom-button with-border bg-transparent'>{segment.buttonText} <Toparrow /></button></Link>
                 </div>
               </motion.div>
             </div>

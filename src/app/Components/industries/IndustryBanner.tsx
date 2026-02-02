@@ -82,22 +82,9 @@ export const IndustryBanner = ({ content }: IndustryBannerProps) => {
             Start Investigating
           </button>
 
-          <button onClick={() => {
-            const element = document.getElementById('industry-contact-us') || document.getElementById('contact-us');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-              router.push('/#contact-us');
-              setTimeout(() => {
-                const element = document.getElementById('contact-us');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }, 500);
-            }
-          }} className="w-full sm:w-fit with-border custom-button bg-transparent">
+          <Link href={'/pages/contactus'}><button className="w-full sm:w-fit with-border custom-button bg-transparent">
             Talk to an Expert <Toparrow />
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

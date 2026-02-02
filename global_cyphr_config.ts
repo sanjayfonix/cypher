@@ -9,6 +9,7 @@ export const twitterLink = 'https://x.com';
 export const linkedinLink = 'https://linkedin.com';
 export const githubLink = 'https://github.com';
 export const recepientEmailForBookingSession = 'hatk808@gmail.com';
+export const domainUrl = 'https://cypher.txogavideo.in'
 
 export const typeOfCaseArray = [
     {

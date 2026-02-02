@@ -452,7 +452,7 @@ export default async function ServicesPage({
       <VideoSection videoName="Socialmedia" />
 
       <ServiceBlurCard data={currentData.blurCard} />
-      <ContactSection />
+      {/* <ContactSection /> */}
     </div>
   );
 }

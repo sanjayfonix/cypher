@@ -46,22 +46,9 @@ export const WhyIndustriesCarrier = ({ data }: WhyIndustriesCarrierProps) => {
 
         <div>
 
-          <button onClick={() => {
-            const element = document.getElementById('industry-contact-us') || document.getElementById('contact-us');
-            if (element) {
-              element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-              router.push('/#contact-us');
-              setTimeout(() => {
-                const element = document.getElementById('contact-us');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-              }, 500);
-            }
-          }} className="custom-button with-border bg-transparent">
+          <Link href={'/pages/contactus'}><button className="custom-button with-border bg-transparent">
             Contact our expert <Toparrow />
-          </button>
+          </button></Link>
 
         </div>
       </div>

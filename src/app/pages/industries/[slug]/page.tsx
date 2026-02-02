@@ -262,7 +262,7 @@ const industryData = {
             "Minimize exposure to negligent hiring claims with documented, verifiable insights",
             "Strengthen employee wellness programs by detecting early signs of distress or external threats",
           ],
-          buttonText: "Support Your TPA Team",
+          buttonText: "Support Your HR & TA Team",
           image: "/industries1.png",
           imagePosition: "left",
         },
@@ -345,7 +345,7 @@ const industryData = {
             "Validate or refute claims with timeline reconstructions and metadata analysis",
             "Counter opponent tactics like coordinated online attacks or false narratives",
           ],
-          buttonText: "Support Your TPA Team",
+          buttonText: "Support Your Legal Team",
           image: "/industries1.png",
           imagePosition: "left",
         },
@@ -358,7 +358,7 @@ const industryData = {
             "Advising on regulatory matters with insights into fraud patterns or compliance gaps",
             "Providing litigation support that minimizes surprises and maximizes leverage",
           ],
-          buttonText: "Request Risk Profiling",
+          buttonText: "Request Compliance Profiling",
           image: "/industries2.png",
           imagePosition: "right",
         },
@@ -428,7 +428,7 @@ const industryData = {
             "Investigating incidents with verifiable digital evidence for swift, fair resolution",
             "Building safer environments through proactive risk awareness without overreach",
           ],
-          buttonText: "Support Your TPA Team",
+          buttonText: "Support Your Campus",
           image: "/industries1.png",
           imagePosition: "left",
         },
@@ -441,7 +441,7 @@ const industryData = {
             "Support investigations into academic fraud with auditable, defensible findings",
             "Protect intellectual property and institutional reputation from online threats",
           ],
-          buttonText: "Request Risk Profiling",
+          buttonText: "Request Research Integrity",
           image: "/industries2.png",
           imagePosition: "right",
         },
@@ -488,7 +488,7 @@ export default async function IndustriesPage({
         <WhyIndustriesCarrier data={currentData.whySection} />
         <KeySegments data={currentData.keySegments} />
         <IndustriesBlurCard data={currentData.blurCard} />
-        <div id='industry-contact-us' className="px-4 scroll-mt-22"><ContactSection /></div>
+        {/* <div id='industry-contact-us' className="px-4 scroll-mt-22"><ContactSection /></div> */}
       </div>
     </>
   );

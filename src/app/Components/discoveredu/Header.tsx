@@ -45,7 +45,7 @@ export const TopBanner = () => {
       {/* Content */}
       <div className="flex bg-transparent flex-col items-center justify-start gap-4 z-10 text-center max-w-[95%] sm:max-w-[700px] md:max-w-[900px] lg:max-w-[1200px]">
         <p className="text-xl sm:text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight font-sans">
-          Advance Your Expertise with<br/> Accredited CE & CLE Programs
+          Advance Your Expertise with<br /> Accredited CE & CLE Programs
         </p>
 
         <p className="text-xs sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] max-w-full md:max-w-[53%] sm:max-w-[80%]">
@@ -53,16 +53,24 @@ export const TopBanner = () => {
         </p>
 
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-4 w-full sm:w-auto items-center justify-center">
-          <button onClick={()=>{
-              const navToSection = document.getElementById('courses')
-              if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' })
-              }
+          <button onClick={() => {
+            const navToSection = document.getElementById('courses')
+            if (navToSection) {
+              navToSection.scrollIntoView({ behavior: 'smooth' })
+            }
 
           }} className="custom-button with-shadow bg-[#1057B5] w-full sm:w-auto">
             Explore Courses
           </button>
-          <button className="text-ellipsis whitespace-nowrap  w-[100%] custom-button with-border bg-transparent sm:w-auto">
+          <button
+            onClick={() => {
+              const element = document.getElementById('booking-form');
+              if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            className="text-ellipsis whitespace-nowrap  w-[100%] custom-button with-border bg-transparent sm:w-auto"
+          >
             Request a Custom Program <Toparrow />
           </button>
         </div>

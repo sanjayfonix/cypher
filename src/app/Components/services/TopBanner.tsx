@@ -96,17 +96,11 @@ export const TopBanner = ({ content }: TopBannerProps) => {
           </button>
 
 
-          <button
-            onClick={() => {
-              const navToSection = document.getElementById('contact-us');
-              if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+          <Link href={'/pages/contactus'}><button
             className="custom-button with-border sm:w-fit h-fit bg-transparent"
           >
             {content.secondaryButton.text} <Toparrow />
-          </button>
+          </button></Link>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ServicesIcon } from "@/assets/icon"; // adjust import
 import Button from "../common/Button";
+import Link from "next/link";
 
 interface WhyConsultingProps {
   data?: {
@@ -56,11 +57,11 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
         if (
           currentIndex === null ||
           distanceToCenter <
-            Math.abs(
-              window.innerHeight / 2 -
-                (sectionsRef.current[currentIndex]?.getBoundingClientRect()
-                  .top || 0)
-            )
+          Math.abs(
+            window.innerHeight / 2 -
+            (sectionsRef.current[currentIndex]?.getBoundingClientRect()
+              .top || 0)
+          )
         ) {
           currentIndex = i;
         }
@@ -103,11 +104,10 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
           <div
             className="absolute left-0 top-0 w-full bg-[#1057B5] transition-all duration-200"
             style={{
-              height: `${
-                activeIndex !== null
+              height: `${activeIndex !== null
                   ? ((activeIndex + progress) / rows.length) * 100
                   : 0
-              }%`,
+                }%`,
             }}
           />
         </div>
@@ -120,9 +120,8 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
               ref={(el) => {
                 if (el) sectionsRef.current[i] = el;
               }}
-              className={`relative flex px-4 md:px-16 justify-between items-center ${
-                i === 0 ? "pt-[4.625rem]" : "pt-8"
-              } gap-4`}
+              className={`relative flex px-4 md:px-16 justify-between items-center ${i === 0 ? "pt-[4.625rem]" : "pt-8"
+                } gap-4`}
             >
               {/* Left text (for rows 1 & 3) */}
               {i !== 1 && (
@@ -141,17 +140,15 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
               {/* Circle OR ServicesIcon */}
               <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
                 <div
-                  className={`w-3 h-3 rounded-full bg-[#6D6D6D] transition-all duration-300 ${
-                    isActive ? "opacity-0 scale-50" : "opacity-100 scale-100"
-                  }`}
+                  className={`w-3 h-3 rounded-full bg-[#6D6D6D] transition-all duration-300 ${isActive ? "opacity-0 scale-50" : "opacity-100 scale-100"
+                    }`}
                 ></div>
 
                 <div
-                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${
-                    isActive && !(i === 0 && progress === 0)
+                  className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isActive && !(i === 0 && progress === 0)
                       ? "opacity-100 scale-100"
                       : "opacity-0 scale-50"
-                  }`}
+                    }`}
                 >
                   <ServicesIcon />
                 </div>
@@ -160,7 +157,7 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
               {/* Image */}
               <img
                 src={row.img}
-                className={`${i===2?'scale-x-[-1]':''} w-[40%] h-auto object-cover`}
+                className={`${i === 2 ? 'scale-x-[-1]' : ''} w-[40%] h-auto object-cover`}
                 alt={`service-${i + 1}`}
               />
 
@@ -184,14 +181,9 @@ export const WhyConsulting = ({ data }: WhyConsultingProps) => {
 
       {/* Button */}
       <div className="relative -top-5 flex justify-center mt-8">
-        <button onClick={() => {
-              const navToSection = document.getElementById('contact-us')
-              if (navToSection) {
-                navToSection.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}  className="custom-button with-shadow bg-[#1057B5]">
+        <Link href={'/pages/contactus'}><button className="custom-button with-shadow bg-[#1057B5]">
           Book a Consultation
-        </button>
+        </button></Link>
       </div>
     </div>
   );

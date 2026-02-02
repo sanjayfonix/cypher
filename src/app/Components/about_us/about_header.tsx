@@ -53,12 +53,7 @@ export const AboutHeader = () => {
                     </p>
 
 
-                    <button onClick={() => {
-                        const navToSection = document.getElementById('contact-us')
-                        if (navToSection) {
-                            navToSection.scrollIntoView({ behavior: 'smooth' })
-                        }
-                    }} className="custom-button with-shadow bg-[#1057B5]"> Book a Consultation <Toparrow /></button>
+                    <Link href={'/pages/contactus'}><button className="custom-button with-shadow bg-[#1057B5]"> Book a Consultation <Toparrow /></button></Link>
                 </div>
 
                 {/* RIGHT TIMELINE */}

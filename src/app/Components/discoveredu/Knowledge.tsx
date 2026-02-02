@@ -10,7 +10,7 @@ const EmpowerTeam = () => {
   const router = useRouter();
 
   return (
-    <div className="relative container mb-4 flex flex-col items-center justify-center  overflow-visible px-4">
+    <div className="relative mx-8 mb-4 flex flex-col items-center justify-center  overflow-visible px-4">
 
 
 
@@ -74,13 +74,17 @@ const EmpowerTeam = () => {
           {/* Buttons Section */}
           <div className="flex  flex-col sm:flex-row justify-center items-center gap-4 sm:gap-6 lg:gap-8 mb-2">
             <button onClick={() => {
-              router.push('/#contact-us');
+              router.push('/pages/contactus');
             }} className="custom-button bg-[#1057B5] with-shadow w-full sm:w-fit"
             >Book a Consultation</button>
-            <button className="text-ellipsis whitespace-nowrap  custom-button with-border bg-transparent w-full sm:w-fit"
-
-
-
+            <button
+              onClick={() => {
+                const element = document.getElementById('booking-form');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="text-ellipsis whitespace-nowrap  custom-button with-border bg-transparent w-full sm:w-fit"
             >
               Request a Custom Program <Toparrow />
             </button>

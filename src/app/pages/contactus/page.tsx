@@ -3,9 +3,9 @@ import { LegalBanner } from "@/app/Components/contact_component/legal_header";
 
 export default function ContactPage() {
   return (
-    <div >
-      <LegalBanner/>
-     <GetContact/>
+    <div className="">
+      <LegalBanner />
+      <GetContact />
     </div>
   );
 }
