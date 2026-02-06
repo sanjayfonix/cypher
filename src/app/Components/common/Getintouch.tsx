@@ -427,7 +427,7 @@ export default function ContactSection() {
 
         <h3 className="text-[18px] md:text-[24px] mb-4 tracking-wide p-2">
           We're here to help with your investigative <br /> intelligence
-          needs, Reach out to us today <br />
+          needs, reach out to us today <br />
           for expert support
         </h3>
       </div>

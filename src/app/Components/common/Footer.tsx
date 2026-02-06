@@ -54,7 +54,7 @@ export default function Footer() {
             </h3>
             <ul className="ml-4 space-y-4 sm:space-y-6">
               <li>
-                <Link href="/pages/services/consult" className="text-gray-200 hover:text-white transition-colors text-[16px] block">
+                <Link href="/pages/services/consulting" className="text-gray-200 hover:text-white transition-colors text-[16px] block">
                   Consulting and Advisory
                 </Link>
               </li>
@@ -64,7 +64,7 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/pages/services/brand-defense" className="text-gray-200 hover:text-white transition-colors text-[16px] block">
+                <Link href="/pages/services/brand-defence" className="text-gray-200 hover:text-white transition-colors text-[16px] block">
                   Brand Defense
                 </Link>
               </li>
