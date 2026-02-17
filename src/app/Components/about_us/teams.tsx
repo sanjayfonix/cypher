@@ -15,14 +15,14 @@ const teamData = [
     title: "Max Terzi - CTO ",
     description:
       "Driven by a track record of success, Max over sees the development team who are building the next-generation Investigative Services platform, which adapts across industries and use cases, from custom to scalable solutions. By combining modern AI with forensic advancements, he bridges the gap between intelligence methodologies and real-world strategies.",
-    image: "/images/img3.png",
+    image: "/images/img3.jpeg",
   },
   {
     id: 3,
     title: "Brett Huselton - ADVISOR - Strategy",
     description:
       "A neuroscience and psychology biotech nerd that spent two decades building growth-oriented services businesses leveraging clinical, commercial and other real world evidence sources in a highly regulated healthcare sector that recognized the converging power of data liquidity, strategic forensic assessment and sophisticated infrastructure and analysis could change the fragmented landscape of investigational science just as it has.",
-    image: "/images/img2.png",
+    image: "/images/img2.jpeg",
   },
 
 ];

@@ -2,7 +2,7 @@ export const headquarters = 'philadelphia';
 
 export const emailId = 'info@webutation.com';
 
-export const phoneNumber = '+11234567890';
+export const phoneNumber = '+1(888) 814-7670';
 
 // Social Media Links
 export const twitterLink = 'https://x.com';
