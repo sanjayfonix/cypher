@@ -116,6 +116,11 @@ export const typeOfCaseArray = [
 
 export const typesOfAssignmentsArray = [
     {
+        "Name": "Insurance Fraud - Social Media Intelligence",
+        "Description": "Monitoring and analyzing social media platforms to detect fraudulent insurance activities, uncover suspicious claims, identify misrepresentation of damages or injuries, and gather publicly available evidence to support investigations and reduce claim-related risks.",
+        "Value": 200
+    },
+    {
         "Name": "Cyber Threat Intelligence (CTI)",
         "Description": "Collecting and analyzing data on cyber threats such as phishing campaigns, ransomware attacks, or data breaches that could compromise insurance client information, using OSINT tools to monitor dark web forums, hacker leaks, and vulnerability databases for proactive risk mitigation.",
         "Value": 201
