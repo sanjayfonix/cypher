@@ -174,8 +174,8 @@ export default function HomeBanner() {
 
         {/* Subtext */}
         <p className="text-[0.75rem] sm:text-sm md:text-base lg:text-[1rem] text-[#F1F1F1] leading-relaxed sm:leading-snug">
-          Cyphr combines real world investigative experience that unites forensic expertise, OSINT disciplines and <br className="hidden lg:block"/> modern data intelligence to give you defensible answers when you need them the most.
-        </p>
+  Cyphr combines proven real-world investigative experience with AI-driven insight, uniting forensic expertise, OSINT disciplines, and <br className="hidden lg:block"/> modern data intelligence to deliver defensible answers when you need them the most.
+</p>
 
         {/* Buttons */}
         <div className="flex flex-col sm:flex-row gap-3 sm:gap-5 mt-3 sm:mt-4 w-full sm:w-auto justify-center">

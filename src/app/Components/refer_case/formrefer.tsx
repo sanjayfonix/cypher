@@ -112,8 +112,8 @@ const SearchableSelect = ({
   };
 
   return (
-    <div className="flex flex-col gap-2 w-full" ref={containerRef}>
-      <label className="text-white font-inter font-medium text-base">
+    <div className="flex flex-col gap-1 w-full" ref={containerRef}>
+      <label className="text-white font-inter font-medium text-sm">
         {label} {required && <span className="text-blue-500">*</span>}
       </label>
       <div className="relative group/select">
@@ -121,9 +121,9 @@ const SearchableSelect = ({
           onChange(val || '');
           setHoveredDescription(null);
         }}>
-          <div className={`relative w-full  cursor-default overflow-hidden rounded-lg bg-[#1E1E1E] text-left border-[0.5px] ${error ? 'border-red-500' : 'border-[#3C414A]'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
+          <div className={`relative w-full cursor-default overflow-hidden rounded-lg bg-[#1E1E1E] text-left border-[0.5px] ${error ? 'border-red-500' : 'border-[#3C414A]'} focus-within:ring-2 focus-within:ring-blue-500 transition-all`}>
             <Combobox.Input
-              className="w-full border-none py-3 pl-[11px] pr-10 text-white bg-[#1E1E1E] focus:outline-none focus:ring-0"
+              className="w-full border-none py-2 pl-2.5 pr-10 text-sm text-white bg-[#1E1E1E] focus:outline-none focus:ring-0"
               placeholder={placeholder}
               displayValue={(val: string) => val}
               onChange={(event) => {
@@ -146,7 +146,7 @@ const SearchableSelect = ({
             }}
           >
             <div className="relative">
-              <Combobox.Options className="absolute mt-1 max-h-64 w-full overflow-y-auto  bg-[#1E1E1E] py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50 border-2 border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+              <Combobox.Options className="absolute mt-1 max-h-64 w-full overflow-y-auto bg-[#1E1E1E] py-1 text-sm shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50 border-2 border-[#3C414A] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                 {filteredOptions.length === 0 && query !== '' ? (
                   <div className="relative cursor-default select-none py-2 px-4 text-gray-400">
                     Nothing found.
@@ -166,7 +166,7 @@ const SearchableSelect = ({
                     >
                       {({ selected, active }) => (
                         <div className="flex items-center">
-                          <span className={`block truncate ${selected ? 'font-medium' : 'font-normal'}`}>
+                          <span className={`block truncate text-sm ${selected ? 'font-medium' : 'font-normal'}`}>
                             {option.Name}
                           </span>
                         </div>
@@ -286,14 +286,14 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
   };
 
   return (
-    <div className="p-8">
-      <h3 className="text-xl sm:text-2xl font-bold font-sans text-[#FFFFFFCC] mb-6">
+    <div className="p-4">
+      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFFFFCC] mb-3">
         Referrer Information:
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
         {/* First & Last Name */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="firstName" className="text-white font-inter font-medium text-base">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="firstName" className="text-white font-inter font-medium text-sm">
             First Name <span className="text-blue-500">*</span>
           </label>
           <input
@@ -302,13 +302,13 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             value={formData.referrer.firstName}
             onChange={(e) => handleInputChange("firstName", e.target.value)}
             placeholder="John"
-            className={`py-3 px-[11px] bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.firstName ? 'border-red-500' : 'border-[#3C414A]'} text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.firstName ? 'border-red-500' : 'border-[#3C414A]'} text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.firstName && <p className="text-xs text-red-500">{errors.firstName}</p>}
         </div>
 
-        <div className="flex flex-col gap-2">
-          <label htmlFor="lastName" className="text-white font-inter font-medium text-base">
+        <div className="flex flex-col gap-1">
+          <label htmlFor="lastName" className="text-white font-inter font-medium text-sm">
             Last Name <span className="text-blue-500">*</span>
           </label>
           <input
@@ -317,14 +317,14 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             value={formData.referrer.lastName}
             onChange={(e) => handleInputChange("lastName", e.target.value)}
             placeholder="Doe"
-            className={`py-3 px-[11px] bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.lastName ? 'border-red-500' : 'border-[#3C414A]'} text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.lastName ? 'border-red-500' : 'border-[#3C414A]'} text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.lastName && <p className="text-xs text-red-500">{errors.lastName}</p>}
         </div>
 
         {/* Company Name */}
-        <div className="flex flex-col md:col-span-2 gap-2">
-          <label htmlFor="companyName" className="text-white font-inter font-medium text-base">
+        <div className="flex flex-col md:col-span-2 gap-1">
+          <label htmlFor="companyName" className="text-white font-inter font-medium text-sm">
             Company Name <span className="text-blue-500">*</span>
           </label>
           <input
@@ -333,13 +333,13 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             value={formData.referrer.companyName}
             onChange={(e) => handleInputChange("companyName", e.target.value)}
             placeholder="Company LLC"
-            className={`py-3 px-[11px] bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.companyName ? 'border-red-500' : 'border-[#3C414A]'} text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] rounded-lg border-[0.5px] ${errors.companyName ? 'border-red-500' : 'border-[#3C414A]'} text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.companyName && <p className="text-xs text-red-500">{errors.companyName}</p>}
         </div>
 
         {/* City & State (Same Row) */}
-        <div className="flex flex-col md:flex-row gap-4 md:col-span-2">
+        <div className="flex flex-col md:flex-row gap-2 md:col-span-2">
           <SearchableSelect
             label="City"
             value={formData.referrer.city}
@@ -357,8 +357,8 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
         </div>
 
         {/* Phone Number */}
-        <div className="flex flex-col md:col-span-2 gap-2">
-          <label className="text-white text-base font-inter font-medium">
+        <div className="flex flex-col md:col-span-2 gap-1">
+          <label className="text-white text-sm font-inter font-medium">
             Phone Number
           </label>
           <div className={`phone-input-container w-full bg-[#1E1E1E] border-[0.5px] ${errors.phone ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg transition-all`}>
@@ -396,8 +396,8 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
         </div>
 
         {/* Email */}
-        <div className="flex flex-col md:col-span-2 gap-2">
-          <label htmlFor="email" className="text-white text-base font-inter font-medium">
+        <div className="flex flex-col md:col-span-2 gap-1">
+          <label htmlFor="email" className="text-white text-sm font-inter font-medium">
             Email <span className="text-blue-500">*</span>
           </label>
           <input
@@ -406,7 +406,7 @@ const ReferrerInformationStep = ({ formData, updateFormData, errors, setErrors }
             value={formData.referrer.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
             placeholder="john123@example.com"
-            className={`py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.email ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.email ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.email && <p className="text-xs text-red-500">{errors.email}</p>}
           <p className="font-normal font-inter text-xs text-[#A0A4AE]">Must be a valid email address</p>
@@ -460,21 +460,21 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
   };
 
   return (
-    <div className="p-8">
-      <h3 className="text-xl sm:text-2xl font-bold font-sans text-[#FFFFFFCC] mb-6">
+    <div className="p-4">
+      <h3 className="text-lg sm:text-xl font-bold font-sans text-[#FFFFFFCC] mb-3">
         Claimant Information:
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-2">
         {/* Row 1 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="claimFile" className="text-white text-base font-inter font-medium">Claim <span className="text-blue-500">*</span></label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="claimFile" className="text-white text-sm font-inter font-medium">Claim <span className="text-blue-500">*</span></label>
           <input
             type="text"
             id="claimFile"
             value={formData.claimant.claimFile}
             onChange={(e) => handleInputChange("claimFile", e.target.value)}
             placeholder="Enter here"
-            className={`py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.claimFile ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.claimFile ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.claimFile && <p className="text-xs text-red-500">{errors.claimFile}</p>}
         </div>
@@ -490,89 +490,89 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
         />
 
         {/* Row 2 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="subject" className="text-white text-base font-inter font-medium">Subject <span className="text-blue-500">*</span></label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="subject" className="text-white text-sm font-inter font-medium">Subject <span className="text-blue-500">*</span></label>
           <input
             type="text"
             id="subject"
             value={formData.claimant.subject}
             onChange={(e) => handleInputChange("subject", e.target.value)}
             placeholder="Enter here"
-            className={`py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.subject ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.subject ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.subject && <p className="text-xs text-red-500">{errors.subject}</p>}
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="address" className="text-white text-base font-inter font-medium">Address</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="address" className="text-white text-sm font-inter font-medium">Address</label>
           <input
             type="text"
             id="address"
             value={formData.claimant.address}
             onChange={(e) => updateFormData("claimant", "address", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
 
         {/* Row 3 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="ssn" className="text-white text-base font-inter font-medium">Last four of SS number</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="ssn" className="text-white text-sm font-inter font-medium">Last four of SS number</label>
           <input
             type="text"
             id="ssn"
             value={formData.claimant.ssn}
             onChange={(e) => updateFormData("claimant", "ssn", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="dob" className="text-white text-base font-inter font-medium">DOB (Date Of Birth)</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="dob" className="text-white text-sm font-inter font-medium">DOB (Date Of Birth)</label>
           <input
             type="text"
             id="dob"
             value={formData.claimant.dob}
             onChange={(e) => handleInputChange("dob", e.target.value)}
             placeholder="MM/DD/YYYY"
-            className={`w-full py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.dob ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`w-full py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.dob ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.dob && <p className="text-xs text-red-500">{errors.dob}</p>}
         </div>
 
         {/* Row 4 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="dol" className="text-white text-base font-inter font-medium">DOL (Date Of Loss) <span className="text-blue-500">*</span></label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="dol" className="text-white text-sm font-inter font-medium">DOL (Date Of Loss) <span className="text-blue-500">*</span></label>
           <input
             type="text"
             id="dol"
             value={formData.claimant.dol}
             onChange={(e) => handleInputChange("dol", e.target.value)}
             placeholder="MM/DD/YYYY"
-            className={`w-full py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.dol ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`w-full py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.dol ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.dol && <p className="text-xs text-red-500">{errors.dol}</p>}
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="allegedInjury" className="text-white text-base font-inter font-medium">Alleged injury</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="allegedInjury" className="text-white text-sm font-inter font-medium">Alleged injury</label>
           <input
             type="text"
             id="allegedInjury"
             value={formData.claimant.allegedInjury}
             onChange={(e) => updateFormData("claimant", "allegedInjury", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
 
         {/* New Row: Marital Status & Gender */}
-        <div className="flex flex-col md:flex-row gap-4 md:col-span-2">
-          <div className="flex flex-col gap-2 flex-1">
-            <label htmlFor="maritalStatus" className="text-white text-base font-inter font-medium">Marital Status</label>
+        <div className="flex flex-col md:flex-row gap-2 md:col-span-2">
+          <div className="flex flex-col gap-1 flex-1">
+            <label htmlFor="maritalStatus" className="text-white text-sm font-inter font-medium">Marital Status</label>
             <select
               id="maritalStatus"
               value={formData.claimant.maritalStatus}
               onChange={(e) => updateFormData("claimant", "maritalStatus", e.target.value)}
-              className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
             >
               <option value="">Select Status</option>
               <option value="single">Single</option>
@@ -581,13 +581,13 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
               <option value="widowed">Widowed</option>
             </select>
           </div>
-          <div className="flex flex-col gap-2 flex-1">
-            <label htmlFor="gender" className="text-white text-base font-inter font-medium">Gender</label>
+          <div className="flex flex-col gap-1 flex-1">
+            <label htmlFor="gender" className="text-white text-sm font-inter font-medium">Gender</label>
             <select
               id="gender"
               value={formData.claimant.gender}
               onChange={(e) => updateFormData("claimant", "gender", e.target.value)}
-              className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
@@ -599,8 +599,8 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
         </div>
 
         {/* Row 5 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="claimantPhone" className="text-white text-base font-inter font-medium">Phone Number</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="claimantPhone" className="text-white text-sm font-inter font-medium">Phone Number</label>
           <div className={`phone-input-container w-full bg-[#1E1E1E] border-[0.5px] ${errors.claimantPhone ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg transition-all`}>
             <PhoneInput
               defaultCountry="us"
@@ -632,8 +632,8 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
           </div>
           {errors.claimantPhone && <p className="text-xs text-red-500 mt-1">{errors.claimantPhone}</p>}
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="claimantEmail" className="text-white text-base font-inter font-medium">Email</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="claimantEmail" className="text-white text-sm font-inter font-medium">Email</label>
           <input
             type="email"
             id="claimantEmail"
@@ -659,69 +659,69 @@ const ClaimantInformationStep = ({ formData, updateFormData, errors, setErrors }
               });
             }}
             placeholder="Enter here"
-            className={`py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] ${errors.claimantEmail ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
+            className={`py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] ${errors.claimantEmail ? 'border-red-500' : 'border-[#3C414A]'} rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all`}
           />
           {errors.claimantEmail && <p className="text-xs text-red-500 mt-1">{errors.claimantEmail}</p>}
         </div>
 
         {/* Row 6 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="employer" className="text-white text-base font-inter font-medium">Employer or insured</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="employer" className="text-white text-sm font-inter font-medium">Employer or insured</label>
           <input
             type="text"
             id="employer"
             value={formData.claimant.employer}
             onChange={(e) => updateFormData("claimant", "employer", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="tpa" className="text-white text-base font-inter font-medium">TPA (Third Party Administrator)</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="tpa" className="text-white text-sm font-inter font-medium">TPA (Third Party Administrator)</label>
           <input
             type="text"
             id="tpa"
             value={formData.claimant.tpa}
             onChange={(e) => updateFormData("claimant", "tpa", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
 
         {/* Row 7 */}
-        <div className="flex flex-col gap-2">
-          <label htmlFor="representedBy" className="text-white text-base font-inter font-medium">Subject represented by</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="representedBy" className="text-white text-sm font-inter font-medium">Subject represented by</label>
           <input
             type="text"
             id="representedBy"
             value={formData.claimant.representedBy}
             onChange={(e) => updateFormData("claimant", "representedBy", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="hobbies" className="text-white text-base font-inter font-medium">Hobbies</label>
+        <div className="flex flex-col gap-1">
+          <label htmlFor="hobbies" className="text-white text-sm font-inter font-medium">Hobbies</label>
           <input
             type="text"
             id="hobbies"
             value={formData.claimant.hobbies}
             onChange={(e) => updateFormData("claimant", "hobbies", e.target.value)}
             placeholder="Enter here"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
           />
         </div>
 
         {/* Special Characteristics Textarea */}
-        <div className="flex flex-col gap-2 md:col-span-2">
-          <label htmlFor="specialCharacteristics" className="text-white text-base font-inter font-medium">Special Physical Characteristics</label>
+        <div className="flex flex-col gap-1 md:col-span-2">
+          <label htmlFor="specialCharacteristics" className="text-white text-sm font-inter font-medium">Special Physical Characteristics</label>
           <textarea
             maxLength={500}
             id="specialCharacteristics"
             value={formData.claimant.specialCharacteristics}
             onChange={(e) => handleTextareaChange(e.target.value)}
             placeholder="glasses, tattoos, hair style"
-            className="py-3 px-[11px] bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-h-[120px] resize-none"
+            className="py-2 px-2.5 bg-[#1E1E1E] border-[0.5px] border-[#3C414A] rounded-lg text-sm text-white placeholder-[#8A8A8A] focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all min-h-[60px] resize-none"
           />
           <div className="flex justify-between items-center mt-1">
             <p className="text-xs text-gray-500 italic">e.g., glasses, tattoos, hair style</p>
