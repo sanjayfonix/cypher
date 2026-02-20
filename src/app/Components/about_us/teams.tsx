@@ -19,7 +19,7 @@ const teamData = [
   },
   {
     id: 3,
-    title: "Brett Huselton - ADVISOR - Strategy",
+    title: "BM - ADVISOR - Strategy",
     description:
       "A neuroscience and psychology biotech nerd that spent two decades building growth-oriented services businesses leveraging clinical, commercial and other real world evidence sources in a highly regulated healthcare sector that recognized the converging power of data liquidity, strategic forensic assessment and sophisticated infrastructure and analysis could change the fragmented landscape of investigational science just as it has.",
     image: "/images/img2.png",

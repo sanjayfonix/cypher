@@ -1,4 +1,4 @@
-export const headquarters = 'philadelphia';
+export const headquarters = 'Philadelphia';
 
 export const emailId = 'info@webutation.com';
 
